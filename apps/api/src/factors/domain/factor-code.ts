@@ -55,4 +55,13 @@ export enum MaYeuTo {
   LUC_NGHI = 'LUC_NGHI',
   CHIEU_DIEU = 'CHIEU_DIEU',
   BAT_TUONG = 'BAT_TUONG',
+
+  DAI_THOI = 'DAI_THOI',
+  THIEN_LAI = 'THIEN_LAI',
+  VANG_VONG = 'VANG_VONG',
+  TU_PHE = 'TU_PHE',
+  TU_KY = 'TU_KY',
+  TU_CUNG = 'TU_CUNG',
+  NGU_MO = 'NGU_MO',
+  BAT_CHUYEN = 'BAT_CHUYEN',
 }

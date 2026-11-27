@@ -1,6 +1,6 @@
 # Research: Wedding blockers Quyển 6
 
-Status: VERIFIED
+Status: ORACLE_TESTED
 
 ## Phạm vi
 
@@ -66,5 +66,5 @@ Mỗi factor chạy ma trận độc lập 12 Chi tháng x 12 Chi ngày:
 - [x] Formula VERIFIED
 - [x] Identity Vãng Vong VERIFIED
 - [x] Oracle plan độc lập
-- [ ] IMPLEMENTED
-- [ ] ORACLE_TESTED
+- [x] IMPLEMENTED
+- [x] ORACLE_TESTED

@@ -1,6 +1,6 @@
 # Research: Wedding blockers Quyển 5
 
-Status: VERIFIED
+Status: ORACLE_TESTED
 
 ## Phạm vi
 
@@ -103,5 +103,5 @@ Không thay bằng danh sách “tám ngày” dân gian chỉ vì tên gọi B�
 - [x] Formula VERIFIED
 - [x] Representation chốt
 - [x] Oracle plan độc lập
-- [ ] IMPLEMENTED
-- [ ] ORACLE_TESTED
+- [x] IMPLEMENTED
+- [x] ORACLE_TESTED
