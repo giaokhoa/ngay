@@ -51,13 +51,13 @@ Chi tiết: `docs/research/virtue-special-day-factors.md`.
 
 ## Factors — Quyển 4 shared positions / Bất Tương
 
-| Chủ đề                          | Module  | Nguồn chính             | Trạng thái | Implementation | Oracle test | Ghi chú                                         |
-| ------------------------------- | ------- | ----------------------- | ---------- | -------------- | ----------- | ----------------------------------------------- |
-| Thần cùng vị trí 12 Trực        | factors | T1 Q4 p302-329 + Hán Q4 | VERIFIED   | -              | planned     | giữ identity riêng, dùng chung phép tính vị trí |
-| Nguyệt Kiến                     | factors | T1 Q4 p344 + Hán Q4     | VERIFIED   | -              | planned     | cùng vị trí Trực Kiến                           |
-| Nguyệt Yếm / Địa Hỏa            | factors | T1 Q4 p347 + Hán Q4     | VERIFIED   | -              | planned     | cùng vị trí, identity riêng                     |
-| Yếm Đối / Lục Nghi / Chiêu Diêu | factors | T1 Q4 p353 + Hán Q4     | VERIFIED   | -              | planned     | cùng vị trí nhưng semantics khác nhau           |
-| Âm Dương Bất Tương              | factors | T1 Q4 p356-358 + Hán Q4 | VERIFIED   | -              | planned     | table-driven 12 tháng × Can Chi                 |
+| Chủ đề                          | Module  | Nguồn chính             | Trạng thái    | Implementation                    | Oracle test                        | Ghi chú                                         |
+| ------------------------------- | ------- | ----------------------- | ------------- | --------------------------------- | ---------------------------------- | ----------------------------------------------- |
+| Thần cùng vị trí 12 Trực        | factors | T1 Q4 p302-329 + Hán Q4 | ORACLE_TESTED | q4-shared-position-definitions.ts | q4-shared-position-factors.spec.ts | giữ identity riêng, dùng chung phép tính vị trí |
+| Nguyệt Kiến                     | factors | T1 Q4 p344 + Hán Q4     | ORACLE_TESTED | q4-shared-position-definitions.ts | q4-shared-position-factors.spec.ts | cùng vị trí Trực Kiến                           |
+| Nguyệt Yếm / Địa Hỏa            | factors | T1 Q4 p347 + Hán Q4     | ORACLE_TESTED | q4-shared-position-definitions.ts | q4-shared-position-factors.spec.ts | cùng vị trí, identity riêng                     |
+| Yếm Đối / Lục Nghi / Chiêu Diêu | factors | T1 Q4 p353 + Hán Q4     | ORACLE_TESTED | q4-shared-position-definitions.ts | q4-shared-position-factors.spec.ts | cùng vị trí nhưng semantics khác nhau           |
+| Âm Dương Bất Tương              | factors | T1 Q4 p356-358 + Hán Q4 | VERIFIED      | -                                 | planned                            | table-driven 12 tháng × Can Chi                 |
 
 Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
 

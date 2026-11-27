@@ -2,6 +2,7 @@ import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { CanChi } from '../calendar/domain/sexagenary-cycle';
 import { Mua } from '../calendar/domain/season';
+import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { ThamChieuNguon } from '../sources/source-reference';
 import { LoaiYeuTo } from './domain/day-factor';
 import { MaYeuTo } from './domain/factor-code';
@@ -43,4 +44,13 @@ export interface DinhNghiaYeuToCanNgayTheoMua extends DinhNghiaYeuTo {
 
 export interface DinhNghiaYeuToChiNgayTheoMua extends DinhNghiaYeuTo {
   chiNgayTheoMua: Readonly<Record<Mua, DiaChi>>;
+}
+
+export interface ViTriYeuToTheoTruc {
+  truc: ThapNhiTruc;
+  chiThangApDung?: readonly DiaChi[];
+}
+
+export interface DinhNghiaYeuToTheoTruc extends DinhNghiaYeuTo {
+  viTri: readonly ViTriYeuToTheoTruc[];
 }
