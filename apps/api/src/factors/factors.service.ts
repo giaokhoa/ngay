@@ -12,6 +12,7 @@ import {
   DINH_NGHIA_THOI_DUC,
   DINH_NGHIA_TU_TUONG,
 } from './fixed-seasonal-factor-definitions';
+import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CAN_NGAY } from './monthly-stem-factor-definitions';
 
 @Injectable()
@@ -27,6 +28,10 @@ export class TinhYeuToNgayService {
 
     const mua = tinhMuaTheoChiThang(boiCanh.chiThang);
     const ketQua: DinhNghiaYeuTo[] = [...theoChiNgay, ...theoCanNgay];
+
+    if (DINH_NGHIA_THIEN_DUC.canNgayTheoChiThang[boiCanh.chiThang] === boiCanh.canNgay) {
+      ketQua.push(DINH_NGHIA_THIEN_DUC);
+    }
 
     if (DINH_NGHIA_THIEN_AN.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
       ketQua.push(DINH_NGHIA_THIEN_AN);

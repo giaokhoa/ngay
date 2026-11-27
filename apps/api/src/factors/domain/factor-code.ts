@@ -1,4 +1,5 @@
 export enum MaYeuTo {
+  THIEN_DUC = 'THIEN_DUC',
   TAM_HOP = 'TAM_HOP',
   DICH_MA = 'DICH_MA',
   KIEP_SAT = 'KIEP_SAT',
