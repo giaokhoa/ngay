@@ -52,4 +52,5 @@ export enum MaYeuTo {
   YEM_DOI = 'YEM_DOI',
   LUC_NGHI = 'LUC_NGHI',
   CHIEU_DIEU = 'CHIEU_DIEU',
+  BAT_TUONG = 'BAT_TUONG',
 }

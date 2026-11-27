@@ -34,6 +34,10 @@ export interface DinhNghiaYeuToCanChiTheoChiThang extends DinhNghiaYeuTo {
   canChiNgayTheoChiThang: Readonly<Record<DiaChi, CanChi>>;
 }
 
+export interface DinhNghiaYeuToTapCanChiTheoChiThang extends DinhNghiaYeuTo {
+  tapCanChiNgayTheoChiThang: Readonly<Record<DiaChi, readonly CanChi[]>>;
+}
+
 export interface DinhNghiaYeuToCanChiTheoMua extends DinhNghiaYeuTo {
   canChiNgayTheoMua: Readonly<Record<Mua, CanChi>>;
 }

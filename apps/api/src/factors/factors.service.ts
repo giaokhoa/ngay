@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { tinhMuaTheoChiThang } from '../calendar/season';
 import { tinhThapNhiTruc } from '../calendar/twelve-officer';
+import { DINH_NGHIA_BAT_TUONG } from './bat-tuong-definition';
 import { YeuToNgay } from './domain/day-factor';
 import { DinhNghiaYeuTo } from './factor-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from './factor-definitions';
@@ -52,6 +53,14 @@ export class TinhYeuToNgayService {
 
     if (DINH_NGHIA_THIEN_DUC.canNgayTheoChiThang[boiCanh.chiThang] === boiCanh.canNgay) {
       ketQua.push(DINH_NGHIA_THIEN_DUC);
+    }
+
+    if (
+      DINH_NGHIA_BAT_TUONG.tapCanChiNgayTheoChiThang[boiCanh.chiThang].some((canChi) =>
+        khopCanChi(canChi, boiCanh),
+      )
+    ) {
+      ketQua.push(DINH_NGHIA_BAT_TUONG);
     }
 
     if (DINH_NGHIA_THIEN_AN.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
