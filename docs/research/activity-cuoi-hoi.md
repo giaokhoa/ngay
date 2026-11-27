@@ -117,9 +117,9 @@ Không cần thêm factor thuận lợi nào để dựng vertical slice.
 | Yếm Đối     | `YEM_DOI`              |
 | ngày Hợi    | `chiNgay === HOI`      |
 
-### Kị — VERIFIED nhưng còn thiếu production factor
+### Kị — production factor đã ORACLE_TESTED
 
-Các factor dưới đây đã khóa source/representation; xem thêm
+Các factor dưới đây đã khóa source/representation và có oracle test; xem thêm
 `wedding-blockers-q5.md` và `wedding-blockers-q6.md`.
 
 - Đại Thời
@@ -255,7 +255,7 @@ cưới hỏi không Kị nhưng việc quân sự vẫn Kị. Xem đầy đủ 
 
 Không implement kết luận cưới hỏi production cho tới khi:
 
-1. 8 factor Kị còn thiếu production implementation phải ORACLE_TESTED;
+1. 8 factor Kị bổ sung từ Q5/Q6 đã ORACLE_TESTED;
 2. Quyển 10 semantics cho 20 mục Kị (tính cả Hợi nhật) đã VERIFIED;
 3. activity rule target contract hỗ trợ YEU_TO/TRUC/CHI_NGAY;
 4. explicit override rules cho các ngoại lệ đã có test.
@@ -266,7 +266,7 @@ Không implement kết luận cưới hỏi production cho tới khi:
 - [x] Việt/Hán COMPARED
 - [x] Nghi/Kị list VERIFIED
 - [x] dependency matrix lập xong
-- [ ] missing blockers implemented
+- [x] missing blockers implemented
 - [x] Q10 conflict semantics VERIFIED đầy đủ
 - [ ] activity rules IMPLEMENTED
 - [ ] end-to-end ORACLE_TESTED

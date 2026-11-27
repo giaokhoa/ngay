@@ -22,6 +22,14 @@ import {
   DINH_NGHIA_YEU_TO_QUAN_HE_THANG_QUYEN_4,
   DINH_NGHIA_YEU_TO_THEO_TRUC,
 } from './q4-shared-position-definitions';
+import {
+  DINH_NGHIA_BAT_CHUYEN,
+  DINH_NGHIA_NGU_MO,
+  DINH_NGHIA_TU_CUNG,
+  DINH_NGHIA_TU_KY,
+  DINH_NGHIA_TU_PHE,
+} from './q5-wedding-blocker-definitions';
+import { DINH_NGHIA_BLOCKER_CUOI_HOI_QUYEN_6 } from './q6-wedding-blocker-definitions';
 
 @Injectable()
 export class TinhYeuToNgayService {
@@ -46,12 +54,36 @@ export class TinhYeuToNgayService {
     const quanHeThangQuyen4 = DINH_NGHIA_YEU_TO_QUAN_HE_THANG_QUYEN_4.filter((dinhNghia) =>
       dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
     );
+    const blockerQuyen6 = DINH_NGHIA_BLOCKER_CUOI_HOI_QUYEN_6.filter((dinhNghia) =>
+      dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
+    );
     const ketQua: DinhNghiaYeuTo[] = [
       ...theoChiNgay,
       ...theoCanNgay,
       ...theoTruc,
       ...quanHeThangQuyen4,
+      ...blockerQuyen6,
     ];
+
+    if (DINH_NGHIA_TU_PHE.tapCanChiNgayTheoMua[mua].some((canChi) => khopCanChi(canChi, boiCanh))) {
+      ketQua.push(DINH_NGHIA_TU_PHE);
+    }
+
+    if (khopCanChi(DINH_NGHIA_TU_KY.canChiNgayTheoMua[mua], boiCanh)) {
+      ketQua.push(DINH_NGHIA_TU_KY);
+    }
+
+    if (khopCanChi(DINH_NGHIA_TU_CUNG.canChiNgayTheoMua[mua], boiCanh)) {
+      ketQua.push(DINH_NGHIA_TU_CUNG);
+    }
+
+    if (khopCanChi(DINH_NGHIA_NGU_MO.canChiNgayTheoChiThang[boiCanh.chiThang], boiCanh)) {
+      ketQua.push(DINH_NGHIA_NGU_MO);
+    }
+
+    if (DINH_NGHIA_BAT_CHUYEN.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
+      ketQua.push(DINH_NGHIA_BAT_CHUYEN);
+    }
 
     if (DINH_NGHIA_THIEN_DUC.canNgayTheoChiThang[boiCanh.chiThang] === boiCanh.canNgay) {
       ketQua.push(DINH_NGHIA_THIEN_DUC);
