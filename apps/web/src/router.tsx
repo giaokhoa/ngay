@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 
+import { TrangDiChuyen } from './pages/moving-page';
 import { TrangChu } from './pages/home-page';
 import { TrangCuoiHoi } from './pages/wedding-page';
 import { DUONG_DAN } from './routes';
@@ -12,5 +13,9 @@ export const boDinhTuyen = createBrowserRouter([
   {
     path: DUONG_DAN.CUOI_HOI,
     Component: TrangCuoiHoi,
+  },
+  {
+    path: DUONG_DAN.DI_CHUYEN,
+    Component: TrangDiChuyen,
   },
 ]);

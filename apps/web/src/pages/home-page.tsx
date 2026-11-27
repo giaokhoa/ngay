@@ -10,9 +10,14 @@ export function TrangChu() {
       <p>
         Xem ngày theo quy tắc có nguồn đối chiếu, giữ riêng lịch pháp, thần sát, Dụng sự và Nghi kị.
       </p>
-      <Link className="nut-chinh" to={DUONG_DAN.CUOI_HOI}>
-        Xem ngày lễ cưới, đón dâu
-      </Link>
+      <div className="hanh-dong-trang-chu">
+        <Link className="nut-chinh" to={DUONG_DAN.CUOI_HOI}>
+          Lễ cưới, đón dâu
+        </Link>
+        <Link className="nut-phu" to={DUONG_DAN.DI_CHUYEN}>
+          Di chuyển
+        </Link>
+      </div>
     </main>
   );
 }

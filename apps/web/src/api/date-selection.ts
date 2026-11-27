@@ -19,6 +19,7 @@ export interface DieuKienDungSuApi {
 export interface DongGopDanhGiaApi {
   quyTac: {
     ma: string;
+    congViec: string;
     tacDong: 'NEN' | 'KY';
     dieuKien: DieuKienDungSuApi;
     nguon: readonly ThamChieuNguonApi[];
@@ -27,7 +28,7 @@ export interface DongGopDanhGiaApi {
   lyDoLoai?: string;
 }
 
-export interface KetQuaXemNgayCuoiHoiApi {
+export interface KetQuaXemNgayApi {
   ngayDanSu: string;
   canChiNgay: { can: string; chi: string };
   chiThang: string;
@@ -58,24 +59,52 @@ export interface KetQuaXemNgayCuoiHoiApi {
   };
 }
 
+export type KetQuaXemNgayCuoiHoiApi = KetQuaXemNgayApi;
+export type KetQuaXemNgayDiChuyenApi = KetQuaXemNgayApi;
+
 export function taoUrlXemCuoiHoi(thoiDiem: Date, muiGio: string): string {
-  const query = new URLSearchParams({
-    thoiDiem: thoiDiem.toISOString(),
-    muiGio,
-  });
-  return '/date-selection/cuoi-hoi?' + query.toString();
+  return taoUrlXemNgay('cuoi-hoi', thoiDiem, muiGio);
 }
 
-export async function xemNgayCuoiHoi(
+export function taoUrlXemDiChuyen(thoiDiem: Date, muiGio: string): string {
+  return taoUrlXemNgay('di-chuyen', thoiDiem, muiGio);
+}
+
+export function xemNgayCuoiHoi(
   thoiDiem: Date,
   muiGio: string,
   signal?: AbortSignal,
 ): Promise<KetQuaXemNgayCuoiHoiApi> {
-  const response = await fetch(taoUrlXemCuoiHoi(thoiDiem, muiGio), { signal });
+  return xemNgay('cuoi-hoi', thoiDiem, muiGio, signal);
+}
+
+export function xemNgayDiChuyen(
+  thoiDiem: Date,
+  muiGio: string,
+  signal?: AbortSignal,
+): Promise<KetQuaXemNgayDiChuyenApi> {
+  return xemNgay('di-chuyen', thoiDiem, muiGio, signal);
+}
+
+function taoUrlXemNgay(duongDan: string, thoiDiem: Date, muiGio: string): string {
+  const query = new URLSearchParams({
+    thoiDiem: thoiDiem.toISOString(),
+    muiGio,
+  });
+  return '/date-selection/' + duongDan + '?' + query.toString();
+}
+
+async function xemNgay(
+  duongDan: string,
+  thoiDiem: Date,
+  muiGio: string,
+  signal?: AbortSignal,
+): Promise<KetQuaXemNgayApi> {
+  const response = await fetch(taoUrlXemNgay(duongDan, thoiDiem, muiGio), { signal });
   if (!response.ok) {
     const body = (await response.json().catch(() => null)) as { message?: string } | null;
     throw new Error(body?.message ?? 'Không thể xem ngày (HTTP ' + response.status + ')');
   }
 
-  return (await response.json()) as KetQuaXemNgayCuoiHoiApi;
+  return (await response.json()) as KetQuaXemNgayApi;
 }

@@ -1,13 +1,16 @@
 import { describe, expect, it } from 'vitest';
 
-import { taoUrlXemCuoiHoi } from './date-selection';
+import { taoUrlXemCuoiHoi, taoUrlXemDiChuyen } from './date-selection';
 
-describe('taoUrlXemCuoiHoi', () => {
-  it('giữ instant ISO và timezone IANA trong query', () => {
-    const url = taoUrlXemCuoiHoi(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+describe('date-selection URLs', () => {
+  it.each([
+    ['cuoi-hoi', taoUrlXemCuoiHoi],
+    ['di-chuyen', taoUrlXemDiChuyen],
+  ] as const)('giữ instant ISO và timezone IANA cho %s', (duongDan, taoUrl) => {
+    const url = taoUrl(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
 
     const parsed = new URL(url, 'https://ngay.local');
-    expect(parsed.pathname).toBe('/date-selection/cuoi-hoi');
+    expect(parsed.pathname).toBe('/date-selection/' + duongDan);
     expect(parsed.searchParams.get('thoiDiem')).toBe('2026-11-27T05:00:00.000Z');
     expect(parsed.searchParams.get('muiGio')).toBe('Asia/Ho_Chi_Minh');
   });
