@@ -24,6 +24,24 @@ export class XemNgayController {
     return this.goi(() => this.xemNgay.xemDiChuyen(thoiDiem, muiGioHopLe));
   }
 
+  @Get('dong-tho')
+  xemDongTho(
+    @Query('thoiDiem') thoiDiemText: string | undefined,
+    @Query('muiGio') muiGio: string | undefined,
+  ) {
+    const { thoiDiem, muiGioHopLe } = docInput(thoiDiemText, muiGio);
+    return this.goi(() => this.xemNgay.xemDongTho(thoiDiem, muiGioHopLe));
+  }
+
+  @Get('sua-cung-that')
+  xemSuaCungThat(
+    @Query('thoiDiem') thoiDiemText: string | undefined,
+    @Query('muiGio') muiGio: string | undefined,
+  ) {
+    const { thoiDiem, muiGioHopLe } = docInput(thoiDiemText, muiGio);
+    return this.goi(() => this.xemNgay.xemSuaCungThat(thoiDiem, muiGioHopLe));
+  }
+
   private goi<T>(thucThi: () => T): T {
     try {
       return thucThi();

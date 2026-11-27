@@ -1119,5 +1119,7 @@ function tenMucTieu(mucTieu: DieuKienDungSu): string {
       return 'TRUC_' + mucTieu.truc;
     case 'CHI_NGAY':
       return 'CHI_NGAY_' + mucTieu.chi;
+    case 'THO_VUONG':
+      return 'THO_VUONG';
   }
 }

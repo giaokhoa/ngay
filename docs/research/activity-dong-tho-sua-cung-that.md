@@ -427,5 +427,5 @@ Trước khi đưa earthwork activity vào production:
 - [x] independent oracle plan defined
 - [x] missing factors IMPLEMENTED
 - [x] missing factors ORACLE_TESTED
-- [ ] activity rules IMPLEMENTED
-- [ ] end-to-end ORACLE_TESTED
+- [x] activity rules IMPLEMENTED
+- [x] end-to-end ORACLE_TESTED cho base vertical Q11 + Q10 earth-blocker semantics

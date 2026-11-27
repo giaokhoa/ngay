@@ -534,6 +534,7 @@ function taoBoiCanh(input: Input): BoiCanhDanhGiaNgay {
     canNgay: input.canNgay ?? ThienCan.GIAP,
     chiNgay: input.chiNgay ?? DiaChi.DAN,
     truc: input.truc ?? ThapNhiTruc.KIEN,
+    dangThoVuong: false,
     yeuTo: input.yeuTo.map(taoYeuTo),
   };
 }

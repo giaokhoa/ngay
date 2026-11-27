@@ -11,6 +11,7 @@ export interface BoiCanhDanhGiaNgay {
   canNgay: ThienCan;
   chiNgay: DiaChi;
   truc: ThapNhiTruc;
+  dangThoVuong: boolean;
   yeuTo: readonly YeuToNgay[];
 }
 
@@ -42,4 +43,5 @@ export interface KetQuaDanhGia {
 export type TargetDanhGia =
   | { loai: 'YEU_TO'; ma: MaYeuTo }
   | { loai: 'TRUC'; truc: ThapNhiTruc }
-  | { loai: 'CHI_NGAY'; chi: DiaChi };
+  | { loai: 'CHI_NGAY'; chi: DiaChi }
+  | { loai: 'THO_VUONG' };

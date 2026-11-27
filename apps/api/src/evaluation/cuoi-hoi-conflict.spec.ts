@@ -171,6 +171,7 @@ function danhGia(
     canNgay: partial.canNgay ?? ThienCan.GIAP,
     chiNgay: partial.chiNgay ?? DiaChi.DAN,
     truc: partial.truc ?? ThapNhiTruc.KIEN,
+    dangThoVuong: partial.dangThoVuong ?? false,
     yeuTo: partial.yeuTo.map(taoYeuTo),
   };
   return service.danhGia(QUY_TAC_CUOI_HOI, boiCanh);

@@ -114,6 +114,7 @@ function boiCanh(yeuTo: readonly MaYeuTo[]) {
     canNgay: ThienCan.GIAP,
     chiNgay: DiaChi.DAN,
     truc: ThapNhiTruc.KIEN,
+    dangThoVuong: false,
     yeuTo: yeuTo.map((ma) => ({
       ma,
       loai: LoaiYeuTo.THAN_SAT,

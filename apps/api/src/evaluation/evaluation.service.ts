@@ -16,6 +16,7 @@ import {
   taoNguonXungDotQuyen10,
 } from './cuoi-hoi-conflict-rules';
 import { QUY_TAC_Q10_DI_CHUYEN } from './di-chuyen-conflict-rules';
+import { QUY_TAC_Q10_CONG_VIEC_DAT } from './earthwork-conflict-rules';
 import {
   BoiCanhDanhGiaNgay,
   DauVetXungDot,
@@ -47,6 +48,9 @@ export class DanhGiaNgayService {
     const congViec = xacDinhCongViec(quyTacDungSu);
     if (congViec === LoaiCongViec.DI_CHUYEN) {
       return danhGiaDiChuyen(dongGop, boiCanh);
+    }
+    if (congViec === LoaiCongViec.DONG_THO || congViec === LoaiCongViec.SUA_CUNG_THAT) {
+      return danhGiaCongViecDat(dongGop, boiCanh);
     }
 
     const daApDung: DauVetXungDot[] = [];
@@ -268,6 +272,22 @@ function danhGiaDiChuyen(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay)
   };
 }
 
+function danhGiaCongViecDat(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
+  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CONG_VIEC_DAT);
+  const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
+
+  return {
+    coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
+    coKy:
+      resolved.camMoiViec ||
+      resolved.coKyBoSung ||
+      hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
+    camMoiViec: resolved.camMoiViec,
+    dongGop,
+    xungDotDaApDung: resolved.xungDotDaApDung,
+  };
+}
+
 function khopDieuKien(dieuKien: DieuKienDungSu, boiCanh: BoiCanhDanhGiaNgay): boolean {
   switch (dieuKien.loai) {
     case 'YEU_TO':
@@ -276,6 +296,8 @@ function khopDieuKien(dieuKien: DieuKienDungSu, boiCanh: BoiCanhDanhGiaNgay): bo
       return boiCanh.truc === dieuKien.truc;
     case 'CHI_NGAY':
       return boiCanh.chiNgay === dieuKien.chi;
+    case 'THO_VUONG':
+      return boiCanh.dangThoVuong;
   }
 }
 
@@ -284,6 +306,7 @@ function cungDieuKien(a: DieuKienDungSu, b: DieuKienDungSu): boolean {
   if (a.loai === 'YEU_TO' && b.loai === 'YEU_TO') return a.ma === b.ma;
   if (a.loai === 'TRUC' && b.loai === 'TRUC') return a.truc === b.truc;
   if (a.loai === 'CHI_NGAY' && b.loai === 'CHI_NGAY') return a.chi === b.chi;
+  if (a.loai === 'THO_VUONG' && b.loai === 'THO_VUONG') return true;
   return false;
 }
 

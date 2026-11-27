@@ -31,6 +31,9 @@ export type DieuKienDungSu =
   | {
       loai: 'CHI_NGAY';
       chi: DiaChi;
+    }
+  | {
+      loai: 'THO_VUONG';
     };
 ```
 
@@ -44,6 +47,7 @@ Một activity rule giữ:
 ## Hệ quả
 
 - Không tạo `BINH_NHAT`, `THU_NHAT`, `BE_NHAT`, `HOI_NHAT` trong `MaYeuTo`.
+- Không tạo `THO_VUONG` trong `MaYeuTo`; Q11 `土王用事後` dùng calendar fact `dangThoVuong`.
 - Khi source có một identity thật như Nguyệt Phá dù vị trí trùng Trực Phá, vẫn giữ `NGUYET_PHA` vì Quyển 10/11 gọi và xử lý nó như một thần/sát riêng.
 - Evaluation nhận facts đã chuẩn hóa thay vì suy lại calendar.
 
@@ -52,7 +56,8 @@ Một activity rule giữ:
 Hiệp Kỷ Biện Phương Thư:
 
 - Quyển 11, mục 嫁娶.
-- Bản Việt Tập 1 PDF 858 / trang in 851.
+- Quyển 11, mục 修宮室 và 興造動土〈修造同〉.
+- Bản Việt Tập 1 trang in 851, 854–855.
 
 Chi tiết:
-`docs/research/activity-cuoi-hoi.md`.
+`docs/research/activity-cuoi-hoi.md` và `docs/research/activity-dong-tho-sua-cung-that.md`.

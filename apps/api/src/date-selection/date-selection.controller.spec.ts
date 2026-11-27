@@ -51,3 +51,20 @@ describe('XemNgayController', () => {
     );
   });
 });
+
+describe('XemNgayController earthwork endpoints', () => {
+  it('trả kết quả DONG_THO', () => {
+    const result = taoController().xemDongTho('2026-01-20T05:00:00.000Z', 'Asia/Ho_Chi_Minh');
+
+    expect(result.dangThoVuong).toBe(true);
+    expect(result.danhGia.dongGop.some((item) => item.quyTac.congViec === 'DONG_THO')).toBe(true);
+  });
+
+  it('trả kết quả SUA_CUNG_THAT', () => {
+    const result = taoController().xemSuaCungThat('2026-11-27T05:00:00.000Z', 'Asia/Ho_Chi_Minh');
+
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'SUA_CUNG_THAT')).toBe(
+      true,
+    );
+  });
+});
