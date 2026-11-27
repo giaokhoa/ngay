@@ -16,6 +16,11 @@ const DUC_HOP = [
   MaYeuTo.NGUYET_DUC_HOP,
 ] as const;
 
+const DUC_NGUYEN = [MaYeuTo.THIEN_DUC, MaYeuTo.NGUYET_DUC, MaYeuTo.THIEN_NGUYEN] as const;
+
+const TARGET_DUC_HOP = DUC_HOP.map(Y);
+const TARGET_DUC_NGUYEN = DUC_NGUYEN.map(Y);
+
 const DUC_HOP_XA_NGUYEN = [...DUC_HOP, MaYeuTo.THIEN_XA, MaYeuTo.THIEN_NGUYEN] as const;
 
 const THANG_TU_MUA = [DiaChi.THIN, DiaChi.TUAT, DiaChi.SUU, DiaChi.MUI] as const;
@@ -507,7 +512,7 @@ export const QUY_TAC_Q10_DI_CHUYEN: readonly QuyTacXungDotDataDriven[] = [
   ),
 
   // Tuế bạc / Trục trận theo chỗ Kị của Nguyệt Yếm -> Q10-only Kị DI_CHUYEN.
-  ...tueBacTrucTranDays().map(({ ma, chiThang, canNgay, chiNgay, moTa }) =>
+  ...tueBacTrucTranDays().map(({ ma, chiThang, canNgay, chiNgay, moTa, boNen }) =>
     globalRule(
       ma,
       808,
@@ -517,6 +522,8 @@ export const QUY_TAC_Q10_DI_CHUYEN: readonly QuyTacXungDotDataDriven[] = [
       { loai: 'THEM_KY' },
       { chiThang: [chiThang], canNgay: [canNgay], chiNgay: [chiNgay] },
       moTa,
+      undefined,
+      boNen,
     ),
   ),
 
@@ -752,6 +759,7 @@ interface NgayDacBiet {
   canNgay: ThienCan;
   chiNgay: DiaChi;
   moTa: string;
+  boNen?: readonly DieuKienDungSu[];
 }
 
 function tueBacTrucTranDays(): readonly NgayDacBiet[] {
@@ -761,7 +769,8 @@ function tueBacTrucTranDays(): readonly NgayDacBiet[] {
       DiaChi.TI,
       ThienCan.BINH,
       DiaChi.NGO,
-      'Tuế bạc theo chỗ Kị của Nguyệt Yếm.',
+      'Tuế bạc theo chỗ Kị của Nguyệt Yếm; không theo chỗ Nên của Đức/Nguyện.',
+      TARGET_DUC_NGUYEN,
     ),
     hard(
       'TUE_BAC_4_MAU_NGO',
@@ -796,7 +805,8 @@ function tueBacTrucTranDays(): readonly NgayDacBiet[] {
       DiaChi.MUI,
       ThienCan.MAU,
       DiaChi.NGO,
-      'Trục trận theo chỗ Kị của Nguyệt Yếm.',
+      'Trục trận theo chỗ Kị của Nguyệt Yếm; không theo chỗ Nên của Đức/Nguyện.',
+      TARGET_DUC_NGUYEN,
     ),
     hard(
       'TRUC_TRAN_12_NHAM_TY',
@@ -934,6 +944,7 @@ function hard(
   canNgay: ThienCan,
   chiNgay: DiaChi,
   moTa: string,
+  boNen?: readonly DieuKienDungSu[],
 ): NgayDacBiet {
   return {
     ma: 'DI_CHUYEN_Q10_NGUYET_YEM_' + suffix,
@@ -941,6 +952,7 @@ function hard(
     canNgay,
     chiNgay,
     moTa,
+    boNen,
   };
 }
 
@@ -961,10 +973,7 @@ function duongThacDays(): readonly NgaySai[] {
     sai('DUONG_THAC_4_DINH', DiaChi.TI, ThienCan.DINH, DiaChi.TI),
     sai('DUONG_THAC_4_KY', DiaChi.TI, ThienCan.KY, DiaChi.TI, true),
     sai('DUONG_THAC_6_DINH', DiaChi.MUI, ThienCan.DINH, DiaChi.MUI),
-    sai('DUONG_THAC_6_KY', DiaChi.MUI, ThienCan.KY, DiaChi.MUI, false, [
-      Y(MaYeuTo.THIEN_DUC_HOP),
-      Y(MaYeuTo.NGUYET_DUC_HOP),
-    ]),
+    sai('DUONG_THAC_6_KY', DiaChi.MUI, ThienCan.KY, DiaChi.MUI, false, TARGET_DUC_HOP),
     sai('DUONG_THAC_7', DiaChi.THAN, ThienCan.CANH, DiaChi.THAN),
     sai('DUONG_THAC_8', DiaChi.DAU, ThienCan.TAN, DiaChi.DAU),
     sai('DUONG_THAC_9', DiaChi.TUAT, ThienCan.CANH, DiaChi.TUAT),
@@ -981,10 +990,7 @@ function amThacDays(): readonly NgaySai[] {
     sai('AM_THAC_4_DINH', DiaChi.TI, ThienCan.DINH, DiaChi.MUI),
     sai('AM_THAC_4_KY', DiaChi.TI, ThienCan.KY, DiaChi.MUI),
     sai('AM_THAC_6_DINH', DiaChi.MUI, ThienCan.DINH, DiaChi.TI, true),
-    sai('AM_THAC_6_KY', DiaChi.MUI, ThienCan.KY, DiaChi.TI, true, [
-      Y(MaYeuTo.THIEN_DUC_HOP),
-      Y(MaYeuTo.NGUYET_DUC_HOP),
-    ]),
+    sai('AM_THAC_6_KY', DiaChi.MUI, ThienCan.KY, DiaChi.TI, true, TARGET_DUC_HOP),
     sai('AM_THAC_7', DiaChi.THAN, ThienCan.GIAP, DiaChi.THIN),
     sai('AM_THAC_8', DiaChi.DAU, ThienCan.AT, DiaChi.MAO, true),
     sai('AM_THAC_9', DiaChi.TUAT, ThienCan.GIAP, DiaChi.DAN),

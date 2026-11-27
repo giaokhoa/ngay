@@ -1,6 +1,6 @@
 # Research: DI_CHUYEN conflict semantics Quyển 10
 
-Status: VERIFIED
+Status: ORACLE_TESTED
 
 ## Mục tiêu
 
@@ -234,17 +234,28 @@ Các nhánh ảnh hưởng trực tiếp DI_CHUYEN:
   Tuyệt âm, Tuyệt dương ở các Can Chi/tháng được sách liệt kê:
   `CAM_MOI_VIEC`.
 - Tuế bạc / Trục trận được ghi “theo chỗ Kị của Nguyệt Yếm”:
-  DI_CHUYEN vẫn `GIU_KY`.
-- Nhóm **Dương thác**: ngoài ngày đã đồng thời là Tiểu hội/hard-ban, source nói
+  đây là **Q10-only Kị**, không phụ thuộc factor `NGUYET_YEM` có được emit hay
+  không.
+  - tháng Tư Bính Ngọ (Tuế bạc) và tháng Sáu Mậu Ngọ (Trục trận) còn bị ghi
+    “không theo chỗ Nên của Đức, Nguyện” / Hán `不從德願所宜`.
+  - `德願` ở đây được giữ đúng hai nhóm từ ngữ: Đức = Thiên Đức/Nguyệt Đức,
+    Nguyện = Thiên Nguyện; không tự kéo Đức Hợp/Nguyệt Đức Hợp vào vì source
+    không có chữ `合`.
+- Nhóm **Dương sai**: ngoài ngày đã đồng thời là Tiểu hội/hard-ban, source nói
   “đều theo chỗ Kị của Kiến”. Q10 Kiến nhật không có 般移 trong danh sách Kị,
   nên với DI_CHUYEN phải `BO_KY` thay vì giữ Kị Nguyệt Yếm.
-- Riêng Dương thác tháng Sáu Kỷ Mùi còn bị ghi không theo chỗ Nên của Đức Hợp:
-  DI_CHUYEN không nhận Kị từ Nguyệt Yếm, nhưng cũng không được dùng Đức Hợp để
-  tự tạo một Nên trong nhánh đặc biệt này.
-- Nhóm **Âm thác**: ngoài các ngày đồng thời Nguyệt Phá / Đại hội hard-ban,
-  source nói theo Kị của Nguyệt Yếm, nên DI_CHUYEN vẫn `GIU_KY`.
-- Riêng tháng Sáu, Đinh Tỵ và Kỷ Tỵ thuộc Đại hội nên `CAM_MOI_VIEC`;
-  câu sau còn ghi Kỷ Tỵ không theo chỗ Nên của Đức Hợp.
+- Riêng Dương sai tháng Sáu Kỷ Mùi còn bị ghi không theo chỗ Nên của
+  `德合`: DI_CHUYEN không nhận Kị từ Nguyệt Yếm, đồng thời bốn contribution
+  Thiên Đức / Nguyệt Đức / Thiên Đức Hợp / Nguyệt Đức Hợp đều không được dùng
+  làm Nên ở nhánh này.
+- Nhóm **Âm sai**:
+  - tháng Hai và tháng Tám gặp Nguyệt Phá: `CAM_MOI_VIEC`;
+  - **tháng Sáu và tháng Chạp là Đại hội: `CAM_MOI_VIEC`**;
+  - các tháng còn lại theo chỗ Kị của Nguyệt Yếm, nên DI_CHUYEN vẫn
+    `GIU_KY`.
+- Do đó tháng Sáu **Kỷ Tỵ là hard-ban**, không phải một Âm sai thường. Câu sau
+  còn ghi Kỷ Tỵ không theo chỗ Nên của `德合`; hard-ban đã triệt toàn bộ Nên,
+  nhưng provenance vẫn giữ chi tiết này.
 
 Những ngày được source nói “mọi việc đều Kị” phải là hard prohibition, không
 được phép được một Nên thông thường gỡ bỏ.
@@ -397,7 +408,7 @@ TAI_SAT
 NGUYET_HINH
 -> NGUYET_YEM
 
-NGUYET_YEM (nhánh Dương thác)
+NGUYET_YEM (nhánh Dương sai)
 -> danh sách Kị của KIEN; DI_CHUYEN không nằm trong Kị Kiến nên BO_KY
 
 DAI_THOI
@@ -438,10 +449,11 @@ Tối thiểu implementation PR phải có:
 | Nguyệt Yếm tháng Dần + Đức/Hợp                        | vẫn Kị DI_CHUYEN                          |
 | Nguyệt Yếm tháng Tý không Thiên Xá                    | mọi việc Kị                               |
 | Nguyệt Yếm tháng Mão dù có Đức/Hợp                    | mọi việc Kị                               |
-| Nguyệt Yếm tháng Giêng ngày Giáp Dần (Dương thác)     | theo Kị Kiến -> bỏ Kị DI_CHUYEN           |
+| Nguyệt Yếm tháng Giêng ngày Giáp Dần (Dương sai)      | theo Kị Kiến -> bỏ Kị DI_CHUYEN           |
 | Nguyệt Yếm tháng Tư ngày Kỷ Tỵ (Tiểu hội)             | mọi việc Kị                               |
-| Nguyệt Yếm tháng Sáu ngày Kỷ Mùi (Dương thác)         | bỏ Kị, không nhận Nên Đức Hợp ở nhánh này |
-| Nguyệt Yếm tháng Sáu ngày Kỷ Tỵ (Âm thác / Đại hội)   | mọi việc Kị                               |
+| Nguyệt Yếm tháng Sáu ngày Kỷ Mùi (Dương sai)          | bỏ Kị, không nhận Nên Đức Hợp ở nhánh này |
+| Tuế bạc tháng Tỵ ngày Bính Ngọ                        | thêm Kị; bỏ Nên Đức + Nguyện              |
+| Trục trận tháng Mùi ngày Mậu Ngọ                      | thêm Kị; bỏ Nên Đức + Nguyện              |
 | Đại Thời tháng Dần                                    | bỏ Kị                                     |
 | Đại Thời tháng Mão                                    | delegate Nguyệt Hình                      |
 | Thiên Lại tháng Dần + Đức/Hợp                         | bỏ Kị                                     |
@@ -492,10 +504,6 @@ Resolver:
 5. fail loud nếu hai rule cùng precedence nhưng cho kết quả khác;
 6. giữ trace operation + source;
 7. không tự sinh Nên.
-
-Implementation còn hỗ trợ Q10-only special-day operations `THEM_KY` và
-`BO_NEN` cho các nhánh như Tuế bạc/Trục trận và Dương/Âm thác, vì các rule
-này có thể áp dụng ngay cả khi không có contribution factor `NGUYET_YEM`.
 
 ## Trạng thái
 

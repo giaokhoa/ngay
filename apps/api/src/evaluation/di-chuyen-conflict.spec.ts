@@ -432,17 +432,49 @@ describe('Q10 standalone special-day rules', () => {
     );
   });
 
-  it('Dương thác tháng Sáu Kỷ Mùi không tự sinh Kị nhưng loại Nên Đức Hợp', () => {
+  it('Tuế bạc tháng Tỵ Bính Ngọ bỏ Nên Đức + Nguyện, không tự kéo Hợp vào', () => {
+    const result = danhGia({
+      chiThang: DiaChi.TI,
+      canNgay: ThienCan.BINH,
+      chiNgay: DiaChi.NGO,
+      yeuTo: [MaYeuTo.THIEN_DUC, MaYeuTo.NGUYET_DUC, MaYeuTo.THIEN_NGUYEN, MaYeuTo.THIEN_DUC_HOP],
+    });
+
+    expect(result.coKy).toBe(true);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_NGUYEN, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC_HOP, TrangThaiDongGop.HIEU_LUC);
+  });
+
+  it('Trục trận tháng Mùi Mậu Ngọ bỏ Nên Đức + Nguyện', () => {
+    const result = danhGia({
+      chiThang: DiaChi.MUI,
+      canNgay: ThienCan.MAU,
+      chiNgay: DiaChi.NGO,
+      yeuTo: [MaYeuTo.THIEN_DUC, MaYeuTo.NGUYET_DUC, MaYeuTo.THIEN_NGUYEN],
+    });
+
+    expect(result.coKy).toBe(true);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_NGUYEN, TrangThaiDongGop.BI_LOAI);
+  });
+
+  it('Dương thác tháng Sáu Kỷ Mùi không tự sinh Kị nhưng loại cả nhóm Đức/Hợp', () => {
     const result = danhGia({
       chiThang: DiaChi.MUI,
       canNgay: ThienCan.KY,
       chiNgay: DiaChi.MUI,
-      yeuTo: [MaYeuTo.THIEN_DUC_HOP],
+      yeuTo: [MaYeuTo.THIEN_DUC, MaYeuTo.NGUYET_DUC, MaYeuTo.THIEN_DUC_HOP, MaYeuTo.NGUYET_DUC_HOP],
     });
 
     expect(result.camMoiViec).toBe(false);
     expect(result.coKy).toBe(false);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC, TrangThaiDongGop.BI_LOAI);
     expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC_HOP, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC_HOP, TrangThaiDongGop.BI_LOAI);
   });
 
   it('Âm thác tháng Sáu Kỷ Tỵ hard-ban dù không có factor Nguyệt Yếm', () => {
