@@ -305,18 +305,19 @@ Lịch lệ:
 
 Điểm cuối làm factor này không thể chỉ map `mùa -> set chiNgày`.
 
-Project hiện chưa có primitive `THO_VUONG` / “Thổ Vương dụng sự” để xác định chính xác khoảng chuyển tiếp mà rule nói tới.
+Primitive Thổ Vượng đã được research tại `docs/research/tho-vuong.md`.
+
+Semantics cho factor:
+
+- ngoài Thổ Vượng: dùng set Chi theo mùa;
+- từ ngày Thổ Vượng bắt đầu tới trước ngày bốn Lập: chuyển sang Tỵ, Ngọ;
+- Tỵ/Ngọ là **replacement theo hành đang vượng**, không cộng vĩnh viễn vào seasonal set.
 
 ### Status
 
-COMPARED, **chưa VERIFIED để implement production**.
+VERIFIED.
 
-Blocker:
-
-- research và implement primitive Thổ Vương trước;
-- sau đó mới xác định precedence giữa seasonal set và `sau Thổ vượng -> Tỵ/Ngọ`.
-
-Không được bỏ điều kiện này và implement bản seasonal rút gọn.
+Implementation nhận `dangThoVuong` từ calendar context; factor không tự tính tiết khí/timezone.
 
 ## 10. Nguyệt Ân
 
