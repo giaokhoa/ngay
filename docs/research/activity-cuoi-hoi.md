@@ -117,9 +117,11 @@ Không cần thêm factor thuận lợi nào để dựng vertical slice.
 | Yếm Đối     | `YEM_DOI`              |
 | ngày Hợi    | `chiNgay === HOI`      |
 
-### Kị — còn thiếu production factor
+### Kị — VERIFIED nhưng còn thiếu production factor
 
-- Nguyệt Phá
+Các factor dưới đây đã khóa source/representation; xem thêm
+`wedding-blockers-q5.md` và `wedding-blockers-q6.md`.
+
 - Đại Thời
 - Thiên Lại
 - Tứ Phế
@@ -128,6 +130,8 @@ Không cần thêm factor thuận lợi nào để dựng vertical slice.
 - Ngũ Mộ
 - Vãng Vong
 - Bát Chuyên
+
+Nguyệt Phá đã được IMPLEMENTED + ORACLE_TESTED ở #42.
 
 ## Phát hiện kiến trúc: activity rule không thể chỉ trỏ tới MaYeuTo
 
@@ -243,14 +247,16 @@ Ví dụ đã xác minh từ Hán bản:
 
 ### Bát Chuyên
 
-Quyển 10 có rule riêng và ngoại lệ liên quan Thiên Nguyện; phải research exact text trước khi code evaluator.
+Quyển 10 trang 824–825 xác minh: gặp Đức/Hợp vẫn Kị; gặp Thiên Nguyện thì
+cưới hỏi không Kị nhưng việc quân sự vẫn Kị. Xem đầy đủ regression matrix ở
+`wedding-conflict-semantics-q10.md`.
 
 ## Vertical-slice gates
 
 Không implement kết luận cưới hỏi production cho tới khi:
 
-1. 9 factor Kị còn thiếu đã VERIFIED + ORACLE_TESTED;
-2. Quyển 10 semantics cho 19 Kị đã được research;
+1. 8 factor Kị còn thiếu production implementation phải ORACLE_TESTED;
+2. Quyển 10 semantics cho 20 mục Kị (tính cả Hợi nhật) đã VERIFIED;
 3. activity rule target contract hỗ trợ YEU_TO/TRUC/CHI_NGAY;
 4. explicit override rules cho các ngoại lệ đã có test.
 
@@ -261,6 +267,6 @@ Không implement kết luận cưới hỏi production cho tới khi:
 - [x] Nghi/Kị list VERIFIED
 - [x] dependency matrix lập xong
 - [ ] missing blockers implemented
-- [ ] Q10 conflict semantics VERIFIED đầy đủ
+- [x] Q10 conflict semantics VERIFIED đầy đủ
 - [ ] activity rules IMPLEMENTED
 - [ ] end-to-end ORACLE_TESTED
