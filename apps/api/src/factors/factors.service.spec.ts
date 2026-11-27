@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { DIA_CHI_THEO_THU_TU, DiaChi } from '../calendar/domain/earthly-branch';
+import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { LoaiNguon } from '../sources/source-reference';
 import { MaYeuTo } from './domain/factor-code';
 import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from './factor-definitions';
@@ -10,9 +11,25 @@ type OracleTheoThang = Readonly<Record<DiaChi, readonly DiaChi[]>>;
 
 const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
 
+const MA_YEU_TO_QUYEN_6 = [
+  MaYeuTo.TAM_HOP,
+  MaYeuTo.DICH_MA,
+  MaYeuTo.KIEP_SAT,
+  MaYeuTo.TAI_SAT,
+  MaYeuTo.NGUYET_SAT,
+  MaYeuTo.NGUYET_HINH,
+  MaYeuTo.NGUYET_HAI,
+  MaYeuTo.LUC_HOP,
+  MaYeuTo.NGU_PHU,
+  MaYeuTo.THIEN_THUONG,
+  MaYeuTo.THIEN_TAC,
+] as const;
+
+type MaYeuToQuyen6 = (typeof MA_YEU_TO_QUYEN_6)[number];
+
 // Oracle độc lập được chép từ bảng research đã đối chiếu Quyển 6 + Lập thành.
 // Không derive từ production definitions hoặc helper production.
-const ORACLE_THEO_YEU_TO: Readonly<Record<MaYeuTo, OracleTheoThang>> = {
+const ORACLE_THEO_YEU_TO: Readonly<Record<MaYeuToQuyen6, OracleTheoThang>> = {
   [MaYeuTo.TAM_HOP]: {
     [DAN]: [NGO, TUAT],
     [MAO]: [MUI, HOI],
@@ -172,7 +189,7 @@ const ORACLE_THEO_YEU_TO: Readonly<Record<MaYeuTo, OracleTheoThang>> = {
 describe('TinhYeuToNgayService — oracle Quyển 6', () => {
   const service = new TinhYeuToNgayService();
 
-  for (const ma of Object.values(MaYeuTo)) {
+  for (const ma of MA_YEU_TO_QUYEN_6) {
     const oracle = ORACLE_THEO_YEU_TO[ma];
 
     describe(ma, () => {
@@ -183,7 +200,11 @@ describe('TinhYeuToNgayService — oracle Quyển 6', () => {
           const nenCo = chiNgayMongDoi.includes(chiNgay);
 
           it(`${chiThang} / ${chiNgay}: ${nenCo ? 'co' : 'khong co'} ${ma}`, () => {
-            const ketQua = service.tinhTheoChiThangVaChiNgay(chiThang, chiNgay);
+            const ketQua = service.tinh({
+              chiThang,
+              chiNgay,
+              canNgay: ThienCan.GIAP,
+            });
             const coYeuTo = ketQua.some((yeuTo) => yeuTo.ma === ma);
 
             expect(coYeuTo).toBe(nenCo);
@@ -221,7 +242,7 @@ describe('Factor provenance', () => {
 
   it('registry chi chua canonical factor da research trong batch nay', () => {
     expect(DINH_NGHIA_YEU_TO_THEO_CHI_THANG.map((dinhNghia) => dinhNghia.ma)).toEqual(
-      Object.values(MaYeuTo),
+      MA_YEU_TO_QUYEN_6,
     );
   });
 });
