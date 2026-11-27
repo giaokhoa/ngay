@@ -11,7 +11,7 @@ import { KetQuaDanhGia, TrangThaiDongGop } from '../evaluation/evaluation-domain
 import { YeuToNgay } from '../factors/domain/day-factor';
 import { TinhYeuToNgayService } from '../factors/factors.service';
 
-export interface KetQuaXemNgayCuoiHoi {
+export interface KetQuaXemNgay {
   ngayDanSu: string;
   canChiNgay: CanChi;
   chiThang: ReturnType<TinhLichService['tinhChiThangTaiThoiDiem']>;
@@ -27,6 +27,9 @@ export interface KetQuaXemNgayCuoiHoi {
   };
 }
 
+export type KetQuaXemNgayCuoiHoi = KetQuaXemNgay;
+export type KetQuaXemNgayDiChuyen = KetQuaXemNgay;
+
 @Injectable()
 export class XemNgayService {
   constructor(
@@ -37,6 +40,14 @@ export class XemNgayService {
   ) {}
 
   xemCuoiHoi(thoiDiem: Date, muiGio: string): KetQuaXemNgayCuoiHoi {
+    return this.xem(thoiDiem, muiGio, LoaiCongViec.CUOI_HOI);
+  }
+
+  xemDiChuyen(thoiDiem: Date, muiGio: string): KetQuaXemNgayDiChuyen {
+    return this.xem(thoiDiem, muiGio, LoaiCongViec.DI_CHUYEN);
+  }
+
+  private xem(thoiDiem: Date, muiGio: string, congViec: LoaiCongViec): KetQuaXemNgay {
     if (Number.isNaN(thoiDiem.getTime())) {
       throw new RangeError('Thời điểm không hợp lệ');
     }
@@ -52,7 +63,7 @@ export class XemNgayService {
       chiNgay: canChiNgay.chi,
       dangThoVuong,
     });
-    const danhGia = this.danhGiaNgay.danhGia(this.dungSu.layQuyTac(LoaiCongViec.CUOI_HOI), {
+    const danhGia = this.danhGiaNgay.danhGia(this.dungSu.layQuyTac(congViec), {
       chiThang,
       canNgay: canChiNgay.can,
       chiNgay: canChiNgay.chi,
@@ -73,7 +84,7 @@ export class XemNgayService {
   }
 }
 
-function taoGiaiThich(danhGia: KetQuaDanhGia): KetQuaXemNgayCuoiHoi['giaiThich'] {
+function taoGiaiThich(danhGia: KetQuaDanhGia): KetQuaXemNgay['giaiThich'] {
   const hieuLuc = danhGia.dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -87,7 +98,7 @@ function taoGiaiThich(danhGia: KetQuaDanhGia): KetQuaXemNgayCuoiHoi['giaiThich']
       .filter((item) => item.trangThai === TrangThaiDongGop.BI_LOAI)
       .map(
         (item) =>
-          `${moTaDieuKien(item.quyTac.dieuKien)}: ${item.lyDoLoai ?? 'bị loại bởi Quyển 10'}`,
+          moTaDieuKien(item.quyTac.dieuKien) + ': ' + (item.lyDoLoai ?? 'bị loại bởi Quyển 10'),
       ),
     xungDot: danhGia.xungDotDaApDung.map((item) => item.moTa),
   };
@@ -98,8 +109,8 @@ function moTaDieuKien(dieuKien: KetQuaDanhGia['dongGop'][number]['quyTac']['dieu
     case 'YEU_TO':
       return dieuKien.ma;
     case 'TRUC':
-      return `TRUC_${dieuKien.truc}`;
+      return 'TRUC_' + dieuKien.truc;
     case 'CHI_NGAY':
-      return `CHI_NGAY_${dieuKien.chi}`;
+      return 'CHI_NGAY_' + dieuKien.chi;
   }
 }

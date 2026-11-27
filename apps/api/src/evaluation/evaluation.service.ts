@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-import { DieuKienDungSu, QuyTacDungSu, TacDongDungSu } from '../activities/activity-rule';
+import {
+  DieuKienDungSu,
+  LoaiCongViec,
+  QuyTacDungSu,
+  TacDongDungSu,
+} from '../activities/activity-rule';
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
@@ -10,6 +15,11 @@ import {
   QuyTacXungDotCuoiHoi,
   taoNguonXungDotQuyen10,
 } from './cuoi-hoi-conflict-rules';
+import {
+  MA_XUNG_DOT_QUY_KY,
+  MO_TA_XUNG_DOT_QUY_KY,
+  NGUON_XUNG_DOT_QUY_KY,
+} from './di-chuyen-conflict-rules';
 import {
   BoiCanhDanhGiaNgay,
   DauVetXungDot,
@@ -36,6 +46,11 @@ export class DanhGiaNgayService {
         quyTac,
         trangThai: TrangThaiDongGop.HIEU_LUC,
       }));
+
+    const congViec = xacDinhCongViec(quyTacDungSu);
+    if (congViec === LoaiCongViec.DI_CHUYEN) {
+      return danhGiaDiChuyen(dongGop, boiCanh);
+    }
 
     const daApDung: DauVetXungDot[] = [];
     let camMoiViec = false;
@@ -225,6 +240,54 @@ export class DanhGiaNgayService {
       xungDotDaApDung: daApDung,
     };
   }
+}
+
+function xacDinhCongViec(quyTacDungSu: readonly QuyTacDungSu[]): LoaiCongViec {
+  const congViec = quyTacDungSu[0]?.congViec;
+  if (!congViec) {
+    throw new Error('Không có quy tắc Dụng sự để đánh giá');
+  }
+
+  if (quyTacDungSu.some((quyTac) => quyTac.congViec !== congViec)) {
+    throw new Error('Không được trộn quy tắc của nhiều công việc trong một lần đánh giá');
+  }
+
+  return congViec;
+}
+
+function danhGiaDiChuyen(
+  dongGop: readonly DongGopDanhGia[],
+  boiCanh: BoiCanhDanhGiaNgay,
+): KetQuaDanhGia {
+  const coYeuTo = (ma: MaYeuTo): boolean => boiCanh.yeuTo.some((yeuTo) => yeuTo.ma === ma);
+  const coQuyKy = coYeuTo(MaYeuTo.QUY_KY);
+  const coCatThanDuocBanVietNeu = [
+    MaYeuTo.THIEN_DUC,
+    MaYeuTo.NGUYET_DUC,
+    MaYeuTo.THIEN_XA,
+    MaYeuTo.THIEN_NGUYEN,
+  ].some(coYeuTo);
+
+  const xungDotDaApDung: DauVetXungDot[] =
+    coQuyKy && coCatThanDuocBanVietNeu
+      ? [
+          {
+            ma: MA_XUNG_DOT_QUY_KY,
+            moTa: MO_TA_XUNG_DOT_QUY_KY,
+            nguon: NGUON_XUNG_DOT_QUY_KY,
+          },
+        ]
+      : [];
+
+  const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
+
+  return {
+    coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
+    coKy: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
+    camMoiViec: false,
+    dongGop,
+    xungDotDaApDung,
+  };
 }
 
 function khopDieuKien(dieuKien: DieuKienDungSu, boiCanh: BoiCanhDanhGiaNgay): boolean {

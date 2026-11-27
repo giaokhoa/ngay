@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { LoaiCongViec, QuyTacDungSu } from './activity-rule';
 import { QUY_TAC_CUOI_HOI } from './cuoi-hoi-rules';
+import { QUY_TAC_DI_CHUYEN } from './di-chuyen-rules';
 
 @Injectable()
 export class DungSuService {
@@ -9,6 +10,8 @@ export class DungSuService {
     switch (congViec) {
       case LoaiCongViec.CUOI_HOI:
         return QUY_TAC_CUOI_HOI;
+      case LoaiCongViec.DI_CHUYEN:
+        return QUY_TAC_DI_CHUYEN;
     }
   }
 }

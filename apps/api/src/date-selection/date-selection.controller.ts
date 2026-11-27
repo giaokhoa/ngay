@@ -11,17 +11,22 @@ export class XemNgayController {
     @Query('thoiDiem') thoiDiemText: string | undefined,
     @Query('muiGio') muiGio: string | undefined,
   ) {
-    if (!thoiDiemText || !muiGio) {
-      throw new BadRequestException('Cần thoiDiem ISO-8601 và muiGio IANA');
-    }
+    const { thoiDiem, muiGioHopLe } = docInput(thoiDiemText, muiGio);
+    return this.goi(() => this.xemNgay.xemCuoiHoi(thoiDiem, muiGioHopLe));
+  }
 
-    const thoiDiem = new Date(thoiDiemText);
-    if (Number.isNaN(thoiDiem.getTime())) {
-      throw new BadRequestException('thoiDiem không hợp lệ');
-    }
+  @Get('di-chuyen')
+  xemDiChuyen(
+    @Query('thoiDiem') thoiDiemText: string | undefined,
+    @Query('muiGio') muiGio: string | undefined,
+  ) {
+    const { thoiDiem, muiGioHopLe } = docInput(thoiDiemText, muiGio);
+    return this.goi(() => this.xemNgay.xemDiChuyen(thoiDiem, muiGioHopLe));
+  }
 
+  private goi<T>(thucThi: () => T): T {
     try {
-      return this.xemNgay.xemCuoiHoi(thoiDiem, muiGio);
+      return thucThi();
     } catch (error) {
       if (error instanceof RangeError) {
         throw new BadRequestException(error.message);
@@ -29,4 +34,20 @@ export class XemNgayController {
       throw error;
     }
   }
+}
+
+function docInput(
+  thoiDiemText: string | undefined,
+  muiGio: string | undefined,
+): { thoiDiem: Date; muiGioHopLe: string } {
+  if (!thoiDiemText || !muiGio) {
+    throw new BadRequestException('Cần thoiDiem ISO-8601 và muiGio IANA');
+  }
+
+  const thoiDiem = new Date(thoiDiemText);
+  if (Number.isNaN(thoiDiem.getTime())) {
+    throw new BadRequestException('thoiDiem không hợp lệ');
+  }
+
+  return { thoiDiem, muiGioHopLe: muiGio };
 }

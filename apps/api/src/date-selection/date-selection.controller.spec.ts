@@ -31,6 +31,14 @@ describe('XemNgayController', () => {
     expect(result.danhGia.dongGop.every((item) => item.quyTac.nguon.length > 0)).toBe(true);
   });
 
+  it('trả kết quả DI_CHUYEN có explanation và Q11 provenance', () => {
+    const result = taoController().xemDiChuyen('2026-11-27T05:00:00.000Z', 'Asia/Ho_Chi_Minh');
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.giaiThich).toBeDefined();
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'DI_CHUYEN')).toBe(true);
+  });
+
   it('từ chối thiếu input', () => {
     expect(() => taoController().xemCuoiHoi(undefined, 'Asia/Ho_Chi_Minh')).toThrow(
       BadRequestException,
