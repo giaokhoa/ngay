@@ -6,6 +6,8 @@ import { ThamChieuNguon } from '../sources/source-reference';
 export enum LoaiCongViec {
   CUOI_HOI = 'CUOI_HOI',
   DI_CHUYEN = 'DI_CHUYEN',
+  DONG_THO = 'DONG_THO',
+  SUA_CUNG_THAT = 'SUA_CUNG_THAT',
 }
 
 export enum TacDongDungSu {
@@ -16,7 +18,8 @@ export enum TacDongDungSu {
 export type DieuKienDungSu =
   | { loai: 'YEU_TO'; ma: MaYeuTo }
   | { loai: 'TRUC'; truc: ThapNhiTruc }
-  | { loai: 'CHI_NGAY'; chi: DiaChi };
+  | { loai: 'CHI_NGAY'; chi: DiaChi }
+  | { loai: 'THO_VUONG' };
 
 export interface QuyTacDungSu {
   ma: string;

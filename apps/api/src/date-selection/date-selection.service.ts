@@ -29,6 +29,8 @@ export interface KetQuaXemNgay {
 
 export type KetQuaXemNgayCuoiHoi = KetQuaXemNgay;
 export type KetQuaXemNgayDiChuyen = KetQuaXemNgay;
+export type KetQuaXemNgayDongTho = KetQuaXemNgay;
+export type KetQuaXemNgaySuaCungThat = KetQuaXemNgay;
 
 @Injectable()
 export class XemNgayService {
@@ -45,6 +47,14 @@ export class XemNgayService {
 
   xemDiChuyen(thoiDiem: Date, muiGio: string): KetQuaXemNgayDiChuyen {
     return this.xem(thoiDiem, muiGio, LoaiCongViec.DI_CHUYEN);
+  }
+
+  xemDongTho(thoiDiem: Date, muiGio: string): KetQuaXemNgayDongTho {
+    return this.xem(thoiDiem, muiGio, LoaiCongViec.DONG_THO);
+  }
+
+  xemSuaCungThat(thoiDiem: Date, muiGio: string): KetQuaXemNgaySuaCungThat {
+    return this.xem(thoiDiem, muiGio, LoaiCongViec.SUA_CUNG_THAT);
   }
 
   private xem(thoiDiem: Date, muiGio: string, congViec: LoaiCongViec): KetQuaXemNgay {
@@ -68,6 +78,7 @@ export class XemNgayService {
       canNgay: canChiNgay.can,
       chiNgay: canChiNgay.chi,
       truc,
+      dangThoVuong,
       yeuTo,
     });
 
@@ -112,5 +123,7 @@ function moTaDieuKien(dieuKien: KetQuaDanhGia['dongGop'][number]['quyTac']['dieu
       return 'TRUC_' + dieuKien.truc;
     case 'CHI_NGAY':
       return 'CHI_NGAY_' + dieuKien.chi;
+    case 'THO_VUONG':
+      return 'THO_VUONG';
   }
 }

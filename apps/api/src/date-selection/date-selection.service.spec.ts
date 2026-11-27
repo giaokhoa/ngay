@@ -74,3 +74,42 @@ describe('XemNgayService DI_CHUYEN end-to-end', () => {
     );
   });
 });
+
+describe('XemNgayService earthwork end-to-end', () => {
+  it('DONG_THO carries real Thổ Vượng calendar fact into typed Q11 blocker', () => {
+    const result = taoService().xemDongTho(
+      new Date('2026-01-20T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(result.ngayDanSu).toBe('2026-01-20');
+    expect(result.dangThoVuong).toBe(true);
+    expect(
+      result.danhGia.dongGop.some(
+        (item) =>
+          item.quyTac.congViec === 'DONG_THO' &&
+          item.quyTac.dieuKien.loai === 'THO_VUONG' &&
+          item.trangThai === 'HIEU_LUC',
+      ),
+    ).toBe(true);
+    expect(result.danhGia.coKy).toBe(true);
+    expect(
+      result.danhGia.xungDotDaApDung.some((item) => item.ma === 'EARTHWORK_Q10_THO_VUONG_GIU_KY'),
+    ).toBe(true);
+  });
+
+  it('SUA_CUNG_THAT uses its own Q11 contract and verified provenance', () => {
+    const result = taoService().xemSuaCungThat(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'SUA_CUNG_THAT')).toBe(
+      true,
+    );
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.nguon.every((nguon) => nguon.daXacMinh)),
+    ).toBe(true);
+  });
+});

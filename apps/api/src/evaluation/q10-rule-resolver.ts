@@ -286,6 +286,11 @@ function kiemTraDelegateCoMat(mucTieu: DieuKienDungSu, boiCanh: BoiCanhDanhGiaNg
       if (boiCanh.chiNgay !== mucTieu.chi) {
         throw new Error('Q10 delegate tới Chi ngày không khớp context: ' + mucTieu.chi);
       }
+      return;
+    case 'THO_VUONG':
+      if (!boiCanh.dangThoVuong) {
+        throw new Error('Q10 delegate tới Thổ Vượng nhưng context không đang Thổ Vượng');
+      }
   }
 }
 
@@ -311,6 +316,7 @@ function cungMucTieu(a: DieuKienDungSu, b: DieuKienDungSu): boolean {
   if (a.loai === 'YEU_TO' && b.loai === 'YEU_TO') return a.ma === b.ma;
   if (a.loai === 'TRUC' && b.loai === 'TRUC') return a.truc === b.truc;
   if (a.loai === 'CHI_NGAY' && b.loai === 'CHI_NGAY') return a.chi === b.chi;
+  if (a.loai === 'THO_VUONG' && b.loai === 'THO_VUONG') return true;
   return false;
 }
 
@@ -322,6 +328,8 @@ function khoaMucTieu(mucTieu: DieuKienDungSu): string {
       return 'TRUC:' + mucTieu.truc;
     case 'CHI_NGAY':
       return 'CHI_NGAY:' + mucTieu.chi;
+    case 'THO_VUONG':
+      return 'THO_VUONG';
   }
 }
 
