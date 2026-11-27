@@ -29,7 +29,8 @@ Ví dụ:
 
 - mapping tháng theo tiết khí đã VERIFIED;
 - thuật toán tính instant tiết khí cũng đã VERIFIED độc lập bằng GB/T + Astronomy Engine + HKO;
-- Gregorian -> Can Chi ngày vẫn là task riêng cho tới khi epoch/day-boundary được khóa.
+- Gregorian -> Can Chi ngày đã VERIFIED bằng epoch GB/T + HKO oracle;
+- implementation vẫn phải giữ civil-date semantics theo ADR 0005.
 
 Không được dùng trạng thái VERIFIED của một phần để hợp thức hóa phần khác chưa được xác minh.
 
