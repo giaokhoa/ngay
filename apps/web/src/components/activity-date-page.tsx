@@ -14,6 +14,11 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   NGUYET_AN: 'Nguyệt Ân',
   TU_TUONG: 'Tứ Tướng',
   THOI_DUC: 'Thời Đức',
+  PHUC_DUC: 'Phúc Đức',
+  NGUYET_KIEN: 'Nguyệt Kiến',
+  THO_PHU: 'Thổ Phủ (土府)',
+  THO_PHU_TIN: 'Thổ Phù (土符)',
+  DIA_NANG: 'Địa Nang',
   DAN_NHAT: 'Dân nhật',
   DICH_MA: 'Dịch Mã',
   THIEN_MA: 'Thiên Mã',
@@ -133,6 +138,7 @@ function KetQuaXemNgay({ ketQua }: { ketQua: KetQuaXemNgayApi }) {
         <div className="thong-so">
           <span>Tháng: {nhanDiaChi(ketQua.chiThang)}</span>
           <span>Trực: {nhanTruc(ketQua.truc)}</span>
+          {ketQua.dangThoVuong ? <span className="nhan-trang-thai">Đang Thổ Vượng</span> : null}
           {ketQua.danhGia.camMoiViec ? <strong>Quyển 10: mọi việc đều kị</strong> : null}
         </div>
       </div>
@@ -235,7 +241,8 @@ function nhanDieuKien(item: DongGopDanhGiaApi): string {
   const condition = item.quyTac.dieuKien;
   if (condition.loai === 'YEU_TO') return NHAN_YEU_TO[condition.ma ?? ''] ?? condition.ma ?? '';
   if (condition.loai === 'TRUC') return 'Trực ' + nhanTruc(condition.truc ?? '');
-  return 'Ngày ' + nhanDiaChi(condition.chi ?? '');
+  if (condition.loai === 'CHI_NGAY') return 'Ngày ' + nhanDiaChi(condition.chi ?? '');
+  return 'Thổ Vượng dụng sự';
 }
 
 function nhanCan(value: string): string {
