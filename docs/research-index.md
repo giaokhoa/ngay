@@ -12,6 +12,24 @@
 | Instant của tiết khí      | calendar | GB/T 33661 + Astronomy Engine + HKO     | ORACLE_TESTED | solar-term.service.ts            | HKO đủ 24 tiết 2026                        | ADR 0004                                         |
 | Thập Nhị Trực             | calendar | T2 Q20 p311, p313-314 + Hán Q20/Q21/Q30 | ORACLE_TESTED | twelve-officer.ts                | twelve-officer.spec.ts                     | Oracle tháng Dần/Mão                             |
 
+## Factors — Quyển 6 core
+
+| Chủ đề       | Module  | Nguồn chính                     | Trạng thái | Implementation | Oracle test | Ghi chú                                       |
+| ------------ | ------- | ------------------------------- | ---------- | -------------- | ----------- | --------------------------------------------- |
+| Tam Hợp      | factors | T1 Q6 p476 + Hán Q6             | VERIFIED   | -              | planned     | core-monthly-factors.md                       |
+| Dịch Mã      | factors | T1 Q6 p481 + Hán Q6 + Q9        | VERIFIED   | -              | planned     | Thiên Hậu cùng vị trí                         |
+| Kiếp Sát     | factors | T1 Q6 p485 + Hán Q6 + Q9        | VERIFIED   | -              | planned     |                                               |
+| Tai Sát      | factors | T1 Q6 p486 + Hán Q6 + Q9        | VERIFIED   | -              | planned     | Thiên Hỏa cùng hệ; không tạo Thiên Ngục riêng |
+| Nguyệt Sát   | factors | T1 Q6 p491 + Hán Q6 + Q9        | VERIFIED   | -              | planned     | Nguyệt Hư cùng vị trí                         |
+| Nguyệt Hình  | factors | T1 Q6 p493 + Hán Q6 + Lập thành | VERIFIED   | -              | planned     | explicit lookup                               |
+| Nguyệt Hại   | factors | T1 Q6 p494 + Hán Q6 + Q9        | VERIFIED   | -              | planned     | Lục Hại                                       |
+| Lục Hợp      | factors | T1 Q6 p502 + Hán Q6 + Q9        | VERIFIED   | -              | planned     | Vô Kiều bị sách bác bỏ                        |
+| Ngũ Phú      | factors | T1 Q6 p506 + Hán Q6 + Q9        | VERIFIED   | -              | planned     | dùng chuỗi thuận theo Lịch lệ/Lập thành       |
+| Thiên Thương | factors | T1 Q6 p508 + Hán Q6 + Q9        | VERIFIED   | -              | planned     |                                               |
+| Thiên Tặc    | factors | T1 Q6 p510 + Hán Q6 + Q9        | VERIFIED   | -              | planned     |                                               |
+
+Chi tiết: `docs/research/core-monthly-factors.md`.
+
 Trạng thái hợp lệ:
 
 - TODO
