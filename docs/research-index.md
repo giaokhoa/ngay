@@ -70,9 +70,14 @@ Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
 
 ## Activities — Quyển 11
 
-| Chủ đề          | Module     | Nguồn chính                  | Trạng thái | Implementation | Oracle test | Ghi chú                                             |
-| --------------- | ---------- | ---------------------------- | ---------- | -------------- | ----------- | --------------------------------------------------- |
-| CUOI_HOI / 嫁娶 | activities | T1 Q11 PDF858 p851 + Hán Q11 | VERIFIED   | -              | planned     | 10 Nghi / 19 Kị; docs/research/activity-cuoi-hoi.md |
+| Chủ đề                         | Module     | Nguồn chính                     | Trạng thái    | Implementation                       | Oracle test                                              | Ghi chú                                                                          |
+| ------------------------------ | ---------- | ------------------------------- | ------------- | ------------------------------------ | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| CUOI_HOI / 嫁娶                | activities | T1 Q11 p851 + Hán Q11           | ORACLE_TESTED | cuoi-hoi-rules.ts + Q10 resolver     | cuoi-hoi-rules.spec.ts / cuoi-hoi-conflict.spec.ts       | docs/research/activity-cuoi-hoi.md                                               |
+| DI_CHUYEN / 般移〈移徙同〉     | activities | T1 Q11 + Hán Q11                | ORACLE_TESTED | di-chuyen-rules.ts + data-driven Q10 | di-chuyen-conflict.spec.ts                               | docs/research/activity-di-chuyen.md                                              |
+| DONG_THO / 興造動土            | activities | T1 Q11 p855 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10        | earthwork-rules.spec.ts / earthwork-conflict.spec.ts     | docs/research/activity-dong-tho-sua-cung-that.md                                 |
+| SUA_CUNG_THAT / 修宮室         | activities | T1 Q11 p854 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10        | earthwork-rules.spec.ts / earthwork-conflict.spec.ts     | docs/research/activity-dong-tho-sua-cung-that.md                                 |
+| KHAI_TRUONG / 開市             | activities | T1 Q11 p857 + Hán Q11           | ORACLE_TESTED | khai-truong-rules.ts + full Q10      | khai-truong-rules.spec.ts / khai-truong-conflict.spec.ts | docs/research/activity-khai-truong.md                                            |
+| XUAT_HANH / 行幸遣使〈出行同〉 | activities | T1 Q11 p849 + Q10 + Hán Q11/Q10 | VERIFIED      | -                                    | planned                                                  | Q11 Việt thiếu 月厭; bổ sung blocker từ Q10; docs/research/activity-xuat-hanh.md |
 
 Trạng thái hợp lệ:
 
