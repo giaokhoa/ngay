@@ -32,20 +32,20 @@ Chi tiết: `docs/research/core-monthly-factors.md`.
 
 ## Factors — Quyển 5 virtue / special days
 
-| Chủ đề         | Module  | Nguồn chính                       | Trạng thái    | Implementation                     | Oracle test                  | Ghi chú                                                |
-| -------------- | ------- | --------------------------------- | ------------- | ---------------------------------- | ---------------------------- | ------------------------------------------------------ |
-| Thiên Đức      | factors | T1 Q5 p387 + Hán Q5 + Nguyệt biểu | VERIFIED      | -                                  | planned                      | 8 tháng Can ngày, 4 tháng quẻ; không đổi quẻ thành Chi |
-| Nguyệt Đức     | factors | T1 Q5 p395 + Hán Q5               | ORACLE_TESTED | monthly-stem-factor-definitions.ts | monthly-stem-factors.spec.ts | chiThang -> Can ngày                                   |
-| Thiên Đức Hợp  | factors | T1 Q5 p398 + Hán Q5               | ORACLE_TESTED | monthly-stem-factor-definitions.ts | monthly-stem-factors.spec.ts | bốn tháng trọng không có ngày hợp                      |
-| Nguyệt Đức Hợp | factors | T1 Q5 p400 + Hán Q5               | ORACLE_TESTED | monthly-stem-factor-definitions.ts | monthly-stem-factors.spec.ts | chiThang -> Can ngày                                   |
-| Nguyệt Không   | factors | T1 Q5 p402 + Hán Q5               | ORACLE_TESTED | monthly-stem-factor-definitions.ts | monthly-stem-factors.spec.ts | chiThang -> Can ngày                                   |
-| Thiên Ân       | factors | T1 Q5 p404 + Hán Q5 + Q9          | VERIFIED      | -                                  | planned                      | 15 Can Chi cố định                                     |
-| Thiên Xá       | factors | T1 Q5 p407 + Hán Q5               | VERIFIED      | -                                  | planned                      | mùa -> Can Chi                                         |
-| Thiên Nguyện   | factors | T1 Q5 p411-412 + Hán Q5           | VERIFIED      | -                                  | planned                      | chiThang -> Can Chi                                    |
-| Mẫu Thương     | factors | T1 Q5 p415 + Hán Q5               | COMPARED      | -                                  | blocked                      | phụ thuộc primitive Thổ Vượng                          |
-| Nguyệt Ân      | factors | T1 Q5 p417-418 + Hán Q5           | ORACLE_TESTED | monthly-stem-factor-definitions.ts | monthly-stem-factors.spec.ts | chiThang -> Can ngày                                   |
-| Tứ Tướng       | factors | T1 Q5 p420-421 + Hán Q5           | VERIFIED      | -                                  | planned                      | mùa -> 2 Can ngày                                      |
-| Thời Đức       | factors | T1 Q5 p422-423 + Hán Q5           | VERIFIED      | -                                  | planned                      | mùa -> Chi ngày                                        |
+| Chủ đề         | Module  | Nguồn chính                       | Trạng thái    | Implementation                       | Oracle test                    | Ghi chú                                                |
+| -------------- | ------- | --------------------------------- | ------------- | ------------------------------------ | ------------------------------ | ------------------------------------------------------ |
+| Thiên Đức      | factors | T1 Q5 p387 + Hán Q5 + Nguyệt biểu | VERIFIED      | -                                    | planned                        | 8 tháng Can ngày, 4 tháng quẻ; không đổi quẻ thành Chi |
+| Nguyệt Đức     | factors | T1 Q5 p395 + Hán Q5               | ORACLE_TESTED | monthly-stem-factor-definitions.ts   | monthly-stem-factors.spec.ts   | chiThang -> Can ngày                                   |
+| Thiên Đức Hợp  | factors | T1 Q5 p398 + Hán Q5               | ORACLE_TESTED | monthly-stem-factor-definitions.ts   | monthly-stem-factors.spec.ts   | bốn tháng trọng không có ngày hợp                      |
+| Nguyệt Đức Hợp | factors | T1 Q5 p400 + Hán Q5               | ORACLE_TESTED | monthly-stem-factor-definitions.ts   | monthly-stem-factors.spec.ts   | chiThang -> Can ngày                                   |
+| Nguyệt Không   | factors | T1 Q5 p402 + Hán Q5               | ORACLE_TESTED | monthly-stem-factor-definitions.ts   | monthly-stem-factors.spec.ts   | chiThang -> Can ngày                                   |
+| Thiên Ân       | factors | T1 Q5 p404 + Hán Q5 + Q9          | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | 15 Can Chi cố định                                     |
+| Thiên Xá       | factors | T1 Q5 p407 + Hán Q5               | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | mùa -> Can Chi                                         |
+| Thiên Nguyện   | factors | T1 Q5 p411-412 + Hán Q5           | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | chiThang -> Can Chi                                    |
+| Mẫu Thương     | factors | T1 Q5 p415 + Hán Q5               | COMPARED      | -                                    | blocked                        | phụ thuộc primitive Thổ Vượng                          |
+| Nguyệt Ân      | factors | T1 Q5 p417-418 + Hán Q5           | ORACLE_TESTED | monthly-stem-factor-definitions.ts   | monthly-stem-factors.spec.ts   | chiThang -> Can ngày                                   |
+| Tứ Tướng       | factors | T1 Q5 p420-421 + Hán Q5           | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | mùa -> 2 Can ngày                                      |
+| Thời Đức       | factors | T1 Q5 p422-423 + Hán Q5           | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | mùa -> Chi ngày                                        |
 
 Chi tiết: `docs/research/virtue-special-day-factors.md`.
 
