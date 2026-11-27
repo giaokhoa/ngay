@@ -20,6 +20,26 @@ export const DINH_NGHIA_DAN_NHAT: DinhNghiaYeuToChiNgayTheoMua = {
   nguon: taoNguon(5, 426, 'Dân nhật', '民日'),
 };
 
+export const DINH_NGHIA_VUONG_NHAT: DinhNghiaYeuToChiNgayTheoMua = {
+  ma: MaYeuTo.VUONG_NHAT,
+  loai: LoaiYeuTo.THAN_SAT,
+  tenKhac: [],
+  chiNgayTheoMua: {
+    [Mua.XUAN]: DAN,
+    [Mua.HA]: TI,
+    [Mua.THU]: THAN,
+    [Mua.DONG]: HOI,
+  },
+  nguon: taoNguon(
+    5,
+    426,
+    'Vương nhật',
+    '王日',
+    'Bản Việt: dùng thuyết cũ Xuân Dần/Hạ Tỵ/Thu Thân/Đông Hợi; phần Xét p.427 bác việc hậu nhân đổi Vương/Quan.',
+    'Hán Q5: phần 按 cũng kết luận thuyết cũ cao hơn việc hậu nhân đổi Vương/Quan.',
+  ),
+};
+
 export const DINH_NGHIA_THIEN_MA: DinhNghiaYeuToTheoChiThang = {
   ma: MaYeuTo.THIEN_MA,
   loai: LoaiYeuTo.THAN_SAT,
@@ -73,6 +93,8 @@ function taoNguon(
   trang: number,
   muc: string,
   tenGoc: string,
+  ghiChuViet?: string,
+  ghiChuHan?: string,
 ): readonly ThamChieuNguon[] {
   return [
     {
@@ -82,6 +104,7 @@ function taoNguon(
       trang,
       muc,
       tenGoc,
+      ghiChu: ghiChuViet,
       daXacMinh: true,
     },
     {
@@ -89,6 +112,7 @@ function taoNguon(
       quyen,
       muc: tenGoc,
       tenGoc,
+      ghiChu: ghiChuHan ?? ghiChuViet,
       daXacMinh: true,
     },
   ];
