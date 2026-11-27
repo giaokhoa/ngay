@@ -6,11 +6,14 @@ Luồng:
 
 calendar -> factors -> activities -> evaluation -> response
 
-## CUOI_HOI
+## Activities đã có API
 
-Endpoint đầu tiên:
+- `GET /date-selection/cuoi-hoi?thoiDiem=<ISO-8601>&muiGio=<IANA timezone>`
+- `GET /date-selection/di-chuyen?thoiDiem=<ISO-8601>&muiGio=<IANA timezone>`
 
-`GET /date-selection/cuoi-hoi?thoiDiem=<ISO-8601>&muiGio=<IANA timezone>`
+CUOI_HOI dùng Q11 嫁娶 + resolver Q10 riêng. DI_CHUYEN dùng Q11
+般移〈移徙同〉 + resolver riêng, hiện khóa invariant Quy Kị theo research đã
+xác minh và không nhận các override chỉ dành cho cưới hỏi.
 
 Response giữ:
 

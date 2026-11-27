@@ -154,13 +154,21 @@ Không suy rộng sang mọi activity di chuyển khác.
 
 歸忌 trực tiếp Kị 般移 / 遠迴.
 
-Q10 ghi gặp Đức/Hợp/Xá/Nguyện vẫn Kị. Vì vậy DI_CHUYEN cần explicit override:
+Bản Việt Quyển 10, trang in 822 / PDF page 829 ghi:
 
-- Quy Kị + Thiên Đức -> Quy Kị vẫn hiệu lực;
-- Quy Kị + Nguyệt Đức -> vẫn hiệu lực;
-- Quy Kị + Thiên Đức Hợp / Nguyệt Đức Hợp -> vẫn hiệu lực;
-- Quy Kị + Thiên Xá / Thiên Nguyện -> vẫn hiệu lực;
-- contribution Nên liên quan không được dùng để xóa blocker Quy Kị.
+- kị di chuyển, đi xa trở về;
+- gặp cùng với Đức, Nguyện, Xá vẫn phải kị.
+
+Hán bản ghi `與德合赦願併猶忌`. Có khác biệt cần giữ lại trong provenance:
+Hán bản có chữ `合`, trong khi câu Việt ở trang 822 không nêu “Hợp”.
+
+Không tự hòa giải khác biệt này thành một danh sách rộng hơn. Invariant production được
+khóa ở mức cả hai bản cùng hỗ trợ: khi Quy Kị đã match thì blocker di chuyển vẫn
+giữ hiệu lực; contribution Nên không được tự động xóa Quy Kị.
+
+Các tổ hợp cụ thể với Thiên Đức Hợp / Nguyệt Đức Hợp được giữ dưới dạng điểm
+đối chiếu Hán, không dùng để tạo phép triệt mới cho tới khi có quyết định source
+rõ hơn.
 
 ## Dependency matrix
 
@@ -245,5 +253,5 @@ Regression:
 - [x] Q10 Quy Kị conflict semantics VERIFIED
 - [x] oracle plan defined
 - [x] missing factors IMPLEMENTED
-- [ ] activity/evaluation IMPLEMENTED
-- [ ] end-to-end ORACLE_TESTED
+- [x] activity/evaluation IMPLEMENTED cho Q11 + invariant Quy Kị đã source-lock
+- [ ] end-to-end ORACLE_TESTED (giữ mở cho rà đầy đủ Q10 và khác biệt `合`)

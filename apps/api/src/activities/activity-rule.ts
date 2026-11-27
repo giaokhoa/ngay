@@ -5,6 +5,7 @@ import { ThamChieuNguon } from '../sources/source-reference';
 
 export enum LoaiCongViec {
   CUOI_HOI = 'CUOI_HOI',
+  DI_CHUYEN = 'DI_CHUYEN',
 }
 
 export enum TacDongDungSu {

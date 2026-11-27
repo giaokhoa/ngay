@@ -46,3 +46,31 @@ describe('XemNgayService CUOI_HOI end-to-end', () => {
     );
   });
 });
+
+describe('XemNgayService DI_CHUYEN end-to-end', () => {
+  it('orchestrates calendar -> factors -> Q11 DI_CHUYEN -> activity-specific evaluation', () => {
+    const result = taoService().xemDiChuyen(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.yeuTo.length).toBeGreaterThan(0);
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'DI_CHUYEN')).toBe(true);
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.nguon.every((nguon) => nguon.daXacMinh)),
+    ).toBe(true);
+  });
+
+  it('is deterministic for DI_CHUYEN with the same instant and timezone', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+
+    expect(service.xemDiChuyen(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemDiChuyen(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+});
