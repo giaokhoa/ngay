@@ -235,12 +235,16 @@ Các nhánh ảnh hưởng trực tiếp DI_CHUYEN:
   `CAM_MOI_VIEC`.
 - Tuế bạc / Trục trận được ghi “theo chỗ Kị của Nguyệt Yếm”:
   DI_CHUYEN vẫn `GIU_KY`.
+  Riêng tháng Tư Bính Ngọ và tháng Sáu Mậu Ngọ còn ghi không theo chỗ Nên
+  của **Đức, Nguyện** / `德願`: loại Thiên Đức, Nguyệt Đức, Thiên Nguyện;
+  không tự mở rộng sang các factor Hợp.
 - Nhóm **Dương thác**: ngoài ngày đã đồng thời là Tiểu hội/hard-ban, source nói
   “đều theo chỗ Kị của Kiến”. Q10 Kiến nhật không có 般移 trong danh sách Kị,
   nên với DI_CHUYEN phải `BO_KY` thay vì giữ Kị Nguyệt Yếm.
-- Riêng Dương thác tháng Sáu Kỷ Mùi còn bị ghi không theo chỗ Nên của Đức Hợp:
-  DI_CHUYEN không nhận Kị từ Nguyệt Yếm, nhưng cũng không được dùng Đức Hợp để
-  tự tạo một Nên trong nhánh đặc biệt này.
+- Riêng Dương thác tháng Sáu Kỷ Mùi còn bị ghi không theo chỗ Nên của
+  **Đức Hợp** / `德合`: DI_CHUYEN không nhận Kị từ Nguyệt Yếm, đồng thời
+  loại nhóm Đức + Hợp (Thiên Đức, Nguyệt Đức, Thiên Đức Hợp, Nguyệt Đức Hợp);
+  không tự mở rộng sang Thiên Nguyện.
 - Nhóm **Âm thác**: ngoài các ngày đồng thời Nguyệt Phá / Đại hội hard-ban,
   source nói theo Kị của Nguyệt Yếm, nên DI_CHUYEN vẫn `GIU_KY`.
 - Riêng tháng Sáu, Đinh Tỵ và Kỷ Tỵ thuộc Đại hội nên `CAM_MOI_VIEC`;
