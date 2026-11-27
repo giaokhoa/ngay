@@ -137,6 +137,9 @@ activity list này.
 
 ## Quyển 10 — conflict semantics cần cho DI_CHUYEN
 
+Ma trận đầy đủ 15 Kị, delegation graph và regression vectors nằm ở
+`di-chuyen-conflict-semantics-q10.md`.
+
 ### Dân nhật
 
 民日 trực tiếp Nên 般移.
