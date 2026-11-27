@@ -85,6 +85,46 @@ Dừng Postgres:
 pnpm pg:down
 ```
 
+## Production-like full stack
+
+Build artifacts:
+
+```bash
+pnpm build
+```
+
+Không cần Vite dev server ở production. Web package có static server + same-origin
+reverse proxy:
+
+```bash
+# API
+DATABASE_URL=postgresql://... HOST=127.0.0.1 PORT=3000 \
+  pnpm --filter @ngay/api start:prod
+
+# Web
+API_ORIGIN=http://127.0.0.1:3000 HOST=127.0.0.1 PORT=8080 \
+  pnpm --filter @ngay/web start:prod
+```
+
+Docker full stack:
+
+```bash
+export POSTGRES_PASSWORD='change-me-demo-password'
+pnpm prod:up
+```
+
+Mở `http://localhost:8080/rules`. Chỉ web port được publish; API/Postgres nằm trong
+private compose network.
+
+Observability:
+
+- `/health/live`
+- `/health/ready`
+- API-internal `/metrics` theo Prometheus text format
+- `X-Request-Id` + structured JSON HTTP logs
+
+Production exit checklist: `docs/production-readiness.md`.
+
 ## CI là nguồn kiểm chứng chuẩn
 
 Mọi push lên main và mọi pull request đều phải qua:
@@ -95,6 +135,9 @@ Mọi push lên main và mọi pull request đều phải qua:
 4. pnpm typecheck
 5. pnpm test
 6. pnpm build
+7. docker compose -f compose.production.yml config
+8. docker build API image
+9. docker build web image
 
 Không coi môi trường dev cục bộ là bằng chứng build/test thành công.
 

@@ -7,6 +7,7 @@ import { DanhGiaNgayModule } from './evaluation/evaluation.module';
 import { YeuToNgayModule } from './factors/factors.module';
 import { SucKhoeController } from './health/health.controller';
 import { KhoTriThucModule } from './knowledge/knowledge.module';
+import { QuanSatModule } from './observability/observability.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { KhoTriThucModule } from './knowledge/knowledge.module';
     DanhGiaNgayModule,
     XemNgayModule,
     KhoTriThucModule,
+    QuanSatModule,
   ],
   controllers: [SucKhoeController],
 })

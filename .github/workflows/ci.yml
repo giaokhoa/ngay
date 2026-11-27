@@ -54,3 +54,14 @@ jobs:
 
       - name: Production build
         run: pnpm build
+
+      - name: Validate production compose
+        env:
+          POSTGRES_PASSWORD: ci-only-password
+        run: docker compose -f compose.production.yml config >/dev/null
+
+      - name: Build API container
+        run: docker build -f Dockerfile.api -t ngay-api:ci .
+
+      - name: Build web container
+        run: docker build -f Dockerfile.web -t ngay-web:ci .

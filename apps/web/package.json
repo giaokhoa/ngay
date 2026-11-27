@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start:prod": "node server.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit && node --check server.mjs",
     "test": "vitest run"
   },
   "dependencies": {

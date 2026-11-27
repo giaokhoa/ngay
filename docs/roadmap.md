@@ -94,12 +94,14 @@ Danh sách cuối phải bám nguồn, không bám popularity.
 
 ## Phase 6 - Production Hardening
 
-- persistence/cache khi thực sự cần;
-- source viewer/admin research tooling;
-- performance;
-- observability;
-- security;
-- deployment.
+- [x] persistence/query catalog khi thực sự cần: PostgreSQL knowledge mirror, không ép hot path;
+- [x] source viewer/admin research tooling: `/rules` + SQL-backed filters/provenance;
+- [x] performance: in-memory evaluation + indexed PostgreSQL query path;
+- [x] observability: request ID, structured logs, health, Prometheus metrics;
+- [x] security: security headers, same-origin proxy, non-root containers, private API/PG;
+- [x] deployment: production web server, API/web Dockerfiles, full-stack compose, CI image build.
+
+Exit criteria chi tiết: `docs/production-readiness.md`.
 
 ## Nguyên tắc phase
 
