@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "start:prod": "node dist/main.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"
   },

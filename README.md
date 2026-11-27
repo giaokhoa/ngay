@@ -22,6 +22,24 @@ Quy ước này được áp dụng cố định cho project:
 
 Ví dụ file apps/api/src/calendar/calendar.service.ts chứa class TinhLichService và hàm tinhThongTinNgay.
 
+## Production runtime
+
+API production:
+
+```bash
+pnpm --filter @ngay/api build
+HOST=0.0.0.0 PORT=3000 pnpm --filter @ngay/api start:prod
+```
+
+Runtime fail-fast nếu `PORT` ngoài `1..65535` hoặc `HOST` không hợp lệ.
+Health probes:
+
+- `/health/live`
+- `/health/ready`
+
+Web hiện dùng relative API path, nên deployment baseline là same-origin/reverse proxy.
+Không bật CORS wildcard. Chi tiết: `docs/decisions/0009-production-runtime-baseline.md`.
+
 ## CI là nguồn kiểm chứng chuẩn
 
 Mọi push lên main và mọi pull request đều phải qua:
