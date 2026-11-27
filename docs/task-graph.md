@@ -14,12 +14,23 @@ Phase 0 Foundation
 #2 Implement verified calendar foundation
         |
         v
-Phase 2A Research verified factors
+#11 Phase 2A.1 Research core monthly factors (Quyển 6)
         |
         v
-Phase 2B Implement factor engine + oracle fixtures
+#12 Phase 2B.1 Implement VERIFIED Quyển 6 subset + oracle
         |
-        v
+        +-------------------------+
+        |                         |
+        v                         v
+#13 Research Quyển 5         #14 Research Quyển 4
+virtue/special days          aliases/Bất Tương
+        |                         |
+        +------------+------------+
+                     |
+                     v
+Phase 2B.2/2B.3 Implement only VERIFIED subsets
+                     |
+                     v
 Phase 3A Research one activity from Dung su
         |
         v
