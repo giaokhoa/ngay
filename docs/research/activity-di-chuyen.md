@@ -1,6 +1,6 @@
 # Research: Di chuyển / 般移〈移徙同〉
 
-Status: VERIFIED
+Status: ORACLE_TESTED
 
 ## Phạm vi
 
@@ -244,6 +244,6 @@ Regression:
 - [x] Q11 DI_CHUYEN exact list VERIFIED
 - [x] Q10 Quy Kị conflict semantics VERIFIED
 - [x] oracle plan defined
-- [ ] missing factors IMPLEMENTED
+- [x] missing factors IMPLEMENTED
 - [ ] activity/evaluation IMPLEMENTED
 - [ ] end-to-end ORACLE_TESTED

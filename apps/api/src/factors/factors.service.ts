@@ -16,6 +16,11 @@ import {
 } from './fixed-seasonal-factor-definitions';
 import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
 import { DINH_NGHIA_MAU_THUONG } from './maternal-storehouse-definition';
+import {
+  DINH_NGHIA_DAN_NHAT,
+  DINH_NGHIA_QUY_KY,
+  DINH_NGHIA_THIEN_MA,
+} from './moving-factor-definitions';
 import { DINH_NGHIA_NGUYET_PHA } from './monthly-break-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CAN_NGAY } from './monthly-stem-factor-definitions';
 import {
@@ -57,13 +62,21 @@ export class TinhYeuToNgayService {
     const blockerQuyen6 = DINH_NGHIA_BLOCKER_CUOI_HOI_QUYEN_6.filter((dinhNghia) =>
       dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
     );
+    const yeuToDiChuyenTheoThang = [DINH_NGHIA_THIEN_MA, DINH_NGHIA_QUY_KY].filter((dinhNghia) =>
+      dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
+    );
     const ketQua: DinhNghiaYeuTo[] = [
       ...theoChiNgay,
       ...theoCanNgay,
       ...theoTruc,
       ...quanHeThangQuyen4,
       ...blockerQuyen6,
+      ...yeuToDiChuyenTheoThang,
     ];
+
+    if (DINH_NGHIA_DAN_NHAT.chiNgayTheoMua[mua] === boiCanh.chiNgay) {
+      ketQua.push(DINH_NGHIA_DAN_NHAT);
+    }
 
     if (DINH_NGHIA_TU_PHE.tapCanChiNgayTheoMua[mua].some((canChi) => khopCanChi(canChi, boiCanh))) {
       ketQua.push(DINH_NGHIA_TU_PHE);
