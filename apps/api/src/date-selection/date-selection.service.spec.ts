@@ -113,3 +113,34 @@ describe('XemNgayService earthwork end-to-end', () => {
     ).toBe(true);
   });
 });
+
+describe('XemNgayService KHAI_TRUONG end-to-end', () => {
+  it('orchestrates calendar -> factors -> Q11 -> full Q10 KHAI_TRUONG', () => {
+    const result = taoService().xemKhaiTruong(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.yeuTo.length).toBeGreaterThan(0);
+    expect(result.danhGia.dongGop.length).toBeGreaterThan(0);
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'KHAI_TRUONG')).toBe(
+      true,
+    );
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.nguon.every((nguon) => nguon.daXacMinh)),
+    ).toBe(true);
+  });
+
+  it('is deterministic for KHAI_TRUONG', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+
+    expect(service.xemKhaiTruong(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemKhaiTruong(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+});

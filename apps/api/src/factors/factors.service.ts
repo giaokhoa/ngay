@@ -4,6 +4,7 @@ import { tinhMuaTheoChiThang } from '../calendar/season';
 import { tinhThapNhiTruc } from '../calendar/twelve-officer';
 import { DINH_NGHIA_BAT_TUONG } from './bat-tuong-definition';
 import { DINH_NGHIA_DIA_NANG, DINH_NGHIA_THO_PHU_TIN } from './earthwork-factor-definitions';
+import { DINH_NGHIA_CUU_KHONG, DINH_NGHIA_TU_HAO } from './khai-truong-factor-definitions';
 import { YeuToNgay } from './domain/day-factor';
 import { DinhNghiaYeuTo } from './factor-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from './factor-definitions';
@@ -69,6 +70,9 @@ export class TinhYeuToNgayService {
     const yeuToCongViecDatTheoChi = [DINH_NGHIA_THO_PHU_TIN].filter((dinhNghia) =>
       dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
     );
+    const yeuToKhaiTruongTheoChi = [DINH_NGHIA_CUU_KHONG].filter((dinhNghia) =>
+      dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
+    );
     const ketQua: DinhNghiaYeuTo[] = [
       ...theoChiNgay,
       ...theoCanNgay,
@@ -77,6 +81,7 @@ export class TinhYeuToNgayService {
       ...blockerQuyen6,
       ...yeuToDiChuyenTheoThang,
       ...yeuToCongViecDatTheoChi,
+      ...yeuToKhaiTruongTheoChi,
     ];
 
     if (
@@ -93,6 +98,10 @@ export class TinhYeuToNgayService {
 
     if (DINH_NGHIA_TU_PHE.tapCanChiNgayTheoMua[mua].some((canChi) => khopCanChi(canChi, boiCanh))) {
       ketQua.push(DINH_NGHIA_TU_PHE);
+    }
+
+    if (khopCanChi(DINH_NGHIA_TU_HAO.canChiNgayTheoMua[mua], boiCanh)) {
+      ketQua.push(DINH_NGHIA_TU_HAO);
     }
 
     if (khopCanChi(DINH_NGHIA_TU_KY.canChiNgayTheoMua[mua], boiCanh)) {

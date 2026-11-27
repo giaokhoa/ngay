@@ -4,4 +4,5 @@ export const DUONG_DAN = {
   DI_CHUYEN: '/di-chuyen',
   DONG_THO: '/dong-tho',
   SUA_CUNG_THAT: '/sua-cung-that',
+  KHAI_TRUONG: '/khai-truong',
 } as const;

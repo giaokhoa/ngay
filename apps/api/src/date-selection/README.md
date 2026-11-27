@@ -12,10 +12,12 @@ calendar -> factors -> activities -> evaluation -> response
 - `GET /date-selection/di-chuyen?thoiDiem=<ISO-8601>&muiGio=<IANA timezone>`
 - `GET /date-selection/dong-tho?thoiDiem=<ISO-8601>&muiGio=<IANA timezone>`
 - `GET /date-selection/sua-cung-that?thoiDiem=<ISO-8601>&muiGio=<IANA timezone>`
+- `GET /date-selection/khai-truong?thoiDiem=<ISO-8601>&muiGio=<IANA timezone>`
 
 CUOI_HOI dùng Q11 嫁娶 + resolver Q10 riêng. DI_CHUYEN dùng Q11
 般移〈移徙同〉 + resolver data-driven Q10. DONG_THO và SUA_CUNG_THAT dùng
-exact Q11 rules và base Q10 earth-blocker semantics đã source-lock.
+exact Q11 rules + full Q10 earthwork semantics. KHAI_TRUONG dùng Q11 開市
+và resolver Q10 riêng đã source-lock từ Quyển 10.
 
 `THO_VUONG` là typed activity target lấy từ calendar fact `dangThoVuong`,
 không phải factor giả trong `MaYeuTo`.

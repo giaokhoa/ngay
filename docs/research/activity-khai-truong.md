@@ -602,8 +602,8 @@ Tối thiểu:
 - [x] Hán Q10 COMPARED
 - [x] full 19-blocker outcome matrix source-locked
 - [x] independent oracle/regression plan
-- [ ] missing factors IMPLEMENTED
-- [ ] missing factors ORACLE_TESTED
-- [ ] KHAI_TRUONG rules IMPLEMENTED
-- [ ] full Q10 KHAI_TRUONG ORACLE_TESTED
-- [ ] end-to-end API/UI
+- [x] missing factors IMPLEMENTED
+- [x] missing factors ORACLE_TESTED
+- [x] KHAI_TRUONG rules IMPLEMENTED
+- [x] full Q10 KHAI_TRUONG ORACLE_TESTED
+- [x] end-to-end API/UI

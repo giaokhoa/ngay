@@ -8,6 +8,7 @@ export enum LoaiCongViec {
   DI_CHUYEN = 'DI_CHUYEN',
   DONG_THO = 'DONG_THO',
   SUA_CUNG_THAT = 'SUA_CUNG_THAT',
+  KHAI_TRUONG = 'KHAI_TRUONG',
 }
 
 export enum TacDongDungSu {

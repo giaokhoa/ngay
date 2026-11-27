@@ -4,6 +4,7 @@ import {
   taoUrlXemCuoiHoi,
   taoUrlXemDiChuyen,
   taoUrlXemDongTho,
+  taoUrlXemKhaiTruong,
   taoUrlXemSuaCungThat,
 } from './date-selection';
 
@@ -13,6 +14,7 @@ describe('date-selection URLs', () => {
     ['di-chuyen', taoUrlXemDiChuyen],
     ['dong-tho', taoUrlXemDongTho],
     ['sua-cung-that', taoUrlXemSuaCungThat],
+    ['khai-truong', taoUrlXemKhaiTruong],
   ] as const)('giữ instant ISO và timezone IANA cho %s', (duongDan, taoUrl) => {
     const url = taoUrl(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
 
