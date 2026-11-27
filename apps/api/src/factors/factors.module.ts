@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
 
-@Module({})
+import { TinhYeuToNgayService } from './factors.service';
+
+@Module({
+  providers: [TinhYeuToNgayService],
+  exports: [TinhYeuToNgayService],
+})
 export class YeuToNgayModule {}
