@@ -1,0 +1,7 @@
+packages:
+  - apps/*
+minimumReleaseAgeExclude:
+  - '@nestjs/common@12.6.3'
+  - '@nestjs/core@12.6.3'
+  - '@nestjs/platform-express@12.6.3'
+  - vite@8.4.0
