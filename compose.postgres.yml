@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ngay
+      POSTGRES_USER: ngay
+      POSTGRES_PASSWORD: ngay
+    ports:
+      - '54329:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ngay -d ngay']
+      interval: 2s
+      timeout: 3s
+      retries: 15
+    volumes:
+      - ngay-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  ngay-postgres-data:

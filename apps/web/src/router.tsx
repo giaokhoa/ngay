@@ -5,6 +5,7 @@ import { TrangDiChuyen } from './pages/moving-page';
 import { TrangDongTho, TrangSuaCungThat } from './pages/earthwork-pages';
 import { TrangChu } from './pages/home-page';
 import { TrangKhaiTruong } from './pages/khai-truong-page';
+import { TrangDemoRuleDb } from './pages/rules-demo-page';
 import { TrangXuatHanh } from './pages/xuat-hanh-page';
 import { TrangCuoiHoi } from './pages/wedding-page';
 import { DUONG_DAN } from './routes';
@@ -41,5 +42,9 @@ export const boDinhTuyen = createBrowserRouter([
   {
     path: DUONG_DAN.AN_TANG,
     Component: TrangAnTang,
+  },
+  {
+    path: DUONG_DAN.RULES,
+    Component: TrangDemoRuleDb,
   },
 ]);

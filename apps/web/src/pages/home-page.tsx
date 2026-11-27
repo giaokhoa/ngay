@@ -32,6 +32,9 @@ export function TrangChu() {
         <Link className="nut-phu" to={DUONG_DAN.AN_TANG}>
           An táng
         </Link>
+        <Link className="nut-phu" to={DUONG_DAN.RULES}>
+          PostgreSQL rule demo
+        </Link>
       </div>
     </main>
   );
