@@ -80,3 +80,13 @@ describe('XemNgayController KHAI_TRUONG endpoint', () => {
     );
   });
 });
+
+describe('XemNgayController XUAT_HANH endpoint', () => {
+  it('trả kết quả XUAT_HANH với provenance', () => {
+    const result = taoController().xemXuatHanh('2026-11-27T05:00:00.000Z', 'Asia/Ho_Chi_Minh');
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.length).toBeGreaterThan(0);
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'XUAT_HANH')).toBe(true);
+  });
+});

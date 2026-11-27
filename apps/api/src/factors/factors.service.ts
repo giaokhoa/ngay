@@ -22,6 +22,7 @@ import {
   DINH_NGHIA_DAN_NHAT,
   DINH_NGHIA_QUY_KY,
   DINH_NGHIA_THIEN_MA,
+  DINH_NGHIA_VUONG_NHAT,
 } from './moving-factor-definitions';
 import { DINH_NGHIA_NGUYET_PHA } from './monthly-break-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CAN_NGAY } from './monthly-stem-factor-definitions';
@@ -94,6 +95,10 @@ export class TinhYeuToNgayService {
 
     if (DINH_NGHIA_DAN_NHAT.chiNgayTheoMua[mua] === boiCanh.chiNgay) {
       ketQua.push(DINH_NGHIA_DAN_NHAT);
+    }
+
+    if (DINH_NGHIA_VUONG_NHAT.chiNgayTheoMua[mua] === boiCanh.chiNgay) {
+      ketQua.push(DINH_NGHIA_VUONG_NHAT);
     }
 
     if (DINH_NGHIA_TU_PHE.tapCanChiNgayTheoMua[mua].some((canChi) => khopCanChi(canChi, boiCanh))) {

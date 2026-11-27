@@ -611,8 +611,8 @@ Tối thiểu:
 - [x] Hán Q10 COMPARED
 - [x] full outcome matrix source-locked
 - [x] independent oracle/regression plan defined
-- [ ] Vương Nhật IMPLEMENTED
-- [ ] Vương Nhật ORACLE_TESTED
-- [ ] XUAT_HANH rules IMPLEMENTED
-- [ ] XUAT_HANH Q10 ORACLE_TESTED
-- [ ] end-to-end API/UI
+- [x] Vương Nhật IMPLEMENTED
+- [x] Vương Nhật ORACLE_TESTED
+- [x] XUAT_HANH rules IMPLEMENTED
+- [x] XUAT_HANH Q10 ORACLE_TESTED
+- [x] end-to-end API/UI

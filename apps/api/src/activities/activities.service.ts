@@ -5,6 +5,7 @@ import { QUY_TAC_CUOI_HOI } from './cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from './di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from './earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from './khai-truong-rules';
+import { QUY_TAC_XUAT_HANH } from './xuat-hanh-rules';
 
 @Injectable()
 export class DungSuService {
@@ -20,6 +21,8 @@ export class DungSuService {
         return QUY_TAC_SUA_CUNG_THAT;
       case LoaiCongViec.KHAI_TRUONG:
         return QUY_TAC_KHAI_TRUONG;
+      case LoaiCongViec.XUAT_HANH:
+        return QUY_TAC_XUAT_HANH;
     }
   }
 }
