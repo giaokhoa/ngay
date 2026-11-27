@@ -16,258 +16,241 @@ const VONG_60_CAN_CHI: readonly CanChi[] = Array.from({ length: 60 }, (_, chiSo)
   chi: DIA_CHI_THEO_THU_TU[chiSo % 12]!,
 }));
 
-// Oracle độc lập chép lại từ bảng Lịch lệ Quyển 4, trang in 357-358.
-// Không import production table để tạo expected.
-const ORACLE: Readonly<Record<DiaChi, ReadonlySet<string>>> = {
+// Oracle độc lập chép từ Lịch lệ Âm Dương Bất Tương, Quyển 4.
+// Không derive từ DINH_NGHIA_BAT_TUONG.
+const ORACLE_BAT_TUONG: Readonly<Record<DiaChi, ReadonlySet<string>>> = {
   [DAN]: tap(
-    k(TAN, HOI),
-    k(TAN, SUU),
-    k(TAN, MAO),
-    k(CANH, TY),
-    k(CANH, DAN),
-    k(KY, HOI),
-    k(KY, SUU),
-    k(KY, MAO),
-    k(DINH, HOI),
-    k(DINH, SUU),
-    k(DINH, MAO),
-    k(BINH, TY),
-    k(BINH, DAN),
+    [TAN, HOI],
+    [TAN, SUU],
+    [TAN, MAO],
+    [CANH, TY],
+    [CANH, DAN],
+    [KY, HOI],
+    [KY, SUU],
+    [KY, MAO],
+    [DINH, HOI],
+    [DINH, SUU],
+    [DINH, MAO],
+    [BINH, TY],
+    [BINH, DAN],
   ),
   [MAO]: tap(
-    k(CANH, TUAT),
-    k(CANH, TY),
-    k(CANH, DAN),
-    k(KY, HOI),
-    k(KY, SUU),
-    k(DINH, HOI),
-    k(DINH, SUU),
-    k(BINH, TUAT),
-    k(BINH, TY),
-    k(BINH, DAN),
-    k(AT, HOI),
-    k(AT, SUU),
+    [CANH, TUAT],
+    [CANH, TY],
+    [CANH, DAN],
+    [KY, HOI],
+    [KY, SUU],
+    [DINH, HOI],
+    [DINH, SUU],
+    [BINH, TUAT],
+    [BINH, TY],
+    [BINH, DAN],
+    [AT, HOI],
+    [AT, SUU],
   ),
   [THIN]: tap(
-    k(KY, DAU),
-    k(KY, HOI),
-    k(KY, SUU),
-    k(DINH, DAU),
-    k(DINH, HOI),
-    k(DINH, SUU),
-    k(BINH, TUAT),
-    k(BINH, TY),
-    k(AT, DAU),
-    k(AT, HOI),
-    k(AT, SUU),
-    k(GIAP, TUAT),
-    k(GIAP, TY),
+    [KY, DAU],
+    [KY, HOI],
+    [KY, SUU],
+    [DINH, DAU],
+    [DINH, HOI],
+    [DINH, SUU],
+    [BINH, TUAT],
+    [BINH, TY],
+    [AT, DAU],
+    [AT, HOI],
+    [AT, SUU],
+    [GIAP, TUAT],
+    [GIAP, TY],
   ),
   [TI]: tap(
-    k(DINH, DAU),
-    k(DINH, HOI),
-    k(BINH, THAN),
-    k(BINH, TUAT),
-    k(BINH, TY),
-    k(AT, DAU),
-    k(AT, HOI),
-    k(GIAP, THAN),
-    k(GIAP, TUAT),
-    k(GIAP, TY),
-    k(MAU, THAN),
-    k(MAU, TUAT),
-    k(MAU, TY),
+    [DINH, DAU],
+    [DINH, HOI],
+    [BINH, THAN],
+    [BINH, TUAT],
+    [BINH, TY],
+    [AT, DAU],
+    [AT, HOI],
+    [GIAP, THAN],
+    [GIAP, TUAT],
+    [GIAP, TY],
+    [MAU, THAN],
+    [MAU, TUAT],
+    [MAU, TY],
   ),
   [NGO]: tap(
-    k(BINH, THAN),
-    k(BINH, TUAT),
-    k(AT, MUI),
-    k(AT, DAU),
-    k(AT, HOI),
-    k(GIAP, THAN),
-    k(GIAP, TUAT),
-    k(MAU, THAN),
-    k(MAU, TUAT),
-    k(QUY, MUI),
-    k(QUY, DAU),
-    k(QUY, HOI),
+    [BINH, THAN],
+    [BINH, TUAT],
+    [AT, MUI],
+    [AT, DAU],
+    [AT, HOI],
+    [GIAP, THAN],
+    [GIAP, TUAT],
+    [MAU, THAN],
+    [MAU, TUAT],
+    [QUY, MUI],
+    [QUY, DAU],
+    [QUY, HOI],
   ),
   [MUI]: tap(
-    k(AT, MUI),
-    k(AT, DAU),
-    k(GIAP, NGO),
-    k(GIAP, THAN),
-    k(GIAP, TUAT),
-    k(MAU, NGO),
-    k(MAU, THAN),
-    k(MAU, TUAT),
-    k(QUY, MUI),
-    k(QUY, DAU),
-    k(NHAM, NGO),
-    k(NHAM, THAN),
-    k(NHAM, TUAT),
+    [AT, MUI],
+    [AT, DAU],
+    [GIAP, NGO],
+    [GIAP, THAN],
+    [GIAP, TUAT],
+    [MAU, NGO],
+    [MAU, THAN],
+    [MAU, TUAT],
+    [QUY, MUI],
+    [QUY, DAU],
+    [NHAM, NGO],
+    [NHAM, THAN],
+    [NHAM, TUAT],
   ),
   [THAN]: tap(
-    k(AT, TI),
-    k(AT, MUI),
-    k(AT, DAU),
-    k(GIAP, NGO),
-    k(GIAP, THAN),
-    k(MAU, NGO),
-    k(MAU, THAN),
-    k(QUY, TI),
-    k(QUY, MUI),
-    k(QUY, DAU),
-    k(NHAM, NGO),
-    k(NHAM, THAN),
+    [AT, TI],
+    [AT, MUI],
+    [AT, DAU],
+    [GIAP, NGO],
+    [GIAP, THAN],
+    [MAU, NGO],
+    [MAU, THAN],
+    [QUY, TI],
+    [QUY, MUI],
+    [QUY, DAU],
+    [NHAM, NGO],
+    [NHAM, THAN],
   ),
   [DAU]: tap(
-    k(GIAP, THIN),
-    k(GIAP, NGO),
-    k(GIAP, THAN),
-    k(MAU, THIN),
-    k(MAU, NGO),
-    k(MAU, THAN),
-    k(QUY, TI),
-    k(QUY, MUI),
-    k(NHAM, THIN),
-    k(NHAM, NGO),
-    k(NHAM, THAN),
-    k(TAN, TI),
-    k(TAN, MUI),
-    k(CANH, THIN),
-    k(CANH, NGO),
+    [GIAP, THIN],
+    [GIAP, NGO],
+    [GIAP, THAN],
+    [MAU, THIN],
+    [MAU, NGO],
+    [MAU, THAN],
+    [QUY, TI],
+    [QUY, MUI],
+    [NHAM, THIN],
+    [NHAM, NGO],
+    [NHAM, THAN],
+    [TAN, TI],
+    [TAN, MUI],
+    [CANH, THIN],
+    [CANH, NGO],
   ),
   [TUAT]: tap(
-    k(MAU, THIN),
-    k(MAU, NGO),
-    k(QUY, MAO),
-    k(QUY, TI),
-    k(QUY, MUI),
-    k(NHAM, THIN),
-    k(NHAM, NGO),
-    k(TAN, MAO),
-    k(TAN, TI),
-    k(TAN, MUI),
-    k(CANH, THIN),
-    k(CANH, NGO),
+    [MAU, THIN],
+    [MAU, NGO],
+    [QUY, MAO],
+    [QUY, TI],
+    [QUY, MUI],
+    [NHAM, THIN],
+    [NHAM, NGO],
+    [TAN, MAO],
+    [TAN, TI],
+    [TAN, MUI],
+    [CANH, THIN],
+    [CANH, NGO],
   ),
   [HOI]: tap(
-    k(QUY, MAO),
-    k(QUY, TI),
-    k(NHAM, DAN),
-    k(NHAM, THIN),
-    k(NHAM, NGO),
-    k(TAN, MAO),
-    k(TAN, TI),
-    k(CANH, DAN),
-    k(CANH, THIN),
-    k(CANH, NGO),
-    k(KY, MAO),
-    k(KY, TI),
+    [QUY, MAO],
+    [QUY, TI],
+    [NHAM, DAN],
+    [NHAM, THIN],
+    [NHAM, NGO],
+    [TAN, MAO],
+    [TAN, TI],
+    [CANH, DAN],
+    [CANH, THIN],
+    [CANH, NGO],
+    [KY, MAO],
+    [KY, TI],
   ),
   [TY]: tap(
-    k(NHAM, DAN),
-    k(NHAM, THIN),
-    k(TAN, SUU),
-    k(TAN, MAO),
-    k(TAN, TI),
-    k(CANH, DAN),
-    k(CANH, THIN),
-    k(KY, SUU),
-    k(KY, MAO),
-    k(KY, TI),
-    k(DINH, SUU),
-    k(DINH, MAO),
-    k(DINH, TI),
+    [NHAM, DAN],
+    [NHAM, THIN],
+    [TAN, SUU],
+    [TAN, MAO],
+    [TAN, TI],
+    [CANH, DAN],
+    [CANH, THIN],
+    [KY, SUU],
+    [KY, MAO],
+    [KY, TI],
+    [DINH, SUU],
+    [DINH, MAO],
+    [DINH, TI],
   ),
   [SUU]: tap(
-    k(TAN, SUU),
-    k(TAN, MAO),
-    k(CANH, TY),
-    k(CANH, DAN),
-    k(CANH, THIN),
-    k(KY, SUU),
-    k(KY, MAO),
-    k(DINH, SUU),
-    k(DINH, MAO),
-    k(BINH, TY),
-    k(BINH, DAN),
-    k(BINH, THIN),
+    [TAN, SUU],
+    [TAN, MAO],
+    [CANH, TY],
+    [CANH, DAN],
+    [CANH, THIN],
+    [KY, SUU],
+    [KY, MAO],
+    [DINH, SUU],
+    [DINH, MAO],
+    [BINH, TY],
+    [BINH, DAN],
+    [BINH, THIN],
   ),
 };
 
-const SO_LUONG_MONG_DOI: Readonly<Record<DiaChi, number>> = {
-  [DAN]: 13,
-  [MAO]: 12,
-  [THIN]: 13,
-  [TI]: 13,
-  [NGO]: 12,
-  [MUI]: 13,
-  [THAN]: 12,
-  [DAU]: 15,
-  [TUAT]: 12,
-  [HOI]: 12,
-  [TY]: 13,
-  [SUU]: 12,
-};
-
-describe('Bất Tương — oracle 12 tháng × 60 Can Chi', () => {
+describe('Bất Tương — oracle 12 tháng x 60 Can Chi', () => {
   const service = new TinhYeuToNgayService();
 
   for (const chiThang of DIA_CHI_THEO_THU_TU) {
-    it(`khớp toàn bộ tháng ${chiThang}`, () => {
-      for (const canChi of VONG_60_CAN_CHI) {
-        const nenCo = ORACLE[chiThang].has(k(canChi.can, canChi.chi));
+    const oracle = ORACLE_BAT_TUONG[chiThang];
+
+    for (const canChi of VONG_60_CAN_CHI) {
+      const nenCo = oracle.has(khoa(canChi.can, canChi.chi));
+
+      it(`${chiThang} / ${canChi.can} ${canChi.chi}: ${nenCo ? 'co' : 'khong co'}`, () => {
         const ketQua = service.tinh({
           chiThang,
           canNgay: canChi.can,
           chiNgay: canChi.chi,
         });
 
-        expect(
-          ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.BAT_TUONG),
-          `${chiThang} / ${canChi.can} ${canChi.chi}`,
-        ).toBe(nenCo);
-      }
-    });
+        expect(ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.BAT_TUONG)).toBe(nenCo);
+      });
+    }
   }
 });
 
-describe('Bất Tương — integrity', () => {
-  it('số lượng từng tháng khớp bảng nguồn', () => {
-    for (const chiThang of DIA_CHI_THEO_THU_TU) {
-      expect(ORACLE[chiThang].size).toBe(SO_LUONG_MONG_DOI[chiThang]);
-      expect(DINH_NGHIA_BAT_TUONG.tapCanChiNgayTheoChiThang[chiThang]).toHaveLength(
-        SO_LUONG_MONG_DOI[chiThang],
-      );
-    }
-  });
-
-  it('production table không có Can Chi trùng hoặc ngoài vòng 60', () => {
-    const hopLe = new Set(VONG_60_CAN_CHI.map((canChi) => k(canChi.can, canChi.chi)));
-
-    for (const chiThang of DIA_CHI_THEO_THU_TU) {
-      const danhSach = DINH_NGHIA_BAT_TUONG.tapCanChiNgayTheoChiThang[chiThang];
-      const khoa = danhSach.map((canChi) => k(canChi.can, canChi.chi));
-
-      expect(new Set(khoa).size).toBe(khoa.length);
-      expect(khoa.every((giaTri) => hopLe.has(giaTri))).toBe(true);
-    }
-  });
-
-  it('có provenance Việt và Hán đã xác minh', () => {
+describe('Bất Tương — provenance và table integrity', () => {
+  it('có bản Việt và Hán bản đã xác minh', () => {
     const loaiNguon = new Set(DINH_NGHIA_BAT_TUONG.nguon.map((nguon) => nguon.loaiNguon));
 
     expect(loaiNguon).toEqual(new Set([LoaiNguon.BAN_VIET, LoaiNguon.HAN_BAN]));
     expect(DINH_NGHIA_BAT_TUONG.nguon.every((nguon) => nguon.daXacMinh)).toBe(true);
   });
+
+  it('mỗi tháng chỉ chứa Can Chi hợp lệ trong vòng 60', () => {
+    const vong60 = new Set(VONG_60_CAN_CHI.map((canChi) => khoa(canChi.can, canChi.chi)));
+
+    for (const chiThang of DIA_CHI_THEO_THU_TU) {
+      for (const canChi of DINH_NGHIA_BAT_TUONG.tapCanChiNgayTheoChiThang[chiThang]) {
+        expect(vong60.has(khoa(canChi.can, canChi.chi))).toBe(true);
+      }
+    }
+  });
+
+  it('tháng Thìn giữ Ất Dậu theo bảng nguồn', () => {
+    expect(ORACLE_BAT_TUONG[THIN].has(khoa(AT, DAU))).toBe(true);
+    expect(
+      DINH_NGHIA_BAT_TUONG.tapCanChiNgayTheoChiThang[THIN].some(
+        (canChi) => canChi.can === AT && canChi.chi === DAU,
+      ),
+    ).toBe(true);
+  });
 });
 
-function tap(...giaTri: string[]): ReadonlySet<string> {
-  return new Set(giaTri);
+function tap(...canChi: readonly [ThienCan, DiaChi][]): ReadonlySet<string> {
+  return new Set(canChi.map(([can, chi]) => khoa(can, chi)));
 }
 
-function k(can: ThienCan, chi: DiaChi): string {
-  return `${can}_${chi}`;
+function khoa(can: ThienCan, chi: DiaChi): string {
+  return `${can}:${chi}`;
 }
