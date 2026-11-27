@@ -223,6 +223,17 @@ input {
   font-size: 13px;
 }
 
+.nhan-trang-thai {
+  display: inline-block;
+  border: 1px solid #b9aa8f;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: #f0e8d9;
+  color: #5d503d;
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .hai-cot {
   display: grid;
   grid-template-columns: 1fr 1fr;

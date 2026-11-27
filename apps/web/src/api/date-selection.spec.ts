@@ -1,11 +1,18 @@
 import { describe, expect, it } from 'vitest';
 
-import { taoUrlXemCuoiHoi, taoUrlXemDiChuyen } from './date-selection';
+import {
+  taoUrlXemCuoiHoi,
+  taoUrlXemDiChuyen,
+  taoUrlXemDongTho,
+  taoUrlXemSuaCungThat,
+} from './date-selection';
 
 describe('date-selection URLs', () => {
   it.each([
     ['cuoi-hoi', taoUrlXemCuoiHoi],
     ['di-chuyen', taoUrlXemDiChuyen],
+    ['dong-tho', taoUrlXemDongTho],
+    ['sua-cung-that', taoUrlXemSuaCungThat],
   ] as const)('giữ instant ISO và timezone IANA cho %s', (duongDan, taoUrl) => {
     const url = taoUrl(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
 

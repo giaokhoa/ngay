@@ -17,6 +17,12 @@ export function TrangChu() {
         <Link className="nut-phu" to={DUONG_DAN.DI_CHUYEN}>
           Di chuyển
         </Link>
+        <Link className="nut-phu" to={DUONG_DAN.DONG_THO}>
+          Khởi tạo động thổ
+        </Link>
+        <Link className="nut-phu" to={DUONG_DAN.SUA_CUNG_THAT}>
+          Sửa cung thất
+        </Link>
       </div>
     </main>
   );
