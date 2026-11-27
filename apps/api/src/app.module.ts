@@ -6,9 +6,17 @@ import { XemNgayModule } from './date-selection/date-selection.module';
 import { DanhGiaNgayModule } from './evaluation/evaluation.module';
 import { YeuToNgayModule } from './factors/factors.module';
 import { SucKhoeController } from './health/health.controller';
+import { KhoTriThucModule } from './knowledge/knowledge.module';
 
 @Module({
-  imports: [LichModule, YeuToNgayModule, DungSuModule, DanhGiaNgayModule, XemNgayModule],
+  imports: [
+    LichModule,
+    YeuToNgayModule,
+    DungSuModule,
+    DanhGiaNgayModule,
+    XemNgayModule,
+    KhoTriThucModule,
+  ],
   controllers: [SucKhoeController],
 })
 export class UngDungModule {}

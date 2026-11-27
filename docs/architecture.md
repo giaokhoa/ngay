@@ -73,6 +73,23 @@ Orchestration:
 
 Không chứa bảng thần sát hay công thức Can Chi.
 
+### knowledge
+
+Optional PostgreSQL query/audit catalog:
+
+- mirror Q10/Q11 rule identities;
+- mirror target/condition JSONB;
+- lưu provenance Việt/Hán dạng relational;
+- phục vụ source viewer, research/admin query và audit.
+
+Không được:
+
+- thay arithmetic lịch pháp bằng SQL;
+- thêm DB round-trip vào hot path xem ngày;
+- trở thành canonical authoring store nếu chưa có migration/validation phase riêng.
+
+Chi tiết: `docs/decisions/0010-postgres-knowledge-catalog.md`.
+
 ## Frontend
 
 React Router chịu trách nhiệm:
@@ -93,8 +110,10 @@ date-selection -> activities
 date-selection -> evaluation
 factors -> calendar domain types
 evaluation -> activities/factors domain types
+knowledge -> activities/evaluation/source data (mirror/query only)
 
 Không cho calendar phụ thuộc ngược lên evaluation hoặc activities.
+Knowledge không được trở thành dependency của date-selection hot path.
 
 ## Dữ liệu và code
 

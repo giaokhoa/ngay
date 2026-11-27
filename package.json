@@ -13,7 +13,9 @@
     "typecheck": "pnpm -r --if-present typecheck",
     "test": "pnpm -r --if-present test",
     "build": "pnpm -r --if-present build",
-    "ci": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+    "ci": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "pg:up": "docker compose -f compose.postgres.yml up -d",
+    "pg:down": "docker compose -f compose.postgres.yml down"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

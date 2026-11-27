@@ -5,6 +5,7 @@
 ## Stack
 
 - Backend: NestJS
+- Knowledge/query catalog: PostgreSQL qua `pg` (optional)
 - Frontend: React + React Router + Vite
 - Package manager: pnpm workspace
 - CI: GitHub Actions
@@ -39,6 +40,50 @@ Health probes:
 
 Web hiện dùng relative API path, nên deployment baseline là same-origin/reverse proxy.
 Không bật CORS wildcard. Chi tiết: `docs/decisions/0009-production-runtime-baseline.md`.
+
+## PostgreSQL rule catalog demo
+
+PostgreSQL là query/audit catalog cho Q10/Q11 + provenance; engine xem ngày vẫn tính
+in-memory bằng TypeScript. Chi tiết boundary: `docs/decisions/0010-postgres-knowledge-catalog.md`.
+
+Khởi động Postgres local:
+
+```bash
+pnpm pg:up
+cp .env.example .env
+set -a
+. ./.env
+set +a
+```
+
+Terminal 1:
+
+```bash
+pnpm --filter @ngay/api build
+pnpm --filter @ngay/api start:prod
+```
+
+Khi `DATABASE_URL` có giá trị, API tự tạo schema và sync generated mirror từ catalog
+type-safe hiện tại.
+
+Terminal 2:
+
+```bash
+pnpm --filter @ngay/web exec vite --host 0.0.0.0
+```
+
+Mở:
+
+- `http://localhost:5173/rules`
+- `http://localhost:3000/knowledge/stats`
+- ví dụ query:
+  `/knowledge/rules?activity=AN_TANG&layer=Q10&target=PHUC_NHAT&book=10&page=823`
+
+Dừng Postgres:
+
+```bash
+pnpm pg:down
+```
 
 ## CI là nguồn kiểm chứng chuẩn
 

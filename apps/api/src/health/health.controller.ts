@@ -1,4 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, ServiceUnavailableException } from '@nestjs/common';
+
+import { KhoTriThucPostgresService } from '../knowledge/knowledge.service';
 
 export interface TrangThaiSucKhoe {
   trangThai: 'ok';
@@ -6,6 +8,8 @@ export interface TrangThaiSucKhoe {
 
 @Controller('health')
 export class SucKhoeController {
+  constructor(private readonly khoTriThuc: KhoTriThucPostgresService) {}
+
   @Get()
   kiemTra(): TrangThaiSucKhoe {
     return { trangThai: 'ok' };
@@ -17,7 +21,10 @@ export class SucKhoeController {
   }
 
   @Get('ready')
-  kiemTraSanSang(): TrangThaiSucKhoe {
+  async kiemTraSanSang(): Promise<TrangThaiSucKhoe> {
+    if (!(await this.khoTriThuc.kiemTraKetNoi())) {
+      throw new ServiceUnavailableException('Postgres knowledge catalog chưa sẵn sàng.');
+    }
     return { trangThai: 'ok' };
   }
 }

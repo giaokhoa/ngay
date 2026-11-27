@@ -6,6 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/date-selection': 'http://localhost:3000',
+      '/knowledge': 'http://localhost:3000',
     },
   },
 });
