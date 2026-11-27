@@ -697,8 +697,8 @@ Tối thiểu:
 - [x] full outcome matrix source-locked
 - [x] shared Kiếp Sát source bug identified
 - [x] independent oracle/regression plan defined
-- [ ] missing factors IMPLEMENTED
-- [ ] missing factors ORACLE_TESTED
-- [ ] AN_TANG rules IMPLEMENTED
-- [ ] AN_TANG Q10 ORACLE_TESTED
-- [ ] end-to-end API/UI
+- [x] missing factors IMPLEMENTED
+- [x] missing factors ORACLE_TESTED
+- [x] AN_TANG rules IMPLEMENTED
+- [x] AN_TANG Q10 ORACLE_TESTED
+- [x] end-to-end API/UI

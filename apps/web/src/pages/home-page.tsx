@@ -29,6 +29,9 @@ export function TrangChu() {
         <Link className="nut-phu" to={DUONG_DAN.XUAT_HANH}>
           Xuất hành
         </Link>
+        <Link className="nut-phu" to={DUONG_DAN.AN_TANG}>
+          An táng
+        </Link>
       </div>
     </main>
   );

@@ -10,6 +10,7 @@ export enum LoaiCongViec {
   SUA_CUNG_THAT = 'SUA_CUNG_THAT',
   KHAI_TRUONG = 'KHAI_TRUONG',
   XUAT_HANH = 'XUAT_HANH',
+  AN_TANG = 'AN_TANG',
 }
 
 export enum TacDongDungSu {

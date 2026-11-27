@@ -60,6 +60,15 @@ export class XemNgayController {
     return this.goi(() => this.xemNgay.xemXuatHanh(thoiDiem, muiGioHopLe));
   }
 
+  @Get('an-tang')
+  xemAnTang(
+    @Query('thoiDiem') thoiDiemText: string | undefined,
+    @Query('muiGio') muiGio: string | undefined,
+  ) {
+    const { thoiDiem, muiGioHopLe } = docInput(thoiDiemText, muiGio);
+    return this.goi(() => this.xemNgay.xemAnTang(thoiDiem, muiGioHopLe));
+  }
+
   private goi<T>(thucThi: () => T): T {
     try {
       return thucThi();

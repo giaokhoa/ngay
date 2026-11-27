@@ -51,6 +51,9 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   NGU_MO: 'Ngũ Mộ',
   VANG_VONG: 'Vãng Vong',
   BAT_CHUYEN: 'Bát Chuyên',
+  O_PHE: 'Ô Phệ',
+  PHUC_NHAT: 'Phục Nhật',
+  TRONG_NHAT: 'Trọng Nhật',
 };
 
 export interface CauHinhTrangXemNgay {

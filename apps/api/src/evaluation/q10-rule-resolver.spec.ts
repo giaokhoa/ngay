@@ -64,6 +64,68 @@ describe('generic Q10 rule resolver', () => {
     ).toThrow('Xung đột Q10 cùng precedence');
   });
 
+  it('global DELEGATE thêm Kị khi target giữ Kị', () => {
+    const rules: readonly QuyTacXungDotDataDriven[] = [
+      {
+        ma: 'GLOBAL_TO_KIEP',
+        phepXuLy: { loai: 'DELEGATE', den: { loai: 'YEU_TO', ma: MaYeuTo.KIEP_SAT } },
+        precedence: 50,
+        moTa: 'global delegates',
+        nguon: [],
+      },
+      {
+        ma: 'KIEP_KEEP',
+        mucTieu: { loai: 'YEU_TO', ma: MaYeuTo.KIEP_SAT },
+        phepXuLy: { loai: 'GIU_KY' },
+        precedence: 10,
+        moTa: 'keep',
+        nguon: [],
+      },
+    ];
+
+    const result = apDungResolverQ10([], boiCanh([]), rules);
+
+    expect(result.coKyBoSung).toBe(true);
+    expect(result.xungDotDaApDung.map((item) => item.ma)).toEqual(['GLOBAL_TO_KIEP', 'KIEP_KEEP']);
+  });
+
+  it('global DELEGATE không thêm Kị khi target được cát giải', () => {
+    const rules: readonly QuyTacXungDotDataDriven[] = [
+      {
+        ma: 'GLOBAL_TO_KIEP',
+        phepXuLy: { loai: 'DELEGATE', den: { loai: 'YEU_TO', ma: MaYeuTo.KIEP_SAT } },
+        precedence: 50,
+        moTa: 'global delegates',
+        nguon: [],
+      },
+      {
+        ma: 'KIEP_REMOVE_WITH_DUC',
+        mucTieu: { loai: 'YEU_TO', ma: MaYeuTo.KIEP_SAT },
+        dieuKien: { coTatCaYeuTo: [MaYeuTo.THIEN_DUC] },
+        phepXuLy: { loai: 'BO_KY' },
+        precedence: 20,
+        moTa: 'remove',
+        nguon: [],
+      },
+      {
+        ma: 'KIEP_KEEP',
+        mucTieu: { loai: 'YEU_TO', ma: MaYeuTo.KIEP_SAT },
+        phepXuLy: { loai: 'GIU_KY' },
+        precedence: 10,
+        moTa: 'keep',
+        nguon: [],
+      },
+    ];
+
+    const result = apDungResolverQ10([], boiCanh([MaYeuTo.THIEN_DUC]), rules);
+
+    expect(result.coKyBoSung).toBe(false);
+    expect(result.xungDotDaApDung.map((item) => item.ma)).toEqual([
+      'GLOBAL_TO_KIEP',
+      'KIEP_REMOVE_WITH_DUC',
+    ]);
+  });
+
   it('rule precedence cao hơn thắng rule tổng quát', () => {
     const contribution = dongGopKy(MaYeuTo.KIEP_SAT);
     const rules: readonly QuyTacXungDotDataDriven[] = [

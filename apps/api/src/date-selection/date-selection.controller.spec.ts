@@ -90,3 +90,12 @@ describe('XemNgayController XUAT_HANH endpoint', () => {
     expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'XUAT_HANH')).toBe(true);
   });
 });
+
+describe('XemNgayController AN_TANG endpoint', () => {
+  it('trả kết quả AN_TANG với provenance', () => {
+    const result = taoController().xemAnTang('2026-11-27T05:00:00.000Z', 'Asia/Ho_Chi_Minh');
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'AN_TANG')).toBe(true);
+  });
+});

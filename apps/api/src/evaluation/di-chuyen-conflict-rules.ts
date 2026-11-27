@@ -260,7 +260,7 @@ export const QUY_TAC_Q10_DI_CHUYEN: readonly QuyTacXungDotDataDriven[] = [
     { loai: 'CHI_CON_QUAN_Y' },
     {
       chiThang: [DiaChi.TI, DiaChi.HOI],
-      coBatKyYeuTo: [MaYeuTo.NGUYET_DUC, MaYeuTo.THIEN_DUC_HOP],
+      coBatKyYeuTo: [MaYeuTo.THIEN_DUC, MaYeuTo.NGUYET_DUC_HOP],
     },
   ),
   rule(
