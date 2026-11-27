@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { tinhMuaTheoChiThang } from '../calendar/season';
+import { tinhThapNhiTruc } from '../calendar/twelve-officer';
 import { YeuToNgay } from './domain/day-factor';
 import { DinhNghiaYeuTo } from './factor-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from './factor-definitions';
@@ -14,6 +15,10 @@ import {
 } from './fixed-seasonal-factor-definitions';
 import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CAN_NGAY } from './monthly-stem-factor-definitions';
+import {
+  DINH_NGHIA_YEU_TO_QUAN_HE_THANG_QUYEN_4,
+  DINH_NGHIA_YEU_TO_THEO_TRUC,
+} from './q4-shared-position-definitions';
 
 @Injectable()
 export class TinhYeuToNgayService {
@@ -27,7 +32,23 @@ export class TinhYeuToNgayService {
     );
 
     const mua = tinhMuaTheoChiThang(boiCanh.chiThang);
-    const ketQua: DinhNghiaYeuTo[] = [...theoChiNgay, ...theoCanNgay];
+    const truc = tinhThapNhiTruc(boiCanh.chiThang, boiCanh.chiNgay);
+    const theoTruc = DINH_NGHIA_YEU_TO_THEO_TRUC.filter((dinhNghia) =>
+      dinhNghia.viTri.some(
+        (viTri) =>
+          viTri.truc === truc &&
+          (!viTri.chiThangApDung || viTri.chiThangApDung.includes(boiCanh.chiThang)),
+      ),
+    );
+    const quanHeThangQuyen4 = DINH_NGHIA_YEU_TO_QUAN_HE_THANG_QUYEN_4.filter((dinhNghia) =>
+      dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
+    );
+    const ketQua: DinhNghiaYeuTo[] = [
+      ...theoChiNgay,
+      ...theoCanNgay,
+      ...theoTruc,
+      ...quanHeThangQuyen4,
+    ];
 
     if (DINH_NGHIA_THIEN_DUC.canNgayTheoChiThang[boiCanh.chiThang] === boiCanh.canNgay) {
       ketQua.push(DINH_NGHIA_THIEN_DUC);
