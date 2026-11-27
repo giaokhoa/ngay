@@ -481,5 +481,5 @@ Tối thiểu phải có các vector độc lập:
 - [x] Nguyệt Yếm special Can-Chi branches source-locked
 - [x] Dương thác earthwork difference VERIFIED
 - [x] independent regression-vector plan defined
-- [ ] full Q10 earthwork rules IMPLEMENTED
-- [ ] full Q10 earthwork regression vectors ORACLE_TESTED
+- [x] full Q10 earthwork rules IMPLEMENTED
+- [x] full Q10 earthwork regression vectors ORACLE_TESTED
