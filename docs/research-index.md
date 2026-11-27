@@ -11,7 +11,7 @@
 | Tháng theo tiết khí       | calendar | T2 Q20..Q31 + Hán Q20..Q31              | ORACLE_TESTED | solar-term.service.ts            | solar-term.service.spec.ts                 | 12 tiết mở tháng                                 |
 | Instant của tiết khí      | calendar | GB/T 33661 + Astronomy Engine + HKO     | ORACLE_TESTED | solar-term.service.ts            | HKO đủ 24 tiết 2026                        | ADR 0004                                         |
 | Thập Nhị Trực             | calendar | T2 Q20 p311, p313-314 + Hán Q20/Q21/Q30 | ORACLE_TESTED | twelve-officer.ts                | twelve-officer.spec.ts                     | Oracle tháng Dần/Mão                             |
-| Thổ Vượng                 | calendar | T1 Q1 p83 + Hán Q1 + Thời Hiến lịch     | VERIFIED      | -                                | planned                                    | 18 civil days trước bốn Lập; ADR 0006            |
+| Thổ Vượng                 | calendar | T1 Q1 p83 + Hán Q1 + Thời Hiến lịch     | ORACLE_TESTED | earth-reign.service.ts           | earth-reign.service.spec.ts                | 18 civil days trước bốn Lập; ADR 0006            |
 
 ## Factors — Quyển 6 core
 
@@ -43,7 +43,7 @@ Chi tiết: `docs/research/core-monthly-factors.md`.
 | Thiên Ân       | factors | T1 Q5 p404 + Hán Q5 + Q9          | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | 15 Can Chi cố định                                     |
 | Thiên Xá       | factors | T1 Q5 p407 + Hán Q5               | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | mùa -> Can Chi                                         |
 | Thiên Nguyện   | factors | T1 Q5 p411-412 + Hán Q5           | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | chiThang -> Can Chi                                    |
-| Mẫu Thương     | factors | T1 Q5 p415 + Hán Q5 + Thổ Vượng   | VERIFIED      | -                                    | planned                        | seasonal set; Thổ Vượng chuyển sang Tỵ/Ngọ             |
+| Mẫu Thương     | factors | T1 Q5 p415 + Hán Q5 + Thổ Vượng   | ORACLE_TESTED | maternal-storehouse-definition.ts    | maternal-storehouse.spec.ts    | seasonal set; Thổ Vượng chuyển sang Tỵ/Ngọ             |
 | Nguyệt Ân      | factors | T1 Q5 p417-418 + Hán Q5           | ORACLE_TESTED | monthly-stem-factor-definitions.ts   | monthly-stem-factors.spec.ts   | chiThang -> Can ngày                                   |
 | Tứ Tướng       | factors | T1 Q5 p420-421 + Hán Q5           | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | mùa -> 2 Can ngày                                      |
 | Thời Đức       | factors | T1 Q5 p422-423 + Hán Q5           | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | mùa -> Chi ngày                                        |
@@ -61,6 +61,12 @@ Chi tiết: `docs/research/virtue-special-day-factors.md`.
 | Âm Dương Bất Tương              | factors | T1 Q4 p356-358 + Hán Q4 | ORACLE_TESTED | bat-tuong-definition.ts           | bat-tuong.spec.ts                  | table-driven 12 tháng × Can Chi                 |
 
 Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
+
+## Factors — Activity dependencies
+
+| Chủ đề     | Module  | Nguồn chính          | Trạng thái    | Implementation              | Oracle test           | Ghi chú                                       |
+| ---------- | ------- | -------------------- | ------------- | --------------------------- | --------------------- | --------------------------------------------- |
+| Nguyệt Phá | factors | T2 Q20 + Hán Q10/Q20 | ORACLE_TESTED | monthly-break-definition.ts | monthly-break.spec.ts | cùng vị trí Trực Phá nhưng giữ identity riêng |
 
 ## Activities — Quyển 11
 
