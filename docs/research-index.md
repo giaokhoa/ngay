@@ -57,7 +57,7 @@ Chi tiết: `docs/research/virtue-special-day-factors.md`.
 | Nguyệt Kiến                     | factors | T1 Q4 p344 + Hán Q4     | ORACLE_TESTED | q4-shared-position-definitions.ts | q4-shared-position-factors.spec.ts | cùng vị trí Trực Kiến                           |
 | Nguyệt Yếm / Địa Hỏa            | factors | T1 Q4 p347 + Hán Q4     | ORACLE_TESTED | q4-shared-position-definitions.ts | q4-shared-position-factors.spec.ts | cùng vị trí, identity riêng                     |
 | Yếm Đối / Lục Nghi / Chiêu Diêu | factors | T1 Q4 p353 + Hán Q4     | ORACLE_TESTED | q4-shared-position-definitions.ts | q4-shared-position-factors.spec.ts | cùng vị trí nhưng semantics khác nhau           |
-| Âm Dương Bất Tương              | factors | T1 Q4 p356-358 + Hán Q4 | VERIFIED      | -                                 | planned                            | table-driven 12 tháng × Can Chi                 |
+| Âm Dương Bất Tương              | factors | T1 Q4 p356-358 + Hán Q4 | ORACLE_TESTED | bat-tuong-definition.ts           | bat-tuong.spec.ts                  | table-driven 12 tháng × Can Chi                 |
 
 Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
 
