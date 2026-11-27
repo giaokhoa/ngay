@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
 
-@Module({})
+import { DanhGiaNgayService } from './evaluation.service';
+
+@Module({
+  providers: [DanhGiaNgayService],
+  exports: [DanhGiaNgayService],
+})
 export class DanhGiaNgayModule {}

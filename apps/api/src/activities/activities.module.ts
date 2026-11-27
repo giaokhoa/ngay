@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
 
-@Module({})
+import { DungSuService } from './activities.service';
+
+@Module({
+  providers: [DungSuService],
+  exports: [DungSuService],
+})
 export class DungSuModule {}

@@ -268,5 +268,5 @@ Không implement kết luận cưới hỏi production cho tới khi:
 - [x] dependency matrix lập xong
 - [x] missing blockers implemented
 - [x] Q10 conflict semantics VERIFIED đầy đủ
-- [ ] activity rules IMPLEMENTED
-- [ ] end-to-end ORACLE_TESTED
+- [x] activity rules IMPLEMENTED
+- [x] end-to-end ORACLE_TESTED bằng Q11 exact-set tests + Q10 source-driven regression vectors
