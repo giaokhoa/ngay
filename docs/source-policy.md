@@ -4,6 +4,14 @@
 
 Engine phải truy được từ kết quả về quy tắc và từ quy tắc về nguồn.
 
+## Khả năng truy cập nguồn
+
+Repository không lưu bản scan sách.
+
+Agent chỉ được nói đã kiểm tra nguồn khi execution context thực sự cho phép mở file hoặc trang nguồn đó. Tóm tắt từ Agent trước, issue cũ hoặc lịch sử chat không thay thế việc mở lại exact source khi task phụ thuộc chi tiết nguồn.
+
+Nếu không truy cập được source cần thiết, đánh dấu blocked-source thay vì suy diễn.
+
 ## Nguồn chính
 
 ### Bản Việt
