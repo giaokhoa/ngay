@@ -166,5 +166,5 @@ Timezone regression tối thiểu:
 - [x] LOCATED
 - [x] COMPARED
 - [x] VERIFIED
-- [ ] IMPLEMENTED
-- [ ] ORACLE_TESTED
+- [x] IMPLEMENTED
+- [x] ORACLE_TESTED
