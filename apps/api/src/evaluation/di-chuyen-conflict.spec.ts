@@ -417,32 +417,70 @@ describe('Q10 standalone special-day rules', () => {
     expect(result.coKy).toBe(true);
   });
 
-  it('Tuế bạc tháng Tỵ Bính Ngọ tạo Q10-only Kị DI_CHUYEN', () => {
+  it('Tuế bạc tháng Tỵ Bính Ngọ: Kị DI_CHUYEN, loại đúng Đức + Nguyện nhưng không mở rộng sang Hợp', () => {
     const result = danhGia({
       chiThang: DiaChi.TI,
       canNgay: ThienCan.BINH,
       chiNgay: DiaChi.NGO,
-      yeuTo: [],
+      yeuTo: [
+        MaYeuTo.THIEN_DUC,
+        MaYeuTo.NGUYET_DUC,
+        MaYeuTo.THIEN_NGUYEN,
+        MaYeuTo.THIEN_DUC_HOP,
+        MaYeuTo.NGUYET_DUC_HOP,
+      ],
     });
 
     expect(result.camMoiViec).toBe(false);
     expect(result.coKy).toBe(true);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_NGUYEN, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC_HOP, TrangThaiDongGop.HIEU_LUC);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC_HOP, TrangThaiDongGop.HIEU_LUC);
     expect(result.xungDotDaApDung.some((item) => item.ma.includes('TUE_BAC_4_BINH_NGO'))).toBe(
       true,
     );
   });
 
-  it('Dương thác tháng Sáu Kỷ Mùi không tự sinh Kị nhưng loại Nên Đức Hợp', () => {
+  it('Trục trận tháng Mùi Mậu Ngọ: cũng loại đúng Đức + Nguyện, không loại Hợp', () => {
+    const result = danhGia({
+      chiThang: DiaChi.MUI,
+      canNgay: ThienCan.MAU,
+      chiNgay: DiaChi.NGO,
+      yeuTo: [MaYeuTo.THIEN_DUC, MaYeuTo.THIEN_NGUYEN, MaYeuTo.NGUYET_DUC_HOP],
+    });
+
+    expect(result.coKy).toBe(true);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_NGUYEN, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC_HOP, TrangThaiDongGop.HIEU_LUC);
+    expect(result.xungDotDaApDung.some((item) => item.ma.includes('TRUC_TRAN_6_MAU_NGO'))).toBe(
+      true,
+    );
+  });
+
+  it('Dương thác tháng Sáu Kỷ Mùi: 德合 loại nhóm Đức + Hợp, không mở rộng sang Nguyện', () => {
     const result = danhGia({
       chiThang: DiaChi.MUI,
       canNgay: ThienCan.KY,
       chiNgay: DiaChi.MUI,
-      yeuTo: [MaYeuTo.THIEN_DUC_HOP],
+      yeuTo: [
+        MaYeuTo.THIEN_DUC,
+        MaYeuTo.NGUYET_DUC,
+        MaYeuTo.THIEN_DUC_HOP,
+        MaYeuTo.NGUYET_DUC_HOP,
+        MaYeuTo.THIEN_NGUYEN,
+      ],
     });
 
     expect(result.camMoiViec).toBe(false);
     expect(result.coKy).toBe(false);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC, TrangThaiDongGop.BI_LOAI);
     expectYeuTo(result.dongGop, MaYeuTo.THIEN_DUC_HOP, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.NGUYET_DUC_HOP, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.THIEN_NGUYEN, TrangThaiDongGop.HIEU_LUC);
   });
 
   it('Âm thác tháng Sáu Kỷ Tỵ hard-ban dù không có factor Nguyệt Yếm', () => {
