@@ -235,15 +235,16 @@ Các nhánh ảnh hưởng trực tiếp DI_CHUYEN:
   `CAM_MOI_VIEC`.
 - Tuế bạc / Trục trận được ghi “theo chỗ Kị của Nguyệt Yếm”:
   DI_CHUYEN vẫn `GIU_KY`.
-- Nhóm **Dương sai**: ngoài ngày đã đồng thời là Tiểu hội/hard-ban, source nói
+- Nhóm **Dương thác**: ngoài ngày đã đồng thời là Tiểu hội/hard-ban, source nói
   “đều theo chỗ Kị của Kiến”. Q10 Kiến nhật không có 般移 trong danh sách Kị,
   nên với DI_CHUYEN phải `BO_KY` thay vì giữ Kị Nguyệt Yếm.
-- Riêng Dương sai tháng Sáu Kỷ Mùi còn bị ghi không theo chỗ Nên của Đức Hợp:
+- Riêng Dương thác tháng Sáu Kỷ Mùi còn bị ghi không theo chỗ Nên của Đức Hợp:
   DI_CHUYEN không nhận Kị từ Nguyệt Yếm, nhưng cũng không được dùng Đức Hợp để
   tự tạo một Nên trong nhánh đặc biệt này.
-- Nhóm **Âm sai**: ngoài các ngày đồng thời Nguyệt Phá / Đại hội hard-ban,
+- Nhóm **Âm thác**: ngoài các ngày đồng thời Nguyệt Phá / Đại hội hard-ban,
   source nói theo Kị của Nguyệt Yếm, nên DI_CHUYEN vẫn `GIU_KY`.
-- Âm sai tháng Sáu Kỷ Tỵ còn không theo chỗ Nên của Đức Hợp.
+- Riêng tháng Sáu, Đinh Tỵ và Kỷ Tỵ thuộc Đại hội nên `CAM_MOI_VIEC`;
+  câu sau còn ghi Kỷ Tỵ không theo chỗ Nên của Đức Hợp.
 
 Những ngày được source nói “mọi việc đều Kị” phải là hard prohibition, không
 được phép được một Nên thông thường gỡ bỏ.
@@ -396,7 +397,7 @@ TAI_SAT
 NGUYET_HINH
 -> NGUYET_YEM
 
-NGUYET_YEM (nhánh Dương sai)
+NGUYET_YEM (nhánh Dương thác)
 -> danh sách Kị của KIEN; DI_CHUYEN không nằm trong Kị Kiến nên BO_KY
 
 DAI_THOI
@@ -437,9 +438,10 @@ Tối thiểu implementation PR phải có:
 | Nguyệt Yếm tháng Dần + Đức/Hợp                        | vẫn Kị DI_CHUYEN                          |
 | Nguyệt Yếm tháng Tý không Thiên Xá                    | mọi việc Kị                               |
 | Nguyệt Yếm tháng Mão dù có Đức/Hợp                    | mọi việc Kị                               |
-| Nguyệt Yếm tháng Giêng ngày Giáp Dần (Dương sai)      | theo Kị Kiến -> bỏ Kị DI_CHUYEN           |
+| Nguyệt Yếm tháng Giêng ngày Giáp Dần (Dương thác)     | theo Kị Kiến -> bỏ Kị DI_CHUYEN           |
 | Nguyệt Yếm tháng Tư ngày Kỷ Tỵ (Tiểu hội)             | mọi việc Kị                               |
-| Nguyệt Yếm tháng Sáu ngày Kỷ Mùi (Dương sai)          | bỏ Kị, không nhận Nên Đức Hợp ở nhánh này |
+| Nguyệt Yếm tháng Sáu ngày Kỷ Mùi (Dương thác)         | bỏ Kị, không nhận Nên Đức Hợp ở nhánh này |
+| Nguyệt Yếm tháng Sáu ngày Kỷ Tỵ (Âm thác / Đại hội)   | mọi việc Kị                               |
 | Đại Thời tháng Dần                                    | bỏ Kị                                     |
 | Đại Thời tháng Mão                                    | delegate Nguyệt Hình                      |
 | Thiên Lại tháng Dần + Đức/Hợp                         | bỏ Kị                                     |
@@ -491,6 +493,10 @@ Resolver:
 6. giữ trace operation + source;
 7. không tự sinh Nên.
 
+Implementation còn hỗ trợ Q10-only special-day operations `THEM_KY` và
+`BO_NEN` cho các nhánh như Tuế bạc/Trục trận và Dương/Âm thác, vì các rule
+này có thể áp dụng ngay cả khi không có contribution factor `NGUYET_YEM`.
+
 ## Trạng thái
 
 - [x] exact Vietnamese pages 788–822 reopened from canonical user upload
@@ -500,6 +506,6 @@ Resolver:
 - [x] delegation graph defined
 - [x] DI_CHUYEN regression vectors defined
 - [x] representation requirements defined
-- [ ] generic Q10 resolver IMPLEMENTED
-- [ ] regression vectors ORACLE_TESTED
-- [ ] DI_CHUYEN end-to-end ORACLE_TESTED
+- [x] generic Q10 resolver IMPLEMENTED
+- [x] regression vectors ORACLE_TESTED
+- [x] DI_CHUYEN end-to-end ORACLE_TESTED
