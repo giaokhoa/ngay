@@ -2,11 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { tinhMuaTheoChiThang } from '../calendar/season';
 import { YeuToNgay } from './domain/day-factor';
-import {
-  DinhNghiaYeuTo,
-  DinhNghiaYeuToTheoCanNgay,
-  DinhNghiaYeuToTheoChiThang,
-} from './factor-definition';
+import { DinhNghiaYeuTo } from './factor-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from './factor-definitions';
 import { BoiCanhTinhYeuToNgay } from './factor-context';
 import {
