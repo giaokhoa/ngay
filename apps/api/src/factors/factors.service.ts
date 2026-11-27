@@ -2,6 +2,11 @@ import { Injectable } from '@nestjs/common';
 
 import { tinhMuaTheoChiThang } from '../calendar/season';
 import { tinhThapNhiTruc } from '../calendar/twelve-officer';
+import {
+  DINH_NGHIA_O_PHE,
+  DINH_NGHIA_PHUC_NHAT,
+  DINH_NGHIA_TRONG_NHAT,
+} from './an-tang-factor-definitions';
 import { DINH_NGHIA_BAT_TUONG } from './bat-tuong-definition';
 import { DINH_NGHIA_DIA_NANG, DINH_NGHIA_THO_PHU_TIN } from './earthwork-factor-definitions';
 import { DINH_NGHIA_CUU_KHONG, DINH_NGHIA_TU_HAO } from './khai-truong-factor-definitions';
@@ -123,6 +128,18 @@ export class TinhYeuToNgayService {
 
     if (DINH_NGHIA_BAT_CHUYEN.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
       ketQua.push(DINH_NGHIA_BAT_CHUYEN);
+    }
+
+    if (DINH_NGHIA_O_PHE.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
+      ketQua.push(DINH_NGHIA_O_PHE);
+    }
+
+    if (DINH_NGHIA_PHUC_NHAT.canNgayTheoChiThang[boiCanh.chiThang] === boiCanh.canNgay) {
+      ketQua.push(DINH_NGHIA_PHUC_NHAT);
+    }
+
+    if (DINH_NGHIA_TRONG_NHAT.chiNgay.includes(boiCanh.chiNgay)) {
+      ketQua.push(DINH_NGHIA_TRONG_NHAT);
     }
 
     if (DINH_NGHIA_THIEN_DUC.canNgayTheoChiThang[boiCanh.chiThang] === boiCanh.canNgay) {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  taoUrlXemAnTang,
   taoUrlXemCuoiHoi,
   taoUrlXemDiChuyen,
   taoUrlXemDongTho,
@@ -17,6 +18,7 @@ describe('date-selection URLs', () => {
     ['sua-cung-that', taoUrlXemSuaCungThat],
     ['khai-truong', taoUrlXemKhaiTruong],
     ['xuat-hanh', taoUrlXemXuatHanh],
+    ['an-tang', taoUrlXemAnTang],
   ] as const)('giữ instant ISO và timezone IANA cho %s', (duongDan, taoUrl) => {
     const url = taoUrl(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
 

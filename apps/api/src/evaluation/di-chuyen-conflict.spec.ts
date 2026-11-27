@@ -135,12 +135,28 @@ describe('DI_CHUYEN Q10 mandatory regression vectors', () => {
     expect(result.coKy).toBe(false);
   });
 
-  it('Kiếp Sát tháng Tỵ + Nguyệt Đức: bỏ Kị', () => {
+  it('Kiếp Sát tháng Tỵ + Thiên Đức: bỏ Kị theo source-exact pair', () => {
+    const result = danhGia({
+      chiThang: DiaChi.TI,
+      yeuTo: [MaYeuTo.KIEP_SAT, MaYeuTo.THIEN_DUC],
+    });
+    expectYeuTo(result.dongGop, MaYeuTo.KIEP_SAT, TrangThaiDongGop.BI_LOAI);
+  });
+
+  it('Kiếp Sát tháng Tỵ + Nguyệt Đức Hợp: bỏ Kị theo source-exact pair', () => {
+    const result = danhGia({
+      chiThang: DiaChi.TI,
+      yeuTo: [MaYeuTo.KIEP_SAT, MaYeuTo.NGUYET_DUC_HOP],
+    });
+    expectYeuTo(result.dongGop, MaYeuTo.KIEP_SAT, TrangThaiDongGop.BI_LOAI);
+  });
+
+  it('Kiếp Sát tháng Tỵ + Nguyệt Đức không được dùng nhầm cặp cũ', () => {
     const result = danhGia({
       chiThang: DiaChi.TI,
       yeuTo: [MaYeuTo.KIEP_SAT, MaYeuTo.NGUYET_DUC],
     });
-    expectYeuTo(result.dongGop, MaYeuTo.KIEP_SAT, TrangThaiDongGop.BI_LOAI);
+    expectYeuTo(result.dongGop, MaYeuTo.KIEP_SAT, TrangThaiDongGop.HIEU_LUC);
   });
 
   it('Tai Sát tháng Tý: delegate Nguyệt Phá', () => {

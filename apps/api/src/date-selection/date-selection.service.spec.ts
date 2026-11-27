@@ -170,3 +170,28 @@ describe('XemNgayService XUAT_HANH end-to-end', () => {
     );
   });
 });
+
+describe('XemNgayService AN_TANG end-to-end', () => {
+  it('orchestrates calendar -> factors -> exact Q11 -> full Q10 AN_TANG', () => {
+    const result = taoService().xemAnTang(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.yeuTo.length).toBeGreaterThan(0);
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'AN_TANG')).toBe(true);
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.nguon.every((nguon) => nguon.daXacMinh)),
+    ).toBe(true);
+  });
+
+  it('is deterministic for AN_TANG', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+
+    expect(service.xemAnTang(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemAnTang(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+});

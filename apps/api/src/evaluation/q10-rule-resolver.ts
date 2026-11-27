@@ -82,6 +82,20 @@ export function apDungResolverQ10(
       case 'BO_NEN':
         loaiNenTheoMucTieu(dongGop, rule.boNen ?? [], rule.moTa);
         break;
+      case 'DELEGATE': {
+        const delegated = resolveMucTieu(rule.phepXuLy.den, boiCanh, rules, new Set());
+        pushUniqueTrace(traces, delegated.dauVet);
+        if (delegated.trangThai === TrangThaiDongGop.HIEU_LUC) {
+          coKyBoSung = true;
+        }
+        if (delegated.camMoiViec) {
+          camMoiViec = true;
+        }
+        if (delegated.boNen.length > 0) {
+          loaiNenTheoMucTieu(dongGop, delegated.boNen, delegated.dauVet.at(-1)?.moTa);
+        }
+        break;
+      }
       default:
         throw new Error('Rule Q10 toàn cục dùng phép xử lý không hợp lệ: ' + rule.ma);
     }
