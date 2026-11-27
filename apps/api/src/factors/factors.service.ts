@@ -16,6 +16,7 @@ import {
 } from './fixed-seasonal-factor-definitions';
 import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
 import { DINH_NGHIA_MAU_THUONG } from './maternal-storehouse-definition';
+import { DINH_NGHIA_NGUYET_PHA } from './monthly-break-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CAN_NGAY } from './monthly-stem-factor-definitions';
 import {
   DINH_NGHIA_YEU_TO_QUAN_HE_THANG_QUYEN_4,
@@ -35,7 +36,7 @@ export class TinhYeuToNgayService {
 
     const mua = tinhMuaTheoChiThang(boiCanh.chiThang);
     const truc = tinhThapNhiTruc(boiCanh.chiThang, boiCanh.chiNgay);
-    const theoTruc = DINH_NGHIA_YEU_TO_THEO_TRUC.filter((dinhNghia) =>
+    const theoTruc = [...DINH_NGHIA_YEU_TO_THEO_TRUC, DINH_NGHIA_NGUYET_PHA].filter((dinhNghia) =>
       dinhNghia.viTri.some(
         (viTri) =>
           viTri.truc === truc &&
