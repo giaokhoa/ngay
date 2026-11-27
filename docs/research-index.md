@@ -62,6 +62,12 @@ Chi tiết: `docs/research/virtue-special-day-factors.md`.
 
 Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
 
+## Activities — Quyển 11
+
+| Chủ đề          | Module     | Nguồn chính                  | Trạng thái | Implementation | Oracle test | Ghi chú                                             |
+| --------------- | ---------- | ---------------------------- | ---------- | -------------- | ----------- | --------------------------------------------------- |
+| CUOI_HOI / 嫁娶 | activities | T1 Q11 PDF858 p851 + Hán Q11 | VERIFIED   | -              | planned     | 10 Nghi / 19 Kị; docs/research/activity-cuoi-hoi.md |
+
 Trạng thái hợp lệ:
 
 - TODO

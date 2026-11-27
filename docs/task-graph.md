@@ -104,3 +104,27 @@ Có thể chạy song song khi phạm vi độc lập, ví dụ:
 - một Agent làm frontend shell không tự tính rule.
 
 Không chạy song song hai Agent cùng tự định nghĩa một domain concept chưa có ADR/schema chung.
+
+## Phase 3 — CUOI_HOI / 嫁娶 vertical slice
+
+```text
+#33 Research CUOI_HOI activity contract (Q11)
+        |
+        +--> #34 Research missing Q6 wedding blockers
+        |
+        +--> #35 Research missing Q5 wedding blockers
+        |
+        +--> #36 Implement NGUYET_PHA identity
+        |
+        +--> #37 Research Q10 wedding conflict semantics
+        |
+        v
+#38 Implement first end-to-end CUOI_HOI evaluation
+```
+
+Gate cho #38:
+
+- 9 blocker còn thiếu phải ORACLE_TESTED;
+- Q10 exceptions phải VERIFIED;
+- activity target contract dùng YEU_TO | TRUC | CHI_NGAY;
+- không dùng arbitrary score hoặc global hasDeSupport.
