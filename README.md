@@ -42,3 +42,19 @@ Không coi môi trường dev cục bộ là bằng chứng build/test thành c�
 - activities: quy tắc Dụng sự theo từng công việc.
 - evaluation: Nghi kị, ngoại lệ và xử lý cát/hung.
 - date-selection: orchestration/API xem ngày.
+
+## Dành cho Agent
+
+Mọi Agent phải đọc AGENTS.md trước khi sửa code.
+
+Tài liệu bắt buộc:
+
+- docs/architecture.md
+- docs/source-policy.md
+- docs/research-workflow.md
+- docs/testing.md
+- docs/roadmap.md
+- docs/research-index.md
+- docs/decisions/
+
+Nếu task liên quan công thức hoặc quy tắc xem ngày mà chưa có trạng thái VERIFIED trong research index, phải research và ghi nguồn trước khi implement.

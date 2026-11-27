@@ -1,0 +1,55 @@
+name: Agent task
+description: Task có cấu trúc để Agent thực hiện
+title: '[Agent] '
+labels: []
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Loại task
+      options:
+        - Research
+        - Calendar
+        - Factors
+        - Activities
+        - Evaluation
+        - API
+        - Frontend
+        - Testing
+        - Infrastructure
+    validations:
+      required: true
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Mục tiêu
+      description: Kết quả cần đạt, không mô tả cách làm quá chi tiết nếu chưa research.
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Nguồn cần dùng
+      description: Tập, quyển, trang, section hoặc link Hán bản nếu đã biết.
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] CI xanh
+    validations:
+      required: true
+
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Không thuộc phạm vi
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Ghi chú / câu hỏi mở
