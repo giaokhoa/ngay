@@ -71,4 +71,7 @@ export enum MaYeuTo {
 
   THO_PHU_TIN = 'THO_PHU_TIN',
   DIA_NANG = 'DIA_NANG',
+
+  TU_HAO = 'TU_HAO',
+  CUU_KHONG = 'CUU_KHONG',
 }

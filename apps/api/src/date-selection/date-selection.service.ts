@@ -31,6 +31,7 @@ export type KetQuaXemNgayCuoiHoi = KetQuaXemNgay;
 export type KetQuaXemNgayDiChuyen = KetQuaXemNgay;
 export type KetQuaXemNgayDongTho = KetQuaXemNgay;
 export type KetQuaXemNgaySuaCungThat = KetQuaXemNgay;
+export type KetQuaXemNgayKhaiTruong = KetQuaXemNgay;
 
 @Injectable()
 export class XemNgayService {
@@ -55,6 +56,10 @@ export class XemNgayService {
 
   xemSuaCungThat(thoiDiem: Date, muiGio: string): KetQuaXemNgaySuaCungThat {
     return this.xem(thoiDiem, muiGio, LoaiCongViec.SUA_CUNG_THAT);
+  }
+
+  xemKhaiTruong(thoiDiem: Date, muiGio: string): KetQuaXemNgayKhaiTruong {
+    return this.xem(thoiDiem, muiGio, LoaiCongViec.KHAI_TRUONG);
   }
 
   private xem(thoiDiem: Date, muiGio: string, congViec: LoaiCongViec): KetQuaXemNgay {

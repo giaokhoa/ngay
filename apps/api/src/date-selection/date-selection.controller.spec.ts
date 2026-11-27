@@ -68,3 +68,15 @@ describe('XemNgayController earthwork endpoints', () => {
     );
   });
 });
+
+describe('XemNgayController KHAI_TRUONG endpoint', () => {
+  it('trả kết quả KHAI_TRUONG với Q11 provenance', () => {
+    const result = taoController().xemKhaiTruong('2026-11-27T05:00:00.000Z', 'Asia/Ho_Chi_Minh');
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.length).toBeGreaterThan(0);
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'KHAI_TRUONG')).toBe(
+      true,
+    );
+  });
+});
