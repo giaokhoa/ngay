@@ -127,6 +127,7 @@ describe('Quyển 4 — shared-position identities from Thập Nhị Trực', ()
             chiThang,
             canNgay: ThienCan.GIAP,
             chiNgay,
+            dangThoVuong: false,
           })
           .map((yeuTo) => yeuTo.ma)
           .filter((ma) => MA_THEO_TRUC.has(ma))
@@ -167,6 +168,7 @@ describe('Quyển 4 — Nguyệt Yếm / Yếm Đối shared positions', () => {
             chiThang,
             canNgay: ThienCan.GIAP,
             chiNgay,
+            dangThoVuong: false,
           })
           .map((yeuTo) => yeuTo.ma)
           .filter((ma) => MA_QUAN_HE_THANG.has(ma))
@@ -182,6 +184,7 @@ describe('Quyển 4 — Nguyệt Yếm / Yếm Đối shared positions', () => {
       chiThang: DiaChi.DAN,
       canNgay: ThienCan.GIAP,
       chiNgay: DiaChi.THIN,
+      dangThoVuong: false,
     });
 
     const ma = new Set(ketQua.map((yeuTo) => yeuTo.ma));

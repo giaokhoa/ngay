@@ -211,6 +211,7 @@ describe('Bất Tương — oracle 12 tháng x 60 Can Chi', () => {
           chiThang,
           canNgay: canChi.can,
           chiNgay: canChi.chi,
+          dangThoVuong: false,
         });
 
         expect(ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.BAT_TUONG)).toBe(nenCo);

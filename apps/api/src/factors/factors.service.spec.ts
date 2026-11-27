@@ -203,6 +203,7 @@ describe('TinhYeuToNgayService — oracle Quyển 6', () => {
             const ketQua = service.tinh({
               chiThang,
               chiNgay,
+              dangThoVuong: false,
               canNgay: ThienCan.GIAP,
             });
             const coYeuTo = ketQua.some((yeuTo) => yeuTo.ma === ma);

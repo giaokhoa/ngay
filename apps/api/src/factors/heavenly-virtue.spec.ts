@@ -61,6 +61,7 @@ describe('Thiên Đức — day-factor semantics', () => {
           chiThang,
           canNgay,
           chiNgay: DiaChi.TY,
+          dangThoVuong: false,
         });
 
         expect(ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.THIEN_DUC)).toBe(nenCo);

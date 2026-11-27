@@ -5,4 +5,5 @@ export interface BoiCanhTinhYeuToNgay {
   chiThang: DiaChi;
   canNgay: ThienCan;
   chiNgay: DiaChi;
+  dangThoVuong: boolean;
 }

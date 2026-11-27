@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { NgayDanSu } from './civil-date';
+import { KhoangThoVuong, TinhThoVuongService } from './earth-reign.service';
 import { DiaChi } from './domain/earthly-branch';
 import { CanChi } from './domain/sexagenary-cycle';
 import { TietKhi } from './domain/solar-term';
@@ -11,7 +12,10 @@ import { tinhThapNhiTruc } from './twelve-officer';
 
 @Injectable()
 export class TinhLichService {
-  constructor(private readonly tinhTietKhiService: TinhTietKhiService) {}
+  constructor(
+    private readonly tinhTietKhiService: TinhTietKhiService,
+    private readonly tinhThoVuongService: TinhThoVuongService,
+  ) {}
 
   tinhCanChiNgay(ngayDanSu: NgayDanSu): CanChi {
     return tinhCanChiNgay(ngayDanSu);
@@ -27,5 +31,13 @@ export class TinhLichService {
 
   tinhTruc(chiThang: DiaChi, chiNgay: DiaChi): ThapNhiTruc {
     return tinhThapNhiTruc(chiThang, chiNgay);
+  }
+
+  tinhCacKhoangThoVuong(nam: number, muiGio: string): readonly KhoangThoVuong[] {
+    return this.tinhThoVuongService.tinhCacKhoangThoVuong(nam, muiGio);
+  }
+
+  dangThoVuong(ngayDanSu: NgayDanSu, muiGio: string): boolean {
+    return this.tinhThoVuongService.dangThoVuong(ngayDanSu, muiGio);
   }
 }
