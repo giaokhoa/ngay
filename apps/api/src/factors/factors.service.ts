@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { tinhMuaTheoChiThang } from '../calendar/season';
 import { tinhThapNhiTruc } from '../calendar/twelve-officer';
 import { DINH_NGHIA_BAT_TUONG } from './bat-tuong-definition';
+import { DINH_NGHIA_DIA_NANG, DINH_NGHIA_THO_PHU_TIN } from './earthwork-factor-definitions';
 import { YeuToNgay } from './domain/day-factor';
 import { DinhNghiaYeuTo } from './factor-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from './factor-definitions';
@@ -65,6 +66,9 @@ export class TinhYeuToNgayService {
     const yeuToDiChuyenTheoThang = [DINH_NGHIA_THIEN_MA, DINH_NGHIA_QUY_KY].filter((dinhNghia) =>
       dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
     );
+    const yeuToCongViecDatTheoChi = [DINH_NGHIA_THO_PHU_TIN].filter((dinhNghia) =>
+      dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
+    );
     const ketQua: DinhNghiaYeuTo[] = [
       ...theoChiNgay,
       ...theoCanNgay,
@@ -72,7 +76,16 @@ export class TinhYeuToNgayService {
       ...quanHeThangQuyen4,
       ...blockerQuyen6,
       ...yeuToDiChuyenTheoThang,
+      ...yeuToCongViecDatTheoChi,
     ];
+
+    if (
+      DINH_NGHIA_DIA_NANG.tapCanChiNgayTheoChiThang[boiCanh.chiThang].some((canChi) =>
+        khopCanChi(canChi, boiCanh),
+      )
+    ) {
+      ketQua.push(DINH_NGHIA_DIA_NANG);
+    }
 
     if (DINH_NGHIA_DAN_NHAT.chiNgayTheoMua[mua] === boiCanh.chiNgay) {
       ketQua.push(DINH_NGHIA_DAN_NHAT);

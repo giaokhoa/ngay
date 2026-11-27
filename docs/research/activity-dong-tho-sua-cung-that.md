@@ -425,7 +425,7 @@ Trước khi đưa earthwork activity vào production:
 - [x] Q10 Việt/Hán COMPARED for missing earth blockers
 - [x] Thổ Vượng typed representation decided
 - [x] independent oracle plan defined
-- [ ] missing factors IMPLEMENTED
-- [ ] missing factors ORACLE_TESTED
+- [x] missing factors IMPLEMENTED
+- [x] missing factors ORACLE_TESTED
 - [ ] activity rules IMPLEMENTED
 - [ ] end-to-end ORACLE_TESTED
