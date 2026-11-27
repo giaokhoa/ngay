@@ -10,4 +10,14 @@ export class SucKhoeController {
   kiemTra(): TrangThaiSucKhoe {
     return { trangThai: 'ok' };
   }
+
+  @Get('live')
+  kiemTraSong(): TrangThaiSucKhoe {
+    return { trangThai: 'ok' };
+  }
+
+  @Get('ready')
+  kiemTraSanSang(): TrangThaiSucKhoe {
+    return { trangThai: 'ok' };
+  }
 }
