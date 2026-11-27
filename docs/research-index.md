@@ -78,6 +78,7 @@ Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
 | SUA_CUNG_THAT / 修宮室         | activities | T1 Q11 p854 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10             | earthwork-rules.spec.ts / earthwork-conflict.spec.ts     | docs/research/activity-dong-tho-sua-cung-that.md                                 |
 | KHAI_TRUONG / 開市             | activities | T1 Q11 p857 + Hán Q11           | ORACLE_TESTED | khai-truong-rules.ts + full Q10           | khai-truong-rules.spec.ts / khai-truong-conflict.spec.ts | docs/research/activity-khai-truong.md                                            |
 | XUAT_HANH / 行幸遣使〈出行同〉 | activities | T1 Q11 p849 + Q10 + Hán Q11/Q10 | ORACLE_TESTED | xuat-hanh-rules.ts + derived Q10 resolver | xuat-hanh-rules.spec.ts / xuat-hanh-conflict.spec.ts     | Q11 Việt thiếu 月厭; bổ sung blocker từ Q10; docs/research/activity-xuat-hanh.md |
+| AN_TANG / 安葬                 | activities | T1 Q11 p862 + Q5/Q10 + Hán      | VERIFIED      | -                                         | planned                                                  | Ô Phệ final 13 ngày; Phục/Trọng source-lock; docs/research/activity-an-tang.md   |
 
 Trạng thái hợp lệ:
 
