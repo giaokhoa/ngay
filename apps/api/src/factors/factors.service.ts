@@ -15,6 +15,7 @@ import {
   DINH_NGHIA_TU_TUONG,
 } from './fixed-seasonal-factor-definitions';
 import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
+import { DINH_NGHIA_MAU_THUONG } from './maternal-storehouse-definition';
 import { DINH_NGHIA_YEU_TO_THEO_CAN_NGAY } from './monthly-stem-factor-definitions';
 import {
   DINH_NGHIA_YEU_TO_QUAN_HE_THANG_QUYEN_4,
@@ -77,6 +78,14 @@ export class TinhYeuToNgayService {
 
     if (DINH_NGHIA_TU_TUONG.canNgayTheoMua[mua].includes(boiCanh.canNgay)) {
       ketQua.push(DINH_NGHIA_TU_TUONG);
+    }
+
+    const chiNgayMauThuong = boiCanh.dangThoVuong
+      ? DINH_NGHIA_MAU_THUONG.chiNgayKhiThoVuong
+      : DINH_NGHIA_MAU_THUONG.chiNgayTheoMua[mua];
+
+    if (chiNgayMauThuong.includes(boiCanh.chiNgay)) {
+      ketQua.push(DINH_NGHIA_MAU_THUONG);
     }
 
     if (DINH_NGHIA_THOI_DUC.chiNgayTheoMua[mua] === boiCanh.chiNgay) {

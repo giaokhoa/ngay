@@ -97,6 +97,7 @@ describe('Thiên Ân — fixed Can Chi oracle', () => {
         chiThang: DAN,
         canNgay: canChi.can,
         chiNgay: canChi.chi,
+        dangThoVuong: false,
       });
 
       expect(ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.THIEN_AN)).toBe(nenCo);
@@ -119,6 +120,7 @@ describe('Thiên Xá — season x 60 Can Chi oracle', () => {
           chiThang,
           canNgay: canChi.can,
           chiNgay: canChi.chi,
+          dangThoVuong: false,
         });
 
         expect(ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.THIEN_XA)).toBe(nenCo);
@@ -141,6 +143,7 @@ describe('Thiên Nguyện — 12 months x 60 Can Chi oracle', () => {
           chiThang,
           canNgay: canChi.can,
           chiNgay: canChi.chi,
+          dangThoVuong: false,
         });
 
         expect(ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.THIEN_NGUYEN)).toBe(nenCo);
@@ -163,6 +166,7 @@ describe('Tứ Tướng — season x 10 stems oracle', () => {
           chiThang,
           canNgay,
           chiNgay: SUU,
+          dangThoVuong: false,
         });
 
         expect(ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.TU_TUONG)).toBe(nenCo);
@@ -185,6 +189,7 @@ describe('Thời Đức — season x 12 branches oracle', () => {
           chiThang,
           canNgay: CANH,
           chiNgay,
+          dangThoVuong: false,
         });
 
         expect(ketQua.some((yeuTo) => yeuTo.ma === MaYeuTo.THOI_DUC)).toBe(nenCo);

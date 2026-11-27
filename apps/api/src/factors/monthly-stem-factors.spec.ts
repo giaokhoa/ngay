@@ -111,6 +111,7 @@ describe('TinhYeuToNgayService — oracle Quyển 5 theo Can ngày', () => {
               chiThang,
               canNgay,
               chiNgay: DiaChi.TY,
+              dangThoVuong: false,
             });
             const coYeuTo = ketQua.some((yeuTo) => yeuTo.ma === ma);
 
