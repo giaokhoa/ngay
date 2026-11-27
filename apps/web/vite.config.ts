@@ -3,4 +3,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/date-selection': 'http://localhost:3000',
+    },
+  },
 });

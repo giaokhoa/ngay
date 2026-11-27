@@ -8,7 +8,7 @@
     'Segoe UI',
     sans-serif;
   color: #1f2328;
-  background: #f6f4ef;
+  background: #f3efe5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -23,29 +23,276 @@ body {
   min-height: 100vh;
 }
 
-.trang-chu {
-  width: min(720px, calc(100% - 32px));
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.trang-chu,
+.trang-cuoi-hoi {
+  width: min(1040px, calc(100% - 32px));
   margin: 0 auto;
+}
+
+.trang-chu {
   padding: 96px 0;
 }
 
 .nhan {
   margin: 0 0 8px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
-h1 {
+.trang-chu h1 {
   margin: 0;
   font-size: clamp(52px, 12vw, 112px);
   line-height: 0.95;
 }
 
-.trang-chu > p:last-child {
-  max-width: 560px;
+.trang-chu > p:nth-of-type(2) {
+  max-width: 620px;
   margin-top: 28px;
   font-size: 18px;
   line-height: 1.6;
+}
+
+.nut-chinh,
+.bo-chon-ngay button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 20px;
+  background: #22211d;
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nut-chinh {
+  margin-top: 16px;
+}
+
+.trang-cuoi-hoi {
+  padding: 36px 0 80px;
+}
+
+.dau-trang {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.thuong-hieu {
+  font-size: 28px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.dau-trang h1 {
+  margin: 0;
+  font-size: clamp(40px, 7vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.mo-ta {
+  max-width: 720px;
+  margin: 18px 0 0;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #57534b;
+}
+
+.bo-chon-ngay {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(220px, 1fr) auto;
+  gap: 12px;
+  margin: 44px 0 28px;
+  padding: 18px;
+  border: 1px solid #d9d2c4;
+  border-radius: 22px;
+  background: #fffdf8;
+}
+
+.bo-chon-ngay label {
+  display: grid;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.bo-chon-ngay input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #cbc3b4;
+  border-radius: 12px;
+  padding: 0 12px;
+  background: #fff;
+  color: #1f2328;
+}
+
+.bo-chon-ngay input[readonly] {
+  color: #686157;
+  background: #f8f5ee;
+}
+
+.bo-chon-ngay button {
+  align-self: end;
+}
+
+.bo-chon-ngay button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.thong-bao-loi {
+  border: 1px solid #b34a3d;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: #fff3f0;
+  color: #7b2f27;
+}
+
+.ket-qua {
+  display: grid;
+  gap: 18px;
+}
+
+.tong-quan,
+.the {
+  border: 1px solid #d9d2c4;
+  border-radius: 22px;
+  background: #fffdf8;
+}
+
+.tong-quan {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px;
+}
+
+.tong-quan h2 {
+  margin: 0;
+  font-size: clamp(34px, 6vw, 58px);
+}
+
+.thong-so {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  text-align: right;
+}
+
+.thong-so strong {
+  display: inline-block;
+  max-width: 280px;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: #8d2f23;
+  color: #fff;
+  font-size: 13px;
+}
+
+.hai-cot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.the {
+  padding: 22px;
+}
+
+.the h3 {
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+
+.danh-sach-rule,
+.danh-sach-trace {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.danh-sach-rule li,
+.danh-sach-trace li {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e5ded1;
+}
+
+.danh-sach-rule li:last-child,
+.danh-sach-trace li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.danh-sach-trace p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.nguon {
+  color: #756d62;
+  line-height: 1.45;
+}
+
+.rong {
+  margin: 0;
+  color: #756d62;
+}
+
+details.the summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+details.the[open] summary {
+  margin-bottom: 18px;
+}
+
+@media (max-width: 760px) {
+  .dau-trang {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .bo-chon-ngay {
+    grid-template-columns: 1fr;
+  }
+
+  .bo-chon-ngay button {
+    width: 100%;
+  }
+
+  .tong-quan {
+    flex-direction: column;
+  }
+
+  .thong-so {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hai-cot {
+    grid-template-columns: 1fr;
+  }
 }
