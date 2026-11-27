@@ -257,4 +257,4 @@ Regression:
 - [x] oracle plan defined
 - [x] missing factors IMPLEMENTED
 - [x] activity/evaluation IMPLEMENTED cho Q11 + invariant Quy Kị đã source-lock
-- [ ] end-to-end ORACLE_TESTED (giữ mở cho rà đầy đủ Q10 và khác biệt `合`)
+- [x] end-to-end ORACLE_TESTED bằng factor oracle + Q11 exact-set + full Q10 source-driven regression vectors

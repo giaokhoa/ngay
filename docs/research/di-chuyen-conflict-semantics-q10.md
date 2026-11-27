@@ -1,6 +1,6 @@
 # Research: DI_CHUYEN conflict semantics Quyển 10
 
-Status: VERIFIED
+Status: ORACLE_TESTED
 
 ## Mục tiêu
 
@@ -234,16 +234,28 @@ Các nhánh ảnh hưởng trực tiếp DI_CHUYEN:
   Tuyệt âm, Tuyệt dương ở các Can Chi/tháng được sách liệt kê:
   `CAM_MOI_VIEC`.
 - Tuế bạc / Trục trận được ghi “theo chỗ Kị của Nguyệt Yếm”:
-  DI_CHUYEN vẫn `GIU_KY`.
+  đây là **Q10-only Kị**, không phụ thuộc factor `NGUYET_YEM` có được emit hay
+  không.
+  - tháng Tư Bính Ngọ (Tuế bạc) và tháng Sáu Mậu Ngọ (Trục trận) còn bị ghi
+    “không theo chỗ Nên của Đức, Nguyện” / Hán `不從德願所宜`.
+  - `德願` ở đây được giữ đúng hai nhóm từ ngữ: Đức = Thiên Đức/Nguyệt Đức,
+    Nguyện = Thiên Nguyện; không tự kéo Đức Hợp/Nguyệt Đức Hợp vào vì source
+    không có chữ `合`.
 - Nhóm **Dương sai**: ngoài ngày đã đồng thời là Tiểu hội/hard-ban, source nói
   “đều theo chỗ Kị của Kiến”. Q10 Kiến nhật không có 般移 trong danh sách Kị,
   nên với DI_CHUYEN phải `BO_KY` thay vì giữ Kị Nguyệt Yếm.
-- Riêng Dương sai tháng Sáu Kỷ Mùi còn bị ghi không theo chỗ Nên của Đức Hợp:
-  DI_CHUYEN không nhận Kị từ Nguyệt Yếm, nhưng cũng không được dùng Đức Hợp để
-  tự tạo một Nên trong nhánh đặc biệt này.
-- Nhóm **Âm sai**: ngoài các ngày đồng thời Nguyệt Phá / Đại hội hard-ban,
-  source nói theo Kị của Nguyệt Yếm, nên DI_CHUYEN vẫn `GIU_KY`.
-- Âm sai tháng Sáu Kỷ Tỵ còn không theo chỗ Nên của Đức Hợp.
+- Riêng Dương sai tháng Sáu Kỷ Mùi còn bị ghi không theo chỗ Nên của
+  `德合`: DI_CHUYEN không nhận Kị từ Nguyệt Yếm, đồng thời bốn contribution
+  Thiên Đức / Nguyệt Đức / Thiên Đức Hợp / Nguyệt Đức Hợp đều không được dùng
+  làm Nên ở nhánh này.
+- Nhóm **Âm sai**:
+  - tháng Hai và tháng Tám gặp Nguyệt Phá: `CAM_MOI_VIEC`;
+  - **tháng Sáu và tháng Chạp là Đại hội: `CAM_MOI_VIEC`**;
+  - các tháng còn lại theo chỗ Kị của Nguyệt Yếm, nên DI_CHUYEN vẫn
+    `GIU_KY`.
+- Do đó tháng Sáu **Kỷ Tỵ là hard-ban**, không phải một Âm sai thường. Câu sau
+  còn ghi Kỷ Tỵ không theo chỗ Nên của `德合`; hard-ban đã triệt toàn bộ Nên,
+  nhưng provenance vẫn giữ chi tiết này.
 
 Những ngày được source nói “mọi việc đều Kị” phải là hard prohibition, không
 được phép được một Nên thông thường gỡ bỏ.
@@ -440,6 +452,8 @@ Tối thiểu implementation PR phải có:
 | Nguyệt Yếm tháng Giêng ngày Giáp Dần (Dương sai)      | theo Kị Kiến -> bỏ Kị DI_CHUYEN           |
 | Nguyệt Yếm tháng Tư ngày Kỷ Tỵ (Tiểu hội)             | mọi việc Kị                               |
 | Nguyệt Yếm tháng Sáu ngày Kỷ Mùi (Dương sai)          | bỏ Kị, không nhận Nên Đức Hợp ở nhánh này |
+| Tuế bạc tháng Tỵ ngày Bính Ngọ                        | thêm Kị; bỏ Nên Đức + Nguyện              |
+| Trục trận tháng Mùi ngày Mậu Ngọ                      | thêm Kị; bỏ Nên Đức + Nguyện              |
 | Đại Thời tháng Dần                                    | bỏ Kị                                     |
 | Đại Thời tháng Mão                                    | delegate Nguyệt Hình                      |
 | Thiên Lại tháng Dần + Đức/Hợp                         | bỏ Kị                                     |
@@ -500,6 +514,6 @@ Resolver:
 - [x] delegation graph defined
 - [x] DI_CHUYEN regression vectors defined
 - [x] representation requirements defined
-- [ ] generic Q10 resolver IMPLEMENTED
-- [ ] regression vectors ORACLE_TESTED
-- [ ] DI_CHUYEN end-to-end ORACLE_TESTED
+- [x] generic Q10 resolver IMPLEMENTED
+- [x] regression vectors ORACLE_TESTED
+- [x] DI_CHUYEN end-to-end ORACLE_TESTED

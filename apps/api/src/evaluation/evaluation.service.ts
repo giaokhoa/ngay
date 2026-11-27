@@ -15,11 +15,7 @@ import {
   QuyTacXungDotCuoiHoi,
   taoNguonXungDotQuyen10,
 } from './cuoi-hoi-conflict-rules';
-import {
-  MA_XUNG_DOT_QUY_KY,
-  MO_TA_XUNG_DOT_QUY_KY,
-  NGUON_XUNG_DOT_QUY_KY,
-} from './di-chuyen-conflict-rules';
+import { QUY_TAC_Q10_DI_CHUYEN } from './di-chuyen-conflict-rules';
 import {
   BoiCanhDanhGiaNgay,
   DauVetXungDot,
@@ -27,6 +23,7 @@ import {
   KetQuaDanhGia,
   TrangThaiDongGop,
 } from './evaluation-domain';
+import { apDungResolverQ10 } from './q10-rule-resolver';
 
 const DUC_HOP = [
   MaYeuTo.THIEN_DUC,
@@ -255,38 +252,19 @@ function xacDinhCongViec(quyTacDungSu: readonly QuyTacDungSu[]): LoaiCongViec {
   return congViec;
 }
 
-function danhGiaDiChuyen(
-  dongGop: readonly DongGopDanhGia[],
-  boiCanh: BoiCanhDanhGiaNgay,
-): KetQuaDanhGia {
-  const coYeuTo = (ma: MaYeuTo): boolean => boiCanh.yeuTo.some((yeuTo) => yeuTo.ma === ma);
-  const coQuyKy = coYeuTo(MaYeuTo.QUY_KY);
-  const coCatThanDuocBanVietNeu = [
-    MaYeuTo.THIEN_DUC,
-    MaYeuTo.NGUYET_DUC,
-    MaYeuTo.THIEN_XA,
-    MaYeuTo.THIEN_NGUYEN,
-  ].some(coYeuTo);
-
-  const xungDotDaApDung: DauVetXungDot[] =
-    coQuyKy && coCatThanDuocBanVietNeu
-      ? [
-          {
-            ma: MA_XUNG_DOT_QUY_KY,
-            moTa: MO_TA_XUNG_DOT_QUY_KY,
-            nguon: NGUON_XUNG_DOT_QUY_KY,
-          },
-        ]
-      : [];
-
+function danhGiaDiChuyen(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
+  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_DI_CHUYEN);
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
-    coKy: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
-    camMoiViec: false,
+    coKy:
+      resolved.camMoiViec ||
+      resolved.coKyBoSung ||
+      hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
+    camMoiViec: resolved.camMoiViec,
     dongGop,
-    xungDotDaApDung,
+    xungDotDaApDung: resolved.xungDotDaApDung,
   };
 }
 
