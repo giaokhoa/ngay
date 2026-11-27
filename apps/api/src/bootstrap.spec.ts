@@ -29,7 +29,9 @@ describe('production HTTP bootstrap', () => {
 
     const baseUrl = await ungDung.getUrl();
     const [live, ready] = await Promise.all([
-      fetch(baseUrl + '/health/live'),
+      fetch(baseUrl + '/health/live', {
+        headers: { 'x-request-id': 'bootstrap-test-request' },
+      }),
       fetch(baseUrl + '/health/ready'),
     ]);
 
@@ -42,6 +44,17 @@ describe('production HTTP bootstrap', () => {
     expect(live.headers.get('x-content-type-options')).toBe('nosniff');
     expect(live.headers.get('x-frame-options')).toBeTruthy();
     expect(live.headers.get('content-security-policy')).toBeTruthy();
+    expect(live.headers.get('x-request-id')).toBe('bootstrap-test-request');
+
+    const metrics = await fetch(baseUrl + '/metrics');
+    const metricsText = await metrics.text();
+
+    expect(metrics.status).toBe(200);
+    expect(metrics.headers.get('content-type')).toContain('text/plain');
+    expect(metricsText).toContain('ngay_http_requests_total');
+    expect(metricsText).toContain('route="/health/live"');
+    expect(metricsText).toContain('status="2xx"');
+    expect(metricsText).toContain('ngay_process_uptime_seconds');
   });
 
   it('keeps knowledge catalog optional when DATABASE_URL is absent', async () => {
@@ -51,7 +64,7 @@ describe('production HTTP bootstrap', () => {
 
     const baseUrl = await ungDung.getUrl();
     const [status, stats] = await Promise.all([
-      fetch(baseUrl + '/knowledge/status'),
+      fetch(baseUrl + '/knowledge/status?noise=khong-duoc-vao-metric'),
       fetch(baseUrl + '/knowledge/stats'),
     ]);
 
@@ -62,5 +75,9 @@ describe('production HTTP bootstrap', () => {
       evaluationUsesDatabase: false,
     });
     expect(stats.status).toBe(503);
+
+    const metrics = await (await fetch(baseUrl + '/metrics')).text();
+    expect(metrics).toContain('route="/knowledge/status"');
+    expect(metrics).not.toContain('khong-duoc-vao-metric');
   });
 });

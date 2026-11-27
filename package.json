@@ -15,7 +15,9 @@
     "build": "pnpm -r --if-present build",
     "ci": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "pg:up": "docker compose -f compose.postgres.yml up -d",
-    "pg:down": "docker compose -f compose.postgres.yml down"
+    "pg:down": "docker compose -f compose.postgres.yml down",
+    "prod:up": "docker compose -f compose.production.yml up -d --build",
+    "prod:down": "docker compose -f compose.production.yml down"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

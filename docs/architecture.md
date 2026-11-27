@@ -90,6 +90,20 @@ Không được:
 
 Chi tiết: `docs/decisions/0010-postgres-knowledge-catalog.md`.
 
+### observability
+
+Cross-cutting HTTP concern:
+
+- correlation ID;
+- structured access logs;
+- health/readiness;
+- Prometheus-compatible metrics.
+
+Metric labels phải low-cardinality; không đưa raw query string, ngày người dùng chọn hoặc
+giá trị nghiệp vụ tự do vào label.
+
+Observability không được đổi kết quả evaluation.
+
 ## Frontend
 
 React Router chịu trách nhiệm:
