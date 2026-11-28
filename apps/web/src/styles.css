@@ -1216,13 +1216,44 @@ button.o-ngay.dang-chon {
     flex-direction: column;
   }
 
-  .luoi-cong-viec,
+  .luoi-cong-viec {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
   .cach-hoat-dong {
     grid-template-columns: 1fr;
   }
 
   .the-cong-viec {
-    min-height: 210px;
+    min-height: 152px;
+    border-radius: 16px;
+    padding: 15px;
+  }
+
+  .ky-hieu-cong-viec {
+    top: 8px;
+    right: 10px;
+    font-size: 54px;
+  }
+
+  .nhan-han {
+    font-size: 11px;
+  }
+
+  .the-cong-viec h3 {
+    margin: 28px 0 6px;
+    font-size: 20px;
+  }
+
+  .the-cong-viec p {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .mo-cong-viec {
+    margin-top: 12px;
+    font-size: 11px;
   }
 }
 
