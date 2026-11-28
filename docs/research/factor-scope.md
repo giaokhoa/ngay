@@ -204,7 +204,7 @@ PDF 571 / trang in 564 có:
 - Tuần trung Không vong;
 - Triệt lộ Không vong.
 
-Một phần đáng dùng về sau nhưng chứa logic giờ và hệ quý nhân. Không đưa vào Phase 2 core trước khi date-level engine chạy.
+Date-level engine hiện đã chạy và Quyển 7 đã được inventory đủ 13/13 đầu mục. Safe subset đã production gồm Hoàng/Hắc đạo, Thiên Quan, Phúc Tinh, Hỷ Thần, Bát Lộc, Nhật Kiến/Phá/Hợp/Hại/Hình, Ngũ Bất Ngộ và hai marker Không vong. Thiên Ất, Tứ Đại Cát Thời, Quý Đăng Thiên Môn và Cửu Xú giữ `COMPARED` nhưng chưa production vì cần location/sunrise-sunset, Nguyệt tướng tại instant hoặc mô hình 24 vị trí/khắc giờ. Chi tiết: `docs/research/q7-day-hour-auxiliary.md`.
 
 ## Quyển 8 — Spatial/directional and advanced annual factors
 

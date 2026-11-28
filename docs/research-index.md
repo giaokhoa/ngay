@@ -62,6 +62,26 @@ Chi tiết: `docs/research/virtue-special-day-factors.md`.
 
 Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
 
+## Day/hour — Quyển 7
+
+| Chủ đề                     | Trạng thái    | Product     | Nguồn / blocker                                |
+| -------------------------- | ------------- | ----------- | ---------------------------------------------- |
+| Hoàng/Hắc đạo ngày + giờ   | ORACLE_TESTED | IMPLEMENTED | T1 Q7 + Hán Q7/Q31                             |
+| Thiên Ất Quý Nhân          | COMPARED      | BLOCKED     | cần location + sunrise/sunset thực tế          |
+| Thiên Quan Quý Nhân        | ORACLE_TESTED | IMPLEMENTED | Q7/Q31                                         |
+| Phúc Tinh Quý Nhân         | ORACLE_TESTED | IMPLEMENTED | Q7/Q31                                         |
+| Hỷ Thần                    | ORACLE_TESTED | IMPLEMENTED | Q7/Q31; không thắng Nhật Phá                   |
+| Bát Lộc                    | ORACLE_TESTED | IMPLEMENTED | Q7/Q31                                         |
+| Nhật Kiến/Phá/Hợp/Hại/Hình | ORACLE_TESTED | IMPLEMENTED | Q7/Q31                                         |
+| Tứ Đại Cát Thời            | COMPARED      | BLOCKED     | cần model 24 vị trí/khắc giờ                   |
+| Quý Đăng Thiên Môn         | COMPARED      | BLOCKED     | cần Nguyệt tướng + sunrise/sunset + time model |
+| Ngũ Bất Ngộ                | ORACLE_TESTED | IMPLEMENTED | mapping Q7/Q31; regression #108                |
+| Cửu Xú                     | COMPARED      | BLOCKED     | cần Nguyệt tướng tại instant giờ               |
+| Tuần trung Không vong      | ORACLE_TESTED | INFO_MARKER | không blanket veto                             |
+| Triệt lộ Không vong        | ORACLE_TESTED | INFO_MARKER | không blanket veto                             |
+
+**Inventory Quyển 7: 13/13 đầu mục.** Production vẫn là safe subset, không claim full-volume oracle. Chi tiết: `docs/research/q7-day-hour-auxiliary.md`.
+
 ## Factors — Activity dependencies
 
 | Chủ đề     | Module  | Nguồn chính          | Trạng thái    | Implementation              | Oracle test           | Ghi chú                                       |
@@ -89,7 +109,7 @@ Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scop
 | ------------------------------ | ---------------------------------- | ------------------------- | --------------------------------------------- |
 | Q4 / 月表 calendar positions   | KR3g0051 WYG Q4 + Q20..31          | HAN_ORACLE_TESTED         | han-q4-month-table-oracle.spec.ts             |
 | Q5 factors đang implement      | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED         | han-q5-oracle.spec.ts                         |
-| Q7 12 thần + giờ bổ trợ        | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
+| Q7 13/13 mục đã inventory      | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
 | Q6 core factors đang implement | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED         | han-q6-oracle.spec.ts                         |
 | Q10 semantics của 7 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
 | Q11 exact 宜/忌 của 7 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |

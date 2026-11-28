@@ -12,7 +12,13 @@
 - `WYG_007-11b..12a`: tên Bảo Quang được dùng thay cho Thiên Đức Hoàng đạo để tránh trùng với Thiên Đức khác.
 - `WYG_007-19b..20b`: 天官貴人 (theo nhật Can), 福星貴人 (theo nhật Can sinh thời Can).
 - `WYG_007-21b..22b`: 喜神 theo ngày Can, nhưng **không thắng được Nhật Phá**, được chính sách lấy Giáp/Kỷ ngày Dần giờ gặp Thân ngày làm phản ví dụ.
+- `WYG_007-13b..18a`: 天乙貴人 phân Dương quý/Âm quý; ranh ngày đêm phải theo mặt trời mọc/lặn thực tế.
 - `WYG_007-23b..24b`: 八祿 và 日建/日破/日合/日害/日刑. Kiến/Hợp thuận; Phá/Hình/Hại kị. Với việc đại sự, mới xét thêm xung với trụ năm/tháng.
+- `WYG_007-25b..26b`: 四大吉時 / 四煞沒時 dùng Nguyệt tướng và mô hình `八干四卦`, có độ phân giải dưới 12 thời thần.
+- `WYG_007-32b..36a`: 貴登天門 dùng Nguyệt tướng gia thời, Âm/Dương quý và phép ngày/đêm.
+- `WYG_007-37b..39a`: 五不遇 và điều kiện không over-flag khi chi giờ tương sinh với nhật Can/Chi.
+- `WYG_007-42b..44a`: 九醜; mười ngày danh nghĩa chưa đủ, phải có 大吉 thực sự lâm nhật chi theo Nguyệt tướng/giờ.
+- `WYG_007-45b..47b`: 旬中空亡 và 截路空亡, cùng phần biện giải không cho blanket-veto.
 - `KR3g0051_031.txt` (`WYG_031`): bảng ngày/giờ; Giáp Tý giờ Dần có Bạch Hổ đồng thời Lộc, Hỷ, Phúc Tinh, Mã — không được chấm điểm cộng cát thần để coi là giờ nên dùng.
 
 ## Đối chiếu bản Việt
@@ -22,18 +28,51 @@
 - p.568: sáu thần Hoàng đạo, sáu Hắc đạo và nhóm việc Hắc đạo kị khớp Hán `WYG_007-3b..4a`.
 - p.572: thứ tự 12 thần, sáu cặp chi khởi Thanh Long, tháng khởi ngày và ngày khởi giờ khớp `WYG_007-7b..9b`.
 - p.576–577: xác nhận dùng tên **Bảo Quang** để phân biệt Thiên Đức Hoàng đạo với Thiên Đức khác.
+- p.579–584: Thiên Ất Quý Nhân khớp Dương/Âm quý; phần kết luận chọn mặt trời xuất/nhập làm ranh ngày đêm, không dùng Mão/Dậu mặc định.
 - p.586–587: Thiên Quan Quý Nhân theo nhật Can khớp đủ các vị trí Hán `WYG_007-19b`.
 - p.588–589: Phúc Tinh Quý Nhân theo nhật Can khớp `WYG_007-20b`.
 - p.590–591: Hỷ Thần khớp năm cặp Can và chi giờ của `WYG_007-21b..22b`, đồng thời giữ ngoại lệ không thắng Nhật Phá.
 - p.592: Bát Lộc là Lộc vị của nhật Can, khớp `WYG_007-23b`.
 - p.593–594: Nhật Kiến/Hợp là cát, Nhật Phá/Hại/Hình là hung; việc lớn mới xét thêm năm/tháng, khớp `WYG_007-24b`.
+- p.595–598: Tứ Đại Cát Thời khớp phép Tứ Sát Một và mô hình vị trí/khắc giờ của Hán.
+- p.599–615: Quý Đăng Thiên Môn khớp Nguyệt tướng gia thời, Âm/Dương quý và phân ngày/đêm.
 - p.616–618: Ngũ Bất Ngộ không được suy thành mọi trường hợp “hành Can giờ khắc hành Can ngày”. Bảng khóa theo Can ngày: Giáp→Ngọ, Ất→Tỵ, Bính→Thìn, Đinh→Mão, Mậu→Dần, Kỷ→Sửu/Hợi, Canh→Tý/Tuất, Tân→Dậu, Nhâm→Thân, Quý→Mùi; phần Thích Ý còn nhấn mạnh phải xét chi giờ tương sinh với nhật Can/Chi trước khi kết luận.
+- p.619–622: Cửu Xú khớp danh sách mười ngày và điều kiện “chân Cửu Xú” phải có Đại Cát lâm nhật chi; không được chỉ nhìn day identity.
 - p.623–625: Tuần trung Không vong — Giáp Tý tuần khuyết Tuất/Hợi; Giáp Tuất khuyết Thân/Dậu; Giáp Thân khuyết Ngọ/Mùi; Giáp Ngọ khuyết Thìn/Tỵ; Giáp Thìn khuyết Dần/Mão; Giáp Dần khuyết Tý/Sửu. Sách nói Không vong không thể đồng loạt coi là hung.
 - p.626–627: Triệt lộ Không vong — Giáp/Kỷ→Thân/Dậu; Ất/Canh→Ngọ/Mùi; Bính/Tân→Thìn/Tỵ; Đinh/Nhâm→Dần/Mão; Mậu/Quý→Tý/Sửu/Tuất/Hợi. Phần Thích Ý không cho phép biến nó thành veto phổ quát.
 
 Hán `WYG_007-37b..39a` xác nhận Ngũ Bất Ngộ. `WYG_007-45b..46b` xác nhận 旬中空亡 và lời bác cách coi mọi Không vong là hung; `WYG_007-47b` xác nhận 截路空亡. Bảng 60 ngày `WYG_031` khớp các vị trí `旬空`/`路空` và mapping Ngũ Bất Ngộ.
 
 Không phát hiện discrepancy Việt/Hán trong scope Q7 đang implement.
+
+## Inventory đủ Quyển 7
+
+Quyển 7 có 13 đầu mục theo mục lục Hán. Tất cả 13 mục đã được locate và đối chiếu đủ để quyết định trạng thái product; **inventory đủ không đồng nghĩa production implement đủ cả quyển**.
+
+|   # | Mục                          | Research      | Product     | Lý do / blocker                                                                                                   |
+| --: | ---------------------------- | ------------- | ----------- | ----------------------------------------------------------------------------------------------------------------- |
+|   1 | Hoàng đạo - Hắc đạo          | ORACLE_TESTED | IMPLEMENTED | Ngày theo chi tháng, giờ theo chi ngày; 12 thần có Q31 oracle                                                     |
+|   2 | Thiên Ất Quý Nhân            | COMPARED      | BLOCKED     | Phải phân Âm/Dương quý theo ngày/đêm thực tế; sách chốt ranh bằng mặt trời mọc/lặn, cần location + solar-event    |
+|   3 | Thiên Quan Quý Nhân          | ORACLE_TESTED | IMPLEMENTED | Lookup theo nhật Can, Q31 cross-check                                                                             |
+|   4 | Phúc Tinh Quý Nhân           | ORACLE_TESTED | IMPLEMENTED | Lookup theo nhật Can và chi giờ, Q31 cross-check                                                                  |
+|   5 | Hỷ Thần                      | ORACLE_TESTED | IMPLEMENTED | Lookup theo nhật Can; không thắng Nhật Phá                                                                        |
+|   6 | Bát Lộc                      | ORACLE_TESTED | IMPLEMENTED | Lộc vị của nhật Can                                                                                               |
+|   7 | Nhật Kiến/Phá/Hợp/Hại/Hình   | ORACLE_TESTED | IMPLEMENTED | Quan hệ chi ngày ↔ chi giờ                                                                                        |
+|   8 | Tứ Đại Cát Thời / Tứ Sát Một | COMPARED      | BLOCKED     | Nguồn dùng 24 vị trí/`八干四卦` và các khắc trong giờ; model 12 thời thần hiện tại không đủ độ phân giải          |
+|   9 | Quý Đăng Thiên Môn           | COMPARED      | BLOCKED     | Cần Nguyệt tướng, Âm/Dương quý theo sunrise/sunset và phép gia thời; không được rút xuống lookup 12 giờ           |
+|  10 | Ngũ Bất Ngộ                  | ORACLE_TESTED | IMPLEMENTED | Mapping Q7/Q31; đã sửa heuristic over-flag ở #108                                                                 |
+|  11 | Cửu Xú                       | COMPARED      | BLOCKED     | “Chân Cửu Xú” cần Đại Cát lâm nhật chi theo Nguyệt tướng + giờ chính xác; biên tiết có thể đổi trong bucket 2 giờ |
+|  12 | Tuần trung Không vong        | ORACLE_TESTED | INFO_MARKER | Sách tự bác cách coi toàn bộ Không vong là hung                                                                   |
+|  13 | Triệt lộ Không vong          | ORACLE_TESTED | INFO_MARKER | Hiển thị tham khảo, không blanket veto                                                                            |
+
+### Blocker của bốn mục chưa production
+
+- **Thiên Ất Quý Nhân:** Hán `WYG_007-18a` chốt ngày/đêm bằng `日出入`; bản Việt p.584 cũng chọn mặt trời xuất/nhập thay vì mặc định Mão/Dậu. Chỉ timezone không đủ để tính sunrise/sunset.
+- **Tứ Đại Cát Thời:** Hán `WYG_007-25b..26b` dùng `八干四卦` và nói đến các khắc phía trên của thời; bản Việt p.595–598 trình bày cùng mô hình. API hiện trả 12 bucket Địa Chi, nên ép vào đó sẽ làm mất nghĩa nguồn.
+- **Quý Đăng Thiên Môn:** Hán `WYG_007-32b..36a` dùng Nguyệt tướng gia thời, Âm/Dương quý và mô hình thời chi tiết; bản Việt p.599–615 khớp. Cùng blocker location/sunrise-sunset với Thiên Ất.
+- **Cửu Xú:** Hán `WYG_007-42b..44a` bác cách chỉ nhìn mười ngày danh nghĩa; phải có Đại Cát thực sự lâm nhật chi. Ví dụ khi Nguyệt tướng là Tý, Mậu Tý chỉ giờ Sửu và Mậu Ngọ chỉ giờ Mùi mới là Cửu Xú. Cần Nguyệt tướng tại instant giờ để an toàn qua biên tiết.
+
+Bốn mục này được giữ ở `COMPARED`, không để một agent sau tự coi “công thức quen thuộc” là đủ VERIFIED.
 
 ## Product policy
 
@@ -51,6 +90,6 @@ Không phát hiện discrepancy Việt/Hán trong scope Q7 đang implement.
 - `hoang-hac-dao.spec.ts`: oracle `旬空`/`路空` trực tiếp với Giáp Tý, Giáp Thìn và Mậu Tý theo bảng Q31.
 - `date-selection.service.spec.ts`: cross-activity, same-month Hắc kị đúng năm nhóm, không ảnh hưởng `danhGia` gốc.
 
-## Không claim
+## Giới hạn claim
 
-Q7 mới được **oracle một phần**, không phải triển khai đầy đủ. Thiên Ất, Quý Đăng Thiên Môn, Tứ Đại Cát Thời, Kỳ Môn và các thế thần phức tạp vẫn nằm ngoài scope này.
+**Inventory Quyển 7 đã đủ 13/13 đầu mục.** Oracle/production coverage vẫn chỉ là một phần, không phải full-volume: Thiên Ất, Tứ Đại Cát Thời, Quý Đăng Thiên Môn và Cửu Xú được giữ ở `COMPARED` cho tới khi product có đúng input và time model mà nguồn đòi hỏi. Không có đầu mục Q7 nào còn ở trạng thái chưa locate/không rõ scope.
