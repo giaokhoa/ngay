@@ -49,6 +49,24 @@ describe('Hán source discrepancy registry', () => {
     ).toEqual([15, 16, 17]);
   });
 
+  it('registers Q7/Q32 Ngũ Bất Ngộ source tension and Q32 transcription defects', () => {
+    expect(laySaiKhacNguonHan('Q7_NGU_BAT_NGO_COMMENTARY_VS_Q32_TABLE')).toMatchObject({
+      loai: 'INTERNAL_SOURCE_TENSION',
+      quyen: 7,
+      muc: '五不遇',
+    });
+    expect(laySaiKhacNguonHan('Q32_KY_HOI_KANRIPO_JI_AS_SI')).toMatchObject({
+      loai: 'TRANSCRIPTION_GLYPH',
+      quyen: 32,
+      muc: '六十日時辰定局・己亥日',
+    });
+    expect(laySaiKhacNguonHan('Q32_NHAM_TY_KANRIPO_ROW_OMITTED')).toMatchObject({
+      loai: 'TRANSCRIPTION_OMISSION',
+      quyen: 32,
+      muc: '六十日時辰定局・壬子日',
+    });
+  });
+
   it('registers source/transcription corrections instead of silently normalizing them', () => {
     expect(new Set(SAI_KHAC_NGUON_HAN.map((item) => item.loai))).toEqual(
       new Set([
@@ -56,6 +74,8 @@ describe('Hán source discrepancy registry', () => {
         'VIET_TOC_TIEU_DE',
         'TRUYEN_BAN',
         'TRANSCRIPTION_GLYPH',
+        'TRANSCRIPTION_OMISSION',
+        'INTERNAL_SOURCE_TENSION',
         'SOURCE_CORRECTION',
       ]),
     );
