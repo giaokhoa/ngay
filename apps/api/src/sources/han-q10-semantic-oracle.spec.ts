@@ -10,6 +10,7 @@ import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
+import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
@@ -26,6 +27,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.AN_GIUONG]: QUY_TAC_AN_GIUONG,
   [LoaiCongViec.QUAN_DAI]: QUY_TAC_QUAN_DAI,
   [LoaiCongViec.NHAP_HOC]: QUY_TAC_NHAP_HOC,
+  [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
@@ -36,6 +38,9 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
 const ALL_ACTIVITIES = Object.values(LoaiCongViec);
 const ACTIVITIES_WITH_ORDINARY_Q10_KY = ALL_ACTIVITIES.filter(
   (activity) => activity !== LoaiCongViec.NHAP_HOC,
+);
+const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_ORDINARY_Q10_KY.filter(
+  (activity) => activity !== LoaiCongViec.YEN_HOI,
 );
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
@@ -63,7 +68,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
     },
   );
 
-  it.each(ACTIVITIES_WITH_ORDINARY_Q10_KY)(
+  it.each(ACTIVITIES_WITH_NGU_MO_KY)(
     '%s: 五墓 in month Ngọ + 月徳 removes Kị (WYG 010-60b..61a)',
     (activity) => {
       const result = danhGia(activity, {
@@ -94,6 +99,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.AN_GIUONG]: false,
       [LoaiCongViec.QUAN_DAI]: false,
       [LoaiCongViec.NHAP_HOC]: false,
+      [LoaiCongViec.YEN_HOI]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -123,6 +129,22 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('宴會: 五離 + 天徳 is released, but 酉日 remains an independent Q11 Kị', () => {
+    const than = danhGia(LoaiCongViec.YEN_HOI, {
+      chiNgay: DiaChi.THAN,
+      yeuTo: [MaYeuTo.NGU_LY, MaYeuTo.THIEN_DUC],
+    });
+    const dau = danhGia(LoaiCongViec.YEN_HOI, {
+      chiNgay: DiaChi.DAU,
+      yeuTo: [MaYeuTo.NGU_LY, MaYeuTo.THIEN_DUC],
+    });
+
+    expect(than.coKy).toBe(false);
+    expect(dau.coKy).toBe(true);
+    expectTrangThai(than.dongGop, MaYeuTo.NGU_LY, TrangThaiDongGop.BI_LOAI);
+    expectTrangThai(dau.dongGop, MaYeuTo.NGU_LY, TrangThaiDongGop.BI_LOAI);
+  });
 
   it('月厭 + 月徳 month Dần keeps 般移 Kị but releases 安牀 and 冠帶 (WYG 010-47b..48a)', () => {
     const diChuyen = danhGia(LoaiCongViec.DI_CHUYEN, {

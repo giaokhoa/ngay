@@ -10,6 +10,7 @@ import { QUY_TAC_KHAI_TRUONG } from './khai-truong-rules';
 import { QUY_TAC_NHAP_HOC } from './nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from './quan-dai-rules';
 import { QUY_TAC_XUAT_HANH } from './xuat-hanh-rules';
+import { QUY_TAC_YEN_HOI } from './yen-hoi-rules';
 
 @Injectable()
 export class DungSuService {
@@ -25,6 +26,8 @@ export class DungSuService {
         return QUY_TAC_QUAN_DAI;
       case LoaiCongViec.NHAP_HOC:
         return QUY_TAC_NHAP_HOC;
+      case LoaiCongViec.YEN_HOI:
+        return QUY_TAC_YEN_HOI;
       case LoaiCongViec.DONG_THO:
         return QUY_TAC_DONG_THO;
       case LoaiCongViec.SUA_CUNG_THAT:

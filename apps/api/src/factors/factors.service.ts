@@ -23,6 +23,7 @@ import {
 } from './fixed-seasonal-factor-definitions';
 import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
 import { DINH_NGHIA_MAU_THUONG } from './maternal-storehouse-definition';
+import { DINH_NGHIA_NGU_HOP, DINH_NGHIA_NGU_LY } from './q5-fixed-branch-factor-definitions';
 import {
   DINH_NGHIA_DAN_NHAT,
   DINH_NGHIA_QUY_KY,
@@ -148,6 +149,14 @@ export class TinhYeuToNgayService {
 
     if (DINH_NGHIA_TRONG_NHAT.chiNgay.includes(boiCanh.chiNgay)) {
       ketQua.push(DINH_NGHIA_TRONG_NHAT);
+    }
+
+    if (DINH_NGHIA_NGU_HOP.chiNgay.includes(boiCanh.chiNgay)) {
+      ketQua.push(DINH_NGHIA_NGU_HOP);
+    }
+
+    if (DINH_NGHIA_NGU_LY.chiNgay.includes(boiCanh.chiNgay)) {
+      ketQua.push(DINH_NGHIA_NGU_LY);
     }
 
     if (DINH_NGHIA_THIEN_DUC.canNgayTheoChiThang[boiCanh.chiThang] === boiCanh.canNgay) {

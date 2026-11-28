@@ -8,7 +8,7 @@ Khóa toàn bộ 30 section trong mục lục Quyển 5, tách rõ:
 
 - identity đã production + Hán oracle;
 - section chỉ production một phần;
-- mục đã hiểu nhưng không thuộc 7 exact Q11 vertical hiện tại;
+- mục đã hiểu nhưng không thuộc 11 exact Q11 vertical hiện tại;
 - mục cần context ngoài day-factor engine.
 
 Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quyết định activity vẫn theo Q11/Q10.
@@ -48,7 +48,7 @@ Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quy
 |  23 | Bảo–Nghĩa–Chế–Chuyên–Phạt Nhật / 寶義制專伐日                      | COMPARED              | OUT_OF_SCOPE        | Can-Chi ngũ hành classification; nhiều semantics quân sự, không current dependency              |
 |  24 | Bát Chuyên / 八專                                                  | ORACLE_TESTED         | IMPLEMENTED         | 5 ngày theo bản hiệu đính                                                                       |
 |  25 | Vô Lộc / 無禄                                                      | COMPARED              | BLOCKED_CONTEXT     | 10 ngày nhưng nguồn nói chỉ tránh tùy năm và bản mệnh, không phải universal day blocker         |
-|  26 | Trọng Nhật – Ngũ Hợp – Ngũ Ly〈Trừ Thần〉 / 重日 五合 五離〈除神〉 | ORACLE_TESTED_PARTIAL | PARTIAL_IMPLEMENTED | Trọng Nhật production; Ngũ Hợp/Ngũ Ly/Trừ Thần không current Q11 dependency                     |
+|  26 | Trọng Nhật – Ngũ Hợp – Ngũ Ly〈Trừ Thần〉 / 重日 五合 五離〈除神〉 | ORACLE_TESTED         | IMPLEMENTED         | Trọng Nhật + Ngũ Hợp + Ngũ Ly production; Trừ Thần là alias của Ngũ Ly                          |
 |  27 | Giải Thần / 解神                                                   | COMPARED              | OUT_OF_SCOPE        | monthly branch pair sequence; không current dependency                                          |
 |  28 | Phục Nhật / 復日                                                   | ORACLE_TESTED         | IMPLEMENTED         | monthly day stem                                                                                |
 |  29 | Minh Phệ / 鳴吠日                                                  | ORACLE_TESTED         | IMPLEMENTED         | production code `O_PHE`; final Lập thành 13 ngày                                                |
@@ -82,7 +82,7 @@ Hán liệt kê mười ngày `甲辰 乙巳 庚辰 辛巳 丙申 戊戌 丁亥 
 - Ngũ Hợp: Dần/Mão.
 - Ngũ Ly: Thân/Dậu; sách đồng thời gọi là Trừ Thần cho nghĩa trừ giải.
 
-Chỉ Trọng Nhật hiện cần trong current exact activity semantics.
+Trọng Nhật, Ngũ Hợp và Ngũ Ly hiện production; Yến hội tạo dependency trực tiếp lên Ngũ Hợp/Ngũ Ly.
 
 ### Minh Phệ và Minh Phệ Đối
 
@@ -92,7 +92,7 @@ Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùn
 
 - **24 identity Q5 production** có Hán oracle độc lập.
 - Section partial không được quảng bá thành full implementation chỉ vì một identity bên trong đã có code.
-- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 10 vertical không cần.
+- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 11 vertical không cần.
 - `Vô Lộc` giữ `BLOCKED_CONTEXT`, không dùng như blanket blocker.
 - Khi mở activity mới, dependency Q11 sẽ quyết định mục nào được kéo vào production.
 
