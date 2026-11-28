@@ -9,6 +9,7 @@ export enum LoaiCongViec {
   AN_GIUONG = 'AN_GIUONG',
   QUAN_DAI = 'QUAN_DAI',
   NHAP_HOC = 'NHAP_HOC',
+  YEN_HOI = 'YEN_HOI',
   DONG_THO = 'DONG_THO',
   SUA_CUNG_THAT = 'SUA_CUNG_THAT',
   KHAI_TRUONG = 'KHAI_TRUONG',

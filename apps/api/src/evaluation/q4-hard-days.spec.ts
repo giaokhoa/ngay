@@ -14,6 +14,7 @@ import { QUY_TAC_Q10_QUAN_DAI } from './quan-dai-conflict-rules';
 import { NGAY_CAM_MOI_VIEC_Q4 } from './q4-hard-days';
 import { QuyTacXungDotDataDriven } from './q10-rule-resolver';
 import { QUY_TAC_Q10_XUAT_HANH } from './xuat-hanh-conflict-rules';
+import { QUY_TAC_Q10_YEN_HOI } from './yen-hoi-conflict-rules';
 
 const HAN_Q4_Q10_HARD_DAY_KEYS = [
   'DAN:GIAP:TUAT:DAI_HOI_1',
@@ -77,6 +78,7 @@ describe('Q4/Q10 canonical hard days', () => {
     ['AN_GIUONG', QUY_TAC_Q10_AN_GIUONG],
     ['QUAN_DAI', QUY_TAC_Q10_QUAN_DAI],
     ['NHAP_HOC', QUY_TAC_Q10_NHAP_HOC],
+    ['YEN_HOI', QUY_TAC_Q10_YEN_HOI],
     ['DONG_THO/SUA_CUNG_THAT', QUY_TAC_Q10_CONG_VIEC_DAT],
     ['KHAI_TRUONG', QUY_TAC_Q10_KHAI_TRUONG],
     ['XUAT_HANH', QUY_TAC_Q10_XUAT_HANH],

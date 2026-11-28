@@ -17,6 +17,10 @@ import {
 } from '../factors/fixed-seasonal-factor-definitions';
 import { DINH_NGHIA_THIEN_DUC } from '../factors/heavenly-virtue-definition';
 import { DINH_NGHIA_MAU_THUONG } from '../factors/maternal-storehouse-definition';
+import {
+  DINH_NGHIA_NGU_HOP,
+  DINH_NGHIA_NGU_LY,
+} from '../factors/q5-fixed-branch-factor-definitions';
 import { DINH_NGHIA_YEU_TO_THEO_CAN_NGAY } from '../factors/monthly-stem-factor-definitions';
 import { DINH_NGHIA_DAN_NHAT, DINH_NGHIA_VUONG_NHAT } from '../factors/moving-factor-definitions';
 import {
@@ -232,6 +236,12 @@ describe('independent Hán Q5 oracle — WYG / Kanripo KR3g0051', () => {
       [Mua.THU]: TY,
       [Mua.DONG]: MAO,
     });
+  });
+
+  it('五合 / 五離 match Hán Q5 + Q9 fixed branch oracle', () => {
+    expect(DINH_NGHIA_NGU_HOP.chiNgay).toEqual([DAN, MAO]);
+    expect(DINH_NGHIA_NGU_LY.chiNgay).toEqual([THAN, DAU]);
+    expect(DINH_NGHIA_NGU_LY.tenKhac).toContain('Trừ Thần');
   });
 
   it('九空 matches 正月辰逆行四季', () => {
