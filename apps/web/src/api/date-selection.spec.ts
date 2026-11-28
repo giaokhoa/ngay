@@ -33,6 +33,7 @@ import {
   taoUrlXemNhanNapGiaSuc,
   taoUrlXemPhaVoDat,
   taoUrlXemAnTang,
+  taoUrlXemCaiTangKhaiToan,
   taoUrlXemCuoiHoi,
   taoUrlXemDiChuyen,
   taoUrlXemDongTho,
@@ -80,6 +81,7 @@ describe('date-selection URLs', () => {
     ['khai-truong', taoUrlXemKhaiTruong],
     ['xuat-hanh', taoUrlXemXuatHanh],
     ['an-tang', taoUrlXemAnTang],
+    ['cai-tang-khai-toan', taoUrlXemCaiTangKhaiToan],
   ] as const)('giữ instant ISO và timezone IANA cho %s', (duongDan, taoUrl) => {
     const url = taoUrl(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
 

@@ -76,6 +76,7 @@ export type KetQuaXemNgaySuaCungThat = KetQuaXemNgay;
 export type KetQuaXemNgayKhaiTruong = KetQuaXemNgay;
 export type KetQuaXemNgayXuatHanh = KetQuaXemNgay;
 export type KetQuaXemNgayAnTang = KetQuaXemNgay;
+export type KetQuaXemNgayCaiTangKhaiToan = KetQuaXemNgay;
 
 export interface NguoiLienQuanXemNgay {
   namSinh: number;
@@ -313,6 +314,10 @@ export class XemNgayService {
 
   xemAnTang(thoiDiem: Date, muiGio: string): KetQuaXemNgayAnTang {
     return this.xem(thoiDiem, muiGio, LoaiCongViec.AN_TANG);
+  }
+
+  xemCaiTangKhaiToan(thoiDiem: Date, muiGio: string): KetQuaXemNgayCaiTangKhaiToan {
+    return this.xem(thoiDiem, muiGio, LoaiCongViec.CAI_TANG_KHAI_TOAN);
   }
 
   xemChiTietNgayTheoNgaySinh(

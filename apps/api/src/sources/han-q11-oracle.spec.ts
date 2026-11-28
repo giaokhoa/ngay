@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { LoaiCongViec, QuyTacDungSu, TacDongDungSu } from '../activities/activity-rule';
 import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
+import { QUY_TAC_CAI_TANG_KHAI_TOAN } from '../activities/cai-tang-khai-toan-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CAU_Y_TRI_BENH } from '../activities/cau-y-tri-benh-rules';
@@ -989,6 +990,27 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'THO_VUONG',
     ],
   },
+  [LoaiCongViec.CAI_TANG_KHAI_TOAN]: {
+    tieuDeHan: '啓攢',
+    anchor: 'KR3g0051_WYG_011-26a',
+    nen: ['YEU_TO:O_PHE_DOI'],
+    ky: [
+      'YEU_TO:NGUYET_KIEN',
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:PHUC_NHAT',
+      'YEU_TO:TRONG_NHAT',
+    ],
+  },
   [LoaiCongViec.AN_TANG]: {
     tieuDeHan: '安葬',
     anchor: 'KR3g0051_WYG_011-25b..26a',
@@ -1058,6 +1080,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
   [LoaiCongViec.XUAT_HANH]: QUY_TAC_XUAT_HANH_Q11,
   [LoaiCongViec.PHA_VO_DAT]: QUY_TAC_PHA_VO_DAT,
+  [LoaiCongViec.CAI_TANG_KHAI_TOAN]: QUY_TAC_CAI_TANG_KHAI_TOAN,
   [LoaiCongViec.AN_TANG]: QUY_TAC_AN_TANG,
 };
 

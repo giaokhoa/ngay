@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 
 import { TrangAnGiuong } from './pages/an-giuong-page';
 import { TrangAnTang } from './pages/an-tang-page';
+import { TrangCaiTangKhaiToan } from './pages/cai-tang-khai-toan-page';
 import { TrangCauPhuc } from './pages/cau-phuc-page';
 import { TrangCauTu } from './pages/cau-tu-page';
 import { TrangChinhDungCatToc } from './pages/chinh-dung-cat-toc-page';
@@ -181,5 +182,9 @@ export const boDinhTuyen = createBrowserRouter([
   {
     path: DUONG_DAN.AN_TANG,
     Component: TrangAnTang,
+  },
+  {
+    path: DUONG_DAN.CAI_TANG_KHAI_TOAN,
+    Component: TrangCaiTangKhaiToan,
   },
 ]);

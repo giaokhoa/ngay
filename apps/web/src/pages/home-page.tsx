@@ -229,6 +229,12 @@ const CONG_VIEC: readonly {
     moTa: 'Cần ngày sinh người mất để cá nhân hóa đúng.',
     to: DUONG_DAN.AN_TANG,
   },
+  {
+    ma: 'CAI_TANG_KHAI_TOAN',
+    ten: 'Cải táng (Khai toản)',
+    moTa: 'Nên Ô Phệ Đối; xét riêng Phục/Trọng, Ngũ Mộ, Nguyệt Kiến và các nhánh Q10 tang sự.',
+    to: DUONG_DAN.CAI_TANG_KHAI_TOAN,
+  },
 ];
 
 const NHAN_YEU_TO: Readonly<Record<string, string>> = {

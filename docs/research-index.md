@@ -174,6 +174,7 @@ Chi tiết: `docs/research/q8-full-inventory.md`.
 | KHAI_TRUONG / 開市                   | activities | T1 Q11 p857 + Hán Q11           | ORACLE_TESTED | khai-truong-rules.ts + full Q10                           | khai-truong-rules.spec.ts / khai-truong-conflict.spec.ts                           | docs/research/activity-khai-truong.md                                                                        |
 | XUAT_HANH / 行幸遣使〈出行同〉       | activities | T1 Q11 p849 + Q10 + Hán Q11/Q10 | ORACLE_TESTED | xuat-hanh-rules.ts + derived Q10 resolver                 | xuat-hanh-rules.spec.ts / xuat-hanh-conflict.spec.ts                               | Q11 Việt thiếu 月厭; bổ sung blocker từ Q10; docs/research/activity-xuat-hanh.md                             |
 | AN_TANG / 安葬                       | activities | T1 Q11 p862 + Q5/Q10 + Hán      | ORACLE_TESTED | an-tang-rules.ts + full Q10 resolver                      | an-tang-rules.spec.ts / an-tang-conflict.spec.ts                                   | Ô Phệ final 13 ngày; Phục/Trọng source-lock; docs/research/activity-an-tang.md                               |
+| CAI_TANG_KHAI_TOAN / 啓攢            | activities | T1 Q11 p862 + Hán Q5/Q10/Q11    | ORACLE_TESTED | cai-tang-khai-toan-rules.ts + An táng-derived Q10         | cai-tang-khai-toan-rules.spec.ts / cai-tang-khai-toan-conflict.spec.ts             | 1 Nên / 14 Kị; 鳴吠對; Phục/Trọng 亦不註宜; docs/research/activity-cai-tang-khai-toan.md                     |
 
 ## Reference tables — Lập thành Q9
 
@@ -200,8 +201,8 @@ Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inven
 
 |      Quyển | Structural inventory                    | Product/oracle                                                                                            |
 | ---------: | --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 10 Nghi kị | 51/51 mục Việt = 99/99 Hán TOC headings | exact semantic oracle cho 35 current vertical; remaining groups explicit source-only/blocked/out-of-scope |
-| 11 Dụng sự | 73/73 canonical activity sections       | 35 ORACLE_TESTED; 38 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
+| 10 Nghi kị | 51/51 mục Việt = 99/99 Hán TOC headings | exact semantic oracle cho 36 current vertical; remaining groups explicit source-only/blocked/out-of-scope |
+| 11 Dụng sự | 73/73 canonical activity sections       | 36 ORACLE_TESTED; 37 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
 
 Chi tiết: `docs/research/q10-full-inventory.md`, `docs/research/q11-full-inventory.md`.
 
@@ -231,8 +232,8 @@ Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scop
 | Q5 30/30 section inventory      | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED_PARTIAL | han-q5-oracle.spec.ts                         |
 | Q7 13/13 mục đã inventory       | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
 | Q6 40/40 mục đã inventory       | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED_PARTIAL | han-q6-oracle.spec.ts                         |
-| Q10 semantics của 35 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
-| Q11 exact 宜/忌 của 35 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
+| Q10 semantics của 36 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
+| Q11 exact 宜/忌 của 36 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
 | 36-volume corpus inventory      | KR3g0051 + Wikisource Q14 fallback | INVENTORIED               | han-source-manifest.spec.ts                   |
 
 Full-volume status: **0/36**.
