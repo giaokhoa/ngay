@@ -204,6 +204,46 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
   });
 });
 
+describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
+  it('Hắc đạo is an additional blocker only for the five activities named by Hán source', () => {
+    const service = taoService();
+    const result = service.xemTongQuanThang('1990-06-15', 2026, 11, 'Asia/Ho_Chi_Minh');
+    const hac = result.ngay.find((ngay) => ngay.thanHoangHac.loai === 'HAC_DAO');
+    const hoang = result.ngay.find((ngay) => ngay.thanHoangHac.loai === 'HOANG_DAO');
+
+    expect(hac).toBeDefined();
+    expect(hoang).toBeDefined();
+
+    for (const activity of [
+      LoaiCongViec.CUOI_HOI,
+      LoaiCongViec.DI_CHUYEN,
+      LoaiCongViec.DONG_THO,
+      LoaiCongViec.SUA_CUNG_THAT,
+      LoaiCongViec.XUAT_HANH,
+    ]) {
+      expect(hac?.theoCongViec[activity].coKy).toBe(true);
+      expect(hac?.theoCongViec[activity].ky).toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);
+      expect(hoang?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hoang?.thanHoangHac.ten);
+    }
+
+    for (const activity of [LoaiCongViec.KHAI_TRUONG, LoaiCongViec.AN_TANG]) {
+      expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);
+    }
+  });
+
+  it('never changes the activity rule verdict when a Q7 marker is added', () => {
+    const service = taoService();
+    const detail = service.xemCuoiHoi(new Date('2026-11-01T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    expect(detail.thanHoangHac.loai).toBe('HAC_DAO');
+    expect(detail.hacDaoKyCongViec).toBe(true);
+
+    // The Q10/Q11 evaluator stays independently auditable.
+    expect(detail.danhGia.dongGop.length).toBe(
+      detail.giaiThich.nen.length + detail.giaiThich.ky.length + detail.giaiThich.biLoai.length,
+    );
+  });
+});
+
 describe('XemNgayService xem tháng + tương chủ', () => {
   it('trả đủ ngày trong tháng và xếp loại không dùng điểm cộng trừ', () => {
     const result = taoService().xemThang(2026, 11, 'Asia/Ho_Chi_Minh', LoaiCongViec.AN_TANG, [

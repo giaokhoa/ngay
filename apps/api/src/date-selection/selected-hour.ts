@@ -3,12 +3,21 @@ import { THIEN_CAN_THEO_THU_TU, ThienCan } from '../calendar/domain/heavenly-ste
 import { CanChi } from '../calendar/domain/sexagenary-cycle';
 import type { NguoiLienQuanXemNgay } from './date-selection.service';
 import { KetQuaXetNamSinh, TruThoiDiem, xetNamSinhVoiTru } from './personal-year';
+import {
+  NHAN_DAU_THAN_GIO,
+  MaDauThanGio,
+  ThanHoangHac,
+  tinhDauThanGio,
+  tinhThanGio,
+} from './hoang-hac-dao';
 
 export type XepLoaiGio = 'NEN_DUNG' | 'TRUNG_BINH' | 'NEN_TRANH' | 'XUNG_TUOI';
 
 export interface GioDuocChon {
   chiGio: DiaChi;
   canChiGio: CanChi;
+  thanHoangHac: ThanHoangHac;
+  dauThanGio: readonly MaDauThanGio[];
   khoangGio: string;
   xepLoai: XepLoaiGio;
   lyDoTot: readonly string[];
@@ -47,6 +56,21 @@ const CHI_XUNG: Readonly<Record<DiaChi, DiaChi>> = {
   [DiaChi.TUAT]: DiaChi.THIN,
   [DiaChi.TI]: DiaChi.HOI,
   [DiaChi.HOI]: DiaChi.TI,
+};
+
+const CHI_HAI: Readonly<Record<DiaChi, DiaChi>> = {
+  [DiaChi.TY]: DiaChi.MUI,
+  [DiaChi.MUI]: DiaChi.TY,
+  [DiaChi.SUU]: DiaChi.NGO,
+  [DiaChi.NGO]: DiaChi.SUU,
+  [DiaChi.DAN]: DiaChi.TI,
+  [DiaChi.TI]: DiaChi.DAN,
+  [DiaChi.MAO]: DiaChi.THIN,
+  [DiaChi.THIN]: DiaChi.MAO,
+  [DiaChi.THAN]: DiaChi.HOI,
+  [DiaChi.HOI]: DiaChi.THAN,
+  [DiaChi.DAU]: DiaChi.TUAT,
+  [DiaChi.TUAT]: DiaChi.DAU,
 };
 
 const CHI_HINH: Readonly<Record<DiaChi, DiaChi>> = {
@@ -179,8 +203,19 @@ export function xetCacGioTrongNgay(input: {
 }): readonly GioDuocChon[] {
   return DIA_CHI_THEO_THU_TU.map((chiGio) => {
     const canChiGio = tinhCanChiGio(input.canChiNgay.can, chiGio);
+    const thanHoangHac = tinhThanGio(input.canChiNgay.chi, chiGio);
+    const dauThanGio = tinhDauThanGio(input.canChiNgay.can, chiGio);
     const lyDoTot: string[] = [];
     const lyDoTranh: string[] = [];
+
+    if (thanHoangHac.loai === 'HOANG_DAO') {
+      lyDoTot.push('Giờ Hoàng đạo: ' + thanHoangHac.ten);
+    } else {
+      lyDoTranh.push('Giờ Hắc đạo: ' + thanHoangHac.ten);
+    }
+    for (const marker of dauThanGio) {
+      lyDoTot.push(NHAN_DAU_THAN_GIO[marker]);
+    }
 
     if (chiGio === input.canChiNgay.chi) lyDoTot.push('Giờ đồng Chi với ngày');
     if (CHI_LUC_HOP[input.canChiNgay.chi] === chiGio) lyDoTot.push('Giờ lục hợp với ngày');
@@ -199,6 +234,9 @@ export function xetCacGioTrongNgay(input: {
     }
     if (CHI_HINH[input.canChiNgay.chi] === chiGio) {
       lyDoTranh.push('Giờ hình ngày');
+    }
+    if (CHI_HAI[input.canChiNgay.chi] === chiGio) {
+      lyDoTranh.push('Giờ hại ngày');
     }
     if (canKhac(canChiGio.can, input.canChiNgay.can)) {
       lyDoTranh.push('Ngũ Bất Ngộ: Can giờ khắc Can ngày');
@@ -240,6 +278,8 @@ export function xetCacGioTrongNgay(input: {
     return {
       chiGio,
       canChiGio,
+      thanHoangHac,
+      dauThanGio,
       khoangGio: KHOANG_GIO[chiGio],
       xepLoai,
       lyDoTot,

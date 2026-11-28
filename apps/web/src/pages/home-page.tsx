@@ -334,6 +334,10 @@ function LichTongQuan({
                 {nhanCan(ngay.canChiNgay.can)} {nhanDiaChi(ngay.canChiNgay.chi)}
               </strong>
               <small>Trực {nhanTruc(ngay.truc)}</small>
+              <small className={'than-hoang-hac than-' + ngay.thanHoangHac.loai.toLowerCase()}>
+                {ngay.thanHoangHac.loai === 'HOANG_DAO' ? 'Hoàng đạo' : 'Hắc đạo'} ·{' '}
+                {ngay.thanHoangHac.ten}
+              </small>
 
               {danhGia ? (
                 <span className={'nhan-xep-loai nhan-' + danhGia.xepLoai.toLowerCase()}>
@@ -382,7 +386,9 @@ function ChiTietTongQuanNgay({
           <h2>{dinhDangNgayViet(ngay.ngayDanSu)}</h2>
           <p>
             {nhanCan(ngay.canChiNgay.can)} {nhanDiaChi(ngay.canChiNgay.chi)} · Trực{' '}
-            {nhanTruc(ngay.truc)}
+            {nhanTruc(ngay.truc)} ·{' '}
+            {ngay.thanHoangHac.loai === 'HOANG_DAO' ? 'Hoàng đạo' : 'Hắc đạo'}{' '}
+            {ngay.thanHoangHac.ten}
           </p>
         </div>
         {ngay.xungTuoi.length > 0 ? (

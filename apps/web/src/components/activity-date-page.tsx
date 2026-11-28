@@ -347,6 +347,9 @@ function NgayCard({
         {nhanCan(ngay.canChiNgay.can)} {nhanDiaChi(ngay.canChiNgay.chi)}
       </span>
       <span className="truc-ngay">Trực {nhanTruc(ngay.truc)}</span>
+      <small className={'than-hoang-hac than-' + ngay.thanHoangHac.loai.toLowerCase()}>
+        {ngay.thanHoangHac.loai === 'HOANG_DAO' ? 'Hoàng đạo' : 'Hắc đạo'} · {ngay.thanHoangHac.ten}
+      </small>
       <strong className="nhan-xep-loai">{nhanXepLoai(ngay.xepLoai)}</strong>
       {ngay.xungTuoi.length > 0 ? (
         <small className="ly-do-tuoi">
@@ -401,6 +404,10 @@ function BangGio({
             <p className="can-chi-gio">
               {nhanCan(item.canChiGio.can)} {nhanDiaChi(item.canChiGio.chi)}
             </p>
+            <small className={'than-hoang-hac than-' + item.thanHoangHac.loai.toLowerCase()}>
+              {item.thanHoangHac.loai === 'HOANG_DAO' ? 'Hoàng đạo' : 'Hắc đạo'} ·{' '}
+              {item.thanHoangHac.ten}
+            </small>
             <span className="nhan-gio">{nhanXepLoaiGio(item.xepLoai)}</span>
             {item.lyDoTot.length > 0 ? (
               <ul className="ly-do-gio ly-do-tot">
@@ -448,10 +455,21 @@ function KetQuaXemNgay({ ketQua }: { ketQua: KetQuaXemNgayApi }) {
         <div className="thong-so">
           <span>Tháng tiết khí: {nhanDiaChi(ketQua.chiThang)}</span>
           <span>Trực: {nhanTruc(ketQua.truc)}</span>
+          <span>
+            {ketQua.thanHoangHac.loai === 'HOANG_DAO' ? 'Hoàng đạo' : 'Hắc đạo'}:{' '}
+            {ketQua.thanHoangHac.ten}
+          </span>
           {ketQua.dangThoVuong ? <span className="nhan-trang-thai">Đang Thổ Vượng</span> : null}
           {ketQua.danhGia.camMoiViec ? <strong>Đối chiếu nghi kị: mọi việc đều kị</strong> : null}
         </div>
       </div>
+
+      <p className="chu-thich-than-ngay">
+        Hoàng/Hắc đạo là một lớp xét bổ sung, không thay thế các điều nên, kị theo công việc.
+        {ketQua.hacDaoKyCongViec
+          ? ' Hắc đạo của ngày này thuộc nhóm kị đối với việc đang xem.'
+          : ''}
+      </p>
 
       <div className="hai-cot">
         <NhomDongGop tieuDe="Nên" items={nen} rong="Không có điều nên đang hiệu lực." />
