@@ -49,7 +49,7 @@ Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quy
 |  24 | Bát Chuyên / 八專                                                  | ORACLE_TESTED         | IMPLEMENTED         | 5 ngày theo bản hiệu đính                                                                       |
 |  25 | Vô Lộc / 無禄                                                      | ORACLE_TESTED         | IMPLEMENTED_CONTEXT | 10 candidate + Q10 relief theo Đức/năm/tháng/trung khí; không blanket-block                     |
 |  26 | Trọng Nhật – Ngũ Hợp – Ngũ Ly〈Trừ Thần〉 / 重日 五合 五離〈除神〉 | ORACLE_TESTED         | IMPLEMENTED         | Trọng Nhật + Ngũ Hợp + Ngũ Ly production; Trừ Thần là alias của Ngũ Ly                          |
-|  27 | Giải Thần / 解神                                                   | COMPARED              | OUT_OF_SCOPE        | monthly branch pair sequence; không current dependency                                          |
+|  27 | Giải Thần / 解神                                                   | ORACLE_TESTED         | IMPLEMENTED         | Việt p462–463 + Hán `WYG_005-59b..60a`; Giải trừ prerequisite                                   |
 |  28 | Phục Nhật / 復日                                                   | ORACLE_TESTED         | IMPLEMENTED         | monthly day stem                                                                                |
 |  29 | Minh Phệ / 鳴吠日                                                  | ORACLE_TESTED         | IMPLEMENTED         | production code `O_PHE`; final Lập thành 13 ngày                                                |
 |  30 | Minh Phệ Đối / 鳴吠對日                                            | COMPARED              | OUT_OF_SCOPE        | identity riêng; current AN_TANG exact Q11 chỉ dùng 鳴吠, không tự nhập chung                    |
@@ -90,10 +90,11 @@ Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùn
 
 ## Product policy
 
-- **25 identity Q5 production** có Hán oracle độc lập.
+- **26 identity Q5 production** có Hán oracle độc lập.
 - Section partial không được quảng bá thành full implementation chỉ vì một identity bên trong đã có code.
 - OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 15 vertical không cần.
 - `Vô Lộc` đã production bằng context năm/tháng/trung khí; vẫn tuyệt đối không dùng như blanket blocker.
+- Giải Thần production theo cặp tháng `Thân/Thân, Tuất/Tuất, Tý/Tý, Dần/Dần, Thìn/Thìn, Ngọ/Ngọ`; dependency trực tiếp của Giải trừ.
 - Khi mở activity mới, dependency Q11 sẽ quyết định mục nào được kéo vào production.
 
 ## Kết luận

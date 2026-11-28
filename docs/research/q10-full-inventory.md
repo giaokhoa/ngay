@@ -37,7 +37,7 @@ Q10 cung cấp **semantic conflict/exception layer**: một thần cát/hung có
 |  13 | 天倉・不將・要安・敬安                 | PARTIAL_IMPLEMENTED            | 天倉 + 不將 production; 要安/敬安 source-only                                                     |
 |  14 | 玉宇・金堂                             | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current production dependency                                                         |
 |  15 | 普護・福生・聖心・益後・續世           | IMPLEMENTED_FOUNDATION         | all five factor identities production; Q10 activity semantics remain source-resolved per vertical |
-|  16 | 解神・除神・五合                       | PARTIAL_IMPLEMENTED            | 五合 production; 除神 represented as alias of 五離/NGU_LY; 解神 remains source-only               |
+|  16 | 解神・除神・五合                       | IMPLEMENTED_FACTOR_SET         | 解神 production; 除神 alias of 五離/NGU_LY; 五合 production                                       |
 |  17 | 寶日・義日・制日                       | SOURCE_ONLY_CURRENT_PRODUCT    | located; no current production dependency                                                         |
 |  18 | 青龍・明堂・金匱・寶光・玉堂・司命     | ORACLE_TESTED_Q7               | six Hoàng đạo spirits implemented as supplementary Q7 layer                                       |
 |  19 | 鳴吠・鳴吠對・亥子日                   | PARTIAL_IMPLEMENTED            | 鳴吠/鳴吠對 production; 亥子日 not standalone current identity                                    |

@@ -71,7 +71,7 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |     2 | 本原二      | CHUA_IMPLEMENT  | 12/12 section inventory; 24 sơn/ngũ hành địa lý/biến quẻ, thiếu spatial domain                                  |
 |     3 | 義例一      | CHUA_IMPLEMENT  | 36/36 mục đã inventory; annual spatial layer, current contract thiếu hướng/tọa-hướng                            |
 |     4 | 義例二      | ORACLE_MOT_PHAN | 12 Trực shared identities, 月厭/厭對, 陰陽不將                                                                  |
-|     5 | 義例三      | ORACLE_MOT_PHAN | 25 production identities; 無禄 context-aware Q5/Q10; Đức/Hợp, special days, 王日/民日, 四廢/五墓/八專/鳴吠…     |
+|     5 | 義例三      | ORACLE_MOT_PHAN | 26 production identities; 無禄 context-aware Q5/Q10; Đức/Hợp, special days, 王日/民日, 四廢/五墓/八專/鳴吠…     |
 |     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục inventory; 29 factor production-computable/Hán-oracle, gồm 普護/福生/聖心/益後/續世 và 上朔/反支/月忌 |
 |     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model                    |
 |     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain                       |
@@ -138,7 +138,7 @@ Ngoài ra test Việt/source-independent hiện có vẫn chạy:
 
 ### Q5
 
-`han-q5-oracle.spec.ts` kiểm độc lập **toàn bộ 25 identity Q5 đang production**:
+`han-q5-oracle.spec.ts` kiểm độc lập **toàn bộ 26 identity Q5 đang production**:
 
 - 天徳;
 - 月徳 / 天徳合 / 月徳合 / 月空 / 月恩;
