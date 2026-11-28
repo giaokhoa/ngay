@@ -13,6 +13,7 @@ import { QUY_TAC_GIAI_TRU } from '../activities/giai-tru-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
+import { QUY_TAC_LAP_KHE_UOC_GIAO_DICH } from '../activities/lap-khe-uoc-giao-dich-rules';
 import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
@@ -39,6 +40,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
   [LoaiCongViec.MAY_DO]: QUY_TAC_MAY_DO,
+  [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: QUY_TAC_LAP_KHE_UOC_GIAO_DICH,
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
   [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
@@ -171,6 +173,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.CAU_Y_TRI_BENH]: true,
       [LoaiCongViec.SUA_MONG_TAY_CHAN]: false,
       [LoaiCongViec.MAY_DO]: false,
+      [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -200,6 +203,32 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('立劵交易: no 閉 baseline, 五離 has exact cát relief', () => {
+    const closed = danhGia(LoaiCongViec.LAP_KHE_UOC_GIAO_DICH, {
+      truc: ThapNhiTruc.BE,
+      yeuTo: [MaYeuTo.THIEN_NGUYEN],
+    });
+    const nguLy = danhGia(LoaiCongViec.LAP_KHE_UOC_GIAO_DICH, {
+      yeuTo: [MaYeuTo.NGU_LY, MaYeuTo.TAM_HOP],
+    });
+    expect(closed.coKy).toBe(false);
+    expect(closed.coNen).toBe(true);
+    expect(nguLy.coKy).toBe(false);
+  });
+
+  it('立劵交易: 長星 / 短星 are supplemental Q10 Kị', () => {
+    for (const [ma, trace] of [
+      [MaYeuTo.TRUONG_TINH, 'LAP_KHE_UOC_GIAO_DICH_Q10_TRUONG_TINH_KY'],
+      [MaYeuTo.DOAN_TINH, 'LAP_KHE_UOC_GIAO_DICH_Q10_DOAN_TINH_KY'],
+    ] as const) {
+      const result = danhGia(LoaiCongViec.LAP_KHE_UOC_GIAO_DICH, {
+        yeuTo: [ma, MaYeuTo.THIEN_NGUYEN],
+      });
+      expect(result.coKy).toBe(true);
+      expect(result.xungDotDaApDung.some((x) => x.ma === trace)).toBe(true);
+    }
+  });
 
   it('裁製: 長星 / 短星 add Q10 Kị without polluting Q11 baseline', () => {
     const longStar = danhGia(LoaiCongViec.MAY_DO, {

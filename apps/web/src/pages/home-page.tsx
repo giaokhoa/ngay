@@ -122,6 +122,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.MAY_DO,
   },
   {
+    ma: 'LAP_KHE_UOC_GIAO_DICH',
+    ten: 'Lập khế ước, giao dịch',
+    moTa: 'Chọn ngày ký kết hợp đồng hoặc giao dịch theo Dân Nhật, Tam Hợp, Lục Hợp, Ngũ Phú, Ngũ Hợp; xét thêm Trường Tinh, Đoản Tinh.',
+    to: DUONG_DAN.LAP_KHE_UOC_GIAO_DICH,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

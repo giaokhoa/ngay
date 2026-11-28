@@ -13,6 +13,7 @@ import { QUY_TAC_DI_CHUYEN } from './di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from './earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from './khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from './khanh-thuong-rules';
+import { QUY_TAC_LAP_KHE_UOC_GIAO_DICH } from './lap-khe-uoc-giao-dich-rules';
 import { QUY_TAC_MAY_DO } from './may-do-rules';
 import { QUY_TAC_NHAP_HOC } from './nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from './quan-dai-rules';
@@ -55,6 +56,8 @@ export class DungSuService {
         return QUY_TAC_SUA_MONG_TAY_CHAN;
       case LoaiCongViec.MAY_DO:
         return QUY_TAC_MAY_DO;
+      case LoaiCongViec.LAP_KHE_UOC_GIAO_DICH:
+        return QUY_TAC_LAP_KHE_UOC_GIAO_DICH;
       case LoaiCongViec.DONG_THO:
         return QUY_TAC_DONG_THO;
       case LoaiCongViec.SUA_CUNG_THAT:

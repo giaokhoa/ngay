@@ -25,6 +25,7 @@ import { QUY_TAC_Q10_AN_TANG } from './an-tang-conflict-rules';
 import { QUY_TAC_Q10_DI_CHUYEN } from './di-chuyen-conflict-rules';
 import { QUY_TAC_Q10_CONG_VIEC_DAT } from './earthwork-conflict-rules';
 import { QUY_TAC_Q10_KHAI_TRUONG } from './khai-truong-conflict-rules';
+import { QUY_TAC_Q10_LAP_KHE_UOC_GIAO_DICH } from './lap-khe-uoc-giao-dich-conflict-rules';
 import { QUY_TAC_Q10_MAY_DO } from './may-do-conflict-rules';
 import { QUY_TAC_Q10_GIAI_TRU } from './giai-tru-conflict-rules';
 import { QUY_TAC_Q10_KHANH_THUONG } from './khanh-thuong-conflict-rules';
@@ -104,6 +105,9 @@ export class DanhGiaNgayService {
     }
     if (congViec === LoaiCongViec.MAY_DO) {
       return danhGiaMayDo(dongGop, boiCanh);
+    }
+    if (congViec === LoaiCongViec.LAP_KHE_UOC_GIAO_DICH) {
+      return danhGiaLapKheUocGiaoDich(dongGop, boiCanh);
     }
     if (congViec === LoaiCongViec.DONG_THO || congViec === LoaiCongViec.SUA_CUNG_THAT) {
       return danhGiaCongViecDat(dongGop, boiCanh);
@@ -547,6 +551,24 @@ function danhGiaSuaMongTayChan(
 
 function danhGiaMayDo(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
   const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_MAY_DO);
+  const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
+  return {
+    coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
+    coKy:
+      resolved.camMoiViec ||
+      resolved.coKyBoSung ||
+      hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
+    camMoiViec: resolved.camMoiViec,
+    dongGop,
+    xungDotDaApDung: resolved.xungDotDaApDung,
+  };
+}
+
+function danhGiaLapKheUocGiaoDich(
+  dongGop: DongGopDanhGia[],
+  boiCanh: BoiCanhDanhGiaNgay,
+): KetQuaDanhGia {
+  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_LAP_KHE_UOC_GIAO_DICH);
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),

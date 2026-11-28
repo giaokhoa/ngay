@@ -15,6 +15,7 @@ export const DUONG_DAN = {
   CAU_Y_TRI_BENH: '/cau-y-tri-benh',
   SUA_MONG_TAY_CHAN: '/sua-mong-tay-chan',
   MAY_DO: '/may-do',
+  LAP_KHE_UOC_GIAO_DICH: '/lap-khe-uoc-giao-dich',
   DONG_THO: '/dong-tho',
   SUA_CUNG_THAT: '/sua-cung-that',
   KHAI_TRUONG: '/khai-truong',
