@@ -1,3 +1,4 @@
+import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
@@ -8,6 +9,7 @@ import {
   QUY_TAC_XUAT_HANH_BO_SUNG_Q10,
   QUY_TAC_XUAT_HANH_Q11,
 } from '../activities/xuat-hanh-rules';
+import { QUY_TAC_Q10_AN_GIUONG } from '../evaluation/an-giuong-conflict-rules';
 import { QUY_TAC_Q10_AN_TANG } from '../evaluation/an-tang-conflict-rules';
 import {
   QUY_TAC_XUNG_DOT_CUOI_HOI,
@@ -52,6 +54,7 @@ export interface DanhMucTriThuc {
 export const HOAT_DONG_TRI_THUC: readonly HoatDongTriThuc[] = [
   { code: LoaiCongViec.CUOI_HOI, tenViet: 'Cưới hỏi', tenHan: '嫁娶' },
   { code: LoaiCongViec.DI_CHUYEN, tenViet: 'Di chuyển', tenHan: '般移〈移徙同〉' },
+  { code: LoaiCongViec.AN_GIUONG, tenViet: 'Kê giường', tenHan: '安牀' },
   { code: LoaiCongViec.DONG_THO, tenViet: 'Khởi tạo động thổ', tenHan: '興造動土' },
   { code: LoaiCongViec.SUA_CUNG_THAT, tenViet: 'Sửa cung thất', tenHan: '修宮室' },
   { code: LoaiCongViec.KHAI_TRUONG, tenViet: 'Khai trương', tenHan: '開市' },
@@ -65,6 +68,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
     quyTac: [
       ...activityRules(QUY_TAC_CUOI_HOI),
       ...activityRules(QUY_TAC_DI_CHUYEN),
+      ...activityRules(QUY_TAC_AN_GIUONG),
       ...activityRules(QUY_TAC_DONG_THO),
       ...activityRules(QUY_TAC_SUA_CUNG_THAT),
       ...activityRules(QUY_TAC_KHAI_TRUONG),
@@ -74,6 +78,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
       ...legacyWeddingConflictRules(),
       ...conflictRules(LoaiCongViec.CUOI_HOI, QUY_TAC_Q10_CUOI_HOI_Q4),
       ...conflictRules(LoaiCongViec.DI_CHUYEN, QUY_TAC_Q10_DI_CHUYEN),
+      ...conflictRules(LoaiCongViec.AN_GIUONG, QUY_TAC_Q10_AN_GIUONG),
       ...conflictRules(LoaiCongViec.DONG_THO, QUY_TAC_Q10_CONG_VIEC_DAT),
       ...conflictRules(LoaiCongViec.SUA_CUNG_THAT, QUY_TAC_Q10_CONG_VIEC_DAT),
       ...conflictRules(LoaiCongViec.KHAI_TRUONG, QUY_TAC_Q10_KHAI_TRUONG),

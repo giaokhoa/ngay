@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
+import { QUY_TAC_Q10_AN_GIUONG } from './an-giuong-conflict-rules';
 import { QUY_TAC_Q10_AN_TANG } from './an-tang-conflict-rules';
 import { QUY_TAC_Q10_DI_CHUYEN } from './di-chuyen-conflict-rules';
 import { QUY_TAC_Q10_CUOI_HOI_Q4 } from './cuoi-hoi-q4-conflict-rules';
@@ -71,6 +72,7 @@ describe('Q4/Q10 canonical hard days', () => {
   it.each([
     ['CUOI_HOI', QUY_TAC_Q10_CUOI_HOI_Q4],
     ['DI_CHUYEN', QUY_TAC_Q10_DI_CHUYEN],
+    ['AN_GIUONG', QUY_TAC_Q10_AN_GIUONG],
     ['DONG_THO/SUA_CUNG_THAT', QUY_TAC_Q10_CONG_VIEC_DAT],
     ['KHAI_TRUONG', QUY_TAC_Q10_KHAI_TRUONG],
     ['XUAT_HANH', QUY_TAC_Q10_XUAT_HANH],

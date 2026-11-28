@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { LoaiCongViec, QuyTacDungSu } from '../activities/activity-rule';
+import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
@@ -20,6 +21,7 @@ const service = new DanhGiaNgayService();
 const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.CUOI_HOI]: QUY_TAC_CUOI_HOI,
   [LoaiCongViec.DI_CHUYEN]: QUY_TAC_DI_CHUYEN,
+  [LoaiCongViec.AN_GIUONG]: QUY_TAC_AN_GIUONG,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
@@ -64,6 +66,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
     const expectedKy: Readonly<Record<LoaiCongViec, boolean>> = {
       [LoaiCongViec.CUOI_HOI]: true,
       [LoaiCongViec.DI_CHUYEN]: true,
+      [LoaiCongViec.AN_GIUONG]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -93,6 +96,20 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('月厭 + 月徳 month Dần keeps 般移 Kị but releases 安牀 (WYG 010-47b..48a)', () => {
+    const diChuyen = danhGia(LoaiCongViec.DI_CHUYEN, {
+      chiThang: DiaChi.DAN,
+      yeuTo: [MaYeuTo.NGUYET_YEM, MaYeuTo.NGUYET_DUC],
+    });
+    const anGiuong = danhGia(LoaiCongViec.AN_GIUONG, {
+      chiThang: DiaChi.DAN,
+      yeuTo: [MaYeuTo.NGUYET_YEM, MaYeuTo.NGUYET_DUC],
+    });
+
+    expect(diChuyen.coKy).toBe(true);
+    expect(anGiuong.coKy).toBe(false);
+  });
 
   it('行幸遣使: 天賊 + 天徳 still Kị (WYG 010-56b..57a)', () => {
     const result = danhGia(LoaiCongViec.XUAT_HANH, {

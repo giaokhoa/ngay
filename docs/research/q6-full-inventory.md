@@ -7,7 +7,7 @@ Status: COMPARED / INVENTORIED
 Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 
 1. factor đã production và có oracle;
-2. mục đã hiểu công thức nhưng không thuộc 7 vertical hiện tại;
+2. mục đã hiểu công thức nhưng không thuộc 8 vertical hiện tại;
 3. mục chưa thể production vì calendar/context hiện thiếu input mà chính nguồn đòi hỏi.
 
 **Inventory đủ không đồng nghĩa implement toàn bộ Quyển 6.** Activity engine vẫn bám exact Dụng sự Q11 + Nghi kị Q10; không tự đưa một thần Q6 vào kết luận chỉ vì mục Nghĩa lệ gọi nó cát/hung.
@@ -17,7 +17,7 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 - Việt: Hiệp Kỷ Biện Phương Thư, Tập 1, Quyển 6, trang in 474–563 (working scan PDF 481–570 đã mở trực tiếp).
 - Hán: Kanripo `KR3g0051_006.txt`, revision pin của repo, `WYG_006-1a..76a`.
 - Oracle phụ: Q9 `KR3g0051_009.txt` cho Thượng Sóc, Phản Chi, Tứ Ly/Tứ Tuyệt, Khí Vãng Vong.
-- Exact activity dependency: Q11 fixture `han-q11-oracle.spec.ts` cho 7 vertical production.
+- Exact activity dependency: Q11 fixture `han-q11-oracle.spec.ts` cho 8 vertical production.
 
 ## Inventory 40 mục
 
@@ -68,7 +68,7 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 
 ### Lâm Nhật
 
-Hán Q6 cho bảng tháng trực tiếp (`正月午...`). Có thể encode bằng `chiThang → chiNgay`, nhưng không xuất hiện trong exact Q11 của 7 vertical hiện tại nên không thêm vào engine chỉ để tăng số lượng thần sát.
+Hán Q6 cho bảng tháng trực tiếp (`正月午...`). Có thể encode bằng `chiThang → chiNgay`, nhưng không xuất hiện trong exact Q11 của 8 vertical hiện tại nên không thêm vào engine chỉ để tăng số lượng thần sát.
 
 ### Du Họa
 
@@ -122,7 +122,7 @@ Bản Việt p558–559 và Hán `WYG_006-72b..73a` khớp. Calendar nay có ast
 - Tứ Ly: ngày trước Đông Chí, Hạ Chí, Xuân Phân, Thu Phân.
 - Tứ Tuyệt: ngày trước Lập Xuân, Lập Hạ, Lập Thu, Lập Đông.
 
-Việt p560–561 và Hán `WYG_006-74a..74b` khớp. Calendar hiện có solar-term instant nên kỹ thuật có thể làm, nhưng exact Q11 của 7 vertical không dùng hai mục này.
+Việt p560–561 và Hán `WYG_006-74a..74b` khớp. Calendar hiện có solar-term instant nên kỹ thuật có thể làm, nhưng exact Q11 của 8 vertical không dùng hai mục này.
 
 ### Ngày Nguyệt Kị
 

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { LoaiCongViec, QuyTacDungSu, TacDongDungSu } from '../activities/activity-rule';
+import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
@@ -54,6 +55,27 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:VANG_VONG',
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.AN_GIUONG]: {
+    tieuDeHan: '安牀',
+    anchor: 'KR3g0051_WYG_011-15a',
+    nen: ['TRUC:NGUY'],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'CHI_NGAY:THAN',
     ],
   },
   [LoaiCongViec.DI_CHUYEN]: {
@@ -273,6 +295,7 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
 const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.CUOI_HOI]: QUY_TAC_CUOI_HOI,
   [LoaiCongViec.DI_CHUYEN]: QUY_TAC_DI_CHUYEN,
+  [LoaiCongViec.AN_GIUONG]: QUY_TAC_AN_GIUONG,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
