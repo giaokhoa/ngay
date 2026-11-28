@@ -72,6 +72,7 @@ export enum MaYeuTo {
   TU_KY = 'TU_KY',
   TU_CUNG = 'TU_CUNG',
   NGU_MO = 'NGU_MO',
+  NGU_HU = 'NGU_HU',
   BAT_CHUYEN = 'BAT_CHUYEN',
 
   DAN_NHAT = 'DAN_NHAT',
