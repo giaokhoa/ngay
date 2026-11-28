@@ -8,6 +8,7 @@ import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CAU_Y_TRI_BENH } from '../activities/cau-y-tri-benh-rules';
 import { QUY_TAC_CHINH_DUNG_CAT_TOC } from '../activities/chinh-dung-cat-toc-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
+import { QUY_TAC_DAT_COI_XAY_GIA } from '../activities/dat-coi-xay-gia-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_GIAI_TRU } from '../activities/giai-tru-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
@@ -52,6 +53,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.CAU_Y_TRI_BENH]: QUY_TAC_CAU_Y_TRI_BENH,
   [LoaiCongViec.SUA_MONG_TAY_CHAN]: QUY_TAC_SUA_MONG_TAY_CHAN,
   [LoaiCongViec.SUA_BUONG_SAN_PHU]: QUY_TAC_SUA_BUONG_SAN_PHU,
+  [LoaiCongViec.DAT_COI_XAY_GIA]: QUY_TAC_DAT_COI_XAY_GIA,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -84,7 +86,8 @@ const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
     activity !== LoaiCongViec.CAU_TU &&
     activity !== LoaiCongViec.MAY_DO &&
     activity !== LoaiCongViec.NAP_TAI &&
-    activity !== LoaiCongViec.MO_KHO_XUAT_HANG_TIEN,
+    activity !== LoaiCongViec.MO_KHO_XUAT_HANG_TIEN &&
+    activity !== LoaiCongViec.DAT_COI_XAY_GIA,
 );
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
@@ -184,6 +187,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.NAP_TAI]: false,
       [LoaiCongViec.MO_KHO_XUAT_HANG_TIEN]: false,
       [LoaiCongViec.SUA_BUONG_SAN_PHU]: false,
+      [LoaiCongViec.DAT_COI_XAY_GIA]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -236,6 +240,26 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('安碓磑: 平日/死神 are not baseline Kị while 三合/開日 are Nên', () => {
+    const result = danhGia(LoaiCongViec.DAT_COI_XAY_GIA, {
+      truc: ThapNhiTruc.BINH,
+      yeuTo: [MaYeuTo.TU_THAN, MaYeuTo.TAM_HOP],
+    });
+    expect(result.coNen).toBe(true);
+    expect(result.coKy).toBe(false);
+  });
+
+  it('安碓磑: 土符/地囊 remain Kị with virtue and 土王用事 remains Kị', () => {
+    for (const context of [
+      { yeuTo: [MaYeuTo.THO_PHU_TIN, MaYeuTo.THIEN_DUC] },
+      { yeuTo: [MaYeuTo.DIA_NANG, MaYeuTo.THIEN_XA] },
+      { dangThoVuong: true, yeuTo: [MaYeuTo.TAM_HOP] },
+    ] as const) {
+      const result = danhGia(LoaiCongViec.DAT_COI_XAY_GIA, context);
+      expect(result.coKy).toBe(true);
+    }
   });
 
   it('開倉庫出貨財: 月建 cát relief keeps 己未陽錯 exception', () => {
@@ -756,6 +780,7 @@ interface Input {
   chiNgay?: DiaChi;
   truc?: ThapNhiTruc;
   ngayAmTrongThang?: number;
+  dangThoVuong?: boolean;
   yeuTo: readonly MaYeuTo[];
 }
 
@@ -770,7 +795,7 @@ function taoBoiCanh(input: Input): BoiCanhDanhGiaNgay {
     chiNgay: input.chiNgay ?? DiaChi.TY,
     truc: input.truc ?? ThapNhiTruc.THANH,
     ngayAmTrongThang: input.ngayAmTrongThang,
-    dangThoVuong: false,
+    dangThoVuong: input.dangThoVuong ?? false,
     yeuTo: input.yeuTo.map(taoYeuTo),
   };
 }
