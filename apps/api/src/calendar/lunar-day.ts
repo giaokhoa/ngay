@@ -1,5 +1,4 @@
-import { SearchMoonPhase } from 'astronomy-engine';
-
+import { timThoiDiemPhaTrang } from './astronomy/ephemeris';
 import { NgayDanSu, soSanhNgayDanSu } from './civil-date';
 import { taoThoiDiemGiuaNgayTaiMuiGio, tinhNgayDanSuTaiMuiGio } from './civil-date-timezone';
 import { CanChi } from './domain/sexagenary-cycle';
@@ -29,15 +28,15 @@ export function tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongT
   if (daCo) return saoChepThongTin(daCo);
 
   const giuaNgay = taoThoiDiemGiuaNgayTaiMuiGio(ngayDanSu, muiGio);
-  const socTruoc = SearchMoonPhase(0, giuaNgay, -CUA_SO_TIM_SOC_NGAY);
+  const socTruoc = timThoiDiemPhaTrang(0, giuaNgay, -CUA_SO_TIM_SOC_NGAY);
 
   if (!socTruoc) {
     throw new Error(`Không tìm thấy sóc trước ${ngayDanSu}`);
   }
 
-  const socSau = SearchMoonPhase(
+  const socSau = timThoiDiemPhaTrang(
     0,
-    new Date(socTruoc.date.getTime() + MOT_NGAY_MILLISECOND),
+    new Date(socTruoc.getTime() + MOT_NGAY_MILLISECOND),
     CUA_SO_TIM_SOC_NGAY,
   );
 
@@ -45,7 +44,7 @@ export function tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongT
     .filter((soc): soc is NonNullable<typeof soc> => soc !== null)
     .map((soc) => ({
       soc,
-      ngay: tinhNgayDanSuTaiMuiGio(soc.date, muiGio),
+      ngay: tinhNgayDanSuTaiMuiGio(soc, muiGio),
     }))
     .filter((item) => soSanhNgayDanSu(item.ngay, ngayDanSu) <= 0)
     .sort((a, b) => soSanhNgayDanSu(b.ngay, a.ngay));
@@ -64,7 +63,7 @@ export function tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongT
     ngaySoc: hienTai.ngay,
     ngayTrongThang,
     canChiNgaySoc: tinhCanChiNgay(hienTai.ngay),
-    thoiDiemSoc: new Date(hienTai.soc.date.getTime()),
+    thoiDiemSoc: new Date(hienTai.soc.getTime()),
   };
   boNhoNgayAm.set(khoa, ketQua);
   return saoChepThongTin(ketQua);

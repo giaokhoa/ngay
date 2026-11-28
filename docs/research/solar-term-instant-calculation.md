@@ -8,7 +8,7 @@ Làm sao tính chính xác instant của 24 tiết khí cho một năm hiện đ
 
 ## Kết luận
 
-Dùng `astronomy-engine` và hàm `SearchSunLongitude` để tìm instant mà tâm Mặt Trời đạt địa tâm thị hoàng kinh tương ứng với tiết khí.
+Dùng ephemeris nội bộ `apps/api/src/calendar/astronomy/ephemeris.ts` để tìm instant mà tâm Mặt Trời đạt địa tâm thị hoàng kinh tương ứng với tiết khí.
 
 Engine phải:
 
@@ -81,24 +81,27 @@ Theo research `solar-term-month-boundary.md`, chỉ 12 “tiết” sau mở th�
 | Đại Tuyết  | 255 | Tý        |
 | Tiểu Hàn   | 285 | Sửu       |
 
-## Library
+## Implementation hiện tại
 
-Đề xuất chấp nhận:
+Production dùng module nội bộ `calendar/astronomy/ephemeris.ts`:
 
-- package: `astronomy-engine`;
-- API: `SearchSunLongitude(targetLon, startTime, limitDays)`.
+- Earth VSOP series;
+- precession + IAU 2000B nutation;
+- light-time/aberration để lấy apparent geocentric solar longitude;
+- Delta-T Espenak/Meeus;
+- root search deterministic cho target longitude.
 
-Documentation của Astronomy Engine mô tả hàm này tìm thời điểm tâm Mặt Trời đạt apparent ecliptic longitude quan sát từ tâm Trái Đất, theo true ecliptic/equinox of date.
+Phần coefficients/formulas được adapt từ Astronomy Engine 2.1.19 (MIT) trước khi dependency bị xóa. Full MIT notice nằm ngay trong source. ADR 0012 ghi quyết định và parity protocol.
 
-Điều này phù hợp trực tiếp với định nghĩa địa tâm thị hoàng kinh dùng để định nghĩa tiết khí.
-
-Không tự implement VSOP/precession/nutation trong project nếu không có nhu cầu đặc biệt.
+Một mô hình Mặt Trời rút gọn đã được thử trong quá trình chuyển đổi và bị loại vì sai tới khoảng 14 phút; project không hạ precision để đổi lấy code ngắn hơn.
 
 ## Đối chiếu độc lập với HKO 2026
 
 Hong Kong Observatory công bố thời điểm 24 tiết khí theo HKT (UTC+8) và nói dữ liệu thiên văn dựa trên HM Nautical Almanac Office, UK và United States Naval Observatory.
 
-Đã chạy `astronomy-engine@2.1.19` cho đủ 24 tiết năm 2026. Kết quả khi chuyển UTC -> HKT và làm tròn đến phút khớp bảng HKO cho cả 24 tiết.
+Ephemeris nội bộ hiện khớp bảng HKO cho đủ 24 tiết năm 2026 khi chuyển UTC -> HKT và làm tròn đến phút.
+
+Trong bước migration, output 24 solar-longitude events còn được so trực tiếp với `astronomy-engine@2.1.19` trước khi package bị xóa; sai khác transition ≤2 ms. Fixture millisecond của bước này được giữ để chống regression, còn **HKO mới là oracle độc lập**.
 
 Một số checkpoint:
 
@@ -143,9 +146,7 @@ Timezone chỉ quyết định cách instant được biểu diễn và local ci
 
 ## Search window
 
-Mỗi target longitude chỉ nên tìm trong window hẹp quanh thời điểm dự kiến. Astronomy Engine khuyến nghị window nhỏ hơn 10 ngày nếu có thể.
-
-Implementation nên có seed/window deterministic theo tháng thay vì search cả năm trong một lần gọi.
+Mỗi target longitude được tìm trong window hẹp 10 ngày quanh seed tuần tự. Root search nội bộ giả định solar longitude tăng đơn điệu trong window này; không search cả năm trong một lần gọi.
 
 ## Test bắt buộc
 
@@ -180,12 +181,12 @@ GitHub runner timezone không được ảnh hưởng kết quả.
 
 GB/T đặt yêu cầu 1 giây cho lịch Trung Quốc chính thức. Cross-check hiện tại của project với HKO chỉ ở độ phân giải phút.
 
-Vì vậy project có thể dùng Astronomy Engine cho boundary computation, nhưng không được tuyên bố rằng implementation của project đạt chứng nhận/độ chính xác 1 giây theo GB/T chỉ từ test HKO này.
+Vì vậy project có thể dùng ephemeris nội bộ cho boundary computation, nhưng không được tuyên bố rằng implementation đạt chứng nhận/độ chính xác 1 giây theo GB/T chỉ từ HKO minute-level fixtures. Transition parity với implementation cũ cũng không thay một oracle thiên văn độc lập cấp giây.
 
 ## Trạng thái
 
 - [x] LOCATED
 - [x] COMPARED
 - [x] VERIFIED
-- [ ] IMPLEMENTED
-- [ ] ORACLE_TESTED
+- [x] IMPLEMENTED
+- [x] ORACLE_TESTED

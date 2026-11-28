@@ -1,6 +1,6 @@
 # ADR 0004: Solar Term Calculation
 
-Status: Accepted
+Status: Superseded by ADR 0012
 
 ## Bối cảnh
 
@@ -10,7 +10,9 @@ Tự viết mô hình thiên văn sẽ tăng rủi ro sai số và tạo một s
 
 ## Quyết định
 
-Dùng package `astronomy-engine`, API `SearchSunLongitude`, để tìm instant Mặt Trời đạt hoàng kinh mục tiêu.
+Quyết định lịch sử của ADR này là dùng package `astronomy-engine`, API `SearchSunLongitude`, để tìm instant Mặt Trời đạt hoàng kinh mục tiêu.
+
+Từ ADR 0012, runtime đã chuyển sang ephemeris nội bộ; package chỉ còn ý nghĩa provenance/transition reference.
 
 Implementation:
 
