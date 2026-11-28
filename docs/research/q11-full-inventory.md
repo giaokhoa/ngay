@@ -63,7 +63,7 @@ Ba số này là catalog nguồn **có overlap**, không được cộng thành 
 |  36 | 求醫療病                 | ORACLE_TESTED                  | `CAU_Y_TRI_BENH`; Hán `WYG_011-16b`; Việt p853             |
 |  37 | 療目                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
 |  38 | 針刺                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
-|  39 | 裁製〈裁衣同〉           | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
+|  39 | 裁製〈裁衣同〉           | ORACLE_TESTED                  | `MAY_DO`; Hán `WYG_011-17a`; Việt p854                     |
 |  40 | 營建宮室                 | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
 |  41 | 修宮室                   | ORACLE_TESTED                  | `SUA_CUNG_THAT`; WYG_011-16a                               |
 |  42 | 繕城郭                   | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
