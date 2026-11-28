@@ -1,4 +1,5 @@
 import { DiaChi } from '../calendar/domain/earthly-branch';
+import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { MaYeuTo } from '../factors/domain/factor-code';
 import { ThamChieuNguon } from '../sources/source-reference';
@@ -31,6 +32,8 @@ export type DieuKienDungSu =
   | { loai: 'YEU_TO'; ma: MaYeuTo }
   | { loai: 'TRUC'; truc: ThapNhiTruc }
   | { loai: 'CHI_NGAY'; chi: DiaChi }
+  | { loai: 'CAN_NGAY'; can: ThienCan }
+  | { loai: 'NGAY_AM'; ngay: number }
   | { loai: 'THO_VUONG' };
 
 export interface QuyTacDungSu {

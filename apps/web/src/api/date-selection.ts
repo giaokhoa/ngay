@@ -4,10 +4,12 @@ export interface ThamChieuNguonApi {
 }
 
 export interface DieuKienDungSuApi {
-  loai: 'YEU_TO' | 'TRUC' | 'CHI_NGAY' | 'THO_VUONG';
+  loai: 'YEU_TO' | 'TRUC' | 'CHI_NGAY' | 'CAN_NGAY' | 'NGAY_AM' | 'THO_VUONG';
   ma?: string;
   truc?: string;
   chi?: string;
+  can?: string;
+  ngay?: number;
 }
 
 export interface DongGopDanhGiaApi {

@@ -607,6 +607,10 @@ function khoa(rule: QuyTacDungSu): string {
       return 'TRUC:' + rule.dieuKien.truc;
     case 'CHI_NGAY':
       return 'CHI_NGAY:' + rule.dieuKien.chi;
+    case 'CAN_NGAY':
+      return 'CAN_NGAY:' + rule.dieuKien.can;
+    case 'NGAY_AM':
+      return 'NGAY_AM:' + rule.dieuKien.ngay;
     case 'THO_VUONG':
       return 'THO_VUONG';
   }

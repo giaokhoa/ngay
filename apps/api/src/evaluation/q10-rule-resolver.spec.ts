@@ -166,6 +166,74 @@ describe('generic Q10 rule resolver', () => {
     expect(nenB.trangThai).toBe(TrangThaiDongGop.HIEU_LUC);
   });
 
+  it('Q10 target matching supports CAN_NGAY and NGAY_AM', () => {
+    const canContribution = dongGopKyDieuKien('CAN', { loai: 'CAN_NGAY', can: ThienCan.DINH });
+    const lunarContribution = dongGopKyDieuKien('LUNAR', { loai: 'NGAY_AM', ngay: 12 });
+    const rules: readonly QuyTacXungDotDataDriven[] = [
+      {
+        ma: 'REMOVE_DINH',
+        mucTieu: { loai: 'CAN_NGAY', can: ThienCan.DINH },
+        phepXuLy: { loai: 'BO_KY' },
+        precedence: 10,
+        moTa: 'remove stem target',
+        nguon: [],
+      },
+      {
+        ma: 'REMOVE_LUNAR_12',
+        mucTieu: { loai: 'NGAY_AM', ngay: 12 },
+        phepXuLy: { loai: 'BO_KY' },
+        precedence: 10,
+        moTa: 'remove lunar target',
+        nguon: [],
+      },
+    ];
+
+    apDungResolverQ10(
+      [canContribution, lunarContribution],
+      boiCanh([], { canNgay: ThienCan.DINH, ngayAmTrongThang: 12 }),
+      rules,
+    );
+
+    expect(canContribution.trangThai).toBe(TrangThaiDongGop.BI_LOAI);
+    expect(lunarContribution.trangThai).toBe(TrangThaiDongGop.BI_LOAI);
+  });
+
+  it('Q10 delegate validates CAN_NGAY / NGAY_AM against context', () => {
+    const rules: readonly QuyTacXungDotDataDriven[] = [
+      {
+        ma: 'GLOBAL_TO_DINH',
+        phepXuLy: { loai: 'DELEGATE', den: { loai: 'CAN_NGAY', can: ThienCan.DINH } },
+        precedence: 30,
+        moTa: 'global to stem',
+        nguon: [],
+      },
+      {
+        ma: 'DINH_TO_LUNAR',
+        mucTieu: { loai: 'CAN_NGAY', can: ThienCan.DINH },
+        phepXuLy: { loai: 'DELEGATE', den: { loai: 'NGAY_AM', ngay: 12 } },
+        precedence: 20,
+        moTa: 'stem delegates to lunar day',
+        nguon: [],
+      },
+      {
+        ma: 'LUNAR_KEEP',
+        mucTieu: { loai: 'NGAY_AM', ngay: 12 },
+        phepXuLy: { loai: 'GIU_KY' },
+        precedence: 10,
+        moTa: 'keep lunar',
+        nguon: [],
+      },
+    ];
+
+    expect(
+      apDungResolverQ10([], boiCanh([], { canNgay: ThienCan.DINH, ngayAmTrongThang: 12 }), rules)
+        .coKyBoSung,
+    ).toBe(true);
+    expect(() =>
+      apDungResolverQ10([], boiCanh([], { canNgay: ThienCan.DINH, ngayAmTrongThang: 13 }), rules),
+    ).toThrow('Q10 delegate tới ngày âm không khớp context: 12');
+  });
+
   it('rule precedence cao hơn thắng rule tổng quát', () => {
     const contribution = dongGopKy(MaYeuTo.KIEP_SAT);
     const rules: readonly QuyTacXungDotDataDriven[] = [
@@ -195,6 +263,19 @@ describe('generic Q10 rule resolver', () => {
   });
 });
 
+function dongGopKyDieuKien(suffix: string, dieuKien: QuyTacDungSu['dieuKien']): DongGopDanhGia {
+  return {
+    quyTac: {
+      ma: 'TEST_' + suffix,
+      congViec: LoaiCongViec.DI_CHUYEN,
+      dieuKien,
+      tacDong: TacDongDungSu.KY,
+      nguon: [],
+    },
+    trangThai: TrangThaiDongGop.HIEU_LUC,
+  };
+}
+
 function dongGopNen(ma: MaYeuTo): DongGopDanhGia {
   const quyTac: QuyTacDungSu = {
     ma: 'TEST_NEN_' + ma,
@@ -222,11 +303,15 @@ function dongGopKy(ma: MaYeuTo): DongGopDanhGia {
   };
 }
 
-function boiCanh(yeuTo: readonly MaYeuTo[]) {
+function boiCanh(
+  yeuTo: readonly MaYeuTo[],
+  overrides: Partial<{ canNgay: ThienCan; ngayAmTrongThang: number }> = {},
+) {
   return {
     chiThang: DiaChi.DAN,
-    canNgay: ThienCan.GIAP,
+    canNgay: overrides.canNgay ?? ThienCan.GIAP,
     chiNgay: DiaChi.DAN,
+    ngayAmTrongThang: overrides.ngayAmTrongThang,
     truc: ThapNhiTruc.KIEN,
     dangThoVuong: false,
     yeuTo: yeuTo.map((ma) => ({

@@ -549,6 +549,10 @@ function khopDieuKien(dieuKien: DieuKienDungSu, boiCanh: BoiCanhDanhGiaNgay): bo
       return boiCanh.truc === dieuKien.truc;
     case 'CHI_NGAY':
       return boiCanh.chiNgay === dieuKien.chi;
+    case 'CAN_NGAY':
+      return boiCanh.canNgay === dieuKien.can;
+    case 'NGAY_AM':
+      return boiCanh.ngayAmTrongThang === dieuKien.ngay;
     case 'THO_VUONG':
       return boiCanh.dangThoVuong;
   }
@@ -559,6 +563,8 @@ function cungDieuKien(a: DieuKienDungSu, b: DieuKienDungSu): boolean {
   if (a.loai === 'YEU_TO' && b.loai === 'YEU_TO') return a.ma === b.ma;
   if (a.loai === 'TRUC' && b.loai === 'TRUC') return a.truc === b.truc;
   if (a.loai === 'CHI_NGAY' && b.loai === 'CHI_NGAY') return a.chi === b.chi;
+  if (a.loai === 'CAN_NGAY' && b.loai === 'CAN_NGAY') return a.can === b.can;
+  if (a.loai === 'NGAY_AM' && b.loai === 'NGAY_AM') return a.ngay === b.ngay;
   if (a.loai === 'THO_VUONG' && b.loai === 'THO_VUONG') return true;
   return false;
 }
