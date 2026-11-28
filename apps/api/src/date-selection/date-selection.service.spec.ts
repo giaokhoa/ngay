@@ -754,6 +754,79 @@ describe('XemNgayService QUET_DON_NHA_CUA end-to-end', () => {
   });
 });
 
+describe('XemNgayService TRANG_TRI_TUONG end-to-end', () => {
+  it('orchestrates calendar/factors -> Hán Q11/Q10 Bình nhật -> filtered earthwork resolver', () => {
+    const result = taoService().xemTrangTriTuong(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'TRANG_TRI_TUONG')).toBe(
+      true,
+    );
+  });
+
+  it('is deterministic for TRANG_TRI_TUONG', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemTrangTriTuong(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemTrangTriTuong(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real 2026 calendar keeps Hán Bình-Nên + exact exemptions and earth blockers', () => {
+    const service = taoService();
+    const binh = service.xemTrangTriTuong(new Date('2026-02-12T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const voLoc = service.xemTrangTriTuong(
+      new Date('2026-08-17T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const thuongSoc = service.xemTrangTriTuong(
+      new Date('2026-08-29T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const thoPhuTin = service.xemTrangTriTuong(
+      new Date('2026-01-14T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const thoVuong = service.xemTrangTriTuong(
+      new Date('2026-01-17T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const hard = service.xemTrangTriTuong(new Date('2026-01-02T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+
+    expect(binh.truc).toBe(ThapNhiTruc.BINH);
+    expect(binh.yeuTo.some((item) => item.ma === MaYeuTo.TU_THAN)).toBe(true);
+    expect(binh.danhGia.coNen).toBe(true);
+    expect(binh.danhGia.coKy).toBe(false);
+
+    expect(voLoc.yeuTo.some((item) => item.ma === MaYeuTo.VO_LOC)).toBe(true);
+    expect(voLoc.danhGia.coNen).toBe(true);
+    expect(voLoc.danhGia.coKy).toBe(false);
+    expect(voLoc.danhGia.xungDotDaApDung.some((item) => item.ma.endsWith('_VO_LOC_BO_NEN'))).toBe(
+      false,
+    );
+
+    expect(thuongSoc.yeuTo.some((item) => item.ma === MaYeuTo.THUONG_SOC)).toBe(true);
+    expect(thuongSoc.danhGia.coNen).toBe(true);
+    expect(thuongSoc.danhGia.coKy).toBe(false);
+
+    expect(thoPhuTin.yeuTo.some((item) => item.ma === MaYeuTo.THO_PHU_TIN)).toBe(true);
+    expect(thoPhuTin.danhGia.coKy).toBe(true);
+
+    expect(thoVuong.dangThoVuong).toBe(true);
+    expect(thoVuong.danhGia.coKy).toBe(true);
+    expect(
+      thoVuong.danhGia.dongGop.some(
+        (item) => item.quyTac.dieuKien.loai === 'THO_VUONG' && item.trangThai === 'HIEU_LUC',
+      ),
+    ).toBe(true);
+
+    expect(hard.danhGia.camMoiViec).toBe(true);
+    expect(hard.danhGia.coKy).toBe(true);
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -899,7 +972,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 26)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 27)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -973,6 +1046,7 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       LoaiCongViec.SUA_BUONG_SAN_PHU,
       LoaiCongViec.DAT_COI_XAY_GIA,
       LoaiCongViec.QUET_DON_NHA_CUA,
+      LoaiCongViec.TRANG_TRI_TUONG,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);

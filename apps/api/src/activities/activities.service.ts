@@ -24,6 +24,7 @@ import { QUY_TAC_QUET_DON_NHA_CUA } from './quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from './sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from './sua-mong-tay-chan-rules';
 import { QUY_TAC_TE_TU } from './te-tu-rules';
+import { QUY_TAC_TRANG_TRI_TUONG } from './trang-tri-tuong-rules';
 import { QUY_TAC_XUAT_HANH } from './xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from './yen-hoi-rules';
 
@@ -73,6 +74,8 @@ export class DungSuService {
         return QUY_TAC_DAT_COI_XAY_GIA;
       case LoaiCongViec.QUET_DON_NHA_CUA:
         return QUY_TAC_QUET_DON_NHA_CUA;
+      case LoaiCongViec.TRANG_TRI_TUONG:
+        return QUY_TAC_TRANG_TRI_TUONG;
       case LoaiCongViec.DONG_THO:
         return QUY_TAC_DONG_THO;
       case LoaiCongViec.SUA_CUNG_THAT:
