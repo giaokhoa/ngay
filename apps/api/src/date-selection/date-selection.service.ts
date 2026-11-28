@@ -13,7 +13,12 @@ import { DanhGiaNgayService } from '../evaluation/evaluation.service';
 import { KetQuaDanhGia, TrangThaiDongGop } from '../evaluation/evaluation-domain';
 import { YeuToNgay } from '../factors/domain/day-factor';
 import { TinhYeuToNgayService } from '../factors/factors.service';
-import { KetQuaXetNamSinh, tinhCanChiNamSinh, xetNamSinhVoiTru } from './personal-year';
+import {
+  KetQuaXetNamSinh,
+  tinhCanChiNamSinh,
+  xetCanChiNamSinhVoiTru,
+  xetNamSinhVoiTru,
+} from './personal-year';
 import { GioDuocChon, xetCacGioTrongNgay } from './selected-hour';
 
 export interface KetQuaXemNgay {
@@ -45,6 +50,8 @@ export interface NguoiLienQuanXemNgay {
   truocLapXuan?: boolean;
 }
 
+const TAT_CA_CONG_VIEC = Object.values(LoaiCongViec) as readonly LoaiCongViec[];
+
 export type XepLoaiNgayTrongThang = 'TOT' | 'TRUNG_BINH' | 'NEN_TRANH' | 'DAI_KY' | 'XUNG_TUOI';
 
 export interface XungTuoiNguoi {
@@ -72,6 +79,40 @@ export interface NgayTrongThang {
 export interface KetQuaChiTietNgay {
   ketQuaNgay: KetQuaXemNgay;
   gio: readonly GioDuocChon[];
+}
+
+export interface KetQuaCongViecTongQuan {
+  congViec: LoaiCongViec;
+  caNhanHoa: 'DAY_DU' | 'CAN_THEM_NGUOI' | 'CAN_NGUOI_MAT';
+  xepLoai: XepLoaiNgayTrongThang;
+  coNen: boolean;
+  coKy: boolean;
+  camMoiViec: boolean;
+  nen: readonly string[];
+  ky: readonly string[];
+}
+
+export interface NgayTongQuan {
+  ngayDanSu: string;
+  canChiNgay: CanChi;
+  canChiThang: CanChi;
+  canChiNam: CanChi;
+  truc: ThapNhiTruc;
+  xungTuoi: readonly KetQuaXetNamSinh[];
+  theoCongViec: Readonly<Record<LoaiCongViec, KetQuaCongViecTongQuan>>;
+  thongKe: Readonly<Record<XepLoaiNgayTrongThang, number>>;
+}
+
+export interface KetQuaTongQuanThang {
+  nam: number;
+  thang: number;
+  muiGio: string;
+  nguoi: {
+    ngaySinh: string;
+    namSinh: number;
+    canChiNamSinh: CanChi;
+  };
+  ngay: readonly NgayTongQuan[];
 }
 
 export interface KetQuaXemThang {
@@ -146,6 +187,102 @@ export class XemNgayService {
     };
   }
 
+  xemTongQuanThang(
+    ngaySinh: string,
+    nam: number,
+    thang: number,
+    muiGio: string,
+  ): KetQuaTongQuanThang {
+    if (!Number.isInteger(nam) || nam < 1 || nam > 9999) {
+      throw new RangeError('Năm xem phải là số nguyên từ 1 đến 9999');
+    }
+    if (!Number.isInteger(thang) || thang < 1 || thang > 12) {
+      throw new RangeError('Tháng xem phải từ 1 đến 12');
+    }
+
+    const thoiDiemSinh = taoThoiDiemGiuaNgayTaiMuiGio(ngaySinh, muiGio);
+    const namSinh = Number(ngaySinh.slice(0, 4));
+    const canChiNamSinh = this.lich.tinhCanChiNamTaiThoiDiem(thoiDiemSinh);
+    const soNgay = new Date(Date.UTC(nam, thang, 0)).getUTCDate();
+    const ngay: NgayTongQuan[] = [];
+
+    for (let ngayTrongThang = 1; ngayTrongThang <= soNgay; ngayTrongThang += 1) {
+      const ngayDanSu = [
+        String(nam).padStart(4, '0'),
+        String(thang).padStart(2, '0'),
+        String(ngayTrongThang).padStart(2, '0'),
+      ].join('-');
+      const thoiDiem = taoThoiDiemGiuaNgayTaiMuiGio(ngayDanSu, muiGio);
+      const canChiNam = this.lich.tinhCanChiNamTaiThoiDiem(thoiDiem);
+      const canChiThang = this.lich.tinhCanChiThangTaiThoiDiem(thoiDiem);
+      const canChiNgay = this.lich.tinhCanChiNgay(ngayDanSu);
+      const truc = this.lich.tinhTruc(canChiThang.chi, canChiNgay.chi);
+      const xungTuoi = [
+        xetCanChiNamSinhVoiTru(namSinh, canChiNamSinh, canChiNam, 'NAM'),
+        xetCanChiNamSinhVoiTru(namSinh, canChiNamSinh, canChiThang, 'THANG'),
+        xetCanChiNamSinhVoiTru(namSinh, canChiNamSinh, canChiNgay, 'NGAY'),
+      ].filter((item) => item.xung);
+
+      const thongKe: Record<XepLoaiNgayTrongThang, number> = {
+        TOT: 0,
+        TRUNG_BINH: 0,
+        NEN_TRANH: 0,
+        DAI_KY: 0,
+        XUNG_TUOI: 0,
+      };
+      const theoCongViec = Object.fromEntries(
+        TAT_CA_CONG_VIEC.map((congViec) => {
+          const ketQua = this.xem(thoiDiem, muiGio, congViec);
+          const apDungTuoiNguoiDangXem = congViec !== LoaiCongViec.AN_TANG;
+          const xepLoai = xepLoaiNgay(ketQua, apDungTuoiNguoiDangXem && xungTuoi.length > 0);
+          thongKe[xepLoai] += 1;
+
+          return [
+            congViec,
+            {
+              congViec,
+              caNhanHoa:
+                congViec === LoaiCongViec.CUOI_HOI
+                  ? 'CAN_THEM_NGUOI'
+                  : congViec === LoaiCongViec.AN_TANG
+                    ? 'CAN_NGUOI_MAT'
+                    : 'DAY_DU',
+              xepLoai,
+              coNen: ketQua.danhGia.coNen,
+              coKy: ketQua.danhGia.coKy,
+              camMoiViec: ketQua.danhGia.camMoiViec,
+              nen: ketQua.giaiThich.nen,
+              ky: ketQua.giaiThich.ky,
+            },
+          ];
+        }),
+      ) as Readonly<Record<LoaiCongViec, KetQuaCongViecTongQuan>>;
+
+      ngay.push({
+        ngayDanSu,
+        canChiNgay,
+        canChiThang,
+        canChiNam,
+        truc,
+        xungTuoi,
+        theoCongViec,
+        thongKe,
+      });
+    }
+
+    return {
+      nam,
+      thang,
+      muiGio,
+      nguoi: {
+        ngaySinh,
+        namSinh,
+        canChiNamSinh,
+      },
+      ngay,
+    };
+  }
+
   xemThang(
     nam: number,
     thang: number,
@@ -204,7 +341,7 @@ export class XemNgayService {
         })
         .filter((item) => item.xung.length > 0);
 
-      const xepLoai = xepLoaiNgay(ketQua, xungTuoi);
+      const xepLoai = xepLoaiNgay(ketQua, xungTuoi.length > 0);
       thongKe[xepLoai] += 1;
 
       ngay.push({
@@ -276,11 +413,8 @@ export class XemNgayService {
   }
 }
 
-function xepLoaiNgay(
-  ketQua: KetQuaXemNgay,
-  xungTuoi: readonly XungTuoiNguoi[],
-): XepLoaiNgayTrongThang {
-  if (xungTuoi.length > 0) return 'XUNG_TUOI';
+function xepLoaiNgay(ketQua: KetQuaXemNgay, coXungTuoi: boolean): XepLoaiNgayTrongThang {
+  if (coXungTuoi) return 'XUNG_TUOI';
   if (ketQua.danhGia.camMoiViec) return 'DAI_KY';
   if (ketQua.danhGia.coKy) return 'NEN_TRANH';
   if (ketQua.danhGia.coNen) return 'TOT';

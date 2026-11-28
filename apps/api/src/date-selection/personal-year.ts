@@ -79,8 +79,15 @@ export function xetNamSinhVoiTru(
   tru: TruThoiDiem,
   truocLapXuan = false,
 ): KetQuaXetNamSinh {
-  const canChiNamSinh = tinhCanChiNamSinh(namSinh, truocLapXuan);
+  return xetCanChiNamSinhVoiTru(namSinh, tinhCanChiNamSinh(namSinh, truocLapXuan), canChiTru, tru);
+}
 
+export function xetCanChiNamSinhVoiTru(
+  namSinh: number,
+  canChiNamSinh: CanChi,
+  canChiTru: CanChi,
+  tru: TruThoiDiem,
+): KetQuaXetNamSinh {
   if (CHI_XUNG[canChiNamSinh.chi] !== canChiTru.chi) {
     return {
       namSinh,
