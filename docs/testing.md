@@ -49,9 +49,35 @@ Ví dụ định hướng:
 
 Không tạo expected bằng cùng function đang test.
 
+### Hán double-entry oracle tests
+
+`ORACLE_TESTED` không tự động có nghĩa expected đến từ Hán bản.
+
+Khi có Hán source pin, dùng thêm nhãn logic `HAN_ORACLE_TESTED` cho scope đã có
+expected/vector độc lập từ Hán source.
+
+Yêu cầu:
+
+- expected Hán không được derive/import từ production rule arrays;
+- pin corpus revision + page anchor hoặc source revision;
+- discrepancy Việt/Hán phải đăng ký explicit;
+- nếu Hán transcription mơ hồ, test phải ghi policy resolve thay vì sửa âm thầm;
+- một volume chỉ được gọi full-volume oracle khi toàn bộ section scope đã inventory/test.
+
+Machine-readable source manifest:
+`apps/api/src/sources/han-source-manifest.ts`.
+
+Completeness:
+`docs/han-source-completeness.md`.
+
 ### Regression tests
 
 Mỗi bug nghiệp vụ phải tạo fixture tái hiện bug trước khi sửa.
+
+Bug do Hán oracle phát hiện phải giữ cả:
+
+- Hán source vector;
+- regression test gần implementation bị lỗi.
 
 ## Quy tắc khi test fail
 

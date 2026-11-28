@@ -8,6 +8,11 @@ export interface QuyTacXungDotCuoiHoi {
 
 export const QUY_TAC_XUNG_DOT_CUOI_HOI: readonly QuyTacXungDotCuoiHoi[] = [
   { ma: 'NGUYET_PHA_DUC_VAN_KY', moTa: 'Nguyệt Phá gặp Đức/Hợp vẫn Kị.', trang: 791 },
+  {
+    ma: 'NGUYET_PHA_MAO_DAU_TAI_SAT_NGUYET_YEM_CAM_MOI_VIEC',
+    moTa: 'Nguyệt Phá tháng Mão/Dậu đồng thời Tai Sát + Nguyệt Yếm: dù gặp Đức/Hợp vẫn mọi việc đều Kị.',
+    trang: 790,
+  },
   { ma: 'TU_PHE_DUC_HOP_VAN_KY', moTa: 'Tứ Phế gặp Đức/Hợp vẫn Kị.', trang: 817 },
   {
     ma: 'TU_PHE_NGUYET_PHA_CAM_MOI_VIEC',

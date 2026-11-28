@@ -40,6 +40,18 @@ describe('KhoTriThucController', () => {
     });
   });
 
+  it('exposes explicit 36-volume Hán source coverage without claiming full-book oracle', () => {
+    const { controller } = taoController();
+    const coverage = controller.baoPhuNguon();
+
+    expect(coverage.volumes).toBe(36);
+    expect(coverage.hanOraclePartialVolumes).toBe(22);
+    expect(coverage.unimplementedVolumes).toBe(14);
+    expect(coverage.fullVolumeOracleCount).toBe(0);
+    expect(coverage.manifest).toHaveLength(36);
+    expect(coverage.discrepancies.length).toBeGreaterThanOrEqual(5);
+  });
+
   it('parses rule filters before handing them to Postgres service', async () => {
     const { controller, service } = taoController();
 

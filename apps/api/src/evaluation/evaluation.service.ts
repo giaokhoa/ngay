@@ -94,6 +94,16 @@ export class DanhGiaNgayService {
       ghi('NGUYET_PHA_DUC_VAN_KY');
     }
 
+    if (
+      coYeuTo(MaYeuTo.NGUYET_PHA) &&
+      coYeuTo(MaYeuTo.TAI_SAT) &&
+      coYeuTo(MaYeuTo.NGUYET_YEM) &&
+      (boiCanh.chiThang === DiaChi.MAO || boiCanh.chiThang === DiaChi.DAU)
+    ) {
+      camMoiViec = true;
+      ghi('NGUYET_PHA_MAO_DAU_TAI_SAT_NGUYET_YEM_CAM_MOI_VIEC');
+    }
+
     if (coYeuTo(MaYeuTo.TU_PHE) && coBatKy(DUC_HOP)) {
       for (const ma of DUC_HOP)
         if (coYeuTo(ma)) loaiYeuTo(ma, 'Tứ Phế không được Đức/Hợp hóa giải.');

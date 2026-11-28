@@ -1,0 +1,338 @@
+import { describe, expect, it } from 'vitest';
+
+import { LoaiCongViec, QuyTacDungSu, TacDongDungSu } from '../activities/activity-rule';
+import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
+import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
+import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
+import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
+import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
+import { QUY_TAC_XUAT_HANH_Q11 } from '../activities/xuat-hanh-rules';
+
+interface HanQ11Fixture {
+  tieuDeHan: string;
+  anchor: string;
+  nen: readonly string[];
+  ky: readonly string[];
+  hanOnly?: readonly string[];
+  productionOnly?: readonly string[];
+}
+
+const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
+  [LoaiCongViec.CUOI_HOI]: {
+    tieuDeHan: '嫁娶',
+    anchor: 'KR3g0051_WYG_011-13a..13b',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:TAM_HOP',
+      'YEU_TO:THIEN_HY',
+      'YEU_TO:LUC_HOP',
+      'YEU_TO:BAT_TUONG',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:YEM_DOI',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:TU_KY',
+      'YEU_TO:TU_CUNG',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:VANG_VONG',
+      'YEU_TO:BAT_CHUYEN',
+      'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.DI_CHUYEN]: {
+    tieuDeHan: '般移〈移徙同〉',
+    anchor: 'KR3g0051_WYG_011-14a',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:DAN_NHAT',
+      'YEU_TO:DICH_MA',
+      'YEU_TO:THIEN_MA',
+      'TRUC:THANH',
+      'TRUC:KHAI',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:QUY_KY',
+      'YEU_TO:VANG_VONG',
+    ],
+  },
+  [LoaiCongViec.DONG_THO]: {
+    tieuDeHan: '興造動土〈修造同〉',
+    anchor: 'KR3g0051_WYG_011-17a',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:TAM_HOP',
+      'TRUC:KHAI',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_KIEN',
+      'YEU_TO:THO_PHU',
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:THO_PHU_TIN',
+      'YEU_TO:DIA_NANG',
+      'THO_VUONG',
+    ],
+  },
+  [LoaiCongViec.SUA_CUNG_THAT]: {
+    tieuDeHan: '修宮室',
+    anchor: 'KR3g0051_WYG_011-16a',
+    nen: [
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:TAM_HOP',
+      'YEU_TO:PHUC_DUC',
+      'TRUC:KHAI',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_KIEN',
+      'YEU_TO:THO_PHU',
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:THO_PHU_TIN',
+      'YEU_TO:DIA_NANG',
+      'THO_VUONG',
+    ],
+  },
+  [LoaiCongViec.KHAI_TRUONG]: {
+    tieuDeHan: '開市',
+    anchor: 'KR3g0051_WYG_011-18b',
+    nen: [
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:DAN_NHAT',
+      'TRUC:MAN',
+      'TRUC:THANH',
+      'TRUC:KHAI',
+      'YEU_TO:NGU_PHU',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'YEU_TO:DAI_HAO',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TIEU_HAO',
+      'YEU_TO:TU_HAO',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:TU_CUNG',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:CUU_KHONG',
+    ],
+  },
+  [LoaiCongViec.XUAT_HANH]: {
+    tieuDeHan: '行幸遣使〈出行同〉',
+    anchor: 'KR3g0051_WYG_011-11a..11b',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:VUONG_NHAT',
+      'YEU_TO:DICH_MA',
+      'YEU_TO:THIEN_MA',
+      'TRUC:KIEN',
+      'YEU_TO:CAT_KY',
+      'YEU_TO:THIEN_HY',
+      'TRUC:KHAI',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:THIEN_TAC',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:VANG_VONG',
+      'CHI_NGAY:TI',
+    ],
+    hanOnly: ['YEU_TO:NGUYET_YEM'],
+  },
+  [LoaiCongViec.AN_TANG]: {
+    tieuDeHan: '安葬',
+    anchor: 'KR3g0051_WYG_011-25b..26a',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:LUC_HOP',
+      'YEU_TO:O_PHE',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_KIEN',
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:TU_KY',
+      'YEU_TO:TU_CUNG',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:PHUC_NHAT',
+      'YEU_TO:TRONG_NHAT',
+    ],
+  },
+};
+
+const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
+  [LoaiCongViec.CUOI_HOI]: QUY_TAC_CUOI_HOI,
+  [LoaiCongViec.DI_CHUYEN]: QUY_TAC_DI_CHUYEN,
+  [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
+  [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
+  [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
+  [LoaiCongViec.XUAT_HANH]: QUY_TAC_XUAT_HANH_Q11,
+  [LoaiCongViec.AN_TANG]: QUY_TAC_AN_TANG,
+};
+
+describe('independent Hán Q11 oracle — WYG / Kanripo KR3g0051', () => {
+  for (const activity of Object.values(LoaiCongViec)) {
+    const fixture = HAN_Q11[activity];
+    const rules = PRODUCTION_Q11[activity];
+
+    it(`${activity}: 宜 matches Hán source ${fixture.tieuDeHan}`, () => {
+      const actual = tap(rules, TacDongDungSu.NEN);
+      expect(actual).toEqual(new Set(fixture.nen));
+    });
+
+    it(`${activity}: 忌 differs only by registered Việt/Hán discrepancies`, () => {
+      const actual = tap(rules, TacDongDungSu.KY);
+      const han = new Set(fixture.ky);
+
+      expect(hieu(han, actual)).toEqual(new Set(fixture.hanOnly ?? []));
+      expect(hieu(actual, han)).toEqual(new Set(fixture.productionOnly ?? []));
+    });
+
+    it(`${activity}: Hán fixture has a pinned WYG page anchor`, () => {
+      expect(fixture.anchor).toMatch(/^KR3g0051_WYG_011-/);
+    });
+  }
+
+  it('XUAT_HANH explicitly registers 月厭 as Hán-only Q11 discrepancy', () => {
+    expect(HAN_Q11[LoaiCongViec.XUAT_HANH].hanOnly).toEqual(['YEU_TO:NGUYET_YEM']);
+  });
+
+  it('no other implemented Q11 activity has an unregistered discrepancy', () => {
+    for (const activity of Object.values(LoaiCongViec)) {
+      if (activity === LoaiCongViec.XUAT_HANH) continue;
+      expect(HAN_Q11[activity].hanOnly ?? []).toEqual([]);
+      expect(HAN_Q11[activity].productionOnly ?? []).toEqual([]);
+    }
+  });
+});
+
+function tap(rules: readonly QuyTacDungSu[], tacDong: TacDongDungSu): Set<string> {
+  return new Set(rules.filter((rule) => rule.tacDong === tacDong).map((rule) => khoa(rule)));
+}
+
+function khoa(rule: QuyTacDungSu): string {
+  switch (rule.dieuKien.loai) {
+    case 'YEU_TO':
+      return 'YEU_TO:' + rule.dieuKien.ma;
+    case 'TRUC':
+      return 'TRUC:' + rule.dieuKien.truc;
+    case 'CHI_NGAY':
+      return 'CHI_NGAY:' + rule.dieuKien.chi;
+    case 'THO_VUONG':
+      return 'THO_VUONG';
+  }
+}
+
+function hieu(a: ReadonlySet<string>, b: ReadonlySet<string>): Set<string> {
+  return new Set([...a].filter((value) => !b.has(value)));
+}

@@ -1,0 +1,180 @@
+import { describe, expect, it } from 'vitest';
+
+import { DiaChi } from '../calendar/domain/earthly-branch';
+import { MaYeuTo } from '../factors/domain/factor-code';
+import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from '../factors/factor-definitions';
+
+const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
+
+type BangHanQ6 = Readonly<Record<DiaChi, readonly DiaChi[]>>;
+
+const HAN_Q6: Readonly<Partial<Record<MaYeuTo, BangHanQ6>>> = {
+  [MaYeuTo.TAM_HOP]: {
+    [DAN]: [NGO, TUAT],
+    [MAO]: [MUI, HOI],
+    [THIN]: [TY, THAN],
+    [TI]: [SUU, DAU],
+    [NGO]: [DAN, TUAT],
+    [MUI]: [MAO, HOI],
+    [THAN]: [TY, THIN],
+    [DAU]: [SUU, TI],
+    [TUAT]: [DAN, NGO],
+    [HOI]: [MAO, MUI],
+    [TY]: [THIN, THAN],
+    [SUU]: [TI, DAU],
+  },
+  [MaYeuTo.DICH_MA]: {
+    [DAN]: [THAN],
+    [MAO]: [TI],
+    [THIN]: [DAN],
+    [TI]: [HOI],
+    [NGO]: [THAN],
+    [MUI]: [TI],
+    [THAN]: [DAN],
+    [DAU]: [HOI],
+    [TUAT]: [THAN],
+    [HOI]: [TI],
+    [TY]: [DAN],
+    [SUU]: [HOI],
+  },
+  [MaYeuTo.KIEP_SAT]: {
+    [DAN]: [HOI],
+    [MAO]: [THAN],
+    [THIN]: [TI],
+    [TI]: [DAN],
+    [NGO]: [HOI],
+    [MUI]: [THAN],
+    [THAN]: [TI],
+    [DAU]: [DAN],
+    [TUAT]: [HOI],
+    [HOI]: [THAN],
+    [TY]: [TI],
+    [SUU]: [DAN],
+  },
+  [MaYeuTo.TAI_SAT]: {
+    [DAN]: [TY],
+    [MAO]: [DAU],
+    [THIN]: [NGO],
+    [TI]: [MAO],
+    [NGO]: [TY],
+    [MUI]: [DAU],
+    [THAN]: [NGO],
+    [DAU]: [MAO],
+    [TUAT]: [TY],
+    [HOI]: [DAU],
+    [TY]: [NGO],
+    [SUU]: [MAO],
+  },
+  [MaYeuTo.NGUYET_SAT]: {
+    [DAN]: [SUU],
+    [MAO]: [TUAT],
+    [THIN]: [MUI],
+    [TI]: [THIN],
+    [NGO]: [SUU],
+    [MUI]: [TUAT],
+    [THAN]: [MUI],
+    [DAU]: [THIN],
+    [TUAT]: [SUU],
+    [HOI]: [TUAT],
+    [TY]: [MUI],
+    [SUU]: [THIN],
+  },
+  [MaYeuTo.NGUYET_HINH]: {
+    [DAN]: [TI],
+    [MAO]: [TY],
+    [THIN]: [THIN],
+    [TI]: [THAN],
+    [NGO]: [NGO],
+    [MUI]: [SUU],
+    [THAN]: [DAN],
+    [DAU]: [DAU],
+    [TUAT]: [MUI],
+    [HOI]: [HOI],
+    [TY]: [MAO],
+    [SUU]: [TUAT],
+  },
+  [MaYeuTo.NGUYET_HAI]: {
+    [DAN]: [TI],
+    [MAO]: [THIN],
+    [THIN]: [MAO],
+    [TI]: [DAN],
+    [NGO]: [SUU],
+    [MUI]: [TY],
+    [THAN]: [HOI],
+    [DAU]: [TUAT],
+    [TUAT]: [DAU],
+    [HOI]: [THAN],
+    [TY]: [MUI],
+    [SUU]: [NGO],
+  },
+  [MaYeuTo.LUC_HOP]: {
+    [DAN]: [HOI],
+    [MAO]: [TUAT],
+    [THIN]: [DAU],
+    [TI]: [THAN],
+    [NGO]: [MUI],
+    [MUI]: [NGO],
+    [THAN]: [TI],
+    [DAU]: [THIN],
+    [TUAT]: [MAO],
+    [HOI]: [DAN],
+    [TY]: [SUU],
+    [SUU]: [TY],
+  },
+  [MaYeuTo.NGU_PHU]: {
+    [DAN]: [HOI],
+    [MAO]: [DAN],
+    [THIN]: [TI],
+    [TI]: [THAN],
+    [NGO]: [HOI],
+    [MUI]: [DAN],
+    [THAN]: [TI],
+    [DAU]: [THAN],
+    [TUAT]: [HOI],
+    [HOI]: [DAN],
+    [TY]: [TI],
+    [SUU]: [THAN],
+  },
+  [MaYeuTo.THIEN_THUONG]: {
+    [DAN]: [DAN],
+    [MAO]: [SUU],
+    [THIN]: [TY],
+    [TI]: [HOI],
+    [NGO]: [TUAT],
+    [MUI]: [DAU],
+    [THAN]: [THAN],
+    [DAU]: [MUI],
+    [TUAT]: [NGO],
+    [HOI]: [TI],
+    [TY]: [THIN],
+    [SUU]: [MAO],
+  },
+  [MaYeuTo.THIEN_TAC]: {
+    [DAN]: [SUU],
+    [MAO]: [TY],
+    [THIN]: [HOI],
+    [TI]: [TUAT],
+    [NGO]: [DAU],
+    [MUI]: [THAN],
+    [THAN]: [MUI],
+    [DAU]: [NGO],
+    [TUAT]: [TI],
+    [HOI]: [THIN],
+    [TY]: [MAO],
+    [SUU]: [DAN],
+  },
+};
+
+describe('independent Hán Q6 oracle — WYG / Kanripo KR3g0051', () => {
+  it.each(Object.entries(HAN_Q6))('%s matches Hán Q6 month->day-branch table', (ma, expected) => {
+    const actual = DINH_NGHIA_YEU_TO_THEO_CHI_THANG.find((item) => item.ma === ma);
+
+    expect(actual?.chiNgayTheoChiThang).toEqual(expected);
+  });
+
+  it('covers every implemented core Q6 definition', () => {
+    expect(new Set(Object.keys(HAN_Q6))).toEqual(
+      new Set(DINH_NGHIA_YEU_TO_THEO_CHI_THANG.map((item) => item.ma)),
+    );
+  });
+});

@@ -1,11 +1,5 @@
 export interface ThamChieuNguonApi {
   loaiNguon: 'BAN_VIET' | 'HAN_BAN';
-  tap?: number;
-  quyen: number;
-  trang?: number;
-  muc?: string;
-  tenGoc?: string;
-  ghiChu?: string;
   daXacMinh: boolean;
 }
 
@@ -66,6 +60,164 @@ export type KetQuaXemNgaySuaCungThatApi = KetQuaXemNgayApi;
 export type KetQuaXemNgayKhaiTruongApi = KetQuaXemNgayApi;
 export type KetQuaXemNgayXuatHanhApi = KetQuaXemNgayApi;
 export type KetQuaXemNgayAnTangApi = KetQuaXemNgayApi;
+
+export interface NguoiLienQuanXemNgayApi {
+  namSinh: number;
+  truocLapXuan: boolean;
+}
+
+export interface XungTuoiApi {
+  nguoiIndex: number;
+  namSinh: number;
+  canChiNamSinh: { can: string; chi: string };
+  xung: readonly {
+    tru: 'NAM' | 'THANG' | 'NGAY' | 'GIO';
+    mucDo: 'KHONG_XUNG' | 'XUNG_CHI' | 'THIEN_KHAC_DIA_XUNG';
+    xung: boolean;
+    moTa: string;
+  }[];
+}
+
+export interface NgayTrongThangApi {
+  ngayDanSu: string;
+  canChiNgay: { can: string; chi: string };
+  canChiThang: { can: string; chi: string };
+  canChiNam: { can: string; chi: string };
+  truc: string;
+  xepLoai: 'TOT' | 'TRUNG_BINH' | 'NEN_TRANH' | 'DAI_KY' | 'XUNG_TUOI';
+  coNen: boolean;
+  coKy: boolean;
+  camMoiViec: boolean;
+  xungTuoi: readonly XungTuoiApi[];
+  nen: readonly string[];
+  ky: readonly string[];
+}
+
+export interface GioThucHienApi {
+  chiGio: string;
+  canChiGio: { can: string; chi: string };
+  khoangGio: string;
+  xepLoai: 'NEN_DUNG' | 'TRUNG_BINH' | 'NEN_TRANH' | 'XUNG_TUOI';
+  lyDoTot: readonly string[];
+  lyDoTranh: readonly string[];
+  xungTuoi: readonly {
+    nguoiIndex: number;
+    namSinh: number;
+    canChiNamSinh: { can: string; chi: string };
+    xung: {
+      tru: 'NAM' | 'THANG' | 'NGAY' | 'GIO';
+      mucDo: 'KHONG_XUNG' | 'XUNG_CHI' | 'THIEN_KHAC_DIA_XUNG';
+      xung: boolean;
+      moTa: string;
+    };
+  }[];
+}
+
+export interface KetQuaChiTietNgayApi {
+  ketQuaNgay: KetQuaXemNgayApi;
+  gio: readonly GioThucHienApi[];
+}
+
+export interface KetQuaXemThangApi {
+  congViec: string;
+  nam: number;
+  thang: number;
+  muiGio: string;
+  nguoiLienQuan: readonly {
+    namSinh: number;
+    truocLapXuan: boolean;
+    canChiNamSinh: { can: string; chi: string };
+  }[];
+  ngay: readonly NgayTrongThangApi[];
+  thongKe: {
+    TOT: number;
+    TRUNG_BINH: number;
+    NEN_TRANH: number;
+    DAI_KY: number;
+    XUNG_TUOI: number;
+  };
+}
+
+export function taoUrlXemThang(
+  congViec: string,
+  nam: number,
+  thang: number,
+  muiGio: string,
+  nguoiLienQuan: readonly NguoiLienQuanXemNgayApi[],
+): string {
+  const query = new URLSearchParams({
+    congViec,
+    nam: String(nam),
+    thang: String(thang),
+    muiGio,
+  });
+
+  for (const nguoi of nguoiLienQuan) {
+    query.append('namSinh', String(nguoi.namSinh));
+    query.append('truocLapXuan', String(nguoi.truocLapXuan));
+  }
+
+  return '/date-selection/thang?' + query.toString();
+}
+
+export function taoUrlChiTietNgay(
+  congViec: string,
+  thoiDiem: Date,
+  muiGio: string,
+  nguoiLienQuan: readonly NguoiLienQuanXemNgayApi[],
+): string {
+  const query = new URLSearchParams({
+    congViec,
+    thoiDiem: thoiDiem.toISOString(),
+    muiGio,
+  });
+
+  for (const nguoi of nguoiLienQuan) {
+    query.append('namSinh', String(nguoi.namSinh));
+    query.append('truocLapXuan', String(nguoi.truocLapXuan));
+  }
+
+  return '/date-selection/chi-tiet?' + query.toString();
+}
+
+export async function xemChiTietNgay(
+  congViec: string,
+  thoiDiem: Date,
+  muiGio: string,
+  nguoiLienQuan: readonly NguoiLienQuanXemNgayApi[],
+  signal?: AbortSignal,
+): Promise<KetQuaChiTietNgayApi> {
+  const response = await fetch(taoUrlChiTietNgay(congViec, thoiDiem, muiGio, nguoiLienQuan), {
+    signal,
+  });
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as { message?: string } | null;
+    throw new Error(body?.message ?? 'Không thể xem chi tiết ngày (HTTP ' + response.status + ')');
+  }
+
+  return (await response.json()) as KetQuaChiTietNgayApi;
+}
+
+export async function xemThang(
+  congViec: string,
+  nam: number,
+  thang: number,
+  muiGio: string,
+  nguoiLienQuan: readonly NguoiLienQuanXemNgayApi[],
+  signal?: AbortSignal,
+): Promise<KetQuaXemThangApi> {
+  const response = await fetch(taoUrlXemThang(congViec, nam, thang, muiGio, nguoiLienQuan), {
+    signal,
+  });
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as { message?: string } | null;
+    throw new Error(body?.message ?? 'Không thể xem tháng (HTTP ' + response.status + ')');
+  }
+
+  return (await response.json()) as KetQuaXemThangApi;
+}
 
 export function taoUrlXemCuoiHoi(thoiDiem: Date, muiGio: string): string {
   return taoUrlXemNgay('cuoi-hoi', thoiDiem, muiGio);

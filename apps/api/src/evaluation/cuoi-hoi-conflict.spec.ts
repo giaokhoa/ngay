@@ -19,6 +19,17 @@ describe('Q10 CUOI_HOI conflict regression vectors', () => {
     expectTrangThai(result.dongGop, MaYeuTo.THIEN_DUC, TrangThaiDongGop.BI_LOAI);
   });
 
+  it('Nguyệt Phá tháng Mão + Tai Sát + Nguyệt Yếm: mọi việc Kị dù gặp Đức', () => {
+    const result = danhGia({
+      chiThang: DiaChi.MAO,
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.TAI_SAT, MaYeuTo.NGUYET_YEM, MaYeuTo.NGUYET_DUC],
+    });
+
+    expect(result.camMoiViec).toBe(true);
+    expect(result.coKy).toBe(true);
+    expectTrangThai(result.dongGop, MaYeuTo.NGUYET_DUC, TrangThaiDongGop.BI_LOAI);
+  });
+
   it('Tứ Phế + Nguyệt Đức: vẫn Kị', () => {
     const result = danhGia({ yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.NGUYET_DUC] });
     expectTrangThai(result.dongGop, MaYeuTo.TU_PHE, TrangThaiDongGop.HIEU_LUC);

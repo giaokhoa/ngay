@@ -1,7 +1,18 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router';
 
-import { DongGopDanhGiaApi, KetQuaXemNgayApi, ThamChieuNguonApi } from '../api/date-selection';
+import {
+  DongGopDanhGiaApi,
+  GioThucHienApi,
+  KetQuaChiTietNgayApi,
+  KetQuaXemNgayApi,
+  KetQuaXemThangApi,
+  NgayTrongThangApi,
+  NguoiLienQuanXemNgayApi,
+  ThamChieuNguonApi,
+  xemChiTietNgay,
+  xemThang,
+} from '../api/date-selection';
 import { DUONG_DAN } from '../routes';
 
 const NHAN_YEU_TO: Readonly<Record<string, string>> = {
@@ -16,8 +27,8 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   THOI_DUC: 'Thời Đức',
   PHUC_DUC: 'Phúc Đức',
   NGUYET_KIEN: 'Nguyệt Kiến',
-  THO_PHU: 'Thổ Phủ (土府)',
-  THO_PHU_TIN: 'Thổ Phù (土符)',
+  THO_PHU: 'Thổ Phủ',
+  THO_PHU_TIN: 'Thổ Phù',
   DIA_NANG: 'Địa Nang',
   DAN_NHAT: 'Dân Nhật',
   VUONG_NHAT: 'Vương Nhật',
@@ -56,21 +67,42 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   TRONG_NHAT: 'Trọng Nhật',
 };
 
+const THU = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'] as const;
+
 export interface CauHinhTrangXemNgay {
   tieuDe: string;
   nhanNguon: string;
   moTa: string;
-  taiKetQua: (thoiDiem: Date, muiGio: string) => Promise<KetQuaXemNgayApi>;
+  congViec: string;
+  nhanNguoi: readonly string[];
 }
 
-export function TrangXemNgay({ tieuDe, nhanNguon, moTa, taiKetQua }: CauHinhTrangXemNgay) {
-  const [ngay, setNgay] = useState(() => dinhDangNgayInput(new Date()));
+interface FormNguoi {
+  namSinh: string;
+  truocLapXuan: boolean;
+}
+
+export function TrangXemNgay({
+  tieuDe,
+  nhanNguon,
+  moTa,
+  congViec,
+  nhanNguoi,
+}: CauHinhTrangXemNgay) {
+  const [thang, setThang] = useState(() => dinhDangThangInput(new Date()));
+  const [nguoi, setNguoi] = useState<readonly FormNguoi[]>(() =>
+    nhanNguoi.map(() => ({ namSinh: '', truocLapXuan: false })),
+  );
   const muiGio = useMemo(
     () => Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Ho_Chi_Minh',
     [],
   );
-  const [ketQua, setKetQua] = useState<KetQuaXemNgayApi | null>(null);
+  const [ketQuaThang, setKetQuaThang] = useState<KetQuaXemThangApi | null>(null);
+  const [chiTietNgay, setChiTietNgay] = useState<KetQuaChiTietNgayApi | null>(null);
+  const [nguoiDaXem, setNguoiDaXem] = useState<readonly NguoiLienQuanXemNgayApi[]>([]);
+  const [ngayDangXem, setNgayDangXem] = useState<string | null>(null);
   const [dangTai, setDangTai] = useState(false);
+  const [dangTaiNgay, setDangTaiNgay] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
 
   useEffect(() => {
@@ -81,21 +113,46 @@ export function TrangXemNgay({ tieuDe, nhanNguon, moTa, taiKetQua }: CauHinhTran
     event.preventDefault();
     setDangTai(true);
     setLoi(null);
+    setChiTietNgay(null);
+    setNgayDangXem(null);
 
     try {
-      const thoiDiem = taoNoonLocalDate(ngay);
-      setKetQua(await taiKetQua(thoiDiem, muiGio));
+      const { nam, thangSo } = docThangInput(thang);
+      const nguoiLienQuan = docNguoiLienQuan(nguoi);
+      setNguoiDaXem(nguoiLienQuan);
+      setKetQuaThang(await xemThang(congViec, nam, thangSo, muiGio, nguoiLienQuan));
     } catch (error) {
-      setKetQua(null);
-      setLoi(error instanceof Error ? error.message : 'Không thể xem ngày');
+      setKetQuaThang(null);
+      setLoi(error instanceof Error ? error.message : 'Không thể xem tháng');
     } finally {
       setDangTai(false);
     }
   }
 
+  async function xemChiTiet(ngay: string) {
+    setDangTaiNgay(true);
+    setLoi(null);
+    setNgayDangXem(ngay);
+
+    try {
+      setChiTietNgay(await xemChiTietNgay(congViec, taoNoonLocalDate(ngay), muiGio, nguoiDaXem));
+    } catch (error) {
+      setChiTietNgay(null);
+      setLoi(error instanceof Error ? error.message : 'Không thể xem chi tiết ngày');
+    } finally {
+      setDangTaiNgay(false);
+    }
+  }
+
+  function suaNguoi(index: number, patch: Partial<FormNguoi>) {
+    setNguoi((current) =>
+      current.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item)),
+    );
+  }
+
   return (
     <main className="trang-xem-ngay">
-      <header className="dau-trang">
+      <header className="dau-trang dau-trang-xem-ngay">
         <Link className="thuong-hieu" to={DUONG_DAN.TRANG_CHU}>
           Ngày
         </Link>
@@ -106,28 +163,270 @@ export function TrangXemNgay({ tieuDe, nhanNguon, moTa, taiKetQua }: CauHinhTran
         </div>
       </header>
 
-      <form className="bo-chon-ngay" onSubmit={gui}>
-        <label>
-          <span>Ngày muốn xem</span>
+      <section className="ghi-chu-tuong-chu">
+        <strong>Xét theo năm sinh, không bắt buộc ngày giờ sinh.</strong>
+        <p>
+          Hiệp Kỷ dùng năm sinh của người liên quan để tránh xung mệnh. Nếu sinh trước Lập Xuân
+          (thường đầu tháng 2), đánh dấu để dùng Can-Chi của năm trước. Khi chọn được ngày, bước
+          tiếp theo mới xét giờ của thời điểm thực hiện.
+        </p>
+      </section>
+
+      <form className="bo-chon-thang" onSubmit={gui}>
+        <label className="truong-thang">
+          <span>Tháng muốn xem</span>
           <input
-            type="date"
-            value={ngay}
-            onChange={(event) => setNgay(event.target.value)}
+            type="month"
+            value={thang}
+            onChange={(event) => setThang(event.target.value)}
             required
           />
         </label>
-        <label>
-          <span>Múi giờ</span>
-          <input type="text" value={muiGio} readOnly />
-        </label>
-        <button type="submit" disabled={dangTai}>
-          {dangTai ? 'Đang đối chiếu…' : 'Xem ngày'}
-        </button>
+
+        {nguoi.map((item, index) => (
+          <fieldset className="truong-nguoi" key={nhanNguoi[index] ?? index}>
+            <legend>{nhanNguoi[index] ?? 'Người liên quan'}</legend>
+            <label>
+              <span>Năm sinh</span>
+              <input
+                type="number"
+                min="1900"
+                max="2100"
+                inputMode="numeric"
+                placeholder="Ví dụ: 1990"
+                value={item.namSinh}
+                onChange={(event) => suaNguoi(index, { namSinh: event.target.value })}
+                required
+              />
+            </label>
+            <label className="chon-lap-xuan">
+              <input
+                type="checkbox"
+                checked={item.truocLapXuan}
+                onChange={(event) => suaNguoi(index, { truocLapXuan: event.target.checked })}
+              />
+              <span>Sinh trước Lập Xuân</span>
+            </label>
+          </fieldset>
+        ))}
+
+        <div className="hanh-dong-xem-thang">
+          <span className="mui-gio">Múi giờ: {muiGio}</span>
+          <button type="submit" disabled={dangTai}>
+            {dangTai ? 'Đang đối chiếu…' : 'Tìm ngày phù hợp'}
+          </button>
+        </div>
       </form>
 
       {loi ? <p className="thong-bao-loi">{loi}</p> : null}
-      {ketQua ? <KetQuaXemNgay ketQua={ketQua} /> : null}
+
+      {ketQuaThang ? (
+        <KetQuaThang
+          ketQua={ketQuaThang}
+          nhanNguoi={nhanNguoi}
+          ngayDangXem={ngayDangXem}
+          onChonNgay={xemChiTiet}
+        />
+      ) : null}
+
+      {dangTaiNgay ? <p className="dang-tai-ngay">Đang mở chi tiết ngày…</p> : null}
+      {chiTietNgay ? (
+        <section className="chi-tiet-ngay">
+          <div className="tieu-de-chi-tiet">
+            <p className="nhan">Chi tiết ngày đã chọn</p>
+            <h2>{dinhDangNgayViet(chiTietNgay.ketQuaNgay.ngayDanSu)}</h2>
+          </div>
+          <KetQuaXemNgay ketQua={chiTietNgay.ketQuaNgay} />
+          <BangGio gio={chiTietNgay.gio} nhanNguoi={nhanNguoi} />
+        </section>
+      ) : null}
     </main>
+  );
+}
+
+function KetQuaThang({
+  ketQua,
+  nhanNguoi,
+  ngayDangXem,
+  onChonNgay,
+}: {
+  ketQua: KetQuaXemThangApi;
+  nhanNguoi: readonly string[];
+  ngayDangXem: string | null;
+  onChonNgay: (ngay: string) => void;
+}) {
+  const offset = thuDauThang(ketQua.nam, ketQua.thang);
+  const oTrong = Array.from({ length: offset }, (_, index) => index);
+
+  return (
+    <section className="ket-qua-thang" aria-live="polite">
+      <div className="dau-ket-qua-thang">
+        <div>
+          <p className="nhan">Kết quả theo tháng</p>
+          <h2>
+            Tháng {ketQua.thang}/{ketQua.nam}
+          </h2>
+        </div>
+        <div className="thong-ke-thang">
+          <ThongKeNgay value={ketQua.thongKe.TOT} label="Tốt" loai="tot" />
+          <ThongKeNgay value={ketQua.thongKe.TRUNG_BINH} label="Trung bình" loai="trung-binh" />
+          <ThongKeNgay value={ketQua.thongKe.NEN_TRANH} label="Nên tránh" loai="nen-tranh" />
+          <ThongKeNgay value={ketQua.thongKe.DAI_KY} label="Đại kỵ" loai="dai-ky" />
+          <ThongKeNgay value={ketQua.thongKe.XUNG_TUOI} label="Xung tuổi" loai="xung-tuoi" />
+        </div>
+      </div>
+
+      <div className="menh-da-dung">
+        {ketQua.nguoiLienQuan.map((nguoi, index) => (
+          <div key={(nhanNguoi[index] ?? index) + ':' + nguoi.namSinh}>
+            <span>{nhanNguoi[index] ?? 'Người liên quan'}</span>
+            <strong>
+              {nhanCan(nguoi.canChiNamSinh.can)} {nhanDiaChi(nguoi.canChiNamSinh.chi)}
+            </strong>
+            <small>
+              Sinh năm {nguoi.namSinh}
+              {nguoi.truocLapXuan ? ' · tính theo năm Can-Chi trước' : ''}
+            </small>
+          </div>
+        ))}
+      </div>
+
+      <p className="giai-thich-xep-loai">
+        Không dùng điểm cộng trừ. Ngày xung năm sinh được loại trước; tiếp đến đại kỵ và các điều kị
+        đang hiệu lực. “Tốt” là ngày có điều nên mà không còn điều kị hiệu lực.
+      </p>
+
+      <div className="lich-thang">
+        {THU.map((thu) => (
+          <div className="ten-thu" key={thu}>
+            {thu}
+          </div>
+        ))}
+        {oTrong.map((index) => (
+          <div className="o-ngay o-trong" key={'blank-' + index} />
+        ))}
+        {ketQua.ngay.map((ngay) => (
+          <NgayCard
+            key={ngay.ngayDanSu}
+            ngay={ngay}
+            nhanNguoi={nhanNguoi}
+            dangChon={ngayDangXem === ngay.ngayDanSu}
+            onChon={() => onChonNgay(ngay.ngayDanSu)}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function NgayCard({
+  ngay,
+  nhanNguoi,
+  dangChon,
+  onChon,
+}: {
+  ngay: NgayTrongThangApi;
+  nhanNguoi: readonly string[];
+  dangChon: boolean;
+  onChon: () => void;
+}) {
+  const ngaySo = Number(ngay.ngayDanSu.slice(-2));
+
+  return (
+    <button
+      type="button"
+      className={
+        'o-ngay ngay-' +
+        ngay.xepLoai.toLowerCase().replace('_', '-') +
+        (dangChon ? ' dang-chon' : '')
+      }
+      onClick={onChon}
+    >
+      <span className="so-ngay">{ngaySo}</span>
+      <span className="can-chi-ngay">
+        {nhanCan(ngay.canChiNgay.can)} {nhanDiaChi(ngay.canChiNgay.chi)}
+      </span>
+      <span className="truc-ngay">Trực {nhanTruc(ngay.truc)}</span>
+      <strong className="nhan-xep-loai">{nhanXepLoai(ngay.xepLoai)}</strong>
+      {ngay.xungTuoi.length > 0 ? (
+        <small className="ly-do-tuoi">
+          {ngay.xungTuoi
+            .map((item) => {
+              const ten = nhanNguoi[item.nguoiIndex] ?? 'Người liên quan';
+              const tru = item.xung.map((xung) => nhanTru(xung.tru)).join(', ');
+              return ten + ': xung ' + tru;
+            })
+            .join(' · ')}
+        </small>
+      ) : null}
+    </button>
+  );
+}
+
+function ThongKeNgay({ value, label, loai }: { value: number; label: string; loai: string }) {
+  return (
+    <div className={'thong-ke-ngay ' + loai}>
+      <strong>{value}</strong>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+function BangGio({
+  gio,
+  nhanNguoi,
+}: {
+  gio: readonly GioThucHienApi[];
+  nhanNguoi: readonly string[];
+}) {
+  return (
+    <section className="the bang-gio">
+      <div className="dau-bang-gio">
+        <div>
+          <p className="nhan">Giờ thực hiện</p>
+          <h3>Chọn giờ sau khi đã chọn ngày</h3>
+        </div>
+        <p>Ưu tiên giờ trợ ngày; tránh giờ phá, hình, Ngũ Bất Ngộ và giờ xung năm sinh.</p>
+      </div>
+      <div className="luoi-gio">
+        {gio.map((item) => (
+          <article
+            className={'the-gio gio-' + item.xepLoai.toLowerCase().replace('_', '-')}
+            key={item.chiGio}
+          >
+            <div className="ten-gio">
+              <strong>Giờ {nhanDiaChi(item.chiGio)}</strong>
+              <span>{item.khoangGio}</span>
+            </div>
+            <p className="can-chi-gio">
+              {nhanCan(item.canChiGio.can)} {nhanDiaChi(item.canChiGio.chi)}
+            </p>
+            <span className="nhan-gio">{nhanXepLoaiGio(item.xepLoai)}</span>
+            {item.lyDoTot.length > 0 ? (
+              <ul className="ly-do-gio ly-do-tot">
+                {item.lyDoTot.map((lyDo) => (
+                  <li key={lyDo}>{lyDo}</li>
+                ))}
+              </ul>
+            ) : null}
+            {item.lyDoTranh.length > 0 ? (
+              <ul className="ly-do-gio ly-do-tranh">
+                {item.lyDoTranh.map((lyDo) => (
+                  <li key={lyDo}>{lyDo}</li>
+                ))}
+              </ul>
+            ) : null}
+            {item.xungTuoi.length > 0 ? (
+              <p className="xung-tuoi-gio">
+                {item.xungTuoi
+                  .map((xung) => (nhanNguoi[xung.nguoiIndex] ?? 'Người liên quan') + ': xung tuổi')
+                  .join(' · ')}
+              </p>
+            ) : null}
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -138,25 +437,25 @@ function KetQuaXemNgay({ ketQua }: { ketQua: KetQuaXemNgayApi }) {
   const biLoai = ketQua.danhGia.dongGop.filter((item) => item.trangThai === 'BI_LOAI');
 
   return (
-    <section className="ket-qua" aria-live="polite">
+    <section className="ket-qua">
       <div className="tong-quan">
         <div>
-          <p className="nhan">Ngày dân sự {ketQua.ngayDanSu}</p>
+          <p className="nhan">Can Chi ngày</p>
           <h2>
             {nhanCan(ketQua.canChiNgay.can)} {nhanDiaChi(ketQua.canChiNgay.chi)}
           </h2>
         </div>
         <div className="thong-so">
-          <span>Tháng: {nhanDiaChi(ketQua.chiThang)}</span>
+          <span>Tháng tiết khí: {nhanDiaChi(ketQua.chiThang)}</span>
           <span>Trực: {nhanTruc(ketQua.truc)}</span>
           {ketQua.dangThoVuong ? <span className="nhan-trang-thai">Đang Thổ Vượng</span> : null}
-          {ketQua.danhGia.camMoiViec ? <strong>Quyển 10: mọi việc đều kị</strong> : null}
+          {ketQua.danhGia.camMoiViec ? <strong>Đối chiếu nghi kị: mọi việc đều kị</strong> : null}
         </div>
       </div>
 
       <div className="hai-cot">
-        <NhomDongGop tieuDe="Nên" items={nen} rong="Không có Nên đang hiệu lực." />
-        <NhomDongGop tieuDe="Kị" items={ky} rong="Không có Kị đang hiệu lực." />
+        <NhomDongGop tieuDe="Nên" items={nen} rong="Không có điều nên đang hiệu lực." />
+        <NhomDongGop tieuDe="Kị" items={ky} rong="Không có điều kị đang hiệu lực." />
       </div>
 
       {ketQua.danhGia.xungDotDaApDung.length > 0 ? (
@@ -174,8 +473,8 @@ function KetQuaXemNgay({ ketQua }: { ketQua: KetQuaXemNgayApi }) {
       ) : null}
 
       {biLoai.length > 0 ? (
-        <section className="the">
-          <h3>Rule bị triệt/loại</h3>
+        <details className="the">
+          <summary>Các điều đã được hóa giải hoặc loại</summary>
           <ul className="danh-sach-trace">
             {biLoai.map((item) => (
               <li key={item.quyTac.ma}>
@@ -187,11 +486,11 @@ function KetQuaXemNgay({ ketQua }: { ketQua: KetQuaXemNgayApi }) {
               </li>
             ))}
           </ul>
-        </section>
+        </details>
       ) : null}
 
       <details className="the">
-        <summary>Yếu tố ngày và provenance</summary>
+        <summary>Thần sát và nguồn đối chiếu</summary>
         <ul className="danh-sach-trace">
           {ketQua.yeuTo.map((yeuTo) => (
             <li key={yeuTo.ma}>
@@ -234,26 +533,75 @@ function NhomDongGop({
 }
 
 function Nguon({ nguon }: { nguon: readonly ThamChieuNguonApi[] }) {
-  return (
-    <small className="nguon">
-      {nguon
-        .map((item) => {
-          const ban = item.loaiNguon === 'BAN_VIET' ? 'Bản Việt' : 'Hán bản';
-          const tap = item.tap ? ' Tập ' + item.tap : '';
-          const trang = item.trang ? ' tr. ' + item.trang : '';
-          return ban + tap + ' · Q' + item.quyen + trang;
-        })
-        .join(' · ')}
-    </small>
-  );
+  const coViet = nguon.some((item) => item.loaiNguon === 'BAN_VIET');
+  const coHan = nguon.some((item) => item.loaiNguon === 'HAN_BAN');
+  const labels = [
+    coViet ? 'Bản Việt đã đối chiếu' : null,
+    coHan ? 'Hán bản đã đối chiếu' : null,
+  ].filter((item): item is string => item !== null);
+
+  return <small className="nguon">{labels.join(' · ')}</small>;
+}
+
+function docNguoiLienQuan(nguoi: readonly FormNguoi[]): readonly NguoiLienQuanXemNgayApi[] {
+  return nguoi.map((item) => {
+    const namSinh = Number(item.namSinh);
+    const namHienTai = new Date().getFullYear();
+
+    if (!Number.isInteger(namSinh) || namSinh < 1900 || namSinh > namHienTai) {
+      throw new RangeError('Năm sinh phải từ 1900 đến ' + namHienTai);
+    }
+
+    return {
+      namSinh,
+      truocLapXuan: item.truocLapXuan,
+    };
+  });
 }
 
 function nhanDieuKien(item: DongGopDanhGiaApi): string {
   const condition = item.quyTac.dieuKien;
-  if (condition.loai === 'YEU_TO') return NHAN_YEU_TO[condition.ma ?? ''] ?? condition.ma ?? '';
-  if (condition.loai === 'TRUC') return 'Trực ' + nhanTruc(condition.truc ?? '');
-  if (condition.loai === 'CHI_NGAY') return 'Ngày ' + nhanDiaChi(condition.chi ?? '');
+  if (condition.loai === 'YEU_TO') {
+    return NHAN_YEU_TO[condition.ma ?? ''] ?? condition.ma ?? '';
+  }
+  if (condition.loai === 'TRUC') {
+    return 'Trực ' + nhanTruc(condition.truc ?? '');
+  }
+  if (condition.loai === 'CHI_NGAY') {
+    return 'Ngày ' + nhanDiaChi(condition.chi ?? '');
+  }
   return 'Thổ Vượng dụng sự';
+}
+
+function nhanXepLoai(value: NgayTrongThangApi['xepLoai']): string {
+  const map: Readonly<Record<NgayTrongThangApi['xepLoai'], string>> = {
+    TOT: 'Tốt',
+    TRUNG_BINH: 'Trung bình',
+    NEN_TRANH: 'Nên tránh',
+    DAI_KY: 'Đại kỵ',
+    XUNG_TUOI: 'Xung tuổi',
+  };
+  return map[value];
+}
+
+function nhanXepLoaiGio(value: GioThucHienApi['xepLoai']): string {
+  const map: Readonly<Record<GioThucHienApi['xepLoai'], string>> = {
+    NEN_DUNG: 'Nên dùng',
+    TRUNG_BINH: 'Trung bình',
+    NEN_TRANH: 'Nên tránh',
+    XUNG_TUOI: 'Xung tuổi',
+  };
+  return map[value];
+}
+
+function nhanTru(value: 'NAM' | 'THANG' | 'NGAY' | 'GIO'): string {
+  const map = {
+    NAM: 'năm',
+    THANG: 'tháng',
+    NGAY: 'ngày',
+    GIO: 'giờ',
+  } as const;
+  return map[value];
 }
 
 function nhanCan(value: string): string {
@@ -308,21 +656,35 @@ function nhanTruc(value: string): string {
   return map[value] ?? value;
 }
 
-function dinhDangNgayInput(date: Date): string {
-  const nam = date.getFullYear();
-  const thang = String(date.getMonth() + 1).padStart(2, '0');
-  const ngay = String(date.getDate()).padStart(2, '0');
-  return [nam, thang, ngay].join('-');
+function dinhDangThangInput(date: Date): string {
+  return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0')].join('-');
+}
+
+function docThangInput(value: string): { nam: number; thangSo: number } {
+  const match = /^(\d{4})-(\d{2})$/.exec(value);
+  if (!match) throw new RangeError('Tháng không hợp lệ');
+
+  const nam = Number(match[1]);
+  const thangSo = Number(match[2]);
+  if (thangSo < 1 || thangSo > 12) {
+    throw new RangeError('Tháng không hợp lệ');
+  }
+  return { nam, thangSo };
 }
 
 function taoNoonLocalDate(value: string): Date {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
-  if (!match) {
-    throw new RangeError('Ngày không hợp lệ');
-  }
+  if (!match) throw new RangeError('Ngày không hợp lệ');
 
-  const nam = Number(match[1]);
-  const thang = Number(match[2]);
-  const ngay = Number(match[3]);
-  return new Date(nam, thang - 1, ngay, 12, 0, 0, 0);
+  return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12, 0, 0, 0);
+}
+
+function thuDauThang(nam: number, thang: number): number {
+  const sundayBased = new Date(Date.UTC(nam, thang - 1, 1)).getUTCDay();
+  return (sundayBased + 6) % 7;
+}
+
+function dinhDangNgayViet(value: string): string {
+  const [nam, thang, ngay] = value.split('-');
+  return [ngay, thang, nam].join('/');
 }

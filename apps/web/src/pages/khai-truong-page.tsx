@@ -1,4 +1,3 @@
-import { xemNgayKhaiTruong } from '../api/date-selection';
 import { TrangXemNgay } from '../components/activity-date-page';
 
 export function TrangKhaiTruong() {
@@ -6,8 +5,9 @@ export function TrangKhaiTruong() {
     <TrangXemNgay
       tieuDe="Khai trương"
       nhanNguon="開市"
-      moTa="Dụng sự Quyển 11 cho khai trương, kết hợp toàn bộ Nghi kị Quyển 10 đã source-lock từ bản Việt canonical và Hán bản đối chiếu."
-      taiKetQua={xemNgayKhaiTruong}
+      moTa="Chọn ngày khai trương theo điều nên, kị và ngoại lệ của Hiệp Kỷ, có xét năm sinh người chủ sự."
+      congViec="KHAI_TRUONG"
+      nhanNguoi={['Người chủ sự']}
     />
   );
 }

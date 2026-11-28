@@ -6,7 +6,6 @@ export default defineConfig({
   server: {
     proxy: {
       '/date-selection': 'http://localhost:3000',
-      '/knowledge': 'http://localhost:3000',
       '/health': 'http://localhost:3000',
       '/metrics': 'http://localhost:3000',
     },

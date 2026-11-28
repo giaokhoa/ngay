@@ -1,4 +1,3 @@
-import { xemNgayDongTho, xemNgaySuaCungThat } from '../api/date-selection';
 import { TrangXemNgay } from '../components/activity-date-page';
 
 export function TrangDongTho() {
@@ -6,8 +5,9 @@ export function TrangDongTho() {
     <TrangXemNgay
       tieuDe="Khởi tạo động thổ"
       nhanNguon="興造動土〈修造同〉"
-      moTa="Dụng sự Quyển 11 cho khởi tạo động thổ/tu tạo, kết hợp Nghi kị Quyển 10 đã source-lock cho Thổ Phù, Địa Nang và Thổ Vượng."
-      taiKetQua={xemNgayDongTho}
+      moTa="Chọn ngày khởi tạo động thổ/tu tạo theo Hiệp Kỷ, có xét năm sinh chủ nhà cùng Thổ Phù, Địa Nang và Thổ Vượng."
+      congViec="DONG_THO"
+      nhanNguoi={['Chủ nhà']}
     />
   );
 }
@@ -17,8 +17,9 @@ export function TrangSuaCungThat() {
     <TrangXemNgay
       tieuDe="Sửa cung thất"
       nhanNguon="修宮室"
-      moTa="Dụng sự Quyển 11 cho sửa cung thất, giữ riêng Thổ Phủ 土府, Thổ Phù 土符, Địa Nang và calendar fact Thổ Vượng."
-      taiKetQua={xemNgaySuaCungThat}
+      moTa="Chọn ngày sửa cung thất theo Hiệp Kỷ, có xét năm sinh chủ nhà, Thổ Phủ, Thổ Phù, Địa Nang và Thổ Vượng."
+      congViec="SUA_CUNG_THAT"
+      nhanNguoi={['Chủ nhà']}
     />
   );
 }

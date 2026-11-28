@@ -8,8 +8,9 @@ logic trạch cát.
 - [x] API validate `HOST` / `PORT` và fail-fast.
 - [x] Graceful shutdown hooks cho API.
 - [x] Production web server chạy trực tiếp artifact `dist/`, không cần Vite dev server.
-- [x] SPA history fallback cho các route như `/rules`, `/an-tang`.
-- [x] Same-origin reverse proxy cho `/date-selection`, `/knowledge`, `/health`.
+- [x] SPA history fallback cho các route consumer như `/cuoi-hoi`, `/an-tang`.
+- [x] Same-origin reverse proxy chỉ cho `/date-selection` và `/health`.
+- [x] `/knowledge/*` và `/metrics` không được public qua web edge.
 - [x] API/PG không cần publish ra host trong production compose.
 
 ## Persistence / knowledge catalog
@@ -20,11 +21,12 @@ logic trạch cát.
 - [x] JSONB target/condition có GIN index.
 - [x] Readiness kiểm PostgreSQL khi `DATABASE_URL` được cấu hình.
 
-## Source viewer / research tooling
+## Research tooling nội bộ
 
-- [x] `/rules` query được activity, Q10/Q11, target, Quyển, trang và text.
-- [x] UI hiển thị provenance Việt/Hán và JSONB target/condition.
+- [x] Knowledge API query được activity/layer/target/source metadata trong private API network.
+- [x] Consumer web không expose rule browser, source page number hay mã nghiên cứu.
 - [x] Stable source/rule identities có constraint ở PostgreSQL.
+- [x] Hán corpus manifest/discrepancy registry nằm trong code/test/docs nội bộ.
 
 ## Performance
 
@@ -106,9 +108,9 @@ Smoke:
 
 ```bash
 curl -fsS http://127.0.0.1:8080/
-curl -fsS http://127.0.0.1:8080/rules
+curl -fsS http://127.0.0.1:8080/cuoi-hoi
 curl -fsS http://127.0.0.1:8080/health/ready
-curl -fsS 'http://127.0.0.1:8080/knowledge/rules?activity=AN_TANG&layer=Q10&target=PHUC_NHAT&book=10&page=823'
+curl -fsS 'http://127.0.0.1:8080/date-selection/thang?congViec=CUOI_HOI&nam=2026&thang=11&muiGio=Asia%2FHo_Chi_Minh&namSinh=1990&truocLapXuan=false&namSinh=1992&truocLapXuan=false'
 curl -fsS http://127.0.0.1:3000/metrics
 ```
 
@@ -123,7 +125,7 @@ export WEB_PORT=8080
 pnpm prod:up
 ```
 
-Mở `http://localhost:8080/rules`.
+Mở `http://localhost:8080/` và chọn một công việc để chạy flow tháng → ngày → giờ.
 
 Dừng:
 

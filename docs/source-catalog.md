@@ -35,12 +35,62 @@ Không được dùng hash của working copy để thay identity của file use
 
 Hiện catalog chưa có fingerprint của một **file scan Hán bản do người dùng upload**.
 
+Nguồn Hán online được pin để làm independent comparison/oracle:
+
+### Kanripo KR3g0051
+
+- Tác phẩm: `欽定協紀辨方書`
+- Repository: `https://github.com/kanripo/KR3g0051`
+- Corpus khai báo base edition: `WYG` — 文淵閣四庫全書
+- Git revision:
+  `8b5522eb0299afbd575f1cb556e972c71c40c42a`
+- Vai trò: machine-readable Hán oracle / page-anchor source.
+- Lưu ý: revision này chỉ có 35 file text và **thiếu 卷十四**.
+  Sau Q13, file `KR3g0051_014.txt` là 卷十五.
+
+SHA-256 từng file + mapping đúng số quyển nằm trong:
+
+`apps/api/src/sources/han-source-manifest.ts`.
+
+### Wikisource fallback cho 卷十四
+
+- Tác phẩm: `欽定協紀辨方書 (四庫全書本)/卷14`
+- Revision: `627109`
+- Timestamp: `2016-10-14T03:23:42Z`
+- Raw SHA-256:
+  `0db8d3d973392758282bfb49b98e71de30447114d8a8bf06ff54ebeaf01c3c8e`
+- Vai trò: lấp đúng gap Q14 của Kanripo; không dùng để giả rằng Kanripo có Q14.
+
+### Quan hệ với bản Việt
+
+Cấu trúc 36 quyển Hán khớp hệ của bản dịch Việt:
+
+- Q1–2 本原;
+- Q3–8 義例;
+- Q9 立成;
+- Q10 宜忌;
+- Q11 用事;
+- Q12–13 公規;
+- Q14–19 年表;
+- Q20–31 月表;
+- Q32 日表;
+- Q33–34 利用;
+- Q35 附錄;
+- Q36 辨訛.
+
+Do đó đây là cùng tác phẩm/cùng hệ văn bản và có thể dùng làm nguồn đối chiếu thứ hai.
+Không được suy ra rằng hai bản giống từng dòng.
+
+Chi tiết completeness/double-entry:
+`docs/han-source-completeness.md`.
+
 Quy tắc đối chiếu:
 
 1. đọc đúng trang/bảng của bản Việt canonical trước;
 2. đối chiếu Hán bản cùng quyển/mục;
 3. nếu Hán bản chỉ truy cập qua transcription/số hóa online, ghi rõ đó là công cụ đối chiếu, không gọi là file user cung cấp;
-4. nếu sau này có Hán scan upload, thêm page count + SHA-256 vào catalog và ưu tiên ảnh scan khi có khác biệt transcription.
+4. discrepancy/transcription ambiguity phải vào registry, không normalize ngầm;
+5. nếu sau này có Hán scan upload, thêm page count + SHA-256 vào catalog và ưu tiên ảnh scan khi có khác biệt transcription.
 
 ## Guardrail
 

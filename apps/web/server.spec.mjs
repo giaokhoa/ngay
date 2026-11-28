@@ -42,7 +42,7 @@ describe('production web server', () => {
     expect(asset.headers.get('cache-control')).toContain('immutable');
   });
 
-  it('proxies API paths same-origin and preserves a safe request id', async () => {
+  it('proxies consumer API paths same-origin and preserves a safe request id', async () => {
     const upstream = createServer((request, response) => {
       response.setHeader('content-type', 'application/json');
       response.setHeader('x-request-id', request.headers['x-request-id'] ?? '');
@@ -59,16 +59,34 @@ describe('production web server', () => {
     const server = taoMayChuWeb({ distDir, apiOrigin: upstreamUrl });
     const baseUrl = await listen(server);
 
-    const response = await fetch(baseUrl + '/knowledge/rules?activity=AN_TANG', {
+    const response = await fetch(baseUrl + '/date-selection/an-tang?demo=1', {
       headers: { 'x-request-id': 'demo-request-123' },
     });
 
     expect(response.status).toBe(200);
     expect(response.headers.get('x-request-id')).toBe('demo-request-123');
     expect(await response.json()).toEqual({
-      url: '/knowledge/rules?activity=AN_TANG',
+      url: '/date-selection/an-tang?demo=1',
       requestId: 'demo-request-123',
     });
+  });
+
+  it('returns 404 for the internal knowledge API on the public web edge', async () => {
+    const upstream = createServer((_request, response) => {
+      response.statusCode = 200;
+      response.end('internal');
+    });
+    const upstreamUrl = await listen(upstream);
+
+    const server = taoMayChuWeb({
+      distDir: await taoDist(),
+      apiOrigin: upstreamUrl,
+    });
+    const baseUrl = await listen(server);
+
+    const response = await fetch(baseUrl + '/knowledge/rules');
+    expect(response.status).toBe(404);
+    expect(await response.text()).toBe('Not found');
   });
 
   it('proxies health but keeps metrics private to the API network', async () => {
