@@ -19,6 +19,7 @@ import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from '../activities/mo-kho-xuat-hang-ti
 import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
+import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
@@ -50,6 +51,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
   [LoaiCongViec.CAU_Y_TRI_BENH]: QUY_TAC_CAU_Y_TRI_BENH,
   [LoaiCongViec.SUA_MONG_TAY_CHAN]: QUY_TAC_SUA_MONG_TAY_CHAN,
+  [LoaiCongViec.SUA_BUONG_SAN_PHU]: QUY_TAC_SUA_BUONG_SAN_PHU,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -181,6 +183,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.MAY_DO]: false,
       [LoaiCongViec.NAP_TAI]: false,
       [LoaiCongViec.MO_KHO_XUAT_HANG_TIEN]: false,
+      [LoaiCongViec.SUA_BUONG_SAN_PHU]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -211,6 +214,29 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('修置産室: 月建/土府 stay Kị with virtue while 死氣 can be released', () => {
+    const kien = danhGia(LoaiCongViec.SUA_BUONG_SAN_PHU, {
+      yeuTo: [MaYeuTo.NGUYET_KIEN, MaYeuTo.THIEN_DUC],
+    });
+    const thoPhu = danhGia(LoaiCongViec.SUA_BUONG_SAN_PHU, {
+      yeuTo: [MaYeuTo.THO_PHU, MaYeuTo.NGUYET_DUC],
+    });
+    const tuKhi = danhGia(LoaiCongViec.SUA_BUONG_SAN_PHU, {
+      yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.THIEN_DUC],
+    });
+    expect(kien.coKy).toBe(true);
+    expect(thoPhu.coKy).toBe(true);
+    expect(tuKhi.coKy).toBe(false);
+  });
+
+  it('修置産室: 辰月 死氣 + 月厭 stays Kị even with virtue', () => {
+    const result = danhGia(LoaiCongViec.SUA_BUONG_SAN_PHU, {
+      chiThang: DiaChi.THIN,
+      yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
+    });
+    expect(result.coKy).toBe(true);
+  });
 
   it('開倉庫出貨財: 月建 cát relief keeps 己未陽錯 exception', () => {
     const relieved = danhGia(LoaiCongViec.MO_KHO_XUAT_HANG_TIEN, {

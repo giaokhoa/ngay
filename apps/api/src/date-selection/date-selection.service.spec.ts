@@ -6,6 +6,7 @@ import { TinhLichService } from '../calendar/calendar.service';
 import { TinhThoVuongService } from '../calendar/earth-reign.service';
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { TietKhi } from '../calendar/domain/solar-term';
+import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { TinhTietKhiService } from '../calendar/solar-term.service';
 import { DanhGiaNgayService } from '../evaluation/evaluation.service';
 import { TinhYeuToNgayService } from '../factors/factors.service';
@@ -568,6 +569,71 @@ describe('XemNgayService MO_KHO_XUAT_HANG_TIEN end-to-end', () => {
   });
 });
 
+describe('XemNgayService SUA_BUONG_SAN_PHU end-to-end', () => {
+  it('orchestrates calendar/factors -> exact Q11 -> maternity-room Q10 resolver', () => {
+    const result = taoService().xemSuaBuongSanPhu(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'SUA_BUONG_SAN_PHU'),
+    ).toBe(true);
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+  });
+
+  it('is deterministic for SUA_BUONG_SAN_PHU', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemSuaBuongSanPhu(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemSuaBuongSanPhu(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real 2026 calendar keeps Khai clean and source-exact relief/hard branches', () => {
+    const service = taoService();
+    const khai = service.xemSuaBuongSanPhu(
+      new Date('2026-02-07T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const tuThan = service.xemSuaBuongSanPhu(
+      new Date('2026-03-21T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const tuKhi = service.xemSuaBuongSanPhu(
+      new Date('2026-05-11T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const thoVuong = service.xemSuaBuongSanPhu(
+      new Date('2026-01-17T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(khai.truc).toBe(ThapNhiTruc.KHAI);
+    expect(khai.danhGia.coNen).toBe(true);
+    expect(khai.danhGia.coKy).toBe(false);
+
+    expect(tuThan.yeuTo.some((item) => item.ma === MaYeuTo.TU_THAN)).toBe(true);
+    expect(tuThan.danhGia.coKy).toBe(false);
+    expect(tuThan.giaiThich.biLoai.some((text) => text.startsWith('TU_THAN:'))).toBe(true);
+
+    expect(tuKhi.yeuTo.some((item) => item.ma === MaYeuTo.TU_KHI)).toBe(true);
+    expect(tuKhi.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_DUC_HOP)).toBe(true);
+    expect(tuKhi.danhGia.coKy).toBe(false);
+    expect(tuKhi.giaiThich.biLoai.some((text) => text.startsWith('TU_KHI:'))).toBe(true);
+
+    expect(thoVuong.dangThoVuong).toBe(true);
+    expect(thoVuong.danhGia.coKy).toBe(true);
+    expect(
+      thoVuong.danhGia.dongGop.some(
+        (item) => item.quyTac.dieuKien.loai === 'THO_VUONG' && item.trangThai === 'HIEU_LUC',
+      ),
+    ).toBe(true);
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -713,7 +779,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 23)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 24)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -784,6 +850,7 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       LoaiCongViec.LAP_KHE_UOC_GIAO_DICH,
       LoaiCongViec.NAP_TAI,
       LoaiCongViec.MO_KHO_XUAT_HANG_TIEN,
+      LoaiCongViec.SUA_BUONG_SAN_PHU,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);

@@ -140,6 +140,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.MO_KHO_XUAT_HANG_TIEN,
   },
   {
+    ma: 'SUA_BUONG_SAN_PHU',
+    ten: 'Sửa buồng sản phụ',
+    moTa: 'Chọn ngày bố trí hoặc sửa sang buồng sản phụ theo Khai nhật; xét riêng Tử Thần, Tử Khí, Thổ Phủ, Thổ Phù và Địa Nang.',
+    to: DUONG_DAN.SUA_BUONG_SAN_PHU,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
