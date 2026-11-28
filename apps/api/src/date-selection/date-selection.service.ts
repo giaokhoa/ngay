@@ -45,6 +45,7 @@ export type KetQuaXemNgayCuoiHoi = KetQuaXemNgay;
 export type KetQuaXemNgayDiChuyen = KetQuaXemNgay;
 export type KetQuaXemNgayAnGiuong = KetQuaXemNgay;
 export type KetQuaXemNgayQuanDai = KetQuaXemNgay;
+export type KetQuaXemNgayNhapHoc = KetQuaXemNgay;
 export type KetQuaXemNgayDongTho = KetQuaXemNgay;
 export type KetQuaXemNgaySuaCungThat = KetQuaXemNgay;
 export type KetQuaXemNgayKhaiTruong = KetQuaXemNgay;
@@ -163,6 +164,10 @@ export class XemNgayService {
 
   xemQuanDai(thoiDiem: Date, muiGio: string): KetQuaXemNgayQuanDai {
     return this.xem(thoiDiem, muiGio, LoaiCongViec.QUAN_DAI);
+  }
+
+  xemNhapHoc(thoiDiem: Date, muiGio: string): KetQuaXemNgayNhapHoc {
+    return this.xem(thoiDiem, muiGio, LoaiCongViec.NHAP_HOC);
   }
 
   xemDongTho(thoiDiem: Date, muiGio: string): KetQuaXemNgayDongTho {

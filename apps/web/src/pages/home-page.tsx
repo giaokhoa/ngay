@@ -56,6 +56,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.QUAN_DAI,
   },
   {
+    ma: 'NHAP_HOC',
+    ten: 'Nhập học',
+    moTa: 'Chọn ngày bắt đầu việc học theo ngày Thành hoặc Khai.',
+    to: DUONG_DAN.NHAP_HOC,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
