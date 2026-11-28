@@ -50,6 +50,14 @@ Chi tiết core: `docs/research/core-monthly-factors.md`. Inventory đủ 40/40 
 
 Chi tiết core: `docs/research/virtue-special-day-factors.md`. Inventory đủ Q5: `docs/research/q5-full-inventory.md`.
 
+## Annual/spatial — Quyển 3
+
+| Scope                                 | Trạng thái  | Product        | Ghi chú                                                                                        |
+| ------------------------------------- | ----------- | -------------- | ---------------------------------------------------------------------------------------------- |
+| 36/36 mục đánh số + closing Tổng luận | INVENTORIED | CHUA_IMPLEMENT | annual spatial layer; calendar có Can Chi năm nhưng current contracts không có hướng/tọa-hướng |
+
+Chi tiết: `docs/research/q3-full-inventory.md`.
+
 ## Factors — Quyển 4 shared positions / Bất Tương
 
 | Chủ đề                          | Module  | Nguồn chính             | Trạng thái    | Implementation                    | Oracle test                        | Ghi chú                                         |

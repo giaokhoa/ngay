@@ -177,9 +177,7 @@ PDF 209 / trang in 207 mở Quyển 3 với các mục như:
 - Tuế Phá/Đại Hao;
 - Đại Tướng Quân...
 
-Đây là nhóm theo năm và có thể cần sau, nhưng không chặn vertical slice ngày theo tháng/ngày.
-
-Defer khỏi Phase 2 core trừ khi một Dụng sự MVP bắt buộc dùng.
+Audit đầy đủ đã khóa **36/36 mục đánh số** tại `docs/research/q3-full-inventory.md`. Đây chủ yếu là **annual spatial layer** (`所理之地/方/向`), không phải day-factor layer. Calendar đã có Can Chi năm; blocker thật là current product contract chưa có hướng/tọa-hướng. Giữ book-level `CHUA_IMPLEMENT` cho đến khi có direction-aware vertical.
 
 ## Quyển 7 — Day/hour and quý nhân factors
 
