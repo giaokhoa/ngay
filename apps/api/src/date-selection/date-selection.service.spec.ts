@@ -9,6 +9,7 @@ import { TietKhi } from '../calendar/domain/solar-term';
 import { TinhTietKhiService } from '../calendar/solar-term.service';
 import { DanhGiaNgayService } from '../evaluation/evaluation.service';
 import { TinhYeuToNgayService } from '../factors/factors.service';
+import { MaYeuTo } from '../factors/domain/factor-code';
 import { XemNgayService } from './date-selection.service';
 
 function taoService(): XemNgayService {
@@ -343,6 +344,57 @@ describe('XemNgayService CHINH_DUNG_CAT_TOC end-to-end', () => {
   });
 });
 
+describe('XemNgayService CAU_Y_TRI_BENH end-to-end', () => {
+  it('orchestrates astronomy/lunar context -> exact Q11 -> medical-specific Q10 resolver', () => {
+    const result = taoService().xemCauYTriBenh(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'CAU_Y_TRI_BENH')).toBe(
+      true,
+    );
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.nguon.every((nguon) => nguon.daXacMinh)),
+    ).toBe(true);
+  });
+
+  it('is deterministic for CAU_Y_TRI_BENH', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemCauYTriBenh(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemCauYTriBenh(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('carries real 朔弦望 and lunar 15 calendar facts into Q11 blockers', () => {
+    const service = taoService();
+    const soc = service.xemCauYTriBenh(new Date('2024-02-10T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const vong15 = service.xemCauYTriBenh(new Date('2024-02-24T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+
+    expect(soc.yeuTo.some((item) => item.ma === MaYeuTo.SOC_HUYEN_VONG)).toBe(true);
+    expect(
+      soc.danhGia.dongGop.some(
+        (item) =>
+          item.quyTac.ma === 'CAU_Y_TRI_BENH_KY_SOC_HUYEN_VONG' && item.trangThai === 'HIEU_LUC',
+      ),
+    ).toBe(true);
+    expect(
+      vong15.danhGia.dongGop.some(
+        (item) =>
+          item.quyTac.dieuKien.loai === 'NGAY_AM' &&
+          item.quyTac.dieuKien.ngay === 15 &&
+          item.trangThai === 'HIEU_LUC',
+      ),
+    ).toBe(true);
+    expect(vong15.yeuTo.some((item) => item.ma === MaYeuTo.SOC_HUYEN_VONG)).toBe(true);
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -488,7 +540,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 17)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 18)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -553,6 +605,7 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       LoaiCongViec.CAU_TU,
       LoaiCongViec.GIAI_TRU,
       LoaiCongViec.CHINH_DUNG_CAT_TOC,
+      LoaiCongViec.CAU_Y_TRI_BENH,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);
