@@ -85,7 +85,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: '2f0e4c0363754cbb50a52d188954d37b3904fa851580176753feafd90c649a35',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '黃道黑道 ngày/giờ; 日建破合害刑; 天官/福星/喜神/八祿 markers. Không áp 天乙 khi thiếu mặt trời mọc/lặn.',
+      '13/13 mục đã inventory. Oracle: 黃道黑道, 日建破合害刑, 天官/福星/喜神/八祿, 五不遇, 旬空/路空. 天乙/四大吉/貴登天門/九醜 chưa production vì thiếu input hoặc độ phân giải thời gian.',
   },
   {
     quyen: 8,

@@ -39,6 +39,14 @@ describe('Hán source corpus manifest', () => {
     expect(HAN_CORPUS_MANIFEST.find((item) => item.quyen === 36)?.tep).toBe('KR3g0051_035.txt');
   });
 
+  it('records Q7 as 13/13 inventoried without claiming a full-volume oracle', () => {
+    const q7 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 7);
+
+    expect(q7?.trangThai).toBe('ORACLE_MOT_PHAN');
+    expect(q7?.phamViOracle).toContain('13/13 mục đã inventory');
+    expect(q7?.phamViOracle).toMatch(/天乙.*四大吉.*貴登天門.*九醜/);
+  });
+
   it('never labels any whole volume as fully implemented/oracle-tested', () => {
     expect(
       HAN_CORPUS_MANIFEST.every((item) =>
