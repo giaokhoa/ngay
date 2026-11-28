@@ -132,10 +132,6 @@ Q14–19 đã inventory đủ 6 block × 10 năm, xem `docs/research/q14-q19-ann
 
 Q20–31 đã inventory đủ 12/12 volume structure; xem `docs/research/q20-q31-month-tables.md`. Mỗi volume = một tháng tiết khí + design bảng 60 Can-Chi ngày. Current Hán oracle chỉ claim subset đã test, không claim 720-row full oracle.
 
-## Reference tables — Nguyệt biểu
-
-Q20–31 đã inventory đủ 12/12 volume structure; xem `docs/research/q20-q31-month-tables.md`. Mỗi volume = một tháng tiết khí + design bảng 60 Can-Chi ngày. Current Hán oracle chỉ claim subset đã test, không claim 720-row full oracle.
-
 ## Hán double-entry coverage
 
 Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scope có expected/vector
