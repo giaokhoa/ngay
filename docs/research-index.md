@@ -48,7 +48,7 @@ Chi tiết core: `docs/research/core-monthly-factors.md`. Inventory đủ 40/40 
 | Tứ Tướng       | factors | T1 Q5 p420-421 + Hán Q5           | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | mùa -> 2 Can ngày                                      |
 | Thời Đức       | factors | T1 Q5 p422-423 + Hán Q5           | ORACLE_TESTED | fixed-seasonal-factor-definitions.ts | fixed-seasonal-factors.spec.ts | mùa -> Chi ngày                                        |
 
-Chi tiết: `docs/research/virtue-special-day-factors.md`.
+Chi tiết core: `docs/research/virtue-special-day-factors.md`. Inventory đủ Q5: `docs/research/q5-full-inventory.md`.
 
 ## Factors — Quyển 4 shared positions / Bất Tương
 
@@ -108,7 +108,7 @@ Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scop
 | Scope                          | Hán source pin                     | Trạng thái                | Test                                          |
 | ------------------------------ | ---------------------------------- | ------------------------- | --------------------------------------------- |
 | Q4 / 月表 calendar positions   | KR3g0051 WYG Q4 + Q20..31          | HAN_ORACLE_TESTED         | han-q4-month-table-oracle.spec.ts             |
-| Q5 factors đang implement      | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED         | han-q5-oracle.spec.ts                         |
+| Q5 30/30 section inventory     | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED_PARTIAL | han-q5-oracle.spec.ts                         |
 | Q7 13/13 mục đã inventory      | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
 | Q6 40/40 mục đã inventory      | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED_PARTIAL | han-q6-oracle.spec.ts                         |
 | Q10 semantics của 7 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
