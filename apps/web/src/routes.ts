@@ -22,6 +22,7 @@ export const DUONG_DAN = {
   DAT_COI_XAY_GIA: '/dat-coi-xay-gia',
   QUET_DON_NHA_CUA: '/quet-don-nha-cua',
   TRANG_TRI_TUONG: '/trang-tri-tuong',
+  SUA_SANG_DUONG_SA: '/sua-sang-duong-sa',
   DONG_THO: '/dong-tho',
   SUA_CUNG_THAT: '/sua-cung-that',
   KHAI_TRUONG: '/khai-truong',

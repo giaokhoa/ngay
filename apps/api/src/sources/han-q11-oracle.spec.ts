@@ -23,6 +23,7 @@ import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
+import { QUY_TAC_SUA_SANG_DUONG_SA } from '../activities/sua-sang-duong-sa-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_TRANG_TRI_TUONG } from '../activities/trang-tri-tuong-rules';
 import { QUY_TAC_XUAT_HANH_Q11 } from '../activities/xuat-hanh-rules';
@@ -74,6 +75,18 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:VANG_VONG',
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.SUA_SANG_DUONG_SA]: {
+    tieuDeHan: '平治道塗',
+    anchor: 'KR3g0051_WYG_011-23a',
+    nen: ['TRUC:BINH'],
+    ky: [
+      'YEU_TO:THO_PHU',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:THO_PHU_TIN',
+      'YEU_TO:DIA_NANG',
+      'THO_VUONG',
     ],
   },
   [LoaiCongViec.TRANG_TRI_TUONG]: {
@@ -854,6 +867,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.DAT_COI_XAY_GIA]: QUY_TAC_DAT_COI_XAY_GIA,
   [LoaiCongViec.QUET_DON_NHA_CUA]: QUY_TAC_QUET_DON_NHA_CUA,
   [LoaiCongViec.TRANG_TRI_TUONG]: QUY_TAC_TRANG_TRI_TUONG,
+  [LoaiCongViec.SUA_SANG_DUONG_SA]: QUY_TAC_SUA_SANG_DUONG_SA,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,

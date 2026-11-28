@@ -25,6 +25,7 @@ import { QUY_TAC_Q10_QUAN_DAI } from './quan-dai-conflict-rules';
 import { QUY_TAC_Q10_QUET_DON_NHA_CUA } from './quet-don-nha-cua-conflict-rules';
 import { QUY_TAC_Q10_SUA_BUONG_SAN_PHU } from './sua-buong-san-phu-conflict-rules';
 import { QUY_TAC_Q10_SUA_MONG_TAY_CHAN } from './sua-mong-tay-chan-conflict-rules';
+import { QUY_TAC_Q10_SUA_SANG_DUONG_SA } from './sua-sang-duong-sa-conflict-rules';
 import { QUY_TAC_Q10_TE_TU } from './te-tu-conflict-rules';
 import { QUY_TAC_Q10_TRANG_TRI_TUONG } from './trang-tri-tuong-conflict-rules';
 import { NGAY_CAM_MOI_VIEC_Q4 } from './q4-hard-days';
@@ -111,6 +112,7 @@ describe('Q4/Q10 canonical hard days', () => {
     ['DAT_COI_XAY_GIA', QUY_TAC_Q10_DAT_COI_XAY_GIA],
     ['QUET_DON_NHA_CUA', QUY_TAC_Q10_QUET_DON_NHA_CUA],
     ['TRANG_TRI_TUONG', QUY_TAC_Q10_TRANG_TRI_TUONG],
+    ['SUA_SANG_DUONG_SA', QUY_TAC_Q10_SUA_SANG_DUONG_SA],
     ['DONG_THO/SUA_CUNG_THAT', QUY_TAC_Q10_CONG_VIEC_DAT],
     ['KHAI_TRUONG', QUY_TAC_Q10_KHAI_TRUONG],
     ['XUAT_HANH', QUY_TAC_Q10_XUAT_HANH],

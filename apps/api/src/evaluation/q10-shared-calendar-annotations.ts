@@ -10,6 +10,7 @@ const CONG_VIEC_DUOC_MIEN = new Set<LoaiCongViec>([
   LoaiCongViec.SUA_MONG_TAY_CHAN,
   LoaiCongViec.QUET_DON_NHA_CUA,
   LoaiCongViec.TRANG_TRI_TUONG,
+  LoaiCongViec.SUA_SANG_DUONG_SA,
 ]);
 
 const CONG_VIEC_DA_CO_KY_DANG_NGAY_RIENG = new Set<LoaiCongViec>([
