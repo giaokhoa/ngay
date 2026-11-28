@@ -63,12 +63,12 @@ Q10 cung cấp **semantic conflict/exception layer**: một thần cát/hung có
 |  39 | 復日・重日・五離・八專                 | IMPLEMENTED                    | Phục/Trọng/Ngũ Ly/Bát Chuyên production for current dependencies                                  |
 |  40 | 觸水龍・專日・伐日                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current production dependency                                                         |
 |  41 | 天刑・朱雀・白虎・天牢・元武・勾陳     | ORACLE_TESTED_Q7               | six Hắc đạo spirits supplementary; not universal veto                                             |
-|  42 | 無禄日                                 | BLOCKED_CONTEXT                | Q5 inventory: avoidance depends on year/native context                                            |
-|  43 | 反支                                   | BLOCKED_CALENDAR               | Q6 inventory: requires sóc/new-moon context                                                       |
-|  44 | 上朔・四離・四絶・晦日                 | PARTIAL_BLOCKED                | Thượng Sóc blocked by missing context; Ly/Tuyệt/Hối retained as source semantics                  |
+|  42 | 無禄日                                 | IMPLEMENTED_CONTEXT_FACTOR     | 10 candidate + Q10 relief theo Đức/năm/tháng/trung khí; 癸亥 override                             |
+|  43 | 反支                                   | IMPLEMENTED_FACTOR             | sóc/new-moon context production; semantics activity vẫn source-driven                             |
+|  44 | 上朔・四離・四絶・晦日                 | PARTIAL_IMPLEMENTED            | Thượng Sóc production; 四離/四絶/晦日 retained source-only                                        |
 |  45 | 冬至・夏至・春分・秋分                 | CALENDAR_REFERENCE             | solar-term calendar primitive, not standalone score factor                                        |
 |  46 | 土王用事・伏社・朔弦望                 | PARTIAL_IMPLEMENTED            | Thổ Vượng implemented; Phục Xã/Sóc-Huyền-Vọng not current day factors                             |
-|  47 | 月忌日・十五日                         | BLOCKED_LUNAR_CALENDAR         | needs lunar-day/date contract                                                                     |
+|  47 | 月忌日・十五日                         | PARTIAL_IMPLEMENTED            | 月忌日 5/14/23 production; 十五日 remains source-only                                             |
 |  48 | 人神所在日                             | OUT_OF_SCOPE_CURRENT_VERTICALS | located; body-location tradition not current product                                              |
 |  49 | 長星・短星                             | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current dependency                                                                    |
 |  50 | 表例附                                 | META                           | appendix/table examples, not factor identity                                                      |

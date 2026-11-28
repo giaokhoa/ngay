@@ -1,6 +1,7 @@
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { CanChi } from '../calendar/domain/sexagenary-cycle';
+import { TietKhi } from '../calendar/domain/solar-term';
 
 export interface BoiCanhTinhYeuToNgay {
   chiThang: DiaChi;
@@ -8,6 +9,8 @@ export interface BoiCanhTinhYeuToNgay {
   chiNgay: DiaChi;
   dangThoVuong: boolean;
   canChiNam?: CanChi;
+  canChiThang?: CanChi;
+  trungKhiHienHanh?: TietKhi;
   ngayAmTrongThang?: number;
   canChiNgaySoc?: CanChi;
 }

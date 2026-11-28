@@ -71,6 +71,18 @@ describe('TinhTietKhiService', () => {
     expect(service.tinhChiThangTaiThoiDiem(new Date(giaoTiet.getTime() + 1))).toBe(chiSau);
   });
 
+  it('trung khí hiện hành đổi đúng tại instant giao trung khí', () => {
+    const vuThuy = service.tinhThoiDiemTietKhi(2026, TietKhi.VU_THUY);
+    expect(service.tinhTrungKhiHienHanh(new Date(vuThuy.getTime() - 1))).toBe(TietKhi.DAI_HAN);
+    expect(service.tinhTrungKhiHienHanh(vuThuy)).toBe(TietKhi.VU_THUY);
+    expect(service.tinhTrungKhiHienHanh(new Date(vuThuy.getTime() + 1))).toBe(TietKhi.VU_THUY);
+  });
+
+  it('đầu năm trước Đại Hàn vẫn dùng Đông Chí năm trước làm trung khí hiện hành', () => {
+    const daiHan = service.tinhThoiDiemTietKhi(2026, TietKhi.DAI_HAN);
+    expect(service.tinhTrungKhiHienHanh(new Date(daiHan.getTime() - 1))).toBe(TietKhi.DONG_CHI);
+  });
+
   it('truoc Tieu Han van la thang Ty cua Dai Tuyet nam truoc', () => {
     const tieuHan = service.tinhThoiDiemTietKhi(2026, TietKhi.TIEU_HAN);
 

@@ -28,6 +28,7 @@
 | Ngũ Phú      | factors | T1 Q6 p506 + Hán Q6 + Q9        | ORACLE_TESTED | factor-definitions.ts           | factors.service.spec.ts                           | dùng chuỗi thuận theo Lịch lệ/Lập thành              |
 | Thiên Thương | factors | T1 Q6 p508 + Hán Q6 + Q9        | ORACLE_TESTED | factor-definitions.ts           | factors.service.spec.ts                           |                                                      |
 | Thiên Tặc    | factors | T1 Q6 p510 + Hán Q6 + Q9        | ORACLE_TESTED | factor-definitions.ts           | factors.service.spec.ts                           |                                                      |
+| Vô Lộc       | factors | T1 Q5 p455–456 + Hán Q5/Q10     | ORACLE_TESTED | vo-loc-definition.ts            | vo-loc.spec.ts + han-q5-oracle.spec.ts            | context-aware; 癸亥 override; Cầu phúc prerequisite  |
 | Du Họa       | factors | T1 Q6 p499 + Hán Q6             | ORACLE_TESTED | q6-du-hoa-definition.ts         | q6-du-hoa.spec.ts + han-q6-oracle.spec.ts         | Cầu phúc prerequisite; `正月起巳逆行四孟`            |
 | Phổ Hộ       | factors | T1 Q6 p516 “Phả Hộ” + Hán Q6    | ORACLE_TESTED | q6-ritual-factor-definitions.ts | q6-ritual-factors.spec.ts + han-q6-oracle.spec.ts | canonical Phổ Hộ; Việt in Phả Hộ; Tế tự prerequisite |
 | Phúc Sinh    | factors | T1 Q6 p517 + Hán Q6             | ORACLE_TESTED | q6-ritual-factor-definitions.ts | q6-ritual-factors.spec.ts + han-q6-oracle.spec.ts | Tế tự prerequisite; tháng→chi ngày exact             |
