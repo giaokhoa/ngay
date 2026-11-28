@@ -114,7 +114,7 @@ Hán bản Quyển 5 xác nhận cùng nhóm và còn có các ngày/phép phứ
 - Phục Nhật;
 - Minh Phệ / Minh Phệ Đối.
 
-Các mục phức tạp này là batch sau, không trộn vào PR đầu.
+Quyển 5 hiện đã được inventory đủ **30/30 section** tại `docs/research/q5-full-inventory.md`. 24 identity đang production có Hán oracle; các section ghép được ghi partial, Thiên Đạo giữ directional và Vô Lộc giữ context-dependent thay vì ép vào day-factor engine.
 
 ### Guardrail Thiên Đức
 

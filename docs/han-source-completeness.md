@@ -127,6 +127,8 @@ Ngoài ra test Việt/source-independent hiện có vẫn chạy:
 - 復日 / 重日;
 - 鳴吠 final 13-day correction.
 
+`docs/research/q5-full-inventory.md` khóa **30/30 section mục lục Q5**. Thiên Đạo giữ directional, Vô Lộc giữ context-dependent, các section ghép được đánh partial thay vì claim full.
+
 ### Q6
 
 `han-q6-oracle.spec.ts` kiểm độc lập **toàn bộ factor Q6 hiện đang production**, không chỉ batch core ban đầu:
