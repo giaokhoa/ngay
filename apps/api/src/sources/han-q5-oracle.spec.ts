@@ -36,6 +36,11 @@ import { MaQuaiThienDuc } from '../factors/domain/heavenly-virtue-position';
 import { CAC_NGAY_CANDIDATE_VO_LOC } from '../factors/vo-loc-definition';
 import { DINH_NGHIA_GIAI_THAN } from '../factors/q5-giai-than-definition';
 import { CHI_NGAY_NGU_HU_THEO_MUA } from '../factors/q5-ngu-hu-definition';
+import {
+  DINH_NGHIA_BAT_PHONG,
+  DINH_NGHIA_CUU_KHAM,
+  DINH_NGHIA_XUC_THUY_LONG,
+} from '../factors/q5-water-travel-factor-definitions';
 
 const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
 const { GIAP, AT, BINH, DINH, MAU, KY, CANH, TAN, NHAM, QUY } = ThienCan;
@@ -224,6 +229,54 @@ describe('independent Hán Q5 oracle — WYG / Kanripo KR3g0051', () => {
       [Mua.THU]: TY,
       [Mua.DONG]: DAN,
     });
+  });
+
+  it('九坎 matches the corrected Q5 month sequence', () => {
+    expect(
+      Object.fromEntries(
+        Object.entries(DINH_NGHIA_CUU_KHAM.chiNgayTheoChiThang).map(([month, branches]) => [
+          month,
+          branches[0],
+        ]),
+      ),
+    ).toEqual({
+      [DAN]: THIN,
+      [MAO]: TY,
+      [THIN]: THAN,
+      [TI]: MUI,
+      [NGO]: MAO,
+      [MUI]: HOI,
+      [THAN]: TUAT,
+      [DAU]: NGO,
+      [TUAT]: DAN,
+      [HOI]: SUU,
+      [TY]: DAU,
+      [SUU]: TI,
+    });
+  });
+
+  it('八風 uses the Q5 corrected eight seasonal Can-Chi days', () => {
+    expect(
+      Object.fromEntries(
+        Object.entries(DINH_NGHIA_BAT_PHONG.tapCanChiNgayTheoMua).map(([mua, entries]) => [
+          mua,
+          entries.map(khoaCanChi),
+        ]),
+      ),
+    ).toEqual({
+      [Mua.XUAN]: ['DINH:SUU', 'DINH:TI'],
+      [Mua.HA]: ['GIAP:THAN', 'GIAP:THIN'],
+      [Mua.THU]: ['DINH:MUI', 'DINH:HOI'],
+      [Mua.DONG]: ['GIAP:TUAT', 'GIAP:DAN'],
+    });
+  });
+
+  it('觸水龍 matches 丙子 癸未 癸丑', () => {
+    expect(DINH_NGHIA_XUC_THUY_LONG.canChiNgay.map(khoaCanChi)).toEqual([
+      'BINH:TY',
+      'QUY:MUI',
+      'QUY:SUU',
+    ]);
   });
 
   it('五虚 matches 春巳酉丑 夏申子辰 秋亥卯未 冬寅午戌', () => {

@@ -8,7 +8,7 @@ Khóa toàn bộ 30 section trong mục lục Quyển 5, tách rõ:
 
 - identity đã production + Hán oracle;
 - section chỉ production một phần;
-- mục đã hiểu nhưng không thuộc 30 vertical hiện tại;
+- mục đã hiểu nhưng không thuộc 31 vertical hiện tại;
 - mục cần context ngoài day-factor engine.
 
 Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quyết định activity vẫn theo Q11/Q10.
@@ -42,9 +42,9 @@ Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quy
 |  17 | Tứ Hao / 四耗                                                      | ORACLE_TESTED         | IMPLEMENTED         | Xuân Nhâm Tý, Hạ Ất Mão, Thu Mậu Ngọ, Đông Tân Dậu                                                         |
 |  18 | Tứ Phế / 四廢                                                      | ORACLE_TESTED         | IMPLEMENTED         | seasonal Can-Chi pairs                                                                                     |
 |  19 | Tứ Kị – Tứ Cùng / 四忌 四窮〈八龍七鳥九虎六蛇〉                    | ORACLE_TESTED         | IMPLEMENTED         | Tứ Kị + Tứ Cùng là production identities; bốn tên phụ mô tả cặp theo mùa, không nhân đôi factor            |
-|  20 | Cửu Khảm – Cửu Tiêu / 九坎〈九焦〉                                 | COMPARED              | OUT_OF_SCOPE        | tháng→chi ngày; specific water/build/fire semantics, absent current exact Q11 sets                         |
+|  20 | Cửu Khảm – Cửu Tiêu / 九坎〈九焦〉                                 | ORACLE_TESTED         | IMPLEMENTED         | Việt p442–443 + Hán Q5 hiệu đính; Cửu Khảm production cho `乘船渡水`                                       |
 |  21 | Ngũ Hư / 五虚                                                      | ORACLE_TESTED         | IMPLEMENTED         | Việt p444–445 + Hán WYG_005-47b..48a; Xuân Tỵ-Dậu-Sửu, Hạ Thân-Tý-Thìn, Thu Hợi-Mão-Mùi, Đông Dần-Ngọ-Tuất |
-|  22 | Bát Phong – Xúc Thủy Long / 八風 觸水龍                            | COMPARED              | OUT_OF_SCOPE        | water/travel-specific special days; absent current exact Q11 sets                                          |
+|  22 | Bát Phong – Xúc Thủy Long / 八風 觸水龍                            | ORACLE_TESTED         | IMPLEMENTED         | Việt p446–447 + Hán `WYG_005-48b..50b`; production cho `乘船渡水`                                          |
 |  23 | Bảo–Nghĩa–Chế–Chuyên–Phạt Nhật / 寶義制專伐日                      | COMPARED              | OUT_OF_SCOPE        | Can-Chi ngũ hành classification; nhiều semantics quân sự, không current dependency                         |
 |  24 | Bát Chuyên / 八專                                                  | ORACLE_TESTED         | IMPLEMENTED         | 5 ngày theo bản hiệu đính                                                                                  |
 |  25 | Vô Lộc / 無禄                                                      | ORACLE_TESTED         | IMPLEMENTED_CONTEXT | 10 candidate + Q10 relief theo Đức/năm/tháng/trung khí; không blanket-block                                |
@@ -70,7 +70,7 @@ Hán `WYG_005-34b..37b` khóa đủ năm loại:
 - Dân: Xuân Ngọ, Hạ Dậu, Thu Tý, Đông Mão;
 - Thủ: sau phần hiệu đính dùng Xuân Thìn, Hạ Mùi, Thu Tuất, Đông Sửu.
 
-Product hiện chỉ có Vương Nhật + Dân Nhật vì 30 vertical hiện tại chỉ cần hai identity này. Không tạo ba factor còn lại chỉ để đủ section.
+Product hiện chỉ có Vương Nhật + Dân Nhật vì 31 vertical hiện tại chỉ cần hai identity này. Không tạo ba factor còn lại chỉ để đủ section.
 
 ### Vô Lộc
 
@@ -92,7 +92,7 @@ Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùn
 
 - **26 identity Q5 production** có Hán oracle độc lập.
 - Section partial không được quảng bá thành full implementation chỉ vì một identity bên trong đã có code.
-- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 30 vertical không cần.
+- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 31 vertical không cần.
 - `Vô Lộc` đã production bằng context năm/tháng/trung khí; vẫn tuyệt đối không dùng như blanket blocker.
 - Giải Thần production theo cặp tháng `Thân/Thân, Tuất/Tuất, Tý/Tý, Dần/Dần, Thìn/Thìn, Ngọ/Ngọ`; dependency trực tiếp của Giải trừ.
 - Khi mở activity mới, dependency Q11 sẽ quyết định mục nào được kéo vào production.

@@ -10,6 +10,7 @@ import { QUY_TAC_CHINH_DUNG_CAT_TOC } from '../activities/chinh-dung-cat-toc-rul
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DAT_COI_XAY_GIA } from '../activities/dat-coi-xay-gia-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
+import { QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC } from '../activities/di-thuyen-vuot-song-nuoc-rules';
 import { QUY_TAC_GIAI_TRU } from '../activities/giai-tru-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
@@ -65,6 +66,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.SUA_SANG_DUONG_SA]: QUY_TAC_SUA_SANG_DUONG_SA,
   [LoaiCongViec.PHA_NHA_HUY_TUONG]: QUY_TAC_PHA_NHA_HUY_TUONG,
   [LoaiCongViec.TROC_NA_BAT_BO]: QUY_TAC_TROC_NA_BAT_BO,
+  [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -84,7 +86,8 @@ const ACTIVITIES_WITH_TU_PHE_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.QUET_DON_NHA_CUA &&
     activity !== LoaiCongViec.SUA_SANG_DUONG_SA &&
     activity !== LoaiCongViec.PHA_NHA_HUY_TUONG &&
-    activity !== LoaiCongViec.TROC_NA_BAT_BO,
+    activity !== LoaiCongViec.TROC_NA_BAT_BO &&
+    activity !== LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC,
 );
 const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
   (activity) =>
@@ -95,7 +98,8 @@ const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.QUET_DON_NHA_CUA &&
     activity !== LoaiCongViec.SUA_SANG_DUONG_SA &&
     activity !== LoaiCongViec.PHA_NHA_HUY_TUONG &&
-    activity !== LoaiCongViec.TROC_NA_BAT_BO,
+    activity !== LoaiCongViec.TROC_NA_BAT_BO &&
+    activity !== LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC,
 );
 const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
   (activity) =>
@@ -213,6 +217,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.SUA_SANG_DUONG_SA]: false,
       [LoaiCongViec.PHA_NHA_HUY_TUONG]: false,
       [LoaiCongViec.TROC_NA_BAT_BO]: false,
+      [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -265,6 +270,52 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('乘船渡水: 招搖 and 八風 release only by their exact cát sets', () => {
+    const chieuDieu = danhGia(LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC, {
+      yeuTo: [MaYeuTo.CHIEU_DIEU, MaYeuTo.THIEN_XA],
+    });
+    const batPhong = danhGia(LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC, {
+      yeuTo: [MaYeuTo.BAT_PHONG, MaYeuTo.LUC_HOP],
+    });
+    expect(chieuDieu.coKy).toBe(false);
+    expect(batPhong.coKy).toBe(false);
+  });
+
+  it('乘船渡水: 九坎 and 觸水龍 remain Kị with their named cát', () => {
+    const cuuKham = danhGia(LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC, {
+      yeuTo: [MaYeuTo.CUU_KHAM, MaYeuTo.THIEN_DUC],
+    });
+    const xucThuyLong = danhGia(LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC, {
+      yeuTo: [MaYeuTo.XUC_THUY_LONG, MaYeuTo.THIEN_NGUYEN],
+    });
+    expect(cuuKham.coKy).toBe(true);
+    expect(xucThuyLong.coKy).toBe(true);
+  });
+
+  it('乘船渡水: 咸池 month branches keep 二德 and 卯月 hard semantics exact', () => {
+    const twoVirtues = danhGia(LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC, {
+      chiThang: DiaChi.SUU,
+      yeuTo: [MaYeuTo.DAI_THOI, MaYeuTo.THIEN_DUC],
+    });
+    const hopOnly = danhGia(LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC, {
+      chiThang: DiaChi.SUU,
+      yeuTo: [MaYeuTo.DAI_THOI, MaYeuTo.THIEN_DUC_HOP],
+    });
+    const maoHard = danhGia(LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC, {
+      chiThang: DiaChi.MAO,
+      yeuTo: [MaYeuTo.DAI_THOI],
+    });
+    const maoRelief = danhGia(LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC, {
+      chiThang: DiaChi.MAO,
+      yeuTo: [MaYeuTo.DAI_THOI, MaYeuTo.NGUYET_DUC_HOP],
+    });
+    expect(twoVirtues.coKy).toBe(false);
+    expect(hopOnly.coKy).toBe(true);
+    expect(maoHard.camMoiViec).toBe(true);
+    expect(maoHard.coKy).toBe(true);
+    expect(maoRelief.coKy).toBe(false);
   });
 
   it('捕捉: 執日/收日 are Nên and 往亡 remains Kị with cát', () => {

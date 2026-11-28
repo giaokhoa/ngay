@@ -120,7 +120,7 @@ describe('Hán source corpus manifest', () => {
 
     expect(q10?.trangThai).toBe('ORACLE_MOT_PHAN');
     expect(q10?.phamViOracle).toMatch(/51\/51 mục Việt = 99\/99 heading TOC Hán/);
-    expect(q10?.phamViOracle).toContain('30 vertical');
+    expect(q10?.phamViOracle).toContain('31 vertical');
   });
 
   it('records Q11 as 73 canonical activities rather than the 60-item source subcatalog', () => {
@@ -128,7 +128,7 @@ describe('Hán source corpus manifest', () => {
 
     expect(q11?.trangThai).toBe('ORACLE_MOT_PHAN');
     expect(q11?.phamViOracle).toMatch(/73\/73 canonical Dụng sự sections/);
-    expect(q11?.phamViOracle).toContain('43 section còn lại out-of-scope');
+    expect(q11?.phamViOracle).toContain('42 section còn lại out-of-scope');
     expect(q11?.phamViOracle).toContain('67/37/60 việc');
   });
 
