@@ -9,6 +9,7 @@ import {
 import { MaYeuTo } from '../factors/domain/factor-code';
 import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from '../factors/factor-definitions';
 import { DINH_NGHIA_QUY_KY, DINH_NGHIA_THIEN_MA } from '../factors/moving-factor-definitions';
+import { DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6 } from '../factors/q6-ritual-factor-definitions';
 import { DINH_NGHIA_BLOCKER_CUOI_HOI_QUYEN_6 } from '../factors/q6-wedding-blocker-definitions';
 
 const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
@@ -187,6 +188,79 @@ describe('independent Hán Q6 oracle — WYG / Kanripo KR3g0051', () => {
   });
 });
 
+const HAN_Q6_RITUAL_MONTHLY: Readonly<Record<string, BangHanQ6>> = {
+  [MaYeuTo.PHO_HO]: {
+    [DAN]: [THAN],
+    [MAO]: [DAN],
+    [THIN]: [DAU],
+    [TI]: [MAO],
+    [NGO]: [TUAT],
+    [MUI]: [THIN],
+    [THAN]: [HOI],
+    [DAU]: [TI],
+    [TUAT]: [TY],
+    [HOI]: [NGO],
+    [TY]: [SUU],
+    [SUU]: [MUI],
+  },
+  [MaYeuTo.PHUC_SINH]: {
+    [DAN]: [DAU],
+    [MAO]: [MAO],
+    [THIN]: [TUAT],
+    [TI]: [THIN],
+    [NGO]: [HOI],
+    [MUI]: [TI],
+    [THAN]: [TY],
+    [DAU]: [NGO],
+    [TUAT]: [SUU],
+    [HOI]: [MUI],
+    [TY]: [DAN],
+    [SUU]: [THAN],
+  },
+  [MaYeuTo.THANH_TAM]: {
+    [DAN]: [HOI],
+    [MAO]: [TI],
+    [THIN]: [TY],
+    [TI]: [NGO],
+    [NGO]: [SUU],
+    [MUI]: [MUI],
+    [THAN]: [DAN],
+    [DAU]: [THAN],
+    [TUAT]: [MAO],
+    [HOI]: [DAU],
+    [TY]: [THIN],
+    [SUU]: [TUAT],
+  },
+  [MaYeuTo.ICH_HAU]: {
+    [DAN]: [TY],
+    [MAO]: [NGO],
+    [THIN]: [SUU],
+    [TI]: [MUI],
+    [NGO]: [DAN],
+    [MUI]: [THAN],
+    [THAN]: [MAO],
+    [DAU]: [DAU],
+    [TUAT]: [THIN],
+    [HOI]: [TUAT],
+    [TY]: [TI],
+    [SUU]: [HOI],
+  },
+  [MaYeuTo.TUC_THE]: {
+    [DAN]: [SUU],
+    [MAO]: [MUI],
+    [THIN]: [DAN],
+    [TI]: [THAN],
+    [NGO]: [MAO],
+    [MUI]: [DAU],
+    [THAN]: [THIN],
+    [DAU]: [TUAT],
+    [TUAT]: [TI],
+    [HOI]: [HOI],
+    [TY]: [NGO],
+    [SUU]: [TY],
+  },
+};
+
 const HAN_Q6_PRODUCTION_MONTHLY: Readonly<Record<string, BangHanQ6>> = {
   [MaYeuTo.DAI_THOI]: {
     [DAN]: [MAO],
@@ -328,11 +402,37 @@ const HAN_Q6_DIA_NANG = {
 function productionQ6Monthly() {
   return [
     ...DINH_NGHIA_BLOCKER_CUOI_HOI_QUYEN_6,
+    ...DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6,
     DINH_NGHIA_THIEN_MA,
     DINH_NGHIA_QUY_KY,
     DINH_NGHIA_THO_PHU_TIN,
   ];
 }
+
+describe('independent Hán Q6 oracle — ritual monthly factors', () => {
+  it.each(Object.entries(HAN_Q6_RITUAL_MONTHLY))(
+    '%s matches exact Hán Q6 month→day-branch table',
+    (ma, expected) => {
+      const actual = DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.find((item) => item.ma === ma);
+      expect(actual?.chiNgayTheoChiThang).toEqual(expected);
+    },
+  );
+
+  it('covers exactly 福生 聖心 益後 續世 and no inferred 血忌 alias', () => {
+    expect(new Set(DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.map((item) => item.ma))).toEqual(
+      new Set([
+        MaYeuTo.PHO_HO,
+        MaYeuTo.PHUC_SINH,
+        MaYeuTo.THANH_TAM,
+        MaYeuTo.ICH_HAU,
+        MaYeuTo.TUC_THE,
+      ]),
+    );
+    expect(
+      DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.find((item) => item.ma === MaYeuTo.TUC_THE)?.tenKhac,
+    ).toEqual([]);
+  });
+});
 
 describe('independent Hán Q6 oracle — production factors beyond core batch', () => {
   it.each(Object.entries(HAN_Q6_PRODUCTION_MONTHLY))(
