@@ -189,6 +189,20 @@ describe('independent Hán Q6 oracle — WYG / Kanripo KR3g0051', () => {
 });
 
 const HAN_Q6_RITUAL_MONTHLY: Readonly<Record<string, BangHanQ6>> = {
+  [MaYeuTo.PHO_HO]: {
+    [DAN]: [THAN],
+    [MAO]: [DAN],
+    [THIN]: [DAU],
+    [TI]: [MAO],
+    [NGO]: [TUAT],
+    [MUI]: [THIN],
+    [THAN]: [HOI],
+    [DAU]: [TI],
+    [TUAT]: [TY],
+    [HOI]: [NGO],
+    [TY]: [SUU],
+    [SUU]: [MUI],
+  },
   [MaYeuTo.PHUC_SINH]: {
     [DAN]: [DAU],
     [MAO]: [MAO],
@@ -406,7 +420,13 @@ describe('independent Hán Q6 oracle — ritual monthly factors', () => {
 
   it('covers exactly 福生 聖心 益後 續世 and no inferred 血忌 alias', () => {
     expect(new Set(DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.map((item) => item.ma))).toEqual(
-      new Set([MaYeuTo.PHUC_SINH, MaYeuTo.THANH_TAM, MaYeuTo.ICH_HAU, MaYeuTo.TUC_THE]),
+      new Set([
+        MaYeuTo.PHO_HO,
+        MaYeuTo.PHUC_SINH,
+        MaYeuTo.THANH_TAM,
+        MaYeuTo.ICH_HAU,
+        MaYeuTo.TUC_THE,
+      ]),
     );
     expect(
       DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.find((item) => item.ma === MaYeuTo.TUC_THE)?.tenKhac,

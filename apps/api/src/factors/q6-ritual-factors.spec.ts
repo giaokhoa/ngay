@@ -8,9 +8,29 @@ import { TinhYeuToNgayService } from './factors.service';
 import { DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6 } from './q6-ritual-factor-definitions';
 
 const service = new TinhYeuToNgayService();
-const CODES = [MaYeuTo.PHUC_SINH, MaYeuTo.THANH_TAM, MaYeuTo.ICH_HAU, MaYeuTo.TUC_THE] as const;
+const CODES = [
+  MaYeuTo.PHO_HO,
+  MaYeuTo.PHUC_SINH,
+  MaYeuTo.THANH_TAM,
+  MaYeuTo.ICH_HAU,
+  MaYeuTo.TUC_THE,
+] as const;
 
 const ORACLE: Readonly<Record<(typeof CODES)[number], Readonly<Record<DiaChi, DiaChi>>>> = {
+  [MaYeuTo.PHO_HO]: {
+    DAN: DiaChi.THAN,
+    MAO: DiaChi.DAN,
+    THIN: DiaChi.DAU,
+    TI: DiaChi.MAO,
+    NGO: DiaChi.TUAT,
+    MUI: DiaChi.THIN,
+    THAN: DiaChi.HOI,
+    DAU: DiaChi.TI,
+    TUAT: DiaChi.TY,
+    HOI: DiaChi.NGO,
+    TY: DiaChi.SUU,
+    SUU: DiaChi.MUI,
+  },
   [MaYeuTo.PHUC_SINH]: {
     DAN: DiaChi.DAU,
     MAO: DiaChi.MAO,
@@ -107,6 +127,11 @@ describe('Q6 ritual monthly factors — 福生 聖心 益後 續世', () => {
       });
     }
   }
+
+  it('keeps printed Việt “Phả Hộ” as an alternate name of canonical Phổ Hộ', () => {
+    const phoHo = DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.find((item) => item.ma === MaYeuTo.PHO_HO)!;
+    expect(phoHo.tenKhac).toContain('Phả Hộ');
+  });
 
   it('does not encode Huyết Kị as an alias of Tục Thế', () => {
     const tucThe = DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.find((item) => item.ma === MaYeuTo.TUC_THE)!;

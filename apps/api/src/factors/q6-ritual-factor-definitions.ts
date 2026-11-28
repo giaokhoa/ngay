@@ -8,6 +8,30 @@ const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
 
 export const DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6: readonly DinhNghiaYeuToTheoChiThang[] = [
   taoTheoChiThang({
+    ma: MaYeuTo.PHO_HO,
+    trang: 516,
+    muc: 'Phả Hộ',
+    tenGoc: '普䕶',
+    hanAnchor: 'WYG_006-39b..40a',
+    bang: {
+      [DAN]: [THAN],
+      [MAO]: [DAN],
+      [THIN]: [DAU],
+      [TI]: [MAO],
+      [NGO]: [TUAT],
+      [MUI]: [THIN],
+      [THAN]: [HOI],
+      [DAU]: [TI],
+      [TUAT]: [TY],
+      [HOI]: [NGO],
+      [TY]: [SUU],
+      [SUU]: [MUI],
+    },
+    tenKhac: ['Phả Hộ'],
+    ghiChu:
+      'Bản Việt p.516 in “Phả Hộ”; canonical Hán-Việt của 普䕶 dùng Phổ Hộ. Hai tên cùng một factor, không phải hai thần khác nhau.',
+  }),
+  taoTheoChiThang({
     ma: MaYeuTo.PHUC_SINH,
     trang: 517,
     muc: 'Phúc Sinh',
@@ -103,13 +127,14 @@ interface ThamSo {
   hanAnchor: string;
   bang: DinhNghiaYeuToTheoChiThang['chiNgayTheoChiThang'];
   ghiChu?: string;
+  tenKhac?: readonly string[];
 }
 
 function taoTheoChiThang(thamSo: ThamSo): DinhNghiaYeuToTheoChiThang {
   return {
     ma: thamSo.ma,
     loai: LoaiYeuTo.THAN_SAT,
-    tenKhac: [],
+    tenKhac: thamSo.tenKhac ?? [],
     chiNgayTheoChiThang: thamSo.bang,
     nguon: [
       {

@@ -72,7 +72,7 @@ Hán bản Quyển 6 xác nhận nhóm:
 
 Quyển 6 đã được inventory đủ **40/40 mục** tại `docs/research/q6-full-inventory.md`.
 
-- 25 factor Q6 đang production-computable đã có Hán oracle độc lập; Phúc Sinh/Thánh Tâm/Ích Hậu/Tục Thế là foundation mới cho Tế tự;
+- 26 factor Q6 đang production-computable đã có Hán oracle độc lập; Phổ Hộ/Phúc Sinh/Thánh Tâm/Ích Hậu/Tục Thế là foundation mới cho Tế tự;
 - các mục công thức rõ nhưng chưa có current activity dependency được giữ `OUT_OF_SCOPE`;
 - Cửu Thần Tổng Luận là `META`, không phải calculator riêng;
 - Thượng Sóc, Phản Chi và Ngày Nguyệt Kị đã được mở khóa bằng Can Chi năm + astronomical new-moon/lunar-day context.

@@ -43,7 +43,7 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 |  18 | Ngọc Vũ / 玉宇                | COMPARED      | OUT_OF_SCOPE       | Việt p513; monthly factor                                                            |
 |  19 | Kim Đường / 金堂              | COMPARED      | OUT_OF_SCOPE       | monthly factor                                                                       |
 |  20 | Kính An / 敬安                | COMPARED      | OUT_OF_SCOPE       | Việt p515; monthly factor                                                            |
-|  21 | Phổ Hộ / 普護                 | COMPARED      | OUT_OF_SCOPE       | monthly factor                                                                       |
+|  21 | Phổ Hộ / 普護                 | ORACLE_TESTED | IMPLEMENTED        | Việt p516 “Phả Hộ” + Hán `WYG_006-39b..40a`; Tế tự prerequisite                      |
 |  22 | Phúc Sinh / 福生              | ORACLE_TESTED | IMPLEMENTED        | Việt p517 + Hán `WYG_006-40b..41a`; Tế tự prerequisite                               |
 |  23 | Thánh Tâm / 聖心              | ORACLE_TESTED | IMPLEMENTED        | Việt p518 + Hán `WYG_006-41b..42a`; Tế tự prerequisite                               |
 |  24 | Ích Hậu / 益後                | ORACLE_TESTED | IMPLEMENTED        | Việt p520 + Hán `WYG_006-43b..44a`; Tế tự prerequisite                               |
@@ -78,7 +78,7 @@ Hán Q6 cho bảng tháng trực tiếp (`正月午...`). Có thể encode bằn
 
 Yếu An, Ngọc Vũ, Kim Đường, Kính An, Phổ Hộ, Phúc Sinh, Thánh Tâm, Ích Hậu, Tục Thế đều có lịch lệ tháng→chi rõ. `九神總論` là phần luận chung, không phải calculator riêng.
 
-Phúc Sinh, Thánh Tâm, Ích Hậu và Tục Thế đã production vì trở thành prerequisite trực tiếp của Tế tự. Exact Việt đã mở p517, p518, p520, p522 và Hán Q6 khớp từng bảng. Yếu An/Ngọc Vũ/Kim Đường/Kính An/Phổ Hộ vẫn out-of-scope current activity dependencies. `續世〈血忌〉` ở mục lục không được dùng để suy Huyết Kị là alias của Tục Thế; body Q6 đang source-lock Tục Thế như một cát thần riêng.
+Phổ Hộ, Phúc Sinh, Thánh Tâm, Ích Hậu và Tục Thế đã production vì trở thành prerequisite trực tiếp của Tế tự. Exact Việt đã mở p516, p517, p518, p520, p522 và Hán Q6 khớp từng bảng. Yếu An/Ngọc Vũ/Kim Đường/Kính An vẫn out-of-scope current activity dependencies. `續世〈血忌〉` ở mục lục không được dùng để suy Huyết Kị là alias của Tục Thế; body Q6 đang source-lock Tục Thế như một cát thần riêng.
 
 ### Dương Đức / Âm Đức
 
@@ -130,7 +130,7 @@ Bản Việt p562–563 và Hán `WYG_006-74b..76a` cùng ghi tục lấy **mồ
 
 ## Product policy
 
-- 25 factor Q6 hiện production-computable và có oracle/test độc lập, gồm cả Phúc Sinh, Thánh Tâm, Ích Hậu, Tục Thế và Thượng Sóc/Phản Chi/Nguyệt Kị.
+- 26 factor Q6 hiện production-computable và có oracle/test độc lập, gồm cả Phổ Hộ, Phúc Sinh, Thánh Tâm, Ích Hậu, Tục Thế và Thượng Sóc/Phản Chi/Nguyệt Kị.
 - Ba factor mới chỉ đi vào factor engine; không tự thay đổi 7 activity vertical nếu exact Q11/Q10 không dùng chúng.
 - Không thêm các mục còn lại vào activity scoring nếu exact Q11/Q10 không cần.
 - `OUT_OF_SCOPE` nghĩa là công thức đã hiểu nhưng không thuộc current product claim, không phải “không tồn tại”.
@@ -139,4 +139,4 @@ Bản Việt p562–563 và Hán `WYG_006-74b..76a` cùng ghi tục lấy **mồ
 
 ## Kết luận
 
-**Quyển 6 đã inventory đủ 40/40 mục.** 25 factor hiện production-computable/Hán-oracle; phần còn lại có trạng thái explicit. Thượng Sóc/Phản Chi/Nguyệt Kị không còn blocker calendar/context.
+**Quyển 6 đã inventory đủ 40/40 mục.** 26 factor hiện production-computable/Hán-oracle; phần còn lại có trạng thái explicit. Thượng Sóc/Phản Chi/Nguyệt Kị không còn blocker calendar/context.
