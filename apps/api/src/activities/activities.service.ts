@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { LoaiCongViec, QuyTacDungSu } from './activity-rule';
+import { QUY_TAC_AN_GIUONG } from './an-giuong-rules';
 import { QUY_TAC_AN_TANG } from './an-tang-rules';
 import { QUY_TAC_CUOI_HOI } from './cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from './di-chuyen-rules';
@@ -16,6 +17,8 @@ export class DungSuService {
         return QUY_TAC_CUOI_HOI;
       case LoaiCongViec.DI_CHUYEN:
         return QUY_TAC_DI_CHUYEN;
+      case LoaiCongViec.AN_GIUONG:
+        return QUY_TAC_AN_GIUONG;
       case LoaiCongViec.DONG_THO:
         return QUY_TAC_DONG_THO;
       case LoaiCongViec.SUA_CUNG_THAT:

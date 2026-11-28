@@ -76,6 +76,33 @@ describe('XemNgayService DI_CHUYEN end-to-end', () => {
   });
 });
 
+describe('XemNgayService AN_GIUONG end-to-end', () => {
+  it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
+    const result = taoService().xemAnGiuong(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'AN_GIUONG')).toBe(true);
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.nguon.every((nguon) => nguon.daXacMinh)),
+    ).toBe(true);
+  });
+
+  it('is deterministic for AN_GIUONG', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+
+    expect(service.xemAnGiuong(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemAnGiuong(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+});
+
 describe('XemNgayService earthwork end-to-end', () => {
   it('DONG_THO carries real Thổ Vượng calendar fact into typed Q11 blocker', () => {
     const result = taoService().xemDongTho(
@@ -194,7 +221,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 7)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 8)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -232,7 +259,11 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       expect(hoang?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hoang?.thanHoangHac.ten);
     }
 
-    for (const activity of [LoaiCongViec.KHAI_TRUONG, LoaiCongViec.AN_TANG]) {
+    for (const activity of [
+      LoaiCongViec.KHAI_TRUONG,
+      LoaiCongViec.AN_GIUONG,
+      LoaiCongViec.AN_TANG,
+    ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);
     }
   });

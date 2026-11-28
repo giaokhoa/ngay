@@ -28,4 +28,4 @@ Quyển này tái khẳng định Q12: thiên văn quan trắc cần latitude/lo
 
 ## Kết luận
 
-**Quyển 13 đã inventory đủ 2/2 top-level section.** Giữ `CHUA_IMPLEMENT`; không có dependency trực tiếp của 7 vertical date-selection hiện tại.
+**Quyển 13 đã inventory đủ 2/2 top-level section.** Giữ `CHUA_IMPLEMENT`; không có dependency trực tiếp của 8 vertical date-selection hiện tại.

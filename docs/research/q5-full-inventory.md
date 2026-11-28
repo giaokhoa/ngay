@@ -92,7 +92,7 @@ Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùn
 
 - **24 identity Q5 production** có Hán oracle độc lập.
 - Section partial không được quảng bá thành full implementation chỉ vì một identity bên trong đã có code.
-- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 7 vertical không cần.
+- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 8 vertical không cần.
 - `Vô Lộc` giữ `BLOCKED_CONTEXT`, không dùng như blanket blocker.
 - Khi mở activity mới, dependency Q11 sẽ quyết định mục nào được kéo vào production.
 

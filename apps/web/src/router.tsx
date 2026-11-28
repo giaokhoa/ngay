@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 
+import { TrangAnGiuong } from './pages/an-giuong-page';
 import { TrangAnTang } from './pages/an-tang-page';
 import { TrangDiChuyen } from './pages/moving-page';
 import { TrangDongTho, TrangSuaCungThat } from './pages/earthwork-pages';
@@ -21,6 +22,10 @@ export const boDinhTuyen = createBrowserRouter([
   {
     path: DUONG_DAN.DI_CHUYEN,
     Component: TrangDiChuyen,
+  },
+  {
+    path: DUONG_DAN.AN_GIUONG,
+    Component: TrangAnGiuong,
   },
   {
     path: DUONG_DAN.DONG_THO,

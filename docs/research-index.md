@@ -158,7 +158,7 @@ Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inven
 |      Quyển | Structural inventory                    | Product/oracle                                                                                           |
 | ---------: | --------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | 10 Nghi kị | 51/51 mục Việt = 99/99 Hán TOC headings | exact semantic oracle cho 7 current vertical; remaining groups explicit source-only/blocked/out-of-scope |
-| 11 Dụng sự | 73/73 canonical activity sections       | 7 ORACLE_TESTED; 66 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
+| 11 Dụng sự | 73/73 canonical activity sections       | 8 ORACLE_TESTED; 65 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
 
 Chi tiết: `docs/research/q10-full-inventory.md`, `docs/research/q11-full-inventory.md`.
 
@@ -188,8 +188,8 @@ Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scop
 | Q5 30/30 section inventory     | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED_PARTIAL | han-q5-oracle.spec.ts                         |
 | Q7 13/13 mục đã inventory      | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
 | Q6 40/40 mục đã inventory      | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED_PARTIAL | han-q6-oracle.spec.ts                         |
-| Q10 semantics của 7 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
-| Q11 exact 宜/忌 của 7 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
+| Q10 semantics của 8 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
+| Q11 exact 宜/忌 của 8 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
 | 36-volume corpus inventory     | KR3g0051 + Wikisource Q14 fallback | INVENTORIED               | han-source-manifest.spec.ts                   |
 
 Full-volume status: **0/36**.

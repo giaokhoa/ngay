@@ -44,6 +44,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.DI_CHUYEN,
   },
   {
+    ma: 'AN_GIUONG',
+    ten: 'Kê giường',
+    moTa: 'Đặt hoặc kê giường theo người chủ sự.',
+    to: DUONG_DAN.AN_GIUONG,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

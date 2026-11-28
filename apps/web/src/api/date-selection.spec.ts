@@ -4,6 +4,7 @@ import {
   taoUrlChiTietNgay,
   taoUrlChiTietNgayTheoNgaySinh,
   taoUrlTongQuanThang,
+  taoUrlXemAnGiuong,
   taoUrlXemAnTang,
   taoUrlXemCuoiHoi,
   taoUrlXemDiChuyen,
@@ -19,6 +20,7 @@ describe('date-selection URLs', () => {
   it.each([
     ['cuoi-hoi', taoUrlXemCuoiHoi],
     ['di-chuyen', taoUrlXemDiChuyen],
+    ['an-giuong', taoUrlXemAnGiuong],
     ['dong-tho', taoUrlXemDongTho],
     ['sua-cung-that', taoUrlXemSuaCungThat],
     ['khai-truong', taoUrlXemKhaiTruong],
