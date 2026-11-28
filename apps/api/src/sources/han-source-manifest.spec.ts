@@ -68,6 +68,14 @@ describe('Hán source corpus manifest', () => {
     expect(HAN_CORPUS_MANIFEST.find((item) => item.quyen === 36)?.tep).toBe('KR3g0051_035.txt');
   });
 
+  it('records Q1 as structurally complete while keeping its oracle partial', () => {
+    const q1 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 1);
+
+    expect(q1?.trangThai).toBe('ORACLE_MOT_PHAN');
+    expect(q1?.phamViOracle).toContain('17/17 mục Việt = 28/28 heading Hán');
+    expect(q1?.phamViOracle).toMatch(/Ngũ Thử.*Ngũ Hổ.*Thổ Vượng/);
+  });
+
   it('keeps inventoried Q2/Q12/Q13 volumes unimplemented and without oracle claims', () => {
     for (const quyen of [2, 12, 13]) {
       const item = HAN_CORPUS_MANIFEST.find((entry) => entry.quyen === quyen);

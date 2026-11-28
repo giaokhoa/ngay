@@ -24,7 +24,8 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     revision: KANRIPO_KR3G0051_REVISION,
     sha256: 'fe400a1eecb1e4060984db0a8bb993578e575ca5e1cf4c2fa4caf293f5ea3cc2',
     trangThai: 'ORACLE_MOT_PHAN',
-    phamViOracle: 'Thiên Can, Địa Chi, Thổ Vượng.',
+    phamViOracle:
+      '17/17 mục Việt = 28/28 heading Hán đã inventory; oracle subset: Can/Chi, Ngũ Thử/Ngũ Hổ Độn, Thổ Vượng.',
   },
   {
     quyen: 2,

@@ -67,7 +67,7 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 
 | Quyển | Hán mục     | Trạng thái      | Scope hiện có                                                                                                |
 | ----: | ----------- | --------------- | ------------------------------------------------------------------------------------------------------------ |
-|     1 | 本原一      | ORACLE_MOT_PHAN | Can/Chi, Thổ Vượng                                                                                           |
+|     1 | 本原一      | ORACLE_MOT_PHAN | 17/17 mục Việt = 28/28 heading Hán inventory; Can/Chi, Ngũ Thử/Ngũ Hổ Độn, Thổ Vượng                         |
 |     2 | 本原二      | CHUA_IMPLEMENT  | 12/12 section inventory; 24 sơn/ngũ hành địa lý/biến quẻ, thiếu spatial domain                               |
 |     3 | 義例一      | CHUA_IMPLEMENT  | 36/36 mục đã inventory; annual spatial layer, current contract thiếu hướng/tọa-hướng                         |
 |     4 | 義例二      | ORACLE_MOT_PHAN | 12 Trực shared identities, 月厭/厭對, 陰陽不將                                                               |
@@ -97,6 +97,10 @@ Tổng hiện tại:
 - **0 quyển** được đánh dấu full-volume oracle.
 
 ## Double-entry oracle hiện có
+
+### Q1
+
+`docs/research/q1-full-inventory.md` khóa **17/17 mục Việt = 28/28 heading Hán**. Oracle production hiện cover Can/Chi, Ngũ Thử/Ngũ Hổ Độn và Thổ Vượng; Bát quái/Nạp Giáp/thiên văn còn lại là foundation/reference hoặc spatial blocker.
 
 ### Q2
 
