@@ -7,7 +7,7 @@ Status: COMPARED / INVENTORIED
 Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 
 1. factor đã production và có oracle;
-2. mục đã hiểu công thức nhưng không thuộc 21 vertical hiện tại;
+2. mục đã hiểu công thức nhưng không thuộc 22 vertical hiện tại;
 3. mục chưa thể production vì calendar/context hiện thiếu input mà chính nguồn đòi hỏi.
 
 **Inventory đủ không đồng nghĩa implement toàn bộ Quyển 6.** Activity engine vẫn bám exact Dụng sự Q11 + Nghi kị Q10; không tự đưa một thần Q6 vào kết luận chỉ vì mục Nghĩa lệ gọi nó cát/hung.
@@ -17,14 +17,14 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 - Việt: Hiệp Kỷ Biện Phương Thư, Tập 1, Quyển 6, trang in 474–563 (working scan PDF 481–570 đã mở trực tiếp).
 - Hán: Kanripo `KR3g0051_006.txt`, revision pin của repo, `WYG_006-1a..76a`.
 - Oracle phụ: Q9 `KR3g0051_009.txt` cho Thượng Sóc, Phản Chi, Tứ Ly/Tứ Tuyệt, Khí Vãng Vong.
-- Exact activity dependency: Q11 fixture `han-q11-oracle.spec.ts` cho 21 vertical production.
+- Exact activity dependency: Q11 fixture `han-q11-oracle.spec.ts` cho 22 vertical production.
 
 ## Inventory 40 mục
 
 |   # | Mục Q6                        | Research      | Product hiện tại   | Ghi chú                                                                        |
 | --: | ----------------------------- | ------------- | ------------------ | ------------------------------------------------------------------------------ |
 |   1 | Tam Hợp / 三合                | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                           |
-|   2 | Lâm Nhật / 臨日               | COMPARED      | OUT_OF_SCOPE       | tháng→chi ngày rõ; không có dependency trong 21 vertical hiện tại              |
+|   2 | Lâm Nhật / 臨日               | COMPARED      | OUT_OF_SCOPE       | tháng→chi ngày rõ; không có dependency trong 22 vertical hiện tại              |
 |   3 | Dịch Mã / 驛馬〈天后〉        | ORACLE_TESTED | IMPLEMENTED        | Thiên Hậu là tên cùng vị trí trong mục này                                     |
 |   4 | Kiếp Sát / 劫煞               | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                           |
 |   5 | Tai Sát / 災煞〈天火〉        | ORACLE_TESTED | IMPLEMENTED        | sách sửa Thiên Hỏa theo cùng vị trí; không tạo Thiên Ngục riêng                |
@@ -39,7 +39,7 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 |  14 | Ngũ Phú / 五富                | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                           |
 |  15 | Thiên Thương / 天倉           | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                           |
 |  16 | Thiên Tặc / 天賊              | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                           |
-|  17 | Yếu An / 要安                 | COMPARED      | OUT_OF_SCOPE       | monthly factor; không có dependency trong 21 vertical hiện tại                 |
+|  17 | Yếu An / 要安                 | COMPARED      | OUT_OF_SCOPE       | monthly factor; không có dependency trong 22 vertical hiện tại                 |
 |  18 | Ngọc Vũ / 玉宇                | COMPARED      | OUT_OF_SCOPE       | Việt p513; monthly factor                                                      |
 |  19 | Kim Đường / 金堂              | COMPARED      | OUT_OF_SCOPE       | monthly factor                                                                 |
 |  20 | Kính An / 敬安                | COMPARED      | OUT_OF_SCOPE       | Việt p515; monthly factor                                                      |
@@ -55,7 +55,7 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 |  30 | Binh Cấm / 兵禁               | COMPARED      | OUT_OF_SCOPE       | Việt p535; military-only                                                       |
 |  31 | Địa Nang / 地囊               | ORACLE_TESTED | IMPLEMENTED        | dùng bảng đính chính, không dùng 歴例 sai 23/48 chữ                            |
 |  32 | Thổ Phù / 土符                | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                           |
-|  33 | Đại Sát / 大煞                | COMPARED      | OUT_OF_SCOPE       | Việt p545; không có dependency trong 21 vertical hiện tại                      |
+|  33 | Đại Sát / 大煞                | COMPARED      | OUT_OF_SCOPE       | Việt p545; không có dependency trong 22 vertical hiện tại                      |
 |  34 | Quy Kị / 歸忌                 | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle; sách bác mở rộng kị cưới                                 |
 |  35 | Vãng Vong / 往亡              | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                           |
 |  36 | Khí Vãng Vong / 氣往亡        | COMPARED      | OUT_OF_SCOPE       | offset ngày sau 12 tiết; Việt p553–555; không có exact Q11 dependency hiện tại |
@@ -68,7 +68,7 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 
 ### Lâm Nhật
 
-Hán Q6 cho bảng tháng trực tiếp (`正月午...`). Có thể encode bằng `chiThang → chiNgay`, nhưng không xuất hiện trong exact Q11 của 21 vertical hiện tại nên không thêm vào engine chỉ để tăng số lượng thần sát.
+Hán Q6 cho bảng tháng trực tiếp (`正月午...`). Có thể encode bằng `chiThang → chiNgay`, nhưng không xuất hiện trong exact Q11 của 22 vertical hiện tại nên không thêm vào engine chỉ để tăng số lượng thần sát.
 
 ### Du Họa
 

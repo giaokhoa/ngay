@@ -31,6 +31,8 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   THO_PHU_TIN: 'Thổ Phù',
   DIA_NANG: 'Địa Nang',
   DAN_NHAT: 'Dân Nhật',
+  MAU_THUONG: 'Mẫu Thương',
+  THIEN_THUONG: 'Thiên Thương',
   VUONG_NHAT: 'Vương Nhật',
   NGU_PHU: 'Ngũ Phú',
   DAI_HAO: 'Đại Hao',
