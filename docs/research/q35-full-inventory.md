@@ -16,7 +16,7 @@ Exact canonical Tập II đã được mở trực tiếp. Q35 bắt đầu p828
 |   2 | 男女九宫     | OUT_OF_SCOPE / PERSONAL-SPATIAL                                     |
 |   3 | 逐日人神所在 | OUT_OF_SCOPE                                                        |
 |   4 | 太白逐日遊方 | BLOCKED_SPATIAL                                                     |
-|   5 | 長星短星     | OUT_OF_SCOPE                                                        |
+|   5 | 長星短星     | CORROBORATES_Q9_PRODUCTION                                          |
 |   6 | 百忌日       | REFERENCE_ONLY pending exact activity semantics                     |
 |   7 | 祀竈日       | OUT_OF_SCOPE_VERTICAL                                               |
 |   8 | 洗頭日       | OUT_OF_SCOPE_VERTICAL                                               |
@@ -38,6 +38,12 @@ Exact Việt có **13 mục đánh số**:
 - Hán còn section dài `竒門三元` ở `WYG_034-52a..62b`; exact Việt **không có section này** và chuyển thẳng sang Q36.
 
 Đây là discrepancy canonical `Q35_QIMEN_SANYUAN_OMITTED`, không còn là TOC pending.
+
+## Chính sách 長星 / 短星
+
+`長星短星` đã được productionize từ **Q9 Lập thành** (`WYG_009-33b`) và cross-check 12 Nguyệt biểu Q19–30. Q35 chỉ corroborate truyền bảng: chính phần phụ lục này ghi một số phép giải nghĩa suy ra kết quả khác bảng (`未知孰是`) và kết luận phép đã tương truyền lâu nhưng nghĩa không rõ. Vì vậy production **không sửa bảng Q9 theo phép suy Q35**.
+
+Bản Việt Tập II của mục Q35 chưa materialize trong file surface của phiên này; docs không claim Việt exact cho factor foundation này.
 
 ## Kết luận
 
