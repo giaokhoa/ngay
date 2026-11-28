@@ -74,7 +74,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: 'f7920ffe391d73acc3fd259e7d3454f58f4a906678e68d3497b24466f53a734a',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      'Toàn bộ factor Q6 đang production: core tháng/ngày + 大時/天吏/往亡/天馬/歸忌/土符/地囊; 地囊 dùng bảng đính chính.',
+      '40/40 mục đã inventory; 18 factor production có Hán oracle. 反支/月忌/上朔 explicit blocked theo calendar/context; phần còn lại out-of-scope current verticals.',
   },
   {
     quyen: 7,
