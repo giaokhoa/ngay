@@ -7,6 +7,7 @@ import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
+import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
 import { DiaChi } from '../calendar/domain/earthly-branch';
@@ -24,6 +25,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.DI_CHUYEN]: QUY_TAC_DI_CHUYEN,
   [LoaiCongViec.AN_GIUONG]: QUY_TAC_AN_GIUONG,
   [LoaiCongViec.QUAN_DAI]: QUY_TAC_QUAN_DAI,
+  [LoaiCongViec.NHAP_HOC]: QUY_TAC_NHAP_HOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
@@ -32,27 +34,36 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
 };
 
 const ALL_ACTIVITIES = Object.values(LoaiCongViec);
+const ACTIVITIES_WITH_ORDINARY_Q10_KY = ALL_ACTIVITIES.filter(
+  (activity) => activity !== LoaiCongViec.NHAP_HOC,
+);
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
-  it.each(ALL_ACTIVITIES)('%s: 月破 + 天徳 remains Kị (WYG 010-29a..30b)', (activity) => {
-    const result = danhGia(activity, {
-      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC],
-    });
+  it.each(ACTIVITIES_WITH_ORDINARY_Q10_KY)(
+    '%s: 月破 + 天徳 remains Kị (WYG 010-29a..30b)',
+    (activity) => {
+      const result = danhGia(activity, {
+        yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC],
+      });
 
-    expect(result.coKy).toBe(true);
-    expectTrangThai(result.dongGop, MaYeuTo.NGUYET_PHA, TrangThaiDongGop.HIEU_LUC);
-  });
+      expect(result.coKy).toBe(true);
+      expectTrangThai(result.dongGop, MaYeuTo.NGUYET_PHA, TrangThaiDongGop.HIEU_LUC);
+    },
+  );
 
-  it.each(ALL_ACTIVITIES)('%s: 四廢 + 月徳 remains Kị (WYG 010-58a..58b)', (activity) => {
-    const result = danhGia(activity, {
-      yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.NGUYET_DUC],
-    });
+  it.each(ACTIVITIES_WITH_ORDINARY_Q10_KY)(
+    '%s: 四廢 + 月徳 remains Kị (WYG 010-58a..58b)',
+    (activity) => {
+      const result = danhGia(activity, {
+        yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.NGUYET_DUC],
+      });
 
-    expect(result.coKy).toBe(true);
-    expectTrangThai(result.dongGop, MaYeuTo.TU_PHE, TrangThaiDongGop.HIEU_LUC);
-  });
+      expect(result.coKy).toBe(true);
+      expectTrangThai(result.dongGop, MaYeuTo.TU_PHE, TrangThaiDongGop.HIEU_LUC);
+    },
+  );
 
-  it.each(ALL_ACTIVITIES)(
+  it.each(ACTIVITIES_WITH_ORDINARY_Q10_KY)(
     '%s: 五墓 in month Ngọ + 月徳 removes Kị (WYG 010-60b..61a)',
     (activity) => {
       const result = danhGia(activity, {
@@ -64,12 +75,25 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
     },
   );
 
+  it('入學 keeps 忌無 for ordinary 月破 / 四廢 / 五墓 branches', () => {
+    for (const context of [
+      { yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC] },
+      { yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.NGUYET_DUC] },
+      { chiThang: DiaChi.NGO, yeuTo: [MaYeuTo.NGU_MO, MaYeuTo.NGUYET_DUC] },
+    ] as const) {
+      const result = danhGia(LoaiCongViec.NHAP_HOC, context);
+      expect(result.coKy).toBe(false);
+      expect(result.camMoiViec).toBe(false);
+    }
+  });
+
   it('月厭 month Dần + 月徳 preserves only the Hán residual activity list', () => {
     const expectedKy: Readonly<Record<LoaiCongViec, boolean>> = {
       [LoaiCongViec.CUOI_HOI]: true,
       [LoaiCongViec.DI_CHUYEN]: true,
       [LoaiCongViec.AN_GIUONG]: false,
       [LoaiCongViec.QUAN_DAI]: false,
+      [LoaiCongViec.NHAP_HOC]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
