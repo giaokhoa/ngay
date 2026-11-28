@@ -5,6 +5,7 @@ import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
+import { QUY_TAC_CHINH_DUNG_CAT_TOC } from '../activities/chinh-dung-cat-toc-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_GIAI_TRU } from '../activities/giai-tru-rules';
@@ -38,6 +39,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
   [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
+  [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
@@ -47,10 +49,16 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
 
 const ALL_ACTIVITIES = Object.values(LoaiCongViec);
 const ACTIVITIES_WITH_TU_PHE_KY = ALL_ACTIVITIES.filter(
-  (activity) => activity !== LoaiCongViec.NHAP_HOC && activity !== LoaiCongViec.TE_TU,
+  (activity) =>
+    activity !== LoaiCongViec.NHAP_HOC &&
+    activity !== LoaiCongViec.TE_TU &&
+    activity !== LoaiCongViec.CHINH_DUNG_CAT_TOC,
 );
-const ACTIVITIES_WITH_NGUYET_PHA_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
-  (activity) => activity !== LoaiCongViec.GIAI_TRU,
+const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
+  (activity) =>
+    activity !== LoaiCongViec.NHAP_HOC &&
+    activity !== LoaiCongViec.TE_TU &&
+    activity !== LoaiCongViec.GIAI_TRU,
 );
 const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
   (activity) =>
@@ -150,6 +158,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.CAU_PHUC]: false,
       [LoaiCongViec.CAU_TU]: false,
       [LoaiCongViec.GIAI_TRU]: false,
+      [LoaiCongViec.CHINH_DUNG_CAT_TOC]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -179,6 +188,43 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('整容剃頭: 四廢 / 五墓 stay exempt, while 月破 remains Kị', () => {
+    const tuPhe = danhGia(LoaiCongViec.CHINH_DUNG_CAT_TOC, {
+      yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.GIAI_THAN],
+    });
+    const nguMo = danhGia(LoaiCongViec.CHINH_DUNG_CAT_TOC, {
+      yeuTo: [MaYeuTo.NGU_MO, MaYeuTo.GIAI_THAN],
+    });
+    const pha = danhGia(LoaiCongViec.CHINH_DUNG_CAT_TOC, {
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC],
+    });
+
+    expect(tuPhe.coKy).toBe(false);
+    expect(nguMo.coKy).toBe(false);
+    expect(pha.coKy).toBe(true);
+  });
+
+  it('整容剃頭: 丁日 suppresses Nên; lunar 12/15 remain direct Kị', () => {
+    const dinh = danhGia(LoaiCongViec.CHINH_DUNG_CAT_TOC, {
+      canNgay: ThienCan.DINH,
+      truc: ThapNhiTruc.TRU,
+      yeuTo: [MaYeuTo.GIAI_THAN],
+    });
+    const lunar12 = danhGia(LoaiCongViec.CHINH_DUNG_CAT_TOC, {
+      ngayAmTrongThang: 12,
+      yeuTo: [MaYeuTo.GIAI_THAN],
+    });
+    const lunar15 = danhGia(LoaiCongViec.CHINH_DUNG_CAT_TOC, {
+      ngayAmTrongThang: 15,
+      yeuTo: [MaYeuTo.GIAI_THAN],
+    });
+
+    expect(dinh.coNen).toBe(false);
+    expect(dinh.coKy).toBe(true);
+    expect(lunar12.coKy).toBe(true);
+    expect(lunar15.coKy).toBe(true);
+  });
 
   it('解除: ordinary 月破 and special-calendar days stay exempt, while 四廢 / 五墓 remain source-driven Kị', () => {
     const pha = danhGia(LoaiCongViec.GIAI_TRU, {
@@ -438,6 +484,7 @@ interface Input {
   canNgay?: ThienCan;
   chiNgay?: DiaChi;
   truc?: ThapNhiTruc;
+  ngayAmTrongThang?: number;
   yeuTo: readonly MaYeuTo[];
 }
 
@@ -451,6 +498,7 @@ function taoBoiCanh(input: Input): BoiCanhDanhGiaNgay {
     canNgay: input.canNgay ?? ThienCan.BINH,
     chiNgay: input.chiNgay ?? DiaChi.TY,
     truc: input.truc ?? ThapNhiTruc.THANH,
+    ngayAmTrongThang: input.ngayAmTrongThang,
     dangThoVuong: false,
     yeuTo: input.yeuTo.map(taoYeuTo),
   };

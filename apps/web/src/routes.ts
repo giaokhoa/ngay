@@ -11,6 +11,7 @@ export const DUONG_DAN = {
   CAU_PHUC: '/cau-phuc',
   CAU_TU: '/cau-tu',
   GIAI_TRU: '/giai-tru',
+  CHINH_DUNG_CAT_TOC: '/chinh-dung-cat-toc',
   DONG_THO: '/dong-tho',
   SUA_CUNG_THAT: '/sua-cung-that',
   KHAI_TRUONG: '/khai-truong',

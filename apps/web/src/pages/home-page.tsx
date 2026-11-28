@@ -98,6 +98,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.GIAI_TRU,
   },
   {
+    ma: 'CHINH_DUNG_CAT_TOC',
+    ten: 'Chỉnh dung, cắt tóc',
+    moTa: 'Chọn ngày chỉnh dung hoặc cắt tóc theo ngày Trừ, Giải Thần và các điều kị đã đối chiếu.',
+    to: DUONG_DAN.CHINH_DUNG_CAT_TOC,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
