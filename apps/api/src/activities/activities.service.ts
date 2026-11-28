@@ -20,6 +20,7 @@ import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from './mo-kho-xuat-hang-tien-rules';
 import { QUY_TAC_NAP_TAI } from './nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from './nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from './quan-dai-rules';
+import { QUY_TAC_QUET_DON_NHA_CUA } from './quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from './sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from './sua-mong-tay-chan-rules';
 import { QUY_TAC_TE_TU } from './te-tu-rules';
@@ -70,6 +71,8 @@ export class DungSuService {
         return QUY_TAC_SUA_BUONG_SAN_PHU;
       case LoaiCongViec.DAT_COI_XAY_GIA:
         return QUY_TAC_DAT_COI_XAY_GIA;
+      case LoaiCongViec.QUET_DON_NHA_CUA:
+        return QUY_TAC_QUET_DON_NHA_CUA;
       case LoaiCongViec.DONG_THO:
         return QUY_TAC_DONG_THO;
       case LoaiCongViec.SUA_CUNG_THAT:

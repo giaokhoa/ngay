@@ -152,6 +152,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.DAT_COI_XAY_GIA,
   },
   {
+    ma: 'QUET_DON_NHA_CUA',
+    ten: 'Quét dọn nhà cửa',
+    moTa: 'Q11 Nên Trừ nhật hoặc Trừ Thần, không có Kị thường; vẫn tôn trọng các ngày Q10 ghi chư sự giai kị.',
+    to: DUONG_DAN.QUET_DON_NHA_CUA,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
