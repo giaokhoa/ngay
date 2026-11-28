@@ -80,6 +80,7 @@ export type KetQuaXemNgaySuaMongTayChanApi = KetQuaXemNgayApi;
 export type KetQuaXemNgayMayDoApi = KetQuaXemNgayApi;
 export type KetQuaXemNgayLapKheUocGiaoDichApi = KetQuaXemNgayApi;
 export type KetQuaXemNgayNapTaiApi = KetQuaXemNgayApi;
+export type KetQuaXemNgayMoKhoXuatHangTienApi = KetQuaXemNgayApi;
 export type KetQuaXemNgayDongThoApi = KetQuaXemNgayApi;
 export type KetQuaXemNgaySuaCungThatApi = KetQuaXemNgayApi;
 export type KetQuaXemNgayKhaiTruongApi = KetQuaXemNgayApi;
@@ -165,6 +166,7 @@ export type MaCongViecApi =
   | 'MAY_DO'
   | 'LAP_KHE_UOC_GIAO_DICH'
   | 'NAP_TAI'
+  | 'MO_KHO_XUAT_HANG_TIEN'
   | 'DONG_THO'
   | 'SUA_CUNG_THAT'
   | 'KHAI_TRUONG'
@@ -510,6 +512,10 @@ export function taoUrlXemNapTai(thoiDiem: Date, muiGio: string): string {
   return taoUrlXemNgay('nap-tai', thoiDiem, muiGio);
 }
 
+export function taoUrlXemMoKhoXuatHangTien(thoiDiem: Date, muiGio: string): string {
+  return taoUrlXemNgay('mo-kho-xuat-hang-tien', thoiDiem, muiGio);
+}
+
 export function taoUrlXemKhaiTruong(thoiDiem: Date, muiGio: string): string {
   return taoUrlXemNgay('khai-truong', thoiDiem, muiGio);
 }
@@ -656,6 +662,14 @@ export function xemNgayNapTai(
   signal?: AbortSignal,
 ): Promise<KetQuaXemNgayNapTaiApi> {
   return xemNgay('nap-tai', thoiDiem, muiGio, signal);
+}
+
+export function xemNgayMoKhoXuatHangTien(
+  thoiDiem: Date,
+  muiGio: string,
+  signal?: AbortSignal,
+): Promise<KetQuaXemNgayMoKhoXuatHangTienApi> {
+  return xemNgay('mo-kho-xuat-hang-tien', thoiDiem, muiGio, signal);
 }
 
 export function xemNgayDongTho(

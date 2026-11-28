@@ -15,6 +15,7 @@ import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
 import { QUY_TAC_LAP_KHE_UOC_GIAO_DICH } from '../activities/lap-khe-uoc-giao-dich-rules';
 import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
+import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from '../activities/mo-kho-xuat-hang-tien-rules';
 import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
@@ -41,6 +42,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
   [LoaiCongViec.MAY_DO]: QUY_TAC_MAY_DO,
+  [LoaiCongViec.MO_KHO_XUAT_HANG_TIEN]: QUY_TAC_MO_KHO_XUAT_HANG_TIEN,
   [LoaiCongViec.NAP_TAI]: QUY_TAC_NAP_TAI,
   [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: QUY_TAC_LAP_KHE_UOC_GIAO_DICH,
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
@@ -79,7 +81,8 @@ const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
     activity !== LoaiCongViec.CAU_PHUC &&
     activity !== LoaiCongViec.CAU_TU &&
     activity !== LoaiCongViec.MAY_DO &&
-    activity !== LoaiCongViec.NAP_TAI,
+    activity !== LoaiCongViec.NAP_TAI &&
+    activity !== LoaiCongViec.MO_KHO_XUAT_HANG_TIEN,
 );
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
@@ -177,6 +180,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.SUA_MONG_TAY_CHAN]: false,
       [LoaiCongViec.MAY_DO]: false,
       [LoaiCongViec.NAP_TAI]: false,
+      [LoaiCongViec.MO_KHO_XUAT_HANG_TIEN]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -207,6 +211,50 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('開倉庫出貨財: 月建 cát relief keeps 己未陽錯 exception', () => {
+    const relieved = danhGia(LoaiCongViec.MO_KHO_XUAT_HANG_TIEN, {
+      yeuTo: [MaYeuTo.NGUYET_KIEN, MaYeuTo.THIEN_DUC],
+    });
+    const kyMui = danhGia(LoaiCongViec.MO_KHO_XUAT_HANG_TIEN, {
+      chiThang: DiaChi.MUI,
+      canNgay: ThienCan.KY,
+      chiNgay: DiaChi.MUI,
+      yeuTo: [MaYeuTo.NGUYET_KIEN, MaYeuTo.THIEN_DUC_HOP],
+    });
+    expect(relieved.coKy).toBe(false);
+    expect(kyMui.coKy).toBe(true);
+  });
+
+  it('開倉庫出貨財: 五虚 can be released, 天賊 with virtue remains Kị, 甲日 is direct Kị', () => {
+    const nguHu = danhGia(LoaiCongViec.MO_KHO_XUAT_HANG_TIEN, {
+      yeuTo: [MaYeuTo.NGU_HU, MaYeuTo.LUC_HOP],
+    });
+    const thienTac = danhGia(LoaiCongViec.MO_KHO_XUAT_HANG_TIEN, {
+      yeuTo: [MaYeuTo.THIEN_TAC, MaYeuTo.THIEN_DUC],
+    });
+    const giap = danhGia(LoaiCongViec.MO_KHO_XUAT_HANG_TIEN, {
+      canNgay: ThienCan.GIAP,
+      yeuTo: [MaYeuTo.NGUYET_AN],
+    });
+    expect(nguHu.coKy).toBe(false);
+    expect(thienTac.coKy).toBe(true);
+    expect(giap.coKy).toBe(true);
+  });
+
+  it('開倉庫出貨財: 月煞/月虚 is one canonical factor and 卯月德願 branch releases it', () => {
+    const result = danhGia(LoaiCongViec.MO_KHO_XUAT_HANG_TIEN, {
+      chiThang: DiaChi.MAO,
+      yeuTo: [MaYeuTo.NGUYET_SAT, MaYeuTo.NGUYET_DUC, MaYeuTo.THIEN_NGUYEN],
+    });
+    expect(result.coKy).toBe(false);
+    expect(
+      result.dongGop.filter(
+        (item) =>
+          item.quyTac.dieuKien.loai === 'YEU_TO' && item.quyTac.dieuKien.ma === MaYeuTo.NGUYET_SAT,
+      ),
+    ).toHaveLength(1);
+  });
 
   it('納財: 收日 is Nên; 閉/五墓 are not baseline Kị', () => {
     const thu = danhGia(LoaiCongViec.NAP_TAI, { truc: ThapNhiTruc.THU, yeuTo: [] });
