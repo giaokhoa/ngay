@@ -157,6 +157,7 @@ Chi tiết: `docs/research/q8-full-inventory.md`.
 | LAP_KHE_UOC_GIAO_DICH / 立劵交易     | activities | T1 Q11 p857 + Hán Q9/Q10/Q11    | ORACLE_TESTED | lap-khe-uoc-giao-dich-rules.ts + trade Q10 resolver     | lap-khe-uoc-giao-dich-rules.spec.ts / lap-khe-uoc-giao-dich-conflict.spec.ts | 7 Nên / 19 Kị; Ngũ Ly relief; 長星短星 Q10-only; docs/research/activity-lap-khe-uoc-giao-dich.md             |
 | NAP_TAI / 納財                       | activities | T1 Q11 p857 + Hán Q9/Q10/Q11    | ORACLE_TESTED | nap-tai-rules.ts + filtered trade Q10 resolver          | nap-tai-rules.spec.ts / nap-tai-conflict.spec.ts                             | 12 Nên / 16 Kị; Thu là Nên; 長星短星 Q10-only; docs/research/activity-nap-tai.md                             |
 | MO_KHO_XUAT_HANG_TIEN / 開倉庫出貨財 | activities | T1 Q11 p858 + Hán Q5/Q10/Q11    | ORACLE_TESTED | mo-kho-xuat-hang-tien-rules.ts + warehouse Q10 resolver | mo-kho-xuat-hang-tien-rules.spec.ts / mo-kho-xuat-hang-tien-conflict.spec.ts | 5 Nên / 23 source Kị names -> 22 canonical; 月煞/月虚 alias; docs/research/activity-mo-kho-xuat-hang-tien.md |
+| SUA_BUONG_SAN_PHU / 修置産室         | activities | T1 Q11 p858 + Hán Q4/Q10/Q11    | ORACLE_TESTED | sua-buong-san-phu-rules.ts + earthwork Q10 resolver     | sua-buong-san-phu-rules.spec.ts / sua-buong-san-phu-conflict.spec.ts         | 1 Nên / 21 Kị; 死神≠平日, 土府≠土符; docs/research/activity-sua-buong-san-phu.md                             |
 | DONG_THO / 興造動土                  | activities | T1 Q11 p855 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10                           | earthwork-rules.spec.ts / earthwork-conflict.spec.ts                         | docs/research/activity-dong-tho-sua-cung-that.md                                                             |
 | SUA_CUNG_THAT / 修宮室               | activities | T1 Q11 p854 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10                           | earthwork-rules.spec.ts / earthwork-conflict.spec.ts                         | docs/research/activity-dong-tho-sua-cung-that.md                                                             |
 | KHAI_TRUONG / 開市                   | activities | T1 Q11 p857 + Hán Q11           | ORACLE_TESTED | khai-truong-rules.ts + full Q10                         | khai-truong-rules.spec.ts / khai-truong-conflict.spec.ts                     | docs/research/activity-khai-truong.md                                                                        |
@@ -188,8 +189,8 @@ Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inven
 
 |      Quyển | Structural inventory                    | Product/oracle                                                                                            |
 | ---------: | --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 10 Nghi kị | 51/51 mục Việt = 99/99 Hán TOC headings | exact semantic oracle cho 23 current vertical; remaining groups explicit source-only/blocked/out-of-scope |
-| 11 Dụng sự | 73/73 canonical activity sections       | 23 ORACLE_TESTED; 50 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
+| 10 Nghi kị | 51/51 mục Việt = 99/99 Hán TOC headings | exact semantic oracle cho 24 current vertical; remaining groups explicit source-only/blocked/out-of-scope |
+| 11 Dụng sự | 73/73 canonical activity sections       | 24 ORACLE_TESTED; 49 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
 
 Chi tiết: `docs/research/q10-full-inventory.md`, `docs/research/q11-full-inventory.md`.
 
@@ -219,8 +220,8 @@ Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scop
 | Q5 30/30 section inventory      | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED_PARTIAL | han-q5-oracle.spec.ts                         |
 | Q7 13/13 mục đã inventory       | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
 | Q6 40/40 mục đã inventory       | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED_PARTIAL | han-q6-oracle.spec.ts                         |
-| Q10 semantics của 23 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
-| Q11 exact 宜/忌 của 23 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
+| Q10 semantics của 24 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
+| Q11 exact 宜/忌 của 24 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
 | 36-volume corpus inventory      | KR3g0051 + Wikisource Q14 fallback | INVENTORIED               | han-source-manifest.spec.ts                   |
 
 Full-volume status: **0/36**.
