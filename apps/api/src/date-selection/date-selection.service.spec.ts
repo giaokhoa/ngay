@@ -185,6 +185,30 @@ describe('XemNgayService KHANH_THUONG end-to-end', () => {
   });
 });
 
+describe('XemNgayService TE_TU end-to-end', () => {
+  it('orchestrates calendar -> Q6 ritual factors -> exact Hán Q11 -> Q10 universal hard subset', () => {
+    const result = taoService().xemTeTu(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'TE_TU')).toBe(true);
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.nguon.every((nguon) => nguon.daXacMinh)),
+    ).toBe(true);
+  });
+
+  it('is deterministic for TE_TU', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+
+    expect(service.xemTeTu(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemTeTu(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -330,7 +354,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 12)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 13)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -390,6 +414,7 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       LoaiCongViec.NHAP_HOC,
       LoaiCongViec.YEN_HOI,
       LoaiCongViec.KHANH_THUONG,
+      LoaiCongViec.TE_TU,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);

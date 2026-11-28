@@ -10,6 +10,7 @@ import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
+import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
 import { DiaChi } from '../calendar/domain/earthly-branch';
@@ -30,6 +31,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.NHAP_HOC]: QUY_TAC_NHAP_HOC,
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
+  [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
@@ -39,7 +41,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
 
 const ALL_ACTIVITIES = Object.values(LoaiCongViec);
 const ACTIVITIES_WITH_ORDINARY_Q10_KY = ALL_ACTIVITIES.filter(
-  (activity) => activity !== LoaiCongViec.NHAP_HOC,
+  (activity) => activity !== LoaiCongViec.NHAP_HOC && activity !== LoaiCongViec.TE_TU,
 );
 const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_ORDINARY_Q10_KY.filter(
   (activity) => activity !== LoaiCongViec.YEN_HOI && activity !== LoaiCongViec.KHANH_THUONG,
@@ -82,6 +84,34 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
     },
   );
 
+  it('祭祀 stays exempt from ordinary 月破 / 四廢 / 五墓 Kị branches', () => {
+    for (const context of [
+      { yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC] },
+      { yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.NGUYET_DUC] },
+      { chiThang: DiaChi.NGO, yeuTo: [MaYeuTo.NGU_MO, MaYeuTo.NGUYET_DUC] },
+    ] as const) {
+      const result = danhGia(LoaiCongViec.TE_TU, context);
+      expect(result.coKy).toBe(false);
+      expect(result.camMoiViec).toBe(false);
+    }
+  });
+
+  it('祭祀 keeps 天狗 and 寅日 as source-exact Kị', () => {
+    const thienCau = danhGia(LoaiCongViec.TE_TU, {
+      chiThang: DiaChi.THAN,
+      chiNgay: DiaChi.TUAT,
+      truc: ThapNhiTruc.MAN,
+      yeuTo: [MaYeuTo.THIEN_CAU, MaYeuTo.THIEN_DUC, MaYeuTo.THIEN_VU],
+    });
+    const dan = danhGia(LoaiCongViec.TE_TU, {
+      chiNgay: DiaChi.DAN,
+      yeuTo: [MaYeuTo.THIEN_XA],
+    });
+
+    expect(thienCau.coKy).toBe(true);
+    expect(dan.coKy).toBe(true);
+  });
+
   it('入學 keeps 忌無 for ordinary 月破 / 四廢 / 五墓 branches', () => {
     for (const context of [
       { yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC] },
@@ -103,6 +133,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.NHAP_HOC]: false,
       [LoaiCongViec.YEN_HOI]: false,
       [LoaiCongViec.KHANH_THUONG]: false,
+      [LoaiCongViec.TE_TU]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -276,7 +307,7 @@ function taoBoiCanh(input: Input): BoiCanhDanhGiaNgay {
   return {
     chiThang: input.chiThang ?? DiaChi.DAN,
     canNgay: input.canNgay ?? ThienCan.BINH,
-    chiNgay: input.chiNgay ?? DiaChi.DAN,
+    chiNgay: input.chiNgay ?? DiaChi.TY,
     truc: input.truc ?? ThapNhiTruc.THANH,
     dangThoVuong: false,
     yeuTo: input.yeuTo.map(taoYeuTo),
