@@ -67,7 +67,7 @@ Q10 cung cấp **semantic conflict/exception layer**: một thần cát/hung có
 |  43 | 反支                                   | IMPLEMENTED_FACTOR             | sóc/new-moon context production; semantics activity vẫn source-driven                             |
 |  44 | 上朔・四離・四絶・晦日                 | IMPLEMENTED_FACTOR_SET         | all four identities production; activity semantics remain source-resolved                         |
 |  45 | 冬至・夏至・春分・秋分                 | CALENDAR_REFERENCE             | solar-term calendar primitive, not standalone score factor                                        |
-|  46 | 土王用事・伏社・朔弦望                 | PARTIAL_IMPLEMENTED            | Thổ Vượng implemented; Phục Xã/Sóc-Huyền-Vọng not current day factors                             |
+|  46 | 土王用事・伏社・朔弦望                 | PARTIAL_IMPLEMENTED            | Thổ Vượng + Sóc-Huyền-Vọng production; Phục Xã remains source-only                                |
 |  47 | 月忌日・十五日                         | PARTIAL_IMPLEMENTED            | 月忌日 5/14/23 production; 十五日 remains source-only                                             |
 |  48 | 人神所在日                             | OUT_OF_SCOPE_CURRENT_VERTICALS | located; body-location tradition not current product                                              |
 |  49 | 長星・短星                             | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current dependency                                                                    |

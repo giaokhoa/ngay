@@ -6,7 +6,7 @@ import { DiaChi } from './domain/earthly-branch';
 import { CanChi } from './domain/sexagenary-cycle';
 import { TietKhi } from './domain/solar-term';
 import { ThapNhiTruc } from './domain/twelve-officer';
-import { tinhThongTinNgayAm, ThongTinNgayAm } from './lunar-day';
+import { laNgaySocHuyenVong, tinhThongTinNgayAm, ThongTinNgayAm } from './lunar-day';
 import { tinhCanChiNgay } from './sexagenary-day';
 import { tinhCanChiNamTheoLapXuan, tinhCanChiThang } from './sexagenary-year-month';
 import { TinhTietKhiService } from './solar-term.service';
@@ -55,6 +55,10 @@ export class TinhLichService {
 
   tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongTinNgayAm {
     return tinhThongTinNgayAm(ngayDanSu, muiGio);
+  }
+
+  laNgaySocHuyenVong(ngayDanSu: NgayDanSu, muiGio: string): boolean {
+    return laNgaySocHuyenVong(ngayDanSu, muiGio);
   }
 
   tinhTruc(chiThang: DiaChi, chiNgay: DiaChi): ThapNhiTruc {

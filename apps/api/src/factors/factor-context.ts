@@ -14,6 +14,7 @@ export interface BoiCanhTinhYeuToNgay {
   ngayTuLy?: boolean;
   ngayTuTuyet?: boolean;
   ngayHoi?: boolean;
+  ngaySocHuyenVong?: boolean;
   ngayAmTrongThang?: number;
   canChiNgaySoc?: CanChi;
 }

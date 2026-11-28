@@ -7,6 +7,9 @@ import { tinhCanChiNgay } from './sexagenary-day';
 const CUA_SO_TIM_SOC_NGAY = 35;
 const MOT_NGAY_MILLISECOND = 86_400_000;
 const boNhoNgayAm = new Map<string, ThongTinNgayAm>();
+const boNhoSocHuyenVong = new Map<string, boolean>();
+const CAC_PHA_SOC_HUYEN_VONG = [0, 90, 180, 270] as const;
+const CUA_SO_TIM_PHA_GAN_NGAY = 2;
 
 export interface ThongTinNgayAm {
   ngaySoc: NgayDanSu;
@@ -25,6 +28,24 @@ export interface ThongTinNgayAm {
  * Vì vậy không được đơn thuần lấy "new moon instant gần nhất <= thời điểm đang xét":
  * sóc có thể xảy ra sau giữa ngày nhưng ngày địa phương đó vẫn là mồng 1.
  */
+export function laNgaySocHuyenVong(ngayDanSu: NgayDanSu, muiGio: string): boolean {
+  const khoa = `${muiGio}|${ngayDanSu}`;
+  const daCo = boNhoSocHuyenVong.get(khoa);
+  if (daCo !== undefined) return daCo;
+
+  const giuaNgay = taoThoiDiemGiuaNgayTaiMuiGio(ngayDanSu, muiGio);
+  const laNgayPha = CAC_PHA_SOC_HUYEN_VONG.some((pha) => {
+    const truoc = timThoiDiemPhaTrang(pha, giuaNgay, -CUA_SO_TIM_PHA_GAN_NGAY);
+    const sau = timThoiDiemPhaTrang(pha, giuaNgay, CUA_SO_TIM_PHA_GAN_NGAY);
+    return [truoc, sau]
+      .filter((item): item is Date => item !== null)
+      .some((item) => tinhNgayDanSuTaiMuiGio(item, muiGio) === ngayDanSu);
+  });
+
+  boNhoSocHuyenVong.set(khoa, laNgayPha);
+  return laNgayPha;
+}
+
 export function tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongTinNgayAm {
   const khoa = `${muiGio}|${ngayDanSu}`;
   const daCo = boNhoNgayAm.get(khoa);
