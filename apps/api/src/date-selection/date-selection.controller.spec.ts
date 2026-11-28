@@ -227,7 +227,9 @@ describe('XemNgayController chi tiết ngày + giờ', () => {
 
     expect(result.gio).toHaveLength(12);
     expect(result.ketQuaNgay.ngayDanSu).toBe('2026-11-27');
-    expect(JSON.stringify(result.ketQuaNgay)).not.toMatch(/\bQ\d+\b|Quyển\s+\d+/i);
+    expect(JSON.stringify(result)).not.toMatch(
+      /\bQ\d+\b|Quyển\s+\d+|KR3g|WYG_|"(?:quyen|trang|muc|revision|sha256|tep|phamViOracle)"/i,
+    );
   });
 });
 

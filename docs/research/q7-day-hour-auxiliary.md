@@ -15,6 +15,21 @@
 - `WYG_007-23b..24b`: 八祿 và 日建/日破/日合/日害/日刑. Kiến/Hợp thuận; Phá/Hình/Hại kị. Với việc đại sự, mới xét thêm xung với trụ năm/tháng.
 - `KR3g0051_031.txt` (`WYG_031`): bảng ngày/giờ; Giáp Tý giờ Dần có Bạch Hổ đồng thời Lộc, Hỷ, Phúc Tinh, Mã — không được chấm điểm cộng cát thần để coi là giờ nên dùng.
 
+## Đối chiếu bản Việt
+
+Đã mở trực tiếp working scan Tập 1 Vũ Hoàng–Lân Bình được catalog trong `docs/source-catalog.md`. Working copy có thể đã repack nên không dùng hash của nó thay identity canonical; số trang dưới đây là **trang in** trong sách.
+
+- p.568: sáu thần Hoàng đạo, sáu Hắc đạo và nhóm việc Hắc đạo kị khớp Hán `WYG_007-3b..4a`.
+- p.572: thứ tự 12 thần, sáu cặp chi khởi Thanh Long, tháng khởi ngày và ngày khởi giờ khớp `WYG_007-7b..9b`.
+- p.576–577: xác nhận dùng tên **Bảo Quang** để phân biệt Thiên Đức Hoàng đạo với Thiên Đức khác.
+- p.586–587: Thiên Quan Quý Nhân theo nhật Can khớp đủ các vị trí Hán `WYG_007-19b`.
+- p.588–589: Phúc Tinh Quý Nhân theo nhật Can khớp `WYG_007-20b`.
+- p.590–591: Hỷ Thần khớp năm cặp Can và chi giờ của `WYG_007-21b..22b`, đồng thời giữ ngoại lệ không thắng Nhật Phá.
+- p.592: Bát Lộc là Lộc vị của nhật Can, khớp `WYG_007-23b`.
+- p.593–594: Nhật Kiến/Hợp là cát, Nhật Phá/Hại/Hình là hung; việc lớn mới xét thêm năm/tháng, khớp `WYG_007-24b`.
+
+Không phát hiện discrepancy Việt/Hán trong scope Q7 đang implement.
+
 ## Product policy
 
 - Các nhãn Hoàng/Hắc đạo là **supplementary source layer**, tuyệt đối không sửa `danhGia` gốc của Dụng sự/Nghi kị.
