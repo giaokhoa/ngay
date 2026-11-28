@@ -533,7 +533,7 @@ Fix production sau audit:
 - **Cưới hỏi bỏ sót toàn bộ lớp global hard-day**;
 - cả ba bản copy cũ đều thiếu Tuyệt Âm/Tuyệt Dương.
 
-Sau fix, cùng canonical hard-ban set được test áp cho đủ 11 vertical. Audit tiếp Nguyệt Yếm cho Cưới hỏi bổ sung đúng các nhánh Tuế Bạc/Trục Trận, Âm/Dương Thác, hard tháng Tý/Ngọ và cân bằng Đức thần. Hành Ngoan/Liễu Lệ/Cô Thần không bị tạo thành factor độc lập nếu Q10 không yêu cầu một outcome riêng.
+Sau fix, cùng canonical hard-ban set được test áp cho đủ 12 vertical. Audit tiếp Nguyệt Yếm cho Cưới hỏi bổ sung đúng các nhánh Tuế Bạc/Trục Trận, Âm/Dương Thác, hard tháng Tý/Ngọ và cân bằng Đức thần. Hành Ngoan/Liễu Lệ/Cô Thần không bị tạo thành factor độc lập nếu Q10 không yêu cầu một outcome riêng.
 
 ## Trạng thái
 

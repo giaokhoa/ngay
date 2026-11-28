@@ -126,6 +126,46 @@ describe('generic Q10 rule resolver', () => {
     ]);
   });
 
+  it('global BO_NEN không có danh sách mục tiêu thì bỏ toàn bộ Nên', () => {
+    const nenA = dongGopNen(MaYeuTo.THIEN_DUC);
+    const nenB = dongGopNen(MaYeuTo.NGUYET_DUC);
+    const rules: readonly QuyTacXungDotDataDriven[] = [
+      {
+        ma: 'GLOBAL_REMOVE_ALL_NEN',
+        dieuKien: { chiNgay: [DiaChi.DAN] },
+        phepXuLy: { loai: 'BO_NEN' },
+        precedence: 10,
+        moTa: 'remove all Nên',
+        nguon: [],
+      },
+    ];
+
+    apDungResolverQ10([nenA, nenB], boiCanh([MaYeuTo.THIEN_DUC, MaYeuTo.NGUYET_DUC]), rules);
+
+    expect(nenA.trangThai).toBe(TrangThaiDongGop.BI_LOAI);
+    expect(nenB.trangThai).toBe(TrangThaiDongGop.BI_LOAI);
+  });
+
+  it('global BO_NEN có danh sách mục tiêu vẫn chỉ bỏ Nên được chỉ định', () => {
+    const nenA = dongGopNen(MaYeuTo.THIEN_DUC);
+    const nenB = dongGopNen(MaYeuTo.NGUYET_DUC);
+    const rules: readonly QuyTacXungDotDataDriven[] = [
+      {
+        ma: 'GLOBAL_REMOVE_SELECTED_NEN',
+        phepXuLy: { loai: 'BO_NEN' },
+        precedence: 10,
+        moTa: 'remove one Nên',
+        nguon: [],
+        boNen: [{ loai: 'YEU_TO', ma: MaYeuTo.THIEN_DUC }],
+      },
+    ];
+
+    apDungResolverQ10([nenA, nenB], boiCanh([MaYeuTo.THIEN_DUC, MaYeuTo.NGUYET_DUC]), rules);
+
+    expect(nenA.trangThai).toBe(TrangThaiDongGop.BI_LOAI);
+    expect(nenB.trangThai).toBe(TrangThaiDongGop.HIEU_LUC);
+  });
+
   it('rule precedence cao hơn thắng rule tổng quát', () => {
     const contribution = dongGopKy(MaYeuTo.KIEP_SAT);
     const rules: readonly QuyTacXungDotDataDriven[] = [
@@ -154,6 +194,18 @@ describe('generic Q10 rule resolver', () => {
     expect(result.xungDotDaApDung.map((item) => item.ma)).toEqual(['SPECIAL_REMOVE']);
   });
 });
+
+function dongGopNen(ma: MaYeuTo): DongGopDanhGia {
+  const quyTac: QuyTacDungSu = {
+    ma: 'TEST_NEN_' + ma,
+    congViec: LoaiCongViec.DI_CHUYEN,
+    dieuKien: { loai: 'YEU_TO', ma },
+    tacDong: TacDongDungSu.NEN,
+    nguon: [],
+  };
+
+  return { quyTac, trangThai: TrangThaiDongGop.HIEU_LUC };
+}
 
 function dongGopKy(ma: MaYeuTo): DongGopDanhGia {
   const quyTac: QuyTacDungSu = {

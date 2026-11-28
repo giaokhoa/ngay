@@ -7,6 +7,7 @@ import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
+import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_XUAT_HANH_Q11 } from '../activities/xuat-hanh-rules';
@@ -58,6 +59,41 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:VANG_VONG',
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.KHANH_THUONG]: {
+    tieuDeHan: '慶賜賞賀',
+    anchor: 'KR3g0051_WYG_011-10a..10b',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_AN',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:VUONG_NHAT',
+      'YEU_TO:TAM_HOP',
+      'YEU_TO:PHUC_DUC',
+      'YEU_TO:THIEN_HY',
+      'TRUC:KHAI',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_LY',
     ],
   },
   [LoaiCongViec.YEN_HOI]: {
@@ -367,6 +403,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.QUAN_DAI]: QUY_TAC_QUAN_DAI,
   [LoaiCongViec.NHAP_HOC]: QUY_TAC_NHAP_HOC,
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
+  [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,

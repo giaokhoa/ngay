@@ -9,6 +9,7 @@ import { QUY_TAC_Q10_CUOI_HOI_Q4 } from './cuoi-hoi-q4-conflict-rules';
 import { QUY_TAC_Q10_CONG_VIEC_DAT } from './earthwork-conflict-rules';
 import { DanhGiaNgayService } from './evaluation.service';
 import { QUY_TAC_Q10_KHAI_TRUONG } from './khai-truong-conflict-rules';
+import { QUY_TAC_Q10_KHANH_THUONG } from './khanh-thuong-conflict-rules';
 import { QUY_TAC_Q10_NHAP_HOC } from './nhap-hoc-conflict-rules';
 import { QUY_TAC_Q10_QUAN_DAI } from './quan-dai-conflict-rules';
 import { NGAY_CAM_MOI_VIEC_Q4 } from './q4-hard-days';
@@ -79,6 +80,7 @@ describe('Q4/Q10 canonical hard days', () => {
     ['QUAN_DAI', QUY_TAC_Q10_QUAN_DAI],
     ['NHAP_HOC', QUY_TAC_Q10_NHAP_HOC],
     ['YEN_HOI', QUY_TAC_Q10_YEN_HOI],
+    ['KHANH_THUONG', QUY_TAC_Q10_KHANH_THUONG],
     ['DONG_THO/SUA_CUNG_THAT', QUY_TAC_Q10_CONG_VIEC_DAT],
     ['KHAI_TRUONG', QUY_TAC_Q10_KHAI_TRUONG],
     ['XUAT_HANH', QUY_TAC_Q10_XUAT_HANH],

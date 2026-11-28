@@ -6,6 +6,7 @@ export const DUONG_DAN = {
   QUAN_DAI: '/quan-dai',
   NHAP_HOC: '/nhap-hoc',
   YEN_HOI: '/yen-hoi',
+  KHANH_THUONG: '/khanh-thuong',
   DONG_THO: '/dong-tho',
   SUA_CUNG_THAT: '/sua-cung-that',
   KHAI_TRUONG: '/khai-truong',

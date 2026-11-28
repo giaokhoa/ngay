@@ -80,7 +80,11 @@ export function apDungResolverQ10(
         coKyBoSung = true;
         break;
       case 'BO_NEN':
-        loaiNenTheoMucTieu(dongGop, rule.boNen ?? [], rule.moTa);
+        if (rule.boNen?.length) {
+          loaiNenTheoMucTieu(dongGop, rule.boNen, rule.moTa);
+        } else {
+          loaiTatCaNen(dongGop, rule.moTa);
+        }
         break;
       case 'DELEGATE': {
         const delegated = resolveMucTieu(rule.phepXuLy.den, boiCanh, rules, new Set());
@@ -305,6 +309,15 @@ function kiemTraDelegateCoMat(mucTieu: DieuKienDungSu, boiCanh: BoiCanhDanhGiaNg
       if (!boiCanh.dangThoVuong) {
         throw new Error('Q10 delegate tới Thổ Vượng nhưng context không đang Thổ Vượng');
       }
+  }
+}
+
+function loaiTatCaNen(dongGop: DongGopDanhGia[], lyDo?: string): void {
+  for (const item of dongGop) {
+    if (item.quyTac.tacDong === TacDongDungSu.NEN && item.trangThai === TrangThaiDongGop.HIEU_LUC) {
+      item.trangThai = TrangThaiDongGop.BI_LOAI;
+      item.lyDoLoai = lyDo ?? 'Nên bị loại theo nhánh đặc biệt Quyển 10.';
+    }
   }
 }
 
