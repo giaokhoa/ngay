@@ -116,14 +116,14 @@ Ngoài ra test Việt/source-independent hiện có vẫn chạy:
 
 ### Q5
 
-`han-q5-oracle.spec.ts` kiểm độc lập:
+`han-q5-oracle.spec.ts` kiểm độc lập **toàn bộ 24 identity Q5 đang production**:
 
 - 天徳;
 - 月徳 / 天徳合 / 月徳合 / 月空 / 月恩;
 - 天恩 / 天赦 / 天願;
 - 母倉 / 四相 / 時徳;
 - 王日 / 民日;
-- 四廢 / 四忌 / 四窮 / 五墓 / 八專;
+- 九空 / 五墓 / 四耗 / 四廢 / 四忌 / 四窮 / 八專;
 - 復日 / 重日;
 - 鳴吠 final 13-day correction.
 

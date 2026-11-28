@@ -63,7 +63,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: '93e4a01b085403bd50da4f1efdd107bab4e39a3b1e2247acb958e87dc51eb9c4',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      'Đức/Hợp, Thiên Xá/Nguyện, Vương Nhật, Phục/Trọng Nhật, Ô Phệ và các factor đã implement.',
+      'Toàn bộ 24 identity Q5 đang production có Hán oracle: Đức/Hợp, special days, 王/民日, 九空/五墓/四耗/四廢/四忌/四窮, 八專, 復/重日, 鳴吠…',
   },
   {
     quyen: 6,
