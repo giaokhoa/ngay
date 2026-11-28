@@ -68,6 +68,15 @@ describe('Hán source corpus manifest', () => {
     expect(HAN_CORPUS_MANIFEST.find((item) => item.quyen === 36)?.tep).toBe('KR3g0051_035.txt');
   });
 
+  it('records the full Q9 Lập thành structure while keeping its oracle partial', () => {
+    const q9 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 9);
+
+    expect(q9?.trangThai).toBe('ORACLE_MOT_PHAN');
+    expect(q9?.phamViOracle).toMatch(
+      /4\/4 phần.*10 biểu niên thần.*30 biểu nguyệt thần.*2 trang nhật thần.*6 biểu thời thần/,
+    );
+  });
+
   it('records Q1 as structurally complete while keeping its oracle partial', () => {
     const q1 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 1);
 
@@ -104,6 +113,19 @@ describe('Hán source corpus manifest', () => {
       expect(item?.trangThai).toBe('CHUA_IMPLEMENT');
       expect(item?.phamViOracle).toBeUndefined();
     }
+  });
+
+  it('records Q32-Q34 structural inventories without claiming full-volume oracle', () => {
+    const q32 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 32);
+    const q33 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 33);
+    const q34 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 34);
+
+    expect(q32?.trangThai).toBe('ORACLE_MOT_PHAN');
+    expect(q32?.phamViOracle).toMatch(/3\/3.*貴登天門.*四大吉時/);
+    expect(q33?.trangThai).toBe('ORACLE_MOT_PHAN');
+    expect(q33?.phamViOracle).toMatch(/14 mục Việt secondary = 15 heading Hán.*相主/);
+    expect(q34?.trangThai).toBe('ORACLE_MOT_PHAN');
+    expect(q34?.phamViOracle).toMatch(/12\/12 heading Hán = 10 mục Việt secondary.*用時法/);
   });
 
   it('records Q4 as 29/29 section inventory without inventing standalone factors', () => {

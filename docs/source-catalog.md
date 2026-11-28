@@ -31,6 +31,14 @@ Catalog này chỉ lưu fingerprint/provenance. Repository **không commit bản
 File này có thể là bản tải/copy đã được repack và **không byte-identical** với canonical Tập 1 ở trên.
 Không được dùng hash của working copy để thay identity của file user upload.
 
+## Secondary structural corroboration cho Tập 2 khi exact scan không mount
+
+Khi execution context không có working copy của canonical Tập 2, repo có thể dùng **secondary public TOC** chỉ để corroborate tên quyển/mục:
+
+- `https://thuvienpdf.net/hiep-ky-bien-phuong-thu-tap-2`
+
+Nguồn này **không thay** fingerprint canonical Tập 2, không được dùng để claim đã kiểm trang/bảng Việt và không được làm oracle cell-by-cell. Mọi wording/chênh mục phải giữ `VIET_EXACT_PENDING` cho tới khi mở được scan canonical.
+
 ## Hán bản
 
 Hiện catalog chưa có fingerprint của một **file scan Hán bản do người dùng upload**.

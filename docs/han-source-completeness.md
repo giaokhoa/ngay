@@ -75,7 +75,7 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục đã inventory; 18 factor production có Hán oracle, phần còn lại explicit out-of-scope/blocked       |
 |     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model                 |
 |     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain                    |
-|     9 | 立成        | ORACLE_MOT_PHAN | cross-check một số factor Q5/Q6                                                                              |
+|     9 | 立成        | ORACLE_MOT_PHAN | full structure: 10 niên + 30 nguyệt + 2 trang nhật + 6 biểu thời; oracle subset                              |
 |    10 | 宜忌        | ORACLE_MOT_PHAN | semantic vectors cho 7 vertical hiện implement                                                               |
 |    11 | 用事        | ORACLE_MOT_PHAN | exact 宜/忌 cho 7 vertical hiện implement                                                                    |
 |    12 | 公規一      | CHUA_IMPLEMENT  | 8/8 top-level inventory; lịch quan/thiên văn, sunrise tables latitude-specific                               |
@@ -83,9 +83,9 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |    14 | 年表一      | CHUA_IMPLEMENT  | annual table block 甲子→癸酉; Wikisource fallback, spatial year table                                        |
 | 15–19 | 年表二–六   | CHUA_IMPLEMENT  | 5 annual blocks tiếp theo; cùng Q14 phủ 60/60 Can-Chi, spatial year tables                                   |
 | 20–31 | 月表一–十二 | ORACLE_MOT_PHAN | 12/12 volume structure inventoried; month boundary/Trực/factor oracle subset, chưa claim 720-row full oracle |
-|    32 | 日表        | ORACLE_MOT_PHAN | 60-day hour-table source vectors cho chọn giờ                                                                |
-|    33 | 利用一      | ORACLE_MOT_PHAN | tương chủ theo sinh niên, xung/khắc mệnh                                                                     |
-|    34 | 利用二      | ORACLE_MOT_PHAN | nguyên tắc dùng giờ: trợ ngày, hợp/lộc/mã, tránh phá/hình/Ngũ Bất Ngộ                                        |
+|    32 | 日表        | ORACLE_MOT_PHAN | 3/3 mục inventoried; 60-day hour vectors partial, Quý Đăng/Tứ Đại Cát blocked                                |
+|    33 | 利用一      | ORACLE_MOT_PHAN | 14 mục Việt secondary = 15 heading Hán; exact T2 scan pending; 相主 oracle partial                           |
+|    34 | 利用二      | ORACLE_MOT_PHAN | 12 heading Hán = 10 mục Việt secondary; exact T2 scan pending; 用時法 oracle partial                         |
 |    35 | 附錄        | CHUA_IMPLEMENT  | Hán 16 heading; public Việt TOC 13 mục; exact T2 scan pending                                                |
 |    36 | 辨訛        | CHUA_IMPLEMENT  | Hán 27 heading; anti-oracle/refutation role; public Việt TOC 26 mục; exact scan pending                      |
 
@@ -197,6 +197,16 @@ Không phát hiện discrepancy Việt/Hán trong scope đã production. **Secti
 ### Q20–31 Nguyệt biểu
 
 `docs/research/q20-q31-month-tables.md` khóa **12/12 volume structure**: mỗi quyển là một tháng tiết khí, có header tháng + trung khí/Nguyệt tướng + bảng thiết kế 60 Can-Chi ngày. Current oracle vẫn partial; transcription có glyph/typo (`夘/卯`, `巳/己`, ...) nên chưa parse 720 row làm machine truth nếu thiếu normalization + Tập II row cross-check.
+
+### Q9
+
+`docs/research/q9-full-inventory.md` khóa **4/4 phần = 10 biểu niên + 30 biểu nguyệt + 2 trang nhật + 6 biểu thời** từ scan Việt T1 PDF 717 / trang in 710 và Hán Q9. Q9 là oracle/index, không thay Nghĩa lệ làm calculator spec; coverage runtime vẫn partial.
+
+### Q32–34
+
+- Q32: `docs/research/q32-full-inventory.md`, Hán **3/3 mục**; 60-day hour table có oracle subset, `貴登天門` và `四大吉時` blocked theo location/time model.
+- Q33: `docs/research/q33-full-inventory.md`, Hán **15 heading**, secondary Việt TOC **14 mục** do gộp `論用盤針 + 羅經圖`; `相主` là production subset. Exact T2 scan pending.
+- Q34: `docs/research/q34-full-inventory.md`, Hán **12 heading**, secondary Việt TOC **10 mục**; `用時法` là production subset, solar/spatial layer blocked. Exact T2 scan pending.
 
 ### Q10
 
