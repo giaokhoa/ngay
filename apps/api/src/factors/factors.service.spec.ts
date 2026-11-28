@@ -247,3 +247,41 @@ describe('Factor provenance', () => {
     );
   });
 });
+
+describe('TinhYeuToNgayService — Q6 year/lunar context', () => {
+  const service = new TinhYeuToNgayService();
+
+  it('emit Thượng Sóc từ Can năm + Can Chi ngày', () => {
+    const ketQua = service.tinh({
+      chiThang: DAN,
+      canNgay: ThienCan.QUY,
+      chiNgay: HOI,
+      dangThoVuong: false,
+      canChiNam: { can: ThienCan.GIAP, chi: DAN },
+    });
+
+    expect(ketQua.map((item) => item.ma)).toContain(MaYeuTo.THUONG_SOC);
+  });
+
+  it('emit Phản Chi và Nguyệt Kị từ lunar context', () => {
+    const phanChi = service.tinh({
+      chiThang: DAN,
+      canNgay: ThienCan.GIAP,
+      chiNgay: TY,
+      dangThoVuong: false,
+      ngayAmTrongThang: 5,
+      canChiNgaySoc: { can: ThienCan.MAU, chi: DAN },
+    });
+    const nguyetKy = service.tinh({
+      chiThang: DAN,
+      canNgay: ThienCan.GIAP,
+      chiNgay: TY,
+      dangThoVuong: false,
+      ngayAmTrongThang: 14,
+      canChiNgaySoc: { can: ThienCan.MAU, chi: TY },
+    });
+
+    expect(phanChi.map((item) => item.ma)).toContain(MaYeuTo.PHAN_CHI);
+    expect(nguyetKy.map((item) => item.ma)).toContain(MaYeuTo.NGUYET_KY);
+  });
+});

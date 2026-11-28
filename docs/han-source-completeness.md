@@ -158,11 +158,12 @@ Ngoài ra test Việt/source-independent hiện có vẫn chạy:
 - core month→day-branch: 三合, 驛馬, 劫煞, 災煞, 月煞, 月刑, 月害, 六合, 五富, 天倉, 天賊;
 - wedding/activity blockers: 大時, 天吏, 往亡;
 - moving/auspicious factors: 天馬, 歸忌;
-- earthwork factors: 土符 và 地囊.
+- earthwork factors: 土符 và 地囊;
+- year/lunar-context factors: 上朔, 反支, 月忌日.
 
 Riêng `地囊` oracle khóa bảng đính chính ở `WYG_006-57a..58a`, không dùng bảng `歴例` cũ mà chính sách nói sai 23/48 chữ.
 
-`docs/research/q6-full-inventory.md` khóa **40/40 mục Quyển 6**. Ngoài 18 factor production, các mục còn lại được phân `OUT_OF_SCOPE`, `META`, `BLOCKED_CONTEXT` hoặc `BLOCKED_CALENDAR`; không còn mục Q6 chưa locate. Phản Chi cần ngày sóc, Nguyệt Kị cần ngày âm lịch, Thượng Sóc cần Can năm.
+`docs/research/q6-full-inventory.md` khóa **40/40 mục Quyển 6**. 21 factor hiện production-computable. Thượng Sóc/Phản Chi/Nguyệt Kị đã được mở khóa bằng Can Chi năm + astronomical new-moon/lunar-day context; các mục còn lại vẫn explicit `OUT_OF_SCOPE`/`META` hoặc blocker khác.
 
 ### Q7
 
