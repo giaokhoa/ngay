@@ -194,6 +194,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.TRONG_TROT,
   },
   {
+    ma: 'CHAN_THA_GIA_SUC_GIA_CAM',
+    ten: 'Chăn thả gia súc, gia cầm',
+    moTa: 'Q11 có 13 Nên / 13 Kị; xét riêng Tử Thần, Nguyệt Hại và các nhánh Nguyệt Yếm/Đại Thời/Thiên Lại.',
+    to: DUONG_DAN.CHAN_THA_GIA_SUC_GIA_CAM,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

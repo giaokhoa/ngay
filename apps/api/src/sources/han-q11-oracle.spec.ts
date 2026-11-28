@@ -6,6 +6,7 @@ import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CAU_Y_TRI_BENH } from '../activities/cau-y-tri-benh-rules';
+import { QUY_TAC_CHAN_THA_GIA_SUC_GIA_CAM } from '../activities/chan-tha-gia-suc-gia-cam-rules';
 import { QUY_TAC_CHINH_DUNG_CAT_TOC } from '../activities/chinh-dung-cat-toc-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DAT_COI_XAY_GIA } from '../activities/dat-coi-xay-gia-rules';
@@ -79,6 +80,40 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:VANG_VONG',
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM]: {
+    tieuDeHan: '牧養',
+    anchor: 'KR3g0051_WYG_011-24b..25a',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:MAU_THUONG',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:DAN_NHAT',
+      'TRUC:KHAI',
+      'YEU_TO:NGU_PHU',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'YEU_TO:TU_THAN',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
     ],
   },
   [LoaiCongViec.TRONG_TROT]: {
@@ -953,6 +988,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.TROC_NA_BAT_BO]: QUY_TAC_TROC_NA_BAT_BO,
   [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC,
   [LoaiCongViec.TRONG_TROT]: QUY_TAC_TRONG_TROT,
+  [LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM]: QUY_TAC_CHAN_THA_GIA_SUC_GIA_CAM,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,

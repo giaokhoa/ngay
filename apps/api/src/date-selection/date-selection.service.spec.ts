@@ -1292,6 +1292,170 @@ describe('XemNgayService TRONG_TROT end-to-end', () => {
   });
 });
 
+describe('XemNgayService CHAN_THA_GIA_SUC_GIA_CAM end-to-end', () => {
+  it('orchestrates calendar/factors -> exact 13/13 Q11 -> source-resolved Q10', () => {
+    const result = taoService().xemChanThaGiaSucGiaCam(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'CHAN_THA_GIA_SUC_GIA_CAM'),
+    ).toBe(true);
+  });
+
+  it('is deterministic for CHAN_THA_GIA_SUC_GIA_CAM', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemChanThaGiaSucGiaCam(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemChanThaGiaSucGiaCam(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real calendar keeps Bình/Tử Thần, Nguyệt Hại, Ngũ Mộ relief and Nguyệt Kị semantics exact', () => {
+    const service = taoService();
+    const balanced = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-02-12T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const nguyetHai = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-01-08T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const nguMoRelief = service.xemChanThaGiaSucGiaCam(
+      new Date('2027-07-06T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const nguyetKy = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-01-11T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const hard = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-01-02T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(balanced.truc).toBe(ThapNhiTruc.BINH);
+    expect(balanced.yeuTo.some((item) => item.ma === MaYeuTo.TU_THAN)).toBe(true);
+    expect(balanced.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_HAI)).toBe(true);
+    expect(balanced.danhGia.coNen).toBe(true);
+    expect(balanced.danhGia.coKy).toBe(false);
+    expect(balanced.giaiThich.biLoai.some((text) => text.startsWith('TU_THAN:'))).toBe(true);
+    expect(balanced.giaiThich.biLoai.some((text) => text.startsWith('NGUYET_HAI:'))).toBe(true);
+
+    expect(nguyetHai.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_HAI)).toBe(true);
+    expect(nguyetHai.danhGia.coKy).toBe(true);
+
+    expect(nguMoRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGU_MO)).toBe(true);
+    expect(nguMoRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_DUC)).toBe(true);
+    expect(nguMoRelief.danhGia.coNen).toBe(true);
+    expect(nguMoRelief.danhGia.coKy).toBe(false);
+    expect(nguMoRelief.giaiThich.biLoai.some((text) => text.startsWith('NGU_MO:'))).toBe(true);
+
+    expect(nguyetKy.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_KY)).toBe(true);
+    expect(nguyetKy.danhGia.coNen).toBe(false);
+    expect(nguyetKy.danhGia.coKy).toBe(false);
+    expect(
+      nguyetKy.danhGia.xungDotDaApDung.some(
+        (item) => item.ma === 'CHAN_THA_GIA_SUC_GIA_CAM_Q10_NGUYET_KY_BO_NEN',
+      ),
+    ).toBe(true);
+
+    expect(hard.danhGia.camMoiViec).toBe(true);
+    expect(hard.danhGia.coKy).toBe(true);
+  });
+
+  it('real calendar keeps 牧養 relief, non-Kị and suppressor branches exact', () => {
+    const service = taoService();
+    const clean = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-01-01T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const monthHarmRelief = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-03-31T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const monthHarmBalance = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-04-23T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const monthAversionRelief = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-02-17T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const deathSpiritRelief = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-02-12T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const deathQiNonKy = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-01-07T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const fiveTombsRelief = service.xemChanThaGiaSucGiaCam(
+      new Date('2027-07-06T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const monthTaboo = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-01-11T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const hard = service.xemChanThaGiaSucGiaCam(
+      new Date('2026-01-02T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(clean.danhGia.coNen).toBe(true);
+    expect(clean.danhGia.coKy).toBe(false);
+
+    expect(monthHarmRelief.chiThang).toBe(DiaChi.MAO);
+    expect(monthHarmRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_HAI)).toBe(true);
+    expect(monthHarmRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_DUC)).toBe(true);
+    expect(monthHarmRelief.danhGia.coKy).toBe(false);
+    expect(monthHarmRelief.giaiThich.biLoai.some((text) => text.startsWith('NGUYET_HAI:'))).toBe(
+      true,
+    );
+
+    expect(monthHarmBalance.chiThang).toBe(DiaChi.THIN);
+    expect(monthHarmBalance.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_HAI)).toBe(true);
+    expect(monthHarmBalance.yeuTo.some((item) => item.ma === MaYeuTo.THIEN_DUC_HOP)).toBe(true);
+    expect(monthHarmBalance.danhGia.coKy).toBe(false);
+
+    expect(monthAversionRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_YEM)).toBe(true);
+    expect(monthAversionRelief.yeuTo.some((item) => item.ma === MaYeuTo.THIEN_DUC_HOP)).toBe(true);
+    expect(monthAversionRelief.danhGia.coKy).toBe(false);
+    expect(
+      monthAversionRelief.giaiThich.biLoai.some((text) => text.startsWith('NGUYET_YEM:')),
+    ).toBe(true);
+
+    expect(deathSpiritRelief.yeuTo.some((item) => item.ma === MaYeuTo.TU_THAN)).toBe(true);
+    expect(deathSpiritRelief.danhGia.coKy).toBe(false);
+    expect(
+      deathSpiritRelief.giaiThich.xungDot.some((text) => /KIEP_SAT|NGUYET_|TRUC_/.test(text)),
+    ).toBe(false);
+
+    expect(deathQiNonKy.yeuTo.some((item) => item.ma === MaYeuTo.TU_KHI)).toBe(true);
+    expect(deathQiNonKy.danhGia.coKy).toBe(false);
+    expect(deathQiNonKy.giaiThich.ky).not.toContain('TU_KHI');
+
+    expect(fiveTombsRelief.chiThang).toBe(DiaChi.NGO);
+    expect(fiveTombsRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGU_MO)).toBe(true);
+    expect(fiveTombsRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_DUC)).toBe(true);
+    expect(fiveTombsRelief.danhGia.coKy).toBe(false);
+
+    expect(monthTaboo.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_KY)).toBe(true);
+    expect(monthTaboo.danhGia.coNen).toBe(false);
+    expect(monthTaboo.danhGia.coKy).toBe(false);
+    expect(
+      monthTaboo.danhGia.xungDotDaApDung.some(
+        (item) => item.ma === 'CHAN_THA_GIA_SUC_GIA_CAM_Q10_NGUYET_KY_BO_NEN',
+      ),
+    ).toBe(true);
+
+    expect(hard.danhGia.camMoiViec).toBe(true);
+    expect(hard.danhGia.coKy).toBe(true);
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -1437,7 +1601,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 32)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 33)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {

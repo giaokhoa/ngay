@@ -6,6 +6,7 @@ import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CAU_Y_TRI_BENH } from '../activities/cau-y-tri-benh-rules';
+import { QUY_TAC_CHAN_THA_GIA_SUC_GIA_CAM } from '../activities/chan-tha-gia-suc-gia-cam-rules';
 import { QUY_TAC_CHINH_DUNG_CAT_TOC } from '../activities/chinh-dung-cat-toc-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DAT_COI_XAY_GIA } from '../activities/dat-coi-xay-gia-rules';
@@ -69,6 +70,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.TROC_NA_BAT_BO]: QUY_TAC_TROC_NA_BAT_BO,
   [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC,
   [LoaiCongViec.TRONG_TROT]: QUY_TAC_TRONG_TROT,
+  [LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM]: QUY_TAC_CHAN_THA_GIA_SUC_GIA_CAM,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -221,6 +223,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.TROC_NA_BAT_BO]: false,
       [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: false,
       [LoaiCongViec.TRONG_TROT]: true,
+      [LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -273,6 +276,32 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('牧養: 月厭 relief applies, 月害 follows exact branches, 死氣 is not a Kị', () => {
+    const monthAversion = danhGia(LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM, {
+      chiThang: DiaChi.DAN,
+      yeuTo: [MaYeuTo.NGUYET_YEM, MaYeuTo.NGUYET_DUC],
+    });
+    const monthHarm = danhGia(LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM, {
+      chiThang: DiaChi.MAO,
+      yeuTo: [MaYeuTo.NGUYET_HAI, MaYeuTo.THIEN_DUC],
+    });
+    const deathQi = danhGia(LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM, {
+      yeuTo: [MaYeuTo.TU_KHI],
+    });
+    expect(monthAversion.coKy).toBe(false);
+    expect(monthHarm.coKy).toBe(false);
+    expect(deathQi.coKy).toBe(false);
+  });
+
+  it('牧養: 月忌 suppresses Nên without inventing Kị', () => {
+    const result = danhGia(LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM, {
+      truc: ThapNhiTruc.KHAI,
+      yeuTo: [MaYeuTo.NGUYET_KY],
+    });
+    expect(result.coNen).toBe(false);
+    expect(result.coKy).toBe(false);
   });
 
   it('栽種: 地火 survives 月厭 relief; 九焦 and 乙日 remain Kị', () => {

@@ -19,6 +19,7 @@ import { QUY_TAC_Q10_AN_GIUONG } from './an-giuong-conflict-rules';
 import { QUY_TAC_Q10_CAU_PHUC } from './cau-phuc-conflict-rules';
 import { QUY_TAC_Q10_CAU_TU } from './cau-tu-conflict-rules';
 import { QUY_TAC_Q10_CAU_Y_TRI_BENH } from './cau-y-tri-benh-conflict-rules';
+import { QUY_TAC_Q10_CHAN_THA_GIA_SUC_GIA_CAM } from './chan-tha-gia-suc-gia-cam-conflict-rules';
 import { QUY_TAC_Q10_CHINH_DUNG_CAT_TOC } from './chinh-dung-cat-toc-conflict-rules';
 import { QUY_TAC_Q10_SUA_BUONG_SAN_PHU } from './sua-buong-san-phu-conflict-rules';
 import { QUY_TAC_Q10_SUA_MONG_TAY_CHAN } from './sua-mong-tay-chan-conflict-rules';
@@ -153,6 +154,9 @@ export class DanhGiaNgayService {
     }
     if (congViec === LoaiCongViec.TRONG_TROT) {
       return danhGiaTrongTrot(dongGop, boiCanh);
+    }
+    if (congViec === LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM) {
+      return danhGiaChanThaGiaSucGiaCam(dongGop, boiCanh);
     }
     if (congViec === LoaiCongViec.DONG_THO || congViec === LoaiCongViec.SUA_CUNG_THAT) {
       return danhGiaCongViecDat(congViec, dongGop, boiCanh);
@@ -934,6 +938,29 @@ function danhGiaTrongTrot(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay
     dongGop,
     boiCanh,
     QUY_TAC_Q10_TRONG_TROT,
+  );
+  const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
+  return {
+    coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
+    coKy:
+      resolved.camMoiViec ||
+      resolved.coKyBoSung ||
+      hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
+    camMoiViec: resolved.camMoiViec,
+    dongGop,
+    xungDotDaApDung: resolved.xungDotDaApDung,
+  };
+}
+
+function danhGiaChanThaGiaSucGiaCam(
+  dongGop: DongGopDanhGia[],
+  boiCanh: BoiCanhDanhGiaNgay,
+): KetQuaDanhGia {
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_CHAN_THA_GIA_SUC_GIA_CAM,
   );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
   return {

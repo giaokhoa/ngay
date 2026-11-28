@@ -6,6 +6,7 @@ import { QUY_TAC_AN_TANG } from './an-tang-rules';
 import { QUY_TAC_CAU_PHUC } from './cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from './cau-tu-rules';
 import { QUY_TAC_CAU_Y_TRI_BENH } from './cau-y-tri-benh-rules';
+import { QUY_TAC_CHAN_THA_GIA_SUC_GIA_CAM } from './chan-tha-gia-suc-gia-cam-rules';
 import { QUY_TAC_CHINH_DUNG_CAT_TOC } from './chinh-dung-cat-toc-rules';
 import { QUY_TAC_CUOI_HOI } from './cuoi-hoi-rules';
 import { QUY_TAC_GIAI_TRU } from './giai-tru-rules';
@@ -91,6 +92,8 @@ export class DungSuService {
         return QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC;
       case LoaiCongViec.TRONG_TROT:
         return QUY_TAC_TRONG_TROT;
+      case LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM:
+        return QUY_TAC_CHAN_THA_GIA_SUC_GIA_CAM;
       case LoaiCongViec.DONG_THO:
         return QUY_TAC_DONG_THO;
       case LoaiCongViec.SUA_CUNG_THAT:

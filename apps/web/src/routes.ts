@@ -27,6 +27,7 @@ export const DUONG_DAN = {
   TROC_NA_BAT_BO: '/troc-na-bat-bo',
   DI_THUYEN_VUOT_SONG_NUOC: '/di-thuyen-vuot-song-nuoc',
   TRONG_TROT: '/trong-trot',
+  CHAN_THA_GIA_SUC_GIA_CAM: '/chan-tha-gia-suc-gia-cam',
   DONG_THO: '/dong-tho',
   SUA_CUNG_THAT: '/sua-cung-that',
   KHAI_TRUONG: '/khai-truong',
