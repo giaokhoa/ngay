@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { LoaiCongViec, QuyTacDungSu, TacDongDungSu } from '../activities/activity-rule';
 import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
+import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
@@ -60,6 +61,49 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:VANG_VONG',
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.CAU_PHUC]: {
+    tieuDeHan: '祈福',
+    anchor: 'KR3g0051_WYG_011-6a',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:THIEN_VU',
+      'TRUC:KHAI',
+      'YEU_TO:PHO_HO',
+      'YEU_TO:PHUC_SINH',
+      'YEU_TO:THANH_TAM',
+      'YEU_TO:ICH_HAU',
+      'YEU_TO:TUC_THE',
+    ],
+    ky: [
+      'TRUC:KIEN',
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:DU_HOA',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:VO_LOC',
+      'YEU_TO:THUONG_SOC',
+      'YEU_TO:TU_LY',
+      'YEU_TO:TU_TUYET',
+      'YEU_TO:HOI_NHAT',
     ],
   },
   [LoaiCongViec.TE_TU]: {
@@ -429,6 +473,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
+  [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,

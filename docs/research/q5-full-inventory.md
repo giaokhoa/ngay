@@ -8,7 +8,7 @@ Khóa toàn bộ 30 section trong mục lục Quyển 5, tách rõ:
 
 - identity đã production + Hán oracle;
 - section chỉ production một phần;
-- mục đã hiểu nhưng không thuộc 13 vertical hiện tại;
+- mục đã hiểu nhưng không thuộc 14 vertical hiện tại;
 - mục cần context ngoài day-factor engine.
 
 Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quyết định activity vẫn theo Q11/Q10.
@@ -70,7 +70,7 @@ Hán `WYG_005-34b..37b` khóa đủ năm loại:
 - Dân: Xuân Ngọ, Hạ Dậu, Thu Tý, Đông Mão;
 - Thủ: sau phần hiệu đính dùng Xuân Thìn, Hạ Mùi, Thu Tuất, Đông Sửu.
 
-Product hiện chỉ có Vương Nhật + Dân Nhật vì exact Q13 current verticals chỉ cần hai identity này. Không tạo ba factor còn lại chỉ để đủ section.
+Product hiện chỉ có Vương Nhật + Dân Nhật vì exact Q14 current verticals chỉ cần hai identity này. Không tạo ba factor còn lại chỉ để đủ section.
 
 ### Vô Lộc
 
@@ -92,7 +92,7 @@ Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùn
 
 - **25 identity Q5 production** có Hán oracle độc lập.
 - Section partial không được quảng bá thành full implementation chỉ vì một identity bên trong đã có code.
-- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 13 vertical không cần.
+- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 14 vertical không cần.
 - `Vô Lộc` đã production bằng context năm/tháng/trung khí; vẫn tuyệt đối không dùng như blanket blocker.
 - Khi mở activity mới, dependency Q11 sẽ quyết định mục nào được kéo vào production.
 
