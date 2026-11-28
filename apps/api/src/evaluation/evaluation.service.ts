@@ -26,6 +26,7 @@ import { QUY_TAC_Q10_SUA_SANG_DUONG_SA } from './sua-sang-duong-sa-conflict-rule
 import { QUY_TAC_Q10_AN_TANG } from './an-tang-conflict-rules';
 import { QUY_TAC_Q10_DAT_COI_XAY_GIA } from './dat-coi-xay-gia-conflict-rules';
 import { QUY_TAC_Q10_DI_CHUYEN } from './di-chuyen-conflict-rules';
+import { QUY_TAC_Q10_DI_THUYEN_VUOT_SONG_NUOC } from './di-thuyen-vuot-song-nuoc-conflict-rules';
 import { QUY_TAC_Q10_CONG_VIEC_DAT } from './earthwork-conflict-rules';
 import { QUY_TAC_Q10_KHAI_TRUONG } from './khai-truong-conflict-rules';
 import { QUY_TAC_Q10_LAP_KHE_UOC_GIAO_DICH } from './lap-khe-uoc-giao-dich-conflict-rules';
@@ -145,6 +146,9 @@ export class DanhGiaNgayService {
     }
     if (congViec === LoaiCongViec.TROC_NA_BAT_BO) {
       return danhGiaTrocNaBatBo(dongGop, boiCanh);
+    }
+    if (congViec === LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC) {
+      return danhGiaDiThuyenVuotSongNuoc(dongGop, boiCanh);
     }
     if (congViec === LoaiCongViec.DONG_THO || congViec === LoaiCongViec.SUA_CUNG_THAT) {
       return danhGiaCongViecDat(congViec, dongGop, boiCanh);
@@ -887,6 +891,29 @@ function danhGiaTrocNaBatBo(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNg
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
+    coKy:
+      resolved.camMoiViec ||
+      resolved.coKyBoSung ||
+      hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
+    camMoiViec: resolved.camMoiViec,
+    dongGop,
+    xungDotDaApDung: resolved.xungDotDaApDung,
+  };
+}
+
+function danhGiaDiThuyenVuotSongNuoc(
+  dongGop: DongGopDanhGia[],
+  boiCanh: BoiCanhDanhGiaNgay,
+): KetQuaDanhGia {
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_DI_THUYEN_VUOT_SONG_NUOC,
+  );
+  const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
+  return {
+    coNen: false,
     coKy:
       resolved.camMoiViec ||
       resolved.coKyBoSung ||

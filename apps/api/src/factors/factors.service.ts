@@ -25,6 +25,11 @@ import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
 import { DINH_NGHIA_MAU_THUONG } from './maternal-storehouse-definition';
 import { DINH_NGHIA_NGU_HOP, DINH_NGHIA_NGU_LY } from './q5-fixed-branch-factor-definitions';
 import { DINH_NGHIA_NGU_HU } from './q5-ngu-hu-definition';
+import {
+  DINH_NGHIA_BAT_PHONG,
+  DINH_NGHIA_CUU_KHAM,
+  DINH_NGHIA_XUC_THUY_LONG,
+} from './q5-water-travel-factor-definitions';
 import { DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6 } from './q6-ritual-factor-definitions';
 import { DINH_NGHIA_DU_HOA } from './q6-du-hoa-definition';
 import { DINH_NGHIA_GIAI_THAN } from './q5-giai-than-definition';
@@ -173,6 +178,20 @@ export class TinhYeuToNgayService {
 
     if (DINH_NGHIA_NGU_HU.chiNgayTheoMua[mua].includes(boiCanh.chiNgay)) {
       ketQua.push(DINH_NGHIA_NGU_HU);
+    }
+
+    if (DINH_NGHIA_CUU_KHAM.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay)) {
+      ketQua.push(DINH_NGHIA_CUU_KHAM);
+    }
+
+    if (
+      DINH_NGHIA_BAT_PHONG.tapCanChiNgayTheoMua[mua].some((canChi) => khopCanChi(canChi, boiCanh))
+    ) {
+      ketQua.push(DINH_NGHIA_BAT_PHONG);
+    }
+
+    if (DINH_NGHIA_XUC_THUY_LONG.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
+      ketQua.push(DINH_NGHIA_XUC_THUY_LONG);
     }
 
     if (DINH_NGHIA_BAT_CHUYEN.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
