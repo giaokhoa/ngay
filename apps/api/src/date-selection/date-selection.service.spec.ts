@@ -1456,6 +1456,87 @@ describe('XemNgayService CHAN_THA_GIA_SUC_GIA_CAM end-to-end', () => {
   });
 });
 
+describe('XemNgayService NHAN_NAP_GIA_SUC end-to-end', () => {
+  it('orchestrates calendar/factors -> exact 13/13 Q11 + Q10 長星/短星', () => {
+    const result = taoService().xemNhanNapGiaSuc(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'NHAN_NAP_GIA_SUC'),
+    ).toBe(true);
+  });
+
+  it('is deterministic for NHAN_NAP_GIA_SUC', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemNhanNapGiaSuc(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemNhanNapGiaSuc(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real 2026 calendar keeps Thu-Nên, Bình/Tử Thần balance, 長短星 Kị and Nguyệt Kị suppressor exact', () => {
+    const service = taoService();
+    const thu = service.xemNhanNapGiaSuc(new Date('2026-02-06T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const balanced = service.xemNhanNapGiaSuc(
+      new Date('2026-02-12T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const truongTinh = service.xemNhanNapGiaSuc(
+      new Date('2026-01-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const doanTinh = service.xemNhanNapGiaSuc(
+      new Date('2026-01-13T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const nguyetKy = service.xemNhanNapGiaSuc(
+      new Date('2026-01-11T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const hard = service.xemNhanNapGiaSuc(new Date('2026-01-02T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+
+    expect(thu.truc).toBe(ThapNhiTruc.THU);
+    expect(thu.danhGia.coNen).toBe(true);
+    expect(thu.danhGia.coKy).toBe(false);
+
+    expect(balanced.truc).toBe(ThapNhiTruc.BINH);
+    expect(balanced.yeuTo.some((item) => item.ma === MaYeuTo.TU_THAN)).toBe(true);
+    expect(balanced.danhGia.coNen).toBe(false);
+    expect(balanced.danhGia.coKy).toBe(false);
+    expect(balanced.giaiThich.biLoai.some((text) => text.startsWith('TU_THAN:'))).toBe(true);
+
+    expect(truongTinh.yeuTo.some((item) => item.ma === MaYeuTo.TRUONG_TINH)).toBe(true);
+    expect(truongTinh.danhGia.coKy).toBe(true);
+    expect(
+      truongTinh.danhGia.xungDotDaApDung.some(
+        (item) => item.ma === 'NHAN_NAP_GIA_SUC_Q10_TRUONG_TINH_KY',
+      ),
+    ).toBe(true);
+
+    expect(doanTinh.yeuTo.some((item) => item.ma === MaYeuTo.DOAN_TINH)).toBe(true);
+    expect(doanTinh.danhGia.coKy).toBe(true);
+    expect(
+      doanTinh.danhGia.xungDotDaApDung.some(
+        (item) => item.ma === 'NHAN_NAP_GIA_SUC_Q10_DOAN_TINH_KY',
+      ),
+    ).toBe(true);
+
+    expect(nguyetKy.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_KY)).toBe(true);
+    expect(nguyetKy.danhGia.coNen).toBe(false);
+    expect(nguyetKy.danhGia.coKy).toBe(false);
+    expect(
+      nguyetKy.danhGia.xungDotDaApDung.some(
+        (item) => item.ma === 'NHAN_NAP_GIA_SUC_Q10_NGUYET_KY_BO_NEN',
+      ),
+    ).toBe(true);
+
+    expect(hard.danhGia.camMoiViec).toBe(true);
+    expect(hard.danhGia.coKy).toBe(true);
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -1601,7 +1682,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 33)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 34)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
