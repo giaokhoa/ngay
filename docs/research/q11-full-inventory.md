@@ -16,8 +16,8 @@ Ba số này là catalog nguồn **có overlap**, không được cộng thành 
 
 ## Product policy
 
-- 14 section hiện có vertical production được exact Hán oracle.
-- 59 section còn lại là `OUT_OF_SCOPE_CURRENT_VERTICALS`, **không phải chưa locate**.
+- 15 section hiện có vertical production được exact Hán oracle.
+- 58 section còn lại là `OUT_OF_SCOPE_CURRENT_VERTICALS`, **không phải chưa locate**.
 - Không tự map một việc ngoài scope vào vertical gần tên chỉ để tăng coverage.
 - Nếu mở vertical mới, phải research exact Q11 section + Q10 conflict semantics tương ứng trước.
 
@@ -27,7 +27,7 @@ Ba số này là catalog nguồn **có overlap**, không được cộng thành 
 | --: | ------------------------ | ------------------------------ | ---------------------------------------------------------- |
 |   1 | 祭祀                     | ORACLE_TESTED                  | `TE_TU`; Hán `WYG_011-6a`; Việt p844 thiếu 福生            |
 |   2 | 祈福                     | ORACLE_TESTED                  | `CAU_PHUC`; Hán `WYG_011-6a`, Việt p844 khớp direct items  |
-|   3 | 求嗣                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
+|   3 | 求嗣                     | ORACLE_TESTED                  | `CAU_TU`; Hán `WYG_011-6b`, Việt p845; phụ chú 餘倣此      |
 |   4 | 上冊進表章〈上冊受封同〉 | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
 |   5 | 上表章                   | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
 |   6 | 頒詔                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                       |
@@ -101,15 +101,15 @@ Ba số này là catalog nguồn **có overlap**, không được cộng thành 
 
 ## Cross-catalog nuance
 
-Current 14 vertical không phải đều đến từ list 60 Thông thư:
+Current 15 vertical không phải đều đến từ list 60 Thông thư:
 
 - `行幸遣使〈出行同〉`, `嫁娶`, `般移〈移徙同〉`, `興造動土〈修造同〉`, `開市`, `安葬` đều có canonical detailed section;
 - `修宮室` là section riêng trong union 73 dù không xuất hiện như một item độc lập trong list 60 Thông thư; vì thế denominator 60 sẽ làm mất một vertical production thật.
 
 ## Oracle hiện có
 
-`han-q11-oracle.spec.ts` chép expected `宜/忌` độc lập cho đủ 14 vertical. Kết quả source comparison hiện có ba discrepancy production đã registry: Xuất hành — Hán Q11 có `月厭` nhưng Việt p849 không in; Quan đới — Việt p848 in thêm Bế nhưng Hán Q11 và Việt/Hán Q10 không Kị `冠帶` ở Bế nhật; Tế tự — Hán Q11 có `福生` nhưng Việt p844 lược mục này, production theo Hán cho riêng contribution Phúc Sinh.
+`han-q11-oracle.spec.ts` chép expected `宜/忌` độc lập cho đủ 15 vertical. Kết quả source comparison hiện có ba discrepancy production đã registry: Xuất hành — Hán Q11 có `月厭` nhưng Việt p849 không in; Quan đới — Việt p848 in thêm Bế nhưng Hán Q11 và Việt/Hán Q10 không Kị `冠帶` ở Bế nhật; Tế tự — Hán Q11 có `福生` nhưng Việt p844 lược mục này, production theo Hán cho riêng contribution Phúc Sinh.
 
 ## Kết luận
 
-**Q11 đã inventory đủ 73/73 section Dụng sự canonical.** 14 section là `ORACLE_TESTED`; 59 section còn lại explicit out-of-scope current product. `ORACLE_MOT_PHAN` vẫn là trạng thái book-level đúng.
+**Q11 đã inventory đủ 73/73 section Dụng sự canonical.** 15 section là `ORACLE_TESTED`; 58 section còn lại explicit out-of-scope current product. `ORACLE_MOT_PHAN` vẫn là trạng thái book-level đúng.

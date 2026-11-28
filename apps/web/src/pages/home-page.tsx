@@ -86,6 +86,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.CAU_PHUC,
   },
   {
+    ma: 'CAU_TU',
+    ten: 'Cầu tự',
+    moTa: 'Chọn ngày cầu tự theo cát thần và các điều kị đã đối chiếu.',
+    to: DUONG_DAN.CAU_TU,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

@@ -4,6 +4,7 @@ import { LoaiCongViec, QuyTacDungSu } from '../activities/activity-rule';
 import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
+import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
@@ -34,6 +35,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
+  [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
@@ -49,7 +51,8 @@ const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_ORDINARY_Q10_KY.filter(
   (activity) =>
     activity !== LoaiCongViec.YEN_HOI &&
     activity !== LoaiCongViec.KHANH_THUONG &&
-    activity !== LoaiCongViec.CAU_PHUC,
+    activity !== LoaiCongViec.CAU_PHUC &&
+    activity !== LoaiCongViec.CAU_TU,
 );
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
@@ -140,6 +143,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.KHANH_THUONG]: false,
       [LoaiCongViec.TE_TU]: false,
       [LoaiCongViec.CAU_PHUC]: false,
+      [LoaiCongViec.CAU_TU]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -169,6 +173,38 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('求嗣: 天狗/寅日 suppresses Nên without inventing Kị (WYG 010-74a..74b)', () => {
+    const thienCau = danhGia(LoaiCongViec.CAU_TU, {
+      chiNgay: DiaChi.TUAT,
+      yeuTo: [MaYeuTo.THIEN_CAU, MaYeuTo.THIEN_DUC],
+    });
+    const dan = danhGia(LoaiCongViec.CAU_TU, {
+      chiNgay: DiaChi.DAN,
+      yeuTo: [MaYeuTo.THIEN_DUC],
+    });
+    expect(thienCau.coNen).toBe(false);
+    expect(thienCau.coKy).toBe(false);
+    expect(dan.coNen).toBe(false);
+    expect(dan.coKy).toBe(false);
+  });
+
+  it('求嗣: shares 月建 / 遊禍 / special-calendar conflict semantics with 祈福', () => {
+    const kien = danhGia(LoaiCongViec.CAU_TU, {
+      truc: ThapNhiTruc.KIEN,
+      yeuTo: [MaYeuTo.THIEN_DUC],
+    });
+    const duHoa = danhGia(LoaiCongViec.CAU_TU, {
+      yeuTo: [MaYeuTo.DU_HOA, MaYeuTo.THIEN_XA],
+    });
+    const tuLy = danhGia(LoaiCongViec.CAU_TU, {
+      yeuTo: [MaYeuTo.TU_LY, MaYeuTo.THIEN_DUC],
+    });
+
+    expect(kien.coKy).toBe(false);
+    expect(duHoa.coKy).toBe(true);
+    expect(tuLy.coKy).toBe(true);
+  });
 
   it('祈福: 天狗/寅日 suppresses Nên without inventing Kị (WYG 010-74a..74b)', () => {
     const thienCau = danhGia(LoaiCongViec.CAU_PHUC, {

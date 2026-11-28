@@ -1,6 +1,7 @@
 import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
+import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
@@ -18,6 +19,7 @@ import {
 import { QUY_TAC_Q10_AN_GIUONG } from '../evaluation/an-giuong-conflict-rules';
 import { QUY_TAC_Q10_AN_TANG } from '../evaluation/an-tang-conflict-rules';
 import { QUY_TAC_Q10_CAU_PHUC } from '../evaluation/cau-phuc-conflict-rules';
+import { QUY_TAC_Q10_CAU_TU } from '../evaluation/cau-tu-conflict-rules';
 import {
   QUY_TAC_XUNG_DOT_CUOI_HOI,
   taoNguonXungDotQuyen10,
@@ -73,6 +75,7 @@ export const HOAT_DONG_TRI_THUC: readonly HoatDongTriThuc[] = [
   { code: LoaiCongViec.KHANH_THUONG, tenViet: 'Chúc mừng ban thưởng', tenHan: '慶賜賞賀' },
   { code: LoaiCongViec.TE_TU, tenViet: 'Cúng tế', tenHan: '祭祀' },
   { code: LoaiCongViec.CAU_PHUC, tenViet: 'Cầu phúc', tenHan: '祈福' },
+  { code: LoaiCongViec.CAU_TU, tenViet: 'Cầu tự', tenHan: '求嗣' },
   { code: LoaiCongViec.DONG_THO, tenViet: 'Khởi tạo động thổ', tenHan: '興造動土' },
   { code: LoaiCongViec.SUA_CUNG_THAT, tenViet: 'Sửa cung thất', tenHan: '修宮室' },
   { code: LoaiCongViec.KHAI_TRUONG, tenViet: 'Khai trương', tenHan: '開市' },
@@ -93,6 +96,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
       ...activityRules(QUY_TAC_KHANH_THUONG),
       ...activityRules(QUY_TAC_TE_TU),
       ...activityRules(QUY_TAC_CAU_PHUC),
+      ...activityRules(QUY_TAC_CAU_TU),
       ...activityRules(QUY_TAC_DONG_THO),
       ...activityRules(QUY_TAC_SUA_CUNG_THAT),
       ...activityRules(QUY_TAC_KHAI_TRUONG),
@@ -109,6 +113,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
       ...conflictRules(LoaiCongViec.KHANH_THUONG, QUY_TAC_Q10_KHANH_THUONG),
       ...conflictRules(LoaiCongViec.TE_TU, QUY_TAC_Q10_TE_TU),
       ...conflictRules(LoaiCongViec.CAU_PHUC, QUY_TAC_Q10_CAU_PHUC),
+      ...conflictRules(LoaiCongViec.CAU_TU, QUY_TAC_Q10_CAU_TU),
       ...conflictRules(LoaiCongViec.DONG_THO, QUY_TAC_Q10_CONG_VIEC_DAT),
       ...conflictRules(LoaiCongViec.SUA_CUNG_THAT, QUY_TAC_Q10_CONG_VIEC_DAT),
       ...conflictRules(LoaiCongViec.KHAI_TRUONG, QUY_TAC_Q10_KHAI_TRUONG),
