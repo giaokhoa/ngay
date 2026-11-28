@@ -2,6 +2,8 @@
 
 Status: VERIFIED
 
+Q10 follow-up: các ngày hội Âm/Dương của Q4 có nhánh “mọi việc đều Kị” được source-lock bằng `q4-hard-days.ts`; xem phần cuối tài liệu.
+
 Issue: #14
 
 ## Mục tiêu
@@ -501,21 +503,30 @@ Implement riêng:
 
 Tách PR vì bảng lớn, dễ review hơn.
 
-## Không thuộc scope
+## Q10 follow-up — ngày “mọi việc đều Kị”
 
-Các mục sau của Quyển 4 chưa vào production trong batch này:
+Audit Q10 cho thấy các hội Âm/Dương cuối Q4 đã đi vào production semantics dù không phải `MaYeuTo` độc lập. Hán `WYG_010-48a..51a` liệt kê các ngày “諸事皆忌”; production khóa thành một canonical set tại `q4-hard-days.ts`.
 
-- Âm Dương Đại Hội;
-- Âm Dương Tiểu Hội;
-- Hành Ngoan/Liễu Lệ/Cô Thần;
-- Đơn Âm/Thuần Âm/Cô Dương/Thuần Dương;
-- Tuế Bạc/Trục Trận;
-- các nhóm giao phá/xung kích;
-- Âm vị/Tam Âm;
-- Dương Thác/Âm Thác;
-- Tuyệt Âm/Tuyệt Dương.
+Canonical set hiện có 34 identity/vector:
 
-Chỉ kéo vào khi activity/evaluation thực tế cần.
+- Đại Hội, Tiểu Hội;
+- Tam Âm, Âm Vị;
+- Âm Dương Giao Phá, Âm Dương Kích Xung;
+- Dương Phá Âm Xung, Âm Đạo Xung Dương;
+- bốn Âm Thác trùng Nguyệt Phá/Đại Hội bị nâng thành hard-ban;
+- Tuyệt Âm tháng Tỵ ngày Mậu Thìn;
+- Tuyệt Dương tháng Hợi ngày Mậu Tuất.
+
+Một civil day có thể mang nhiều danh xưng, nên test khóa **identity unique** chứ không giả định bộ ba tháng/ngày là unique.
+
+Fix production sau audit:
+
+- trước đó Di chuyển/Động thổ/Khai trương đã có phần lớn hard-day list bằng ba bản copy riêng;
+- Xuất hành và An táng kế thừa một phần từ các matrix này;
+- **Cưới hỏi bỏ sót toàn bộ lớp global hard-day**;
+- cả ba bản copy cũ đều thiếu Tuyệt Âm/Tuyệt Dương.
+
+Sau fix, cùng canonical set được test áp cho đủ 7 vertical. Hành Ngoan/Liễu Lệ/Cô Thần và các hội không phải blanket hard-day vẫn không bị tạo thành factor độc lập nếu Q10 không yêu cầu.
 
 ## Trạng thái
 

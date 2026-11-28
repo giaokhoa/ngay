@@ -98,7 +98,11 @@ Tổng hiện tại:
 
 ## Double-entry oracle hiện có
 
-### Q4 + Nguyệt biểu
+### Q4
+
+Ngoài oracle vị trí/Âm Dương Bất Tương, Q10 hard-day coverage của các hội Âm/Dương Q4 đã được canonical hóa tại `q4-hard-days.ts`: 34 identity/vector từ `WYG_010-48a..49b`, gồm Đại/Tiểu Hội, Tam Âm, Âm Vị, các giao phá/xung, các Âm Thác hard-overlap và Tuyệt Âm/Tuyệt Dương. Cùng set này được test áp cho đủ 7 vertical; trước fix, Cưới hỏi bỏ sót toàn bộ lớp này và ba matrix cũ bỏ sót Tuyệt Âm/Tuyệt Dương.
+
+- Nguyệt biểu
 
 `han-q4-month-table-oracle.spec.ts` khóa trực tiếp:
 
