@@ -27,6 +27,9 @@
 - p.590–591: Hỷ Thần khớp năm cặp Can và chi giờ của `WYG_007-21b..22b`, đồng thời giữ ngoại lệ không thắng Nhật Phá.
 - p.592: Bát Lộc là Lộc vị của nhật Can, khớp `WYG_007-23b`.
 - p.593–594: Nhật Kiến/Hợp là cát, Nhật Phá/Hại/Hình là hung; việc lớn mới xét thêm năm/tháng, khớp `WYG_007-24b`.
+- p.616–618: Ngũ Bất Ngộ không được suy thành mọi trường hợp “hành Can giờ khắc hành Can ngày”. Bảng khóa theo Can ngày: Giáp→Ngọ, Ất→Tỵ, Bính→Thìn, Đinh→Mão, Mậu→Dần, Kỷ→Sửu/Hợi, Canh→Tý/Tuất, Tân→Dậu, Nhâm→Thân, Quý→Mùi; phần Thích Ý còn nhấn mạnh phải xét chi giờ tương sinh với nhật Can/Chi trước khi kết luận.
+
+Hán `WYG_007-37b..39a` xác nhận cùng điểm: định nghĩa mở đầu là thời Can khắc nhật Can, nhưng ngay sau đó loại trường hợp chi giờ có quan hệ tương sinh với nhật Can/Chi. Bảng 60 ngày `WYG_031` khớp đúng mapping giờ ở trên.
 
 Không phát hiện discrepancy Việt/Hán trong scope Q7 đang implement.
 

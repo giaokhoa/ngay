@@ -44,7 +44,7 @@ describe('giờ thực hiện theo bảng giờ Hán', () => {
     });
     expect(lay(gio, DiaChi.NGO)).toMatchObject({
       xepLoai: 'NEN_TRANH',
-      lyDoTranh: expect.arrayContaining(['Giờ phá ngày', 'Ngũ Bất Ngộ: Can giờ khắc Can ngày']),
+      lyDoTranh: expect.arrayContaining(['Giờ phá ngày', 'Ngũ Bất Ngộ']),
     });
   });
 
@@ -57,9 +57,45 @@ describe('giờ thực hiện theo bảng giờ Hán', () => {
     });
 
     expect(lay(gio, DiaChi.MAO).lyDoTot).toContain('Lộc của Can ngày đến giờ');
-    expect(lay(gio, DiaChi.TI).lyDoTranh).toContain('Ngũ Bất Ngộ: Can giờ khắc Can ngày');
+    expect(lay(gio, DiaChi.TI).lyDoTranh).toContain('Ngũ Bất Ngộ');
     expect(lay(gio, DiaChi.MUI).lyDoTranh).toContain('Giờ phá ngày');
     expect(lay(gio, DiaChi.TUAT).lyDoTranh).toContain('Giờ hình ngày');
+  });
+
+  it('Ngũ Bất Ngộ khớp bảng Q7/Q31, không over-flag giờ cùng hành khắc', () => {
+    const vectors = [
+      [{ can: ThienCan.GIAP, chi: DiaChi.TY }, [DiaChi.NGO]],
+      [{ can: ThienCan.AT, chi: DiaChi.SUU }, [DiaChi.TI]],
+      [{ can: ThienCan.BINH, chi: DiaChi.DAN }, [DiaChi.THIN]],
+      [{ can: ThienCan.DINH, chi: DiaChi.MAO }, [DiaChi.MAO]],
+      [{ can: ThienCan.MAU, chi: DiaChi.THIN }, [DiaChi.DAN]],
+      [{ can: ThienCan.KY, chi: DiaChi.TI }, [DiaChi.SUU, DiaChi.HOI]],
+      [{ can: ThienCan.CANH, chi: DiaChi.NGO }, [DiaChi.TY, DiaChi.TUAT]],
+      [{ can: ThienCan.TAN, chi: DiaChi.MUI }, [DiaChi.DAU]],
+      [{ can: ThienCan.NHAM, chi: DiaChi.THAN }, [DiaChi.THAN]],
+      [{ can: ThienCan.QUY, chi: DiaChi.DAU }, [DiaChi.MUI]],
+    ] as const;
+
+    for (const [canChiNgay, expected] of vectors) {
+      const gio = xetCacGioTrongNgay({
+        canChiNgay,
+        canChiNam: { can: ThienCan.GIAP, chi: DiaChi.DAN },
+        canChiThang: { can: ThienCan.BINH, chi: DiaChi.MAO },
+        nguoiLienQuan: [],
+      });
+
+      expect(
+        gio.filter((item) => item.lyDoTranh.includes('Ngũ Bất Ngộ')).map((item) => item.chiGio),
+      ).toEqual(expected);
+    }
+
+    const giapTy = xetCacGioTrongNgay({
+      canChiNgay: { can: ThienCan.GIAP, chi: DiaChi.TY },
+      canChiNam: { can: ThienCan.BINH, chi: DiaChi.THIN },
+      canChiThang: { can: ThienCan.MAU, chi: DiaChi.TI },
+      nguoiLienQuan: [],
+    });
+    expect(lay(giapTy, DiaChi.MUI).lyDoTranh).not.toContain('Ngũ Bất Ngộ');
   });
 
   it('xung năm sinh ưu tiên loại giờ dù giờ có điều thuận', () => {

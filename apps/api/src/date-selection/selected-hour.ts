@@ -151,27 +151,17 @@ const CHI_MA_THEO_CHI_NGAY: Readonly<Record<DiaChi, DiaChi>> = {
   [DiaChi.SUU]: DiaChi.HOI,
 };
 
-type NguHanh = 'MOC' | 'HOA' | 'THO' | 'KIM' | 'THUY';
-
-const NGU_HANH_CAN: Readonly<Record<ThienCan, NguHanh>> = {
-  [ThienCan.GIAP]: 'MOC',
-  [ThienCan.AT]: 'MOC',
-  [ThienCan.BINH]: 'HOA',
-  [ThienCan.DINH]: 'HOA',
-  [ThienCan.MAU]: 'THO',
-  [ThienCan.KY]: 'THO',
-  [ThienCan.CANH]: 'KIM',
-  [ThienCan.TAN]: 'KIM',
-  [ThienCan.NHAM]: 'THUY',
-  [ThienCan.QUY]: 'THUY',
-};
-
-const KHAC: Readonly<Record<NguHanh, NguHanh>> = {
-  MOC: 'THO',
-  HOA: 'KIM',
-  THO: 'THUY',
-  KIM: 'MOC',
-  THUY: 'HOA',
+const CHI_NGU_BAT_NGO_THEO_CAN_NGAY: Readonly<Record<ThienCan, readonly DiaChi[]>> = {
+  [ThienCan.GIAP]: [DiaChi.NGO],
+  [ThienCan.AT]: [DiaChi.TI],
+  [ThienCan.BINH]: [DiaChi.THIN],
+  [ThienCan.DINH]: [DiaChi.MAO],
+  [ThienCan.MAU]: [DiaChi.DAN],
+  [ThienCan.KY]: [DiaChi.SUU, DiaChi.HOI],
+  [ThienCan.CANH]: [DiaChi.TY, DiaChi.TUAT],
+  [ThienCan.TAN]: [DiaChi.DAU],
+  [ThienCan.NHAM]: [DiaChi.THAN],
+  [ThienCan.QUY]: [DiaChi.MUI],
 };
 
 const KHOANG_GIO: Readonly<Record<DiaChi, string>> = {
@@ -243,8 +233,8 @@ export function xetCacGioTrongNgay(input: {
     if (CHI_HAI[input.canChiNgay.chi] === chiGio) {
       lyDoTranh.push('Giờ hại ngày');
     }
-    if (canKhac(canChiGio.can, input.canChiNgay.can)) {
-      lyDoTranh.push('Ngũ Bất Ngộ: Can giờ khắc Can ngày');
+    if (CHI_NGU_BAT_NGO_THEO_CAN_NGAY[input.canChiNgay.can].includes(chiGio)) {
+      lyDoTranh.push('Ngũ Bất Ngộ');
     }
     if (CHI_XUNG[input.canChiNam.chi] === chiGio) {
       lyDoTranh.push('Giờ xung Chi của năm thực hiện');
@@ -299,8 +289,4 @@ export function xetCacGioTrongNgay(input: {
       xungTuoi,
     };
   });
-}
-
-function canKhac(canA: ThienCan, canB: ThienCan): boolean {
-  return KHAC[NGU_HANH_CAN[canA]] === NGU_HANH_CAN[canB];
 }
