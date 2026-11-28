@@ -43,6 +43,14 @@ import {
   DINH_NGHIA_TU_PHE,
 } from './q5-wedding-blocker-definitions';
 import { DINH_NGHIA_BLOCKER_CUOI_HOI_QUYEN_6 } from './q6-wedding-blocker-definitions';
+import {
+  DINH_NGHIA_NGUYET_KY,
+  DINH_NGHIA_PHAN_CHI,
+  DINH_NGHIA_THUONG_SOC,
+  laNguyetKy,
+  laPhanChi,
+  laThuongSoc,
+} from './q6-lunar-context-definitions';
 
 @Injectable()
 export class TinhYeuToNgayService {
@@ -181,6 +189,10 @@ export class TinhYeuToNgayService {
     if (DINH_NGHIA_THOI_DUC.chiNgayTheoMua[mua] === boiCanh.chiNgay) {
       ketQua.push(DINH_NGHIA_THOI_DUC);
     }
+
+    if (laThuongSoc(boiCanh)) ketQua.push(DINH_NGHIA_THUONG_SOC);
+    if (laPhanChi(boiCanh)) ketQua.push(DINH_NGHIA_PHAN_CHI);
+    if (laNguyetKy(boiCanh)) ketQua.push(DINH_NGHIA_NGUYET_KY);
 
     return ketQua.map(taoYeuTo);
   }

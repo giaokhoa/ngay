@@ -448,7 +448,9 @@ export class XemNgayService {
 
     const ngayDanSu = tinhNgayDanSuTaiMuiGio(thoiDiem, muiGio);
     const canChiNgay = this.lich.tinhCanChiNgay(ngayDanSu);
+    const canChiNam = this.lich.tinhCanChiNamTaiThoiDiem(thoiDiem);
     const chiThang = this.lich.tinhChiThangTaiThoiDiem(thoiDiem);
+    const thongTinNgayAm = this.lich.tinhThongTinNgayAm(ngayDanSu, muiGio);
     const truc = this.lich.tinhTruc(chiThang, canChiNgay.chi);
     const thanHoangHac = tinhThanNgay(chiThang, canChiNgay.chi);
     const dangThoVuong = this.lich.dangThoVuong(ngayDanSu, muiGio);
@@ -457,6 +459,9 @@ export class XemNgayService {
       canNgay: canChiNgay.can,
       chiNgay: canChiNgay.chi,
       dangThoVuong,
+      canChiNam,
+      ngayAmTrongThang: thongTinNgayAm.ngayTrongThang,
+      canChiNgaySoc: thongTinNgayAm.canChiNgaySoc,
     });
     const danhGia = this.danhGiaNgay.danhGia(this.dungSu.layQuyTac(congViec), {
       chiThang,

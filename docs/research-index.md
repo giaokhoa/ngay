@@ -217,3 +217,7 @@ Một chủ đề lớn có thể tách thành nhiều hàng nếu chỉ một p
 Không được dùng trạng thái VERIFIED/ORACLE_TESTED của một phần để hợp thức hóa phần khác chưa được xác minh.
 
 Khi thêm một thần sát, quy tắc Dụng sự hoặc Nghi kị, thêm dòng vào bảng này hoặc tách thành bảng con theo module nếu danh sách lớn.
+
+## Calendar context — lunar/new-moon
+
+Q6 `上朔 / 反支 / 月忌日` đã được mở khóa bằng Can Chi năm theo Lập Xuân và astronomical new-moon civil date theo múi giờ. Ngày chứa sóc được coi là mồng 1 cho toàn ngày dân sự địa phương. Xem `apps/api/src/calendar/lunar-day.ts` và `docs/research/q6-full-inventory.md`.
