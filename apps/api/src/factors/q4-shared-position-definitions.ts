@@ -19,7 +19,6 @@ export const DINH_NGHIA_YEU_TO_THEO_TRUC: readonly DinhNghiaYeuToTheoTruc[] = [
   taoTheoTruc(MaYeuTo.BINH_BAO, [{ truc: TRU }], 306, 'Binh Bảo', '兵寶'),
   taoTheoTruc(MaYeuTo.PHUC_DUC, [{ truc: MAN }], 308, 'Phúc Đức', '福德'),
   taoTheoTruc(MaYeuTo.THIEN_VU, [{ truc: MAN }], 308, 'Thiên Vu', '天巫'),
-  taoTheoTruc(MaYeuTo.THIEN_CAU, [{ truc: MAN }], 308, 'Thiên Cẩu', '天狗'),
   taoTheoTruc(
     MaYeuTo.THIEN_CUONG,
     [
@@ -55,6 +54,21 @@ export const DINH_NGHIA_YEU_TO_THEO_TRUC: readonly DinhNghiaYeuToTheoTruc[] = [
   taoTheoTruc(MaYeuTo.NGUYET_KIEN, [{ truc: KIEN }], 344, 'Nguyệt Kiến', '月建'),
 ];
 
+const BANG_THIEN_CAU = {
+  [DAN]: [],
+  [MAO]: [],
+  [THIN]: [],
+  [TI]: [],
+  [NGO]: [],
+  [MUI]: [],
+  [THAN]: [TUAT],
+  [DAU]: [],
+  [TUAT]: [],
+  [HOI]: [],
+  [TY]: [],
+  [SUU]: [],
+} as const;
+
 const BANG_NGUYET_YEM = {
   [DAN]: [TUAT],
   [MAO]: [DAU],
@@ -86,6 +100,7 @@ const BANG_YEM_DOI = {
 } as const;
 
 export const DINH_NGHIA_YEU_TO_QUAN_HE_THANG_QUYEN_4: readonly DinhNghiaYeuToTheoChiThang[] = [
+  taoTheoChiThang(MaYeuTo.THIEN_CAU, BANG_THIEN_CAU, 311, 'Thiên Cẩu', '天狗'),
   taoTheoChiThang(MaYeuTo.NGUYET_YEM, BANG_NGUYET_YEM, 347, 'Nguyệt Yếm', '月厭'),
   taoTheoChiThang(MaYeuTo.DIA_HOA, BANG_NGUYET_YEM, 347, 'Địa Hỏa', '地火'),
   taoTheoChiThang(MaYeuTo.YEM_DOI, BANG_YEM_DOI, 353, 'Yếm Đối', '厭對'),

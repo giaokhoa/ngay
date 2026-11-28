@@ -58,7 +58,6 @@ const MA_THEO_TRUC = new Set<MaYeuTo>([
   MaYeuTo.BINH_BAO,
   MaYeuTo.PHUC_DUC,
   MaYeuTo.THIEN_VU,
-  MaYeuTo.THIEN_CAU,
   MaYeuTo.THIEN_CUONG,
   MaYeuTo.HA_KHOI,
   MaYeuTo.TU_THAN,
@@ -77,6 +76,7 @@ const MA_THEO_TRUC = new Set<MaYeuTo>([
 ]);
 
 const MA_QUAN_HE_THANG = new Set<MaYeuTo>([
+  MaYeuTo.THIEN_CAU,
   MaYeuTo.NGUYET_YEM,
   MaYeuTo.DIA_HOA,
   MaYeuTo.YEM_DOI,
@@ -147,6 +147,41 @@ describe('Quyển 4 — shared-position identities from Thập Nhị Trực', ()
   });
 });
 
+describe('Quyển 4 — Thiên Cẩu singleton', () => {
+  const service = new TinhYeuToNgayService();
+
+  it('chỉ tháng kiến Thân ngày Tuất là Thiên Cẩu', () => {
+    for (const chiThang of CHI_THEO_THU_TU) {
+      for (const chiNgay of CHI_THEO_THU_TU) {
+        const codes = service
+          .tinh({
+            chiThang,
+            canNgay: ThienCan.GIAP,
+            chiNgay,
+            dangThoVuong: false,
+          })
+          .map((item) => item.ma);
+        expect(codes.includes(MaYeuTo.THIEN_CAU)).toBe(
+          chiThang === DiaChi.THAN && chiNgay === DiaChi.TUAT,
+        );
+      }
+    }
+  });
+
+  it('các Trực Mãn khác vẫn có Phúc Đức/Thiên Vu nhưng không có Thiên Cẩu', () => {
+    const result = service.tinh({
+      chiThang: DiaChi.DAN,
+      canNgay: ThienCan.GIAP,
+      chiNgay: DiaChi.THIN, // Dần -> Thìn là Trực Mãn
+      dangThoVuong: false,
+    });
+    const codes = new Set(result.map((item) => item.ma));
+    expect(codes.has(MaYeuTo.PHUC_DUC)).toBe(true);
+    expect(codes.has(MaYeuTo.THIEN_VU)).toBe(true);
+    expect(codes.has(MaYeuTo.THIEN_CAU)).toBe(false);
+  });
+});
+
 describe('Quyển 4 — Nguyệt Yếm / Yếm Đối shared positions', () => {
   const service = new TinhYeuToNgayService();
 
@@ -154,6 +189,10 @@ describe('Quyển 4 — Nguyệt Yếm / Yếm Đối shared positions', () => {
     for (const chiNgay of CHI_THEO_THU_TU) {
       it(`${chiThang} / ${chiNgay}`, () => {
         const mongDoi: MaYeuTo[] = [];
+
+        if (chiThang === DiaChi.THAN && chiNgay === DiaChi.TUAT) {
+          mongDoi.push(MaYeuTo.THIEN_CAU);
+        }
 
         if (ORACLE_NGUYET_YEM[chiThang] === chiNgay) {
           mongDoi.push(MaYeuTo.NGUYET_YEM, MaYeuTo.DIA_HOA);
@@ -227,7 +266,7 @@ function oracleMaTheoTruc(truc: ThapNhiTruc, chiThang: DiaChi): MaYeuTo[] {
     case ThapNhiTruc.TRU:
       return [MaYeuTo.CAT_KY, MaYeuTo.BINH_BAO];
     case ThapNhiTruc.MAN:
-      return [MaYeuTo.PHUC_DUC, MaYeuTo.THIEN_VU, MaYeuTo.THIEN_CAU];
+      return [MaYeuTo.PHUC_DUC, MaYeuTo.THIEN_VU];
     case ThapNhiTruc.BINH:
       return [coPhaiThangDuong ? MaYeuTo.THIEN_CUONG : MaYeuTo.HA_KHOI, MaYeuTo.TU_THAN];
     case ThapNhiTruc.DINH:
