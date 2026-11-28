@@ -15,6 +15,7 @@ import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
 import { QUY_TAC_LAP_KHE_UOC_GIAO_DICH } from '../activities/lap-khe-uoc-giao-dich-rules';
 import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
+import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from '../activities/mo-kho-xuat-hang-tien-rules';
 import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
@@ -159,6 +160,35 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:TU_PHE',
       'YEU_TO:TU_CUNG',
       'YEU_TO:CUU_KHONG',
+    ],
+  },
+  [LoaiCongViec.MO_KHO_XUAT_HANG_TIEN]: {
+    tieuDeHan: '開倉庫出貨財',
+    anchor: 'KR3g0051_WYG_011-21a..21b',
+    nen: ['YEU_TO:NGUYET_AN', 'YEU_TO:TU_TUONG', 'YEU_TO:THOI_DUC', 'TRUC:MAN', 'YEU_TO:NGU_PHU'],
+    ky: [
+      'YEU_TO:NGUYET_KIEN',
+      'YEU_TO:NGUYET_PHA',
+      'YEU_TO:DAI_HAO',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'TRUC:BE',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TIEU_HAO',
+      'YEU_TO:THIEN_TAC',
+      'YEU_TO:TU_HAO',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:TU_CUNG',
+      'YEU_TO:NGU_HU',
+      'YEU_TO:CUU_KHONG',
+      'CAN_NGAY:GIAP',
     ],
   },
   [LoaiCongViec.MAY_DO]: {
@@ -738,6 +768,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
   [LoaiCongViec.MAY_DO]: QUY_TAC_MAY_DO,
+  [LoaiCongViec.MO_KHO_XUAT_HANG_TIEN]: QUY_TAC_MO_KHO_XUAT_HANG_TIEN,
   [LoaiCongViec.NAP_TAI]: QUY_TAC_NAP_TAI,
   [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: QUY_TAC_LAP_KHE_UOC_GIAO_DICH,
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,

@@ -134,6 +134,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.NAP_TAI,
   },
   {
+    ma: 'MO_KHO_XUAT_HANG_TIEN',
+    ten: 'Mở kho xuất hàng, tiền',
+    moTa: 'Chọn ngày mở kho, xuất hàng hoặc tiền theo Nguyệt Ân, Tứ Tướng, Thời Đức, Mãn nhật và Ngũ Phú; xét riêng Ngũ Hư, Thiên Tặc và ngày Giáp.',
+    to: DUONG_DAN.MO_KHO_XUAT_HANG_TIEN,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
