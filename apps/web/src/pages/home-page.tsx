@@ -170,6 +170,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.SUA_SANG_DUONG_SA,
   },
   {
+    ma: 'PHA_NHA_HUY_TUONG',
+    ten: 'Phá nhà, hủy tường',
+    moTa: 'Nên Nguyệt Phá; Q10 xử lý riêng các hội hung có thể cân bằng, bỏ Nên hoặc nâng thành chư sự giai kị.',
+    to: DUONG_DAN.PHA_NHA_HUY_TUONG,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

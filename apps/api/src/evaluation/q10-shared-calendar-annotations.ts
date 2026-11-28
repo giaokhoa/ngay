@@ -11,6 +11,7 @@ const CONG_VIEC_DUOC_MIEN = new Set<LoaiCongViec>([
   LoaiCongViec.QUET_DON_NHA_CUA,
   LoaiCongViec.TRANG_TRI_TUONG,
   LoaiCongViec.SUA_SANG_DUONG_SA,
+  LoaiCongViec.PHA_NHA_HUY_TUONG,
 ]);
 
 const CONG_VIEC_DA_CO_KY_DANG_NGAY_RIENG = new Set<LoaiCongViec>([

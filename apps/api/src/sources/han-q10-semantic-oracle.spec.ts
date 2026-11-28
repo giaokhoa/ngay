@@ -19,6 +19,7 @@ import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
 import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from '../activities/mo-kho-xuat-hang-tien-rules';
 import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
+import { QUY_TAC_PHA_NHA_HUY_TUONG } from '../activities/pha-nha-huy-tuong-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
@@ -60,6 +61,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.QUET_DON_NHA_CUA]: QUY_TAC_QUET_DON_NHA_CUA,
   [LoaiCongViec.TRANG_TRI_TUONG]: QUY_TAC_TRANG_TRI_TUONG,
   [LoaiCongViec.SUA_SANG_DUONG_SA]: QUY_TAC_SUA_SANG_DUONG_SA,
+  [LoaiCongViec.PHA_NHA_HUY_TUONG]: QUY_TAC_PHA_NHA_HUY_TUONG,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -77,7 +79,8 @@ const ACTIVITIES_WITH_TU_PHE_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.CHINH_DUNG_CAT_TOC &&
     activity !== LoaiCongViec.SUA_MONG_TAY_CHAN &&
     activity !== LoaiCongViec.QUET_DON_NHA_CUA &&
-    activity !== LoaiCongViec.SUA_SANG_DUONG_SA,
+    activity !== LoaiCongViec.SUA_SANG_DUONG_SA &&
+    activity !== LoaiCongViec.PHA_NHA_HUY_TUONG,
 );
 const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
   (activity) =>
@@ -86,7 +89,8 @@ const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.GIAI_TRU &&
     activity !== LoaiCongViec.CAU_Y_TRI_BENH &&
     activity !== LoaiCongViec.QUET_DON_NHA_CUA &&
-    activity !== LoaiCongViec.SUA_SANG_DUONG_SA,
+    activity !== LoaiCongViec.SUA_SANG_DUONG_SA &&
+    activity !== LoaiCongViec.PHA_NHA_HUY_TUONG,
 );
 const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
   (activity) =>
@@ -202,6 +206,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.QUET_DON_NHA_CUA]: false,
       [LoaiCongViec.TRANG_TRI_TUONG]: false,
       [LoaiCongViec.SUA_SANG_DUONG_SA]: false,
+      [LoaiCongViec.PHA_NHA_HUY_TUONG]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -254,6 +259,34 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('破屋壞垣: 月破 is Nên and 災煞 in 四仲 follows 月破', () => {
+    const nguyetPha = danhGia(LoaiCongViec.PHA_NHA_HUY_TUONG, {
+      yeuTo: [MaYeuTo.NGUYET_PHA],
+    });
+    const taiSat = danhGia(LoaiCongViec.PHA_NHA_HUY_TUONG, {
+      chiThang: DiaChi.MAO,
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.TAI_SAT],
+    });
+    expect(nguyetPha.coNen).toBe(true);
+    expect(nguyetPha.coKy).toBe(false);
+    expect(taiSat.coNen).toBe(true);
+    expect(taiSat.coKy).toBe(false);
+  });
+
+  it('破屋壞垣: 劫煞 balance removes 月破 Nên, while 月忌 only suppresses Nên', () => {
+    const balanced = danhGia(LoaiCongViec.PHA_NHA_HUY_TUONG, {
+      chiThang: DiaChi.THIN,
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.KIEP_SAT],
+    });
+    const monthTaboo = danhGia(LoaiCongViec.PHA_NHA_HUY_TUONG, {
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.NGUYET_KY],
+    });
+    expect(balanced.coNen).toBe(false);
+    expect(balanced.coKy).toBe(false);
+    expect(monthTaboo.coNen).toBe(false);
+    expect(monthTaboo.coKy).toBe(false);
   });
 
   it('平治道塗: 平日 is Nên; ordinary 月破/劫煞/月刑/四廢 do not invent Kị', () => {
