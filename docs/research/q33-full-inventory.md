@@ -1,13 +1,13 @@
 # Quyển 33 — Lợi dụng 1 full inventory
 
-Status: HAN_INVENTORIED / VIET_SECONDARY_TOC / EXACT_VIET_SCAN_PENDING / ORACLE_PARTIAL
+Status: HAN_INVENTORIED / VIET_EXACT_VERIFIED / ORACLE_PARTIAL
 
 ## Nguồn và denominator
 
 - Hán: Kanripo `KR3g0051_032.txt`, revision pin, 卷三十三 `利用一`.
 - Hán TOC có **15 heading chính**.
-- Secondary public TOC Việt Tập 2 có **14 mục** vì mục 13 gộp `論用盤針` + `羅經圖` thành “Luận dùng bàn kế, La kinh đồ”.
-- Exact canonical Việt Tập 2 chưa mount, nên wording/mapping Việt chỉ là corroboration, không claim scan verification.
+- Exact Việt Tập II Q33 bắt đầu p687 và có **14 mục**.
+- Mục 13 p748 in “Luận dùng bàn kế, La kinh đồ”, xác nhận trực tiếp việc gộp `論用盤針` + `羅經圖` của 15 heading Hán.
 
 ## Inventory 14 mục Việt / 15 heading Hán
 
@@ -25,7 +25,7 @@ Status: HAN_INVENTORIED / VIET_SECONDARY_TOC / EXACT_VIET_SCAN_PENDING / ORACLE_
 |  10 | 論開山立向與修山修向不同        | BLOCKED_SPATIAL              | phân loại thao tác theo sơn/hướng                                                            |
 |  11 | 論修方                          | BLOCKED_SPATIAL              | cần phương tu sửa                                                                            |
 |  12 | 論修方兼山向及中宫              | BLOCKED_SPATIAL              | cần phương + sơn/hướng + trung cung                                                          |
-|  13 | 論用盤針 + 羅經圖               | BLOCKED_COMPASS              | Hán tách 2 heading; Việt public TOC gộp 1 mục                                                |
+|  13 | 論用盤針 + 羅經圖               | BLOCKED_COMPASS              | Hán tách 2 heading; exact Việt p748 gộp 1 mục                                                |
 |  14 | 定方隅法                        | BLOCKED_SPATIAL_COMPASS      | phép định phương góc, không biểu diễn trong current contracts                                |
 
 ## Scope production đã khóa
@@ -41,4 +41,4 @@ Repo đã encode/test phần này ở `personal-year.ts` / `personal-year.spec.t
 
 ## Kết luận
 
-**Q33 đã structural-inventory đủ 14 mục Việt secondary = 15 heading Hán.** Oracle production vẫn partial, chủ yếu `相主`; phần lớn quyển là spatial/compass doctrine và giữ blocked thay vì bị ép thành day factor.
+**Q33 đã exact Việt/Hán structural-double-entry đủ 14 mục Việt = 15 heading Hán.** Oracle production vẫn partial, chủ yếu `相主`; phần lớn quyển là spatial/compass doctrine và giữ blocked thay vì bị ép thành day factor.

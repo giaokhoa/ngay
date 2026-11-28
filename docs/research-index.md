@@ -146,10 +146,10 @@ Q20–31 đã inventory đủ 12/12 volume structure; xem `docs/research/q20-q31
 
 ## Appendix / refutation — Quyển 35–36
 
-| Scope         | Research status                                                        | Product                          |
-| ------------- | ---------------------------------------------------------------------- | -------------------------------- |
-| Q35 Phụ lục   | Hán 16/16 headings; secondary Việt TOC 13 items; exact T2 scan pending | CHUA_IMPLEMENT / reference       |
-| Q36 Biện ngụy | Hán 27/27 headings; secondary Việt TOC 26 items; exact T2 scan pending | ANTI_ORACLE / source-review only |
+| Scope         | Research status                                                      | Product                          |
+| ------------- | -------------------------------------------------------------------- | -------------------------------- |
+| Q35 Phụ lục   | exact T2 13 items ↔ Hán 16 headings; 竒門三元 omitted                | CHUA_IMPLEMENT / reference       |
+| Q36 Biện ngụy | exact T2 26 items ↔ Hán 27 headings; TOC Thiên đạo/body Lục đạo typo | ANTI_ORACLE / source-review only |
 
 Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inventory.md`.
 
@@ -167,11 +167,15 @@ Chi tiết: `docs/research/q10-full-inventory.md`, `docs/research/q11-full-inven
 | Quyển | Structural inventory                           | Product/oracle                                                    |
 | ----: | ---------------------------------------------- | ----------------------------------------------------------------- |
 |     9 | 4 phần = 10 niên + 30 nguyệt + 2 nhật + 6 thời | ORACLE_PARTIAL; index/cross-check, không calculator spec duy nhất |
-|    32 | 3/3 mục Hán                                    | ORACLE_PARTIAL; 60-day hour subset; advanced hour rules blocked   |
-|    33 | 15 Hán headings / 14 secondary Việt items      | ORACLE_PARTIAL; `相主`; exact T2 scan pending                     |
-|    34 | 12 Hán headings / 10 secondary Việt items      | ORACLE_PARTIAL; `用時法`; exact T2 scan pending                   |
+|    32 | exact T2 3/3 mục ↔ Hán 3 headings              | ORACLE_PARTIAL; 60-day hour subset; advanced hour rules blocked   |
+|    33 | exact T2 14 items ↔ 15 Hán headings            | ORACLE_PARTIAL; `相主`; compass/spatial remainder blocked         |
+|    34 | exact T2 10 items ↔ 12 Hán headings            | ORACLE_PARTIAL; `用時法`; `時刻方位圖` omission registered        |
 
 Chi tiết: `docs/research/q9-full-inventory.md`, `docs/research/q32-full-inventory.md`, `docs/research/q33-full-inventory.md`, `docs/research/q34-full-inventory.md`.
+
+## Exact Tập II cross-check
+
+Canonical Tập II 1001 trang đã được mở trực tiếp và exact-map với Hán Q14–36. Page map + grouping + discrepancy: `docs/research/t2-exact-viet-han-crosscheck.md`.
 
 ## Hán double-entry coverage
 

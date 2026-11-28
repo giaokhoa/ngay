@@ -1,5 +1,9 @@
 export type LoaiSaiKhacNguonHan =
-  'VIET_HAN_NOI_DUNG' | 'TRUYEN_BAN' | 'TRANSCRIPTION_GLYPH' | 'SOURCE_CORRECTION';
+  | 'VIET_HAN_NOI_DUNG'
+  | 'VIET_TOC_TIEU_DE'
+  | 'TRUYEN_BAN'
+  | 'TRANSCRIPTION_GLYPH'
+  | 'SOURCE_CORRECTION';
 
 export interface SaiKhacNguonHan {
   ma: string;
@@ -50,6 +54,66 @@ export const SAI_KHAC_NGUON_HAN: readonly SaiKhacNguonHan[] = [
     moTa: 'Kanripo/Wikisource transcription có câu “重日者己亥二日也”, nhưng ngay phần giải thích đối xứng 巳 là cực dương với 亥 là cực âm; bản Việt cũng dùng Tỵ/Hợi.',
     chinhSachProduction:
       'Resolve theo ngữ cảnh thành 巳/亥 (Tỵ/Hợi). Không coi chữ 己 trong transcription online là Can Kỷ.',
+  },
+  {
+    ma: 'Q15_KY_MAO_KANRIPO_JI_AS_SI',
+    loai: 'TRANSCRIPTION_GLYPH',
+    quyen: 15,
+    muc: '己卯年表',
+    anchorHan: 'KR3g0051_WYG_014-27a',
+    moTa: 'Kanripo chép row title 太嵗巳卯; exact Việt Tập II p82 in Thái Tuế Kỷ Mão, đúng vị trí 己卯 trong 60 hoa giáp.',
+    chinhSachProduction:
+      'Normalize row title thành 己卯 khi xây annual-table oracle; không coi 巳卯 là Can-Chi hợp lệ.',
+  },
+  {
+    ma: 'Q16_KY_SUU_KANRIPO_JI_AS_SI',
+    loai: 'TRANSCRIPTION_GLYPH',
+    quyen: 16,
+    muc: '己丑年表',
+    anchorHan: 'KR3g0051_WYG_015-27a',
+    moTa: 'Kanripo chép row title 太歲巳丑; exact Việt Tập II p133 in Thái Tuế Kỷ Sửu, đúng vị trí 己丑.',
+    chinhSachProduction:
+      'Normalize row title thành 己丑 khi xây annual-table oracle; giữ raw transcription trong provenance.',
+  },
+  {
+    ma: 'Q17_KY_HOI_KANRIPO_JI_AS_SI',
+    loai: 'TRANSCRIPTION_GLYPH',
+    quyen: 17,
+    muc: '己亥年表',
+    anchorHan: 'KR3g0051_WYG_016-27a',
+    moTa: 'Kanripo chép row title 太歲巳亥; exact Việt Tập II p184 in Thái Tuế Kỷ Hợi, đúng vị trí 己亥.',
+    chinhSachProduction:
+      'Normalize row title thành 己亥 khi xây annual-table oracle; giữ raw transcription trong provenance.',
+  },
+  {
+    ma: 'Q34_THOI_KHAC_PHUONG_VI_DO_OMITTED',
+    loai: 'VIET_HAN_NOI_DUNG',
+    quyen: 34,
+    muc: '時刻方位圖',
+    anchorHan: 'KR3g0051_WYG_033-47a..48a',
+    moTa: 'Hán Q34 có 時刻方位圖 và 太陽到方圖 riêng. Exact Việt Tập II chỉ in “Đồ hình Thái dương đến phương” p818 rồi sang bảng p820; 時刻方位圖 bị lược.',
+    chinhSachProduction:
+      'Nếu implement solar/spatial time-direction layer, giữ 時刻方位圖 từ Hán như source riêng; không giả rằng bản Việt có đồ này.',
+  },
+  {
+    ma: 'Q35_QIMEN_SANYUAN_OMITTED',
+    loai: 'VIET_HAN_NOI_DUNG',
+    quyen: 35,
+    muc: '竒門三元',
+    anchorHan: 'KR3g0051_WYG_034-52a..62b',
+    moTa: 'Hán Q35 có section 竒門三元 dài sau 吉將加時. Exact Việt Tập II kết thúc Q35 sau “Cát tướng gia thêm vào giờ” rồi sang Q36; toàn section này bị lược.',
+    chinhSachProduction:
+      'Q35 vẫn CHUA_IMPLEMENT. Nếu mở Qimen, dùng Hán section làm source; không claim Việt double-entry cho 竒門三元.',
+  },
+  {
+    ma: 'Q36_LUC_DAO_TOC_THIEN_DAO',
+    loai: 'VIET_TOC_TIEU_DE',
+    quyen: 36,
+    muc: '六道',
+    anchorHan: 'KR3g0051_WYG_035-54a..55b',
+    moTa: 'TOC Việt exact mục 24 in “Thiên đạo”, nhưng thân bài p982 in “Lục đạo (sáu con đường)” và nội dung khớp Hán 六道.',
+    chinhSachProduction:
+      'Xem “Thiên đạo” ở TOC là typo title; canonical identity của section là Lục Đạo/六道, không tạo factor Thiên Đạo riêng.',
   },
   {
     ma: 'Q10_KIEP_SAT_TI_HOI_RELIEF_PAIR',

@@ -65,29 +65,29 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 
 Đây là **book-level completeness**, không phải số lượng test.
 
-| Quyển | Hán mục     | Trạng thái      | Scope hiện có                                                                                                |
-| ----: | ----------- | --------------- | ------------------------------------------------------------------------------------------------------------ |
-|     1 | 本原一      | ORACLE_MOT_PHAN | 17/17 mục Việt = 28/28 heading Hán inventory; Can/Chi, Ngũ Thử/Ngũ Hổ Độn, Thổ Vượng                         |
-|     2 | 本原二      | CHUA_IMPLEMENT  | 12/12 section inventory; 24 sơn/ngũ hành địa lý/biến quẻ, thiếu spatial domain                               |
-|     3 | 義例一      | CHUA_IMPLEMENT  | 36/36 mục đã inventory; annual spatial layer, current contract thiếu hướng/tọa-hướng                         |
-|     4 | 義例二      | ORACLE_MOT_PHAN | 12 Trực shared identities, 月厭/厭對, 陰陽不將                                                               |
-|     5 | 義例三      | ORACLE_MOT_PHAN | Đức/Hợp, special days, 王日/民日, 四廢/四忌/四窮/五墓/八專/復日/重日/鳴吠…                                   |
-|     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục đã inventory; 18 factor production có Hán oracle, phần còn lại explicit out-of-scope/blocked       |
-|     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model                 |
-|     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain                    |
-|     9 | 立成        | ORACLE_MOT_PHAN | full structure: 10 niên + 30 nguyệt + 2 trang nhật + 6 biểu thời; oracle subset                              |
-|    10 | 宜忌        | ORACLE_MOT_PHAN | 51/51 mục Việt = 99/99 heading Hán inventoried; semantic oracle exact cho 7 current vertical                 |
-|    11 | 用事        | ORACLE_MOT_PHAN | 73/73 canonical activity sections inventoried; 7 oracle-tested, 66 out-of-scope current product              |
-|    12 | 公規一      | CHUA_IMPLEMENT  | 8/8 top-level inventory; lịch quan/thiên văn, sunrise tables latitude-specific                               |
-|    13 | 公規二      | CHUA_IMPLEMENT  | 2/2 top-level inventory; canh lậu/trung tinh + tinh đồ, bảng Kinh sư                                         |
-|    14 | 年表一      | CHUA_IMPLEMENT  | annual table block 甲子→癸酉; Wikisource fallback, spatial year table                                        |
-| 15–19 | 年表二–六   | CHUA_IMPLEMENT  | 5 annual blocks tiếp theo; cùng Q14 phủ 60/60 Can-Chi, spatial year tables                                   |
-| 20–31 | 月表一–十二 | ORACLE_MOT_PHAN | 12/12 volume structure inventoried; month boundary/Trực/factor oracle subset, chưa claim 720-row full oracle |
-|    32 | 日表        | ORACLE_MOT_PHAN | 3/3 mục inventoried; 60-day hour vectors partial, Quý Đăng/Tứ Đại Cát blocked                                |
-|    33 | 利用一      | ORACLE_MOT_PHAN | 14 mục Việt secondary = 15 heading Hán; exact T2 scan pending; 相主 oracle partial                           |
-|    34 | 利用二      | ORACLE_MOT_PHAN | 12 heading Hán = 10 mục Việt secondary; exact T2 scan pending; 用時法 oracle partial                         |
-|    35 | 附錄        | CHUA_IMPLEMENT  | Hán 16 heading; public Việt TOC 13 mục; exact T2 scan pending                                                |
-|    36 | 辨訛        | CHUA_IMPLEMENT  | Hán 27 heading; anti-oracle/refutation role; public Việt TOC 26 mục; exact scan pending                      |
+| Quyển | Hán mục     | Trạng thái      | Scope hiện có                                                                                               |
+| ----: | ----------- | --------------- | ----------------------------------------------------------------------------------------------------------- |
+|     1 | 本原一      | ORACLE_MOT_PHAN | 17/17 mục Việt = 28/28 heading Hán inventory; Can/Chi, Ngũ Thử/Ngũ Hổ Độn, Thổ Vượng                        |
+|     2 | 本原二      | CHUA_IMPLEMENT  | 12/12 section inventory; 24 sơn/ngũ hành địa lý/biến quẻ, thiếu spatial domain                              |
+|     3 | 義例一      | CHUA_IMPLEMENT  | 36/36 mục đã inventory; annual spatial layer, current contract thiếu hướng/tọa-hướng                        |
+|     4 | 義例二      | ORACLE_MOT_PHAN | 12 Trực shared identities, 月厭/厭對, 陰陽不將                                                              |
+|     5 | 義例三      | ORACLE_MOT_PHAN | Đức/Hợp, special days, 王日/民日, 四廢/四忌/四窮/五墓/八專/復日/重日/鳴吠…                                  |
+|     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục inventory; 21 factor production-computable/Hán-oracle, gồm 上朔/反支/月忌 đã mở khóa              |
+|     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model                |
+|     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain                   |
+|     9 | 立成        | ORACLE_MOT_PHAN | full structure: 10 niên + 30 nguyệt + 2 trang nhật + 6 biểu thời; oracle subset                             |
+|    10 | 宜忌        | ORACLE_MOT_PHAN | 51/51 mục Việt = 99/99 heading Hán inventoried; semantic oracle exact cho 7 current vertical                |
+|    11 | 用事        | ORACLE_MOT_PHAN | 73/73 canonical activity sections inventoried; 7 oracle-tested, 66 out-of-scope current product             |
+|    12 | 公規一      | CHUA_IMPLEMENT  | 8/8 top-level inventory; lịch quan/thiên văn, sunrise tables latitude-specific                              |
+|    13 | 公規二      | CHUA_IMPLEMENT  | 2/2 top-level inventory; canh lậu/trung tinh + tinh đồ, bảng Kinh sư                                        |
+|    14 | 年表一      | CHUA_IMPLEMENT  | exact T2 p5; 甲子→癸酉, Wikisource fallback; spatial year table                                             |
+| 15–19 | 年表二–六   | CHUA_IMPLEMENT  | exact T2 p56/107/158/209/260; cùng Q14 phủ 60/60 Can-Chi; 3 己→巳 transcription errors source-locked        |
+| 20–31 | 月表一–十二 | ORACLE_MOT_PHAN | exact T2 12/12 structure verified; month boundary/Trực/factor oracle subset, chưa claim 720-row full oracle |
+|    32 | 日表        | ORACLE_MOT_PHAN | exact T2 3/3 mục verified; 60-day hour vectors partial, Quý Đăng/Tứ Đại Cát blocked                         |
+|    33 | 利用一      | ORACLE_MOT_PHAN | exact T2 14 mục = 15 heading Hán; 論用盤針+羅經圖 gộp; 相主 oracle partial                                  |
+|    34 | 利用二      | ORACLE_MOT_PHAN | exact T2 10 mục ↔ 12 Hán heading; 時刻方位圖 omitted; 用時法 oracle partial                                 |
+|    35 | 附錄        | CHUA_IMPLEMENT  | exact T2 13 mục ↔ 16 Hán heading; 百忌/祀竈/洗頭 gộp; 竒門三元 omitted                                      |
+|    36 | 辨訛        | CHUA_IMPLEMENT  | exact T2 26 mục ↔ 27 Hán heading; 章光+五合五離 gộp; TOC Thiên đạo → body Lục đạo/六道 typo                 |
 
 Tổng hiện tại:
 
@@ -185,9 +185,9 @@ Không phát hiện discrepancy Việt/Hán trong scope đã production. **Secti
 
 ### Q35–36
 
-- Q35: `docs/research/q35-full-inventory.md` khóa Hán **16/16 heading**. Secondary Việt Tập 2 TOC có 13 mục: mục 6 gộp `百忌日/祀竈日/洗頭日`, còn `竒門三元` không hiện trên TOC public. Exact canonical scan pending nên chưa gọi đây là discrepancy Việt/Hán đã xác nhận.
-- Q36: `docs/research/q36-full-inventory.md` khóa Hán **27/27 heading**. Secondary Việt TOC có 26 mục do gộp `章光` + `五合五離`. Q36 là **辨訛 — anti-oracle/refutation source**, không phải factor catalog.
-- Cả hai giữ `CHUA_IMPLEMENT` và không có `phamViOracle` runtime claim.
+- Q35: `docs/research/q35-full-inventory.md` exact-map **13 mục Việt ↔ 16 heading Hán**. Mục 6 gộp `百忌日/祀竈日/洗頭日`; `竒門三元` bị lược hoàn toàn khỏi exact T2 và đã vào discrepancy registry.
+- Q36: `docs/research/q36-full-inventory.md` exact-map **26 mục Việt ↔ 27 heading Hán** do gộp `章光` + `五合五離`. TOC mục 24 in “Thiên đạo”, nhưng thân bài p982 là “Lục đạo/六道”; registry khóa đây là TOC typo.
+- Cả hai giữ `CHUA_IMPLEMENT`; Q36 vẫn là **辨訛 — anti-oracle/refutation source**.
 
 ### Q12–13
 
@@ -197,7 +197,7 @@ Không phát hiện discrepancy Việt/Hán trong scope đã production. **Secti
 
 ### Q20–31 Nguyệt biểu
 
-`docs/research/q20-q31-month-tables.md` khóa **12/12 volume structure**: mỗi quyển là một tháng tiết khí, có header tháng + trung khí/Nguyệt tướng + bảng thiết kế 60 Can-Chi ngày. Current oracle vẫn partial; transcription có glyph/typo (`夘/卯`, `巳/己`, ...) nên chưa parse 720 row làm machine truth nếu thiếu normalization + Tập II row cross-check.
+`docs/research/q20-q31-month-tables.md` exact-map **12/12 volume structure** từ Tập II: trang in 311/339/367/396/423/451/480/507/535/565/594/622. Mỗi quyển là một tháng tiết khí với trung khí/Nguyệt tướng + bảng 60 Can-Chi ngày. Oracle vẫn partial; exact scan đã gỡ blocker nguồn Việt nhưng chưa claim 720 row cell-by-cell.
 
 ### Q9
 
@@ -205,9 +205,9 @@ Không phát hiện discrepancy Việt/Hán trong scope đã production. **Secti
 
 ### Q32–34
 
-- Q32: `docs/research/q32-full-inventory.md`, Hán **3/3 mục**; 60-day hour table có oracle subset, `貴登天門` và `四大吉時` blocked theo location/time model.
-- Q33: `docs/research/q33-full-inventory.md`, Hán **15 heading**, secondary Việt TOC **14 mục** do gộp `論用盤針 + 羅經圖`; `相主` là production subset. Exact T2 scan pending.
-- Q34: `docs/research/q34-full-inventory.md`, Hán **12 heading**, secondary Việt TOC **10 mục**; `用時法` là production subset, solar/spatial layer blocked. Exact T2 scan pending.
+- Q32: `docs/research/q32-full-inventory.md`, exact T2 **3/3 mục** khớp Hán; 60-day hour table có oracle subset, `貴登天門` và `四大吉時` blocked theo location/time model.
+- Q33: `docs/research/q33-full-inventory.md`, exact T2 **14 mục ↔ 15 heading Hán**; mục 13 gộp `論用盤針 + 羅經圖`; `相主` là production subset.
+- Q34: `docs/research/q34-full-inventory.md`, exact T2 **10 mục ↔ 12 heading Hán**; `月吉/月凶` gộp và `時刻方位圖` bị lược. `用時法` là production subset, solar/spatial layer blocked.
 
 ### Q10
 
@@ -285,6 +285,10 @@ Policy: khác biệt phải có ID và production policy rõ; không normalize �
 - `HAN_ORACLE_TESTED`: có thêm expected/vector độc lập lấy từ Hán source pin.
 - `ORACLE_MOT_PHAN` ở manifest: chỉ một phần nội dung của cả quyển đã được Hán-oracle.
 - Không có nhãn nào ở trên tự động nghĩa là “full quyển”.
+
+## Exact Tập II Việt/Hán
+
+`docs/research/t2-exact-viet-han-crosscheck.md` khóa page map Q14–36 và các exact discrepancy của canonical Tập II 1001 trang. Từ audit này, secondary TOC không còn là bằng chứng chính cho Tập II.
 
 ## Structural inventory milestone
 

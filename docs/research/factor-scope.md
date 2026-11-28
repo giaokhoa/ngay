@@ -278,7 +278,7 @@ Nếu chưa đủ, issue phải giữ `status:blocked-source` hoặc research st
 
 ## Quyển 35–36 — Phụ lục và Biện ngụy
 
-- Q35: Phụ lục, Hán 16 heading; public Việt TOC 13 mục, exact scan pending một điểm quanh `竒門三元`.
-- Q36: Biện ngụy, Hán 27 heading; phải dùng như anti-oracle/refutation source, không biến heading thành factor.
+- Q35: exact T2 13 mục ↔ 16 heading Hán; `百忌/祀竈/洗頭` gộp, `竒門三元` bị lược và đã vào discrepancy registry.
+- Q36: exact T2 26 mục ↔ 27 heading Hán do gộp `章光+五合五離`; TOC “Thiên đạo” là typo, thân bài `Lục đạo/六道` khớp Hán; vẫn là anti-oracle/refutation source.
 
 Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inventory.md`.

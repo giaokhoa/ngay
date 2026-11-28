@@ -1,6 +1,6 @@
 # Quyển 14–19 — inventory Niên biểu 60 năm
 
-Status: HAN_INVENTORIED / VIET_SECONDARY_TOC / EXACT_VIET_SCAN_PENDING / NOT_IMPLEMENTED
+Status: HAN_INVENTORIED / VIET_EXACT_VERIFIED / NOT_IMPLEMENTED
 
 ## Phạm vi
 
@@ -10,9 +10,9 @@ Nguồn:
 
 - Q14: Wikisource 四庫全書本 fallback, revision `627109`, vì Kanripo revision pin thiếu đúng 卷十四;
 - Q15–19: Kanripo KR3g0051 revision pin, lần lượt `KR3g0051_014.txt` → `_018.txt`;
-- Tập II Việt có canonical fingerprint trong `docs/source-catalog.md`, nhưng working copy Tập II hiện không mount trong execution context; batch này **không claim Việt double-entry**.
-- Secondary public TOC của Tập 2 1001 trang corroborate đúng sáu range Q14–19. Nó chỉ dùng cho structure, không thay scan canonical: `https://thuvienpdf.net/hiep-ky-bien-phuong-thu-tap-2`.
-- Public bibliographic record xác nhận Tập 2 là file PDF-scan 1001 trang: `https://vietbooks.info/threads/hiep-ky-bien-phuong-thu-tap-2-nxb-mui-ca-mau-1998-mai-coc-thanh-1001-trang.96/`.
+- Exact canonical Tập II 1001 trang đã được mở và đối chiếu trực tiếp; SHA-256 khớp `docs/source-catalog.md`.
+- Trang in mở sáu quyển lần lượt: Q14 p5, Q15 p56, Q16 p107, Q17 p158, Q18 p209, Q19 p260.
+- Page map/điểm lệch chi tiết: `docs/research/t2-exact-viet-han-crosscheck.md`.
 
 ## Sáu block 10 năm
 
@@ -50,9 +50,9 @@ Range heading của Q15–19 rõ, nhưng transcription Kanripo có dị tự/typ
 - Q16 `己丑` thành `太歲巳丑`;
 - Q17 `己亥` thành `太歲巳亥`.
 
-Do đó regex ngây thơ theo 10 Thiên Can chỉ đếm 9/10 row ở vài quyển dù entry thực tế vẫn có. Q18 còn dùng dị thể `太歳` ở Canh Tuất.
+Exact Việt Tập II xác nhận các row đúng là **Kỷ Mão p82, Kỷ Sửu p133, Kỷ Hợi p184**. Do đó đây là lỗi transcription `己`→`巳`, không phải thiếu row. Q18 còn dùng dị thể `太歳` ở Canh Tuất.
 
-Chính sách: trước khi biến Niên biểu thành machine oracle, cần một lớp normalization/source vectors và đối chiếu scan/Tập II; không parse thẳng text transcription thành production table.
+Chính sách: trước khi biến Niên biểu thành machine oracle, cần normalization/source vectors; không parse thẳng text transcription thành production table. Ba lỗi `己`→`巳` đã được source-lock bằng exact Việt scan.
 
 ## Quan hệ current product
 
@@ -66,4 +66,4 @@ Nó không phải lý do để đánh cả một ngày là Kị nếu không bi�
 
 ## Kết luận
 
-**Hán structural inventory Q14–19 đã đủ 6/6 volume blocks, bao phủ range 60/60 Can-Chi theo heading.** Giữ `CHUA_IMPLEMENT`; blocker product là spatial domain + source-normalization cho bảng. Exact canonical Việt Tập 2 vẫn pending nên chưa gọi đây là double-entry full table verification.
+**Q14–19 đã exact Việt/Hán structural-double-entry đủ 6/6 volume blocks, bao phủ range 60/60 Can-Chi.** Giữ `CHUA_IMPLEMENT`; blocker product là spatial domain. Audit xác nhận structure + representative vectors, chưa claim machine-oracle mọi cell của 60 bảng năm.

@@ -1,12 +1,12 @@
 # Quyển 35 — Phụ lục inventory
 
-Status: HAN_INVENTORIED / VIET_SECONDARY_TOC / EXACT_VIET_SCAN_PENDING / NOT_IMPLEMENTED
+Status: HAN_INVENTORIED / VIET_EXACT_VERIFIED_WITH_DISCREPANCY / NOT_IMPLEMENTED
 
 ## Vai trò nguồn
 
 Hán Q35 tự nói đây là **附錄**: những phép tục truyền còn dùng, tài liệu cũ từng chép, hoặc phương pháp hỗ trợ như Nhâm/Độn được đưa vào để tham khảo; không đồng cấp với chính biên. Vì vậy “có trong Q35” không tự động nghĩa là phải trở thành production factor.
 
-Exact Tập 2 scan Việt hiện không có trong execution context. Secondary public TOC của Tập 2 được dùng chỉ để corroborate structure; wording/trang phải chờ canonical scan.
+Exact canonical Tập II đã được mở trực tiếp. Q35 bắt đầu p828, có 13 mục Việt và kết thúc sau “Cát tướng gia thêm vào giờ” trước Q36 p892.
 
 ## Hán inventory 16/16 heading
 
@@ -29,16 +29,16 @@ Exact Tập 2 scan Việt hiện không có trong execution context. Secondary p
 |  15 | 吉將加時     | BLOCKED_ADVANCED_TIME                                               |
 |  16 | 竒門三元     | OUT_OF_SCOPE_SYSTEM; separate Qimen domain                          |
 
-## Public Việt TOC discrepancy pending exact scan
+## Exact Việt/Hán mapping
 
-Secondary Việt TOC có **13 mục đánh số**:
+Exact Việt có **13 mục đánh số**:
 
 - mục 6 gộp `百忌日 / 祀竈日 / 洗頭日`, tương ứng 3 heading Hán;
 - các mục 7–13 tiếp tục tới `吉將加時`;
-- TOC public không hiện `竒門三元` dù Hán có heading riêng cuối mục lục Q35.
+- Hán còn section dài `竒門三元` ở `WYG_034-52a..62b`; exact Việt **không có section này** và chuyển thẳng sang Q36.
 
-Do exact Tập 2 scan chưa truy cập được, repo **không kết luận** đây là thiếu mục trong bản dịch, lỗi OCR/TOC của website, hay cách biên tập gộp/loại. Ghi là `VIET_EXACT_PENDING`, không đưa vào discrepancy registry canonical cho đến khi mở được scan.
+Đây là discrepancy canonical `Q35_QIMEN_SANYUAN_OMITTED`, không còn là TOC pending.
 
 ## Kết luận
 
-**Hán Q35 đã inventory 16/16 heading.** Secondary Việt TOC có 13 mục và một điểm chưa khớp quanh `竒門三元`. Q35 giữ `CHUA_IMPLEMENT`; từng mục chỉ được kéo vào product khi Q10/Q11 hoặc vertical mới thực sự cần và source rank của Phụ lục được xét đúng.
+**Q35 đã exact Việt/Hán mapping: 16 heading Hán ↔ 13 mục Việt; ba heading được gộp ở mục 6 và `竒門三元` bị lược khỏi bản Việt exact.** Q35 giữ `CHUA_IMPLEMENT`; từng mục chỉ được kéo vào product khi Q10/Q11 hoặc vertical mới thực sự cần và source rank của Phụ lục được xét đúng.
