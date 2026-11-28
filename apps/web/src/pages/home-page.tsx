@@ -110,6 +110,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.CAU_Y_TRI_BENH,
   },
   {
+    ma: 'SUA_MONG_TAY_CHAN',
+    ten: 'Sửa móng tay chân',
+    moTa: 'Chọn ngày sửa móng tay chân theo ngày Trừ, Giải Thần, Trừ Thần và sáu ngày âm kị đã đối chiếu.',
+    to: DUONG_DAN.SUA_MONG_TAY_CHAN,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

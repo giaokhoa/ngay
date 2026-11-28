@@ -15,6 +15,7 @@ import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
+import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
@@ -40,6 +41,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
   [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
   [LoaiCongViec.CAU_Y_TRI_BENH]: QUY_TAC_CAU_Y_TRI_BENH,
+  [LoaiCongViec.SUA_MONG_TAY_CHAN]: QUY_TAC_SUA_MONG_TAY_CHAN,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -54,7 +56,8 @@ const ACTIVITIES_WITH_TU_PHE_KY = ALL_ACTIVITIES.filter(
   (activity) =>
     activity !== LoaiCongViec.NHAP_HOC &&
     activity !== LoaiCongViec.TE_TU &&
-    activity !== LoaiCongViec.CHINH_DUNG_CAT_TOC,
+    activity !== LoaiCongViec.CHINH_DUNG_CAT_TOC &&
+    activity !== LoaiCongViec.SUA_MONG_TAY_CHAN,
 );
 const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
   (activity) =>
@@ -163,6 +166,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.GIAI_TRU]: false,
       [LoaiCongViec.CHINH_DUNG_CAT_TOC]: false,
       [LoaiCongViec.CAU_Y_TRI_BENH]: true,
+      [LoaiCongViec.SUA_MONG_TAY_CHAN]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -192,6 +196,32 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('整手足甲: shares grooming Q10 targets but not the 丁日 suppression', () => {
+    const pha = danhGia(LoaiCongViec.SUA_MONG_TAY_CHAN, {
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC],
+    });
+    const dinh = danhGia(LoaiCongViec.SUA_MONG_TAY_CHAN, {
+      canNgay: ThienCan.DINH,
+      truc: ThapNhiTruc.TRU,
+      yeuTo: [MaYeuTo.GIAI_THAN],
+    });
+    const tuPhe = danhGia(LoaiCongViec.SUA_MONG_TAY_CHAN, {
+      yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.GIAI_THAN],
+    });
+    expect(pha.coKy).toBe(true);
+    expect(dinh.coNen).toBe(true);
+    expect(dinh.coKy).toBe(false);
+    expect(tuPhe.coKy).toBe(false);
+  });
+
+  it('整手足甲: lunar 1/6/15/19/21/23 are direct Kị', () => {
+    for (const ngayAmTrongThang of [1, 6, 15, 19, 21, 23]) {
+      expect(danhGia(LoaiCongViec.SUA_MONG_TAY_CHAN, { ngayAmTrongThang, yeuTo: [] }).coKy).toBe(
+        true,
+      );
+    }
+  });
 
   it('整容剃頭: 四廢 / 五墓 stay exempt, while 月破 remains Kị', () => {
     const tuPhe = danhGia(LoaiCongViec.CHINH_DUNG_CAT_TOC, {

@@ -20,6 +20,7 @@ import { QUY_TAC_Q10_CAU_PHUC } from './cau-phuc-conflict-rules';
 import { QUY_TAC_Q10_CAU_TU } from './cau-tu-conflict-rules';
 import { QUY_TAC_Q10_CAU_Y_TRI_BENH } from './cau-y-tri-benh-conflict-rules';
 import { QUY_TAC_Q10_CHINH_DUNG_CAT_TOC } from './chinh-dung-cat-toc-conflict-rules';
+import { QUY_TAC_Q10_SUA_MONG_TAY_CHAN } from './sua-mong-tay-chan-conflict-rules';
 import { QUY_TAC_Q10_AN_TANG } from './an-tang-conflict-rules';
 import { QUY_TAC_Q10_DI_CHUYEN } from './di-chuyen-conflict-rules';
 import { QUY_TAC_Q10_CONG_VIEC_DAT } from './earthwork-conflict-rules';
@@ -96,6 +97,9 @@ export class DanhGiaNgayService {
     }
     if (congViec === LoaiCongViec.CAU_Y_TRI_BENH) {
       return danhGiaCauYTriBenh(dongGop, boiCanh);
+    }
+    if (congViec === LoaiCongViec.SUA_MONG_TAY_CHAN) {
+      return danhGiaSuaMongTayChan(dongGop, boiCanh);
     }
     if (congViec === LoaiCongViec.DONG_THO || congViec === LoaiCongViec.SUA_CUNG_THAT) {
       return danhGiaCongViecDat(dongGop, boiCanh);
@@ -506,6 +510,24 @@ function danhGiaChinhDungCatToc(
 
 function danhGiaCauYTriBenh(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
   const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CAU_Y_TRI_BENH);
+  const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
+  return {
+    coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
+    coKy:
+      resolved.camMoiViec ||
+      resolved.coKyBoSung ||
+      hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
+    camMoiViec: resolved.camMoiViec,
+    dongGop,
+    xungDotDaApDung: resolved.xungDotDaApDung,
+  };
+}
+
+function danhGiaSuaMongTayChan(
+  dongGop: DongGopDanhGia[],
+  boiCanh: BoiCanhDanhGiaNgay,
+): KetQuaDanhGia {
+  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_SUA_MONG_TAY_CHAN);
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
