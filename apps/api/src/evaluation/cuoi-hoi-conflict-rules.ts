@@ -1,4 +1,5 @@
 import { ThamChieuNguon, LoaiNguon } from '../sources/source-reference';
+import { NGAY_CAM_MOI_VIEC_Q4 } from './q4-hard-days';
 
 export interface QuyTacXungDotCuoiHoi {
   ma: string;
@@ -65,6 +66,11 @@ export const QUY_TAC_XUNG_DOT_CUOI_HOI: readonly QuyTacXungDotCuoiHoi[] = [
     moTa: 'Đại Thời tháng Dần: cưới hỏi không Kị; không tự sinh Nên.',
     trang: 812,
   },
+  ...NGAY_CAM_MOI_VIEC_Q4.map((item) => ({
+    ma: 'Q4_HARD_' + item.suffix,
+    moTa: item.moTa,
+    trang: 807,
+  })),
 ] as const;
 
 export function taoNguonXungDotQuyen10(trang: number): readonly ThamChieuNguon[] {

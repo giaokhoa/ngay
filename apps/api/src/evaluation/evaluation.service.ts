@@ -20,6 +20,7 @@ import { QUY_TAC_Q10_DI_CHUYEN } from './di-chuyen-conflict-rules';
 import { QUY_TAC_Q10_CONG_VIEC_DAT } from './earthwork-conflict-rules';
 import { QUY_TAC_Q10_KHAI_TRUONG } from './khai-truong-conflict-rules';
 import { QUY_TAC_Q10_XUAT_HANH } from './xuat-hanh-conflict-rules';
+import { NGAY_CAM_MOI_VIEC_Q4 } from './q4-hard-days';
 import {
   BoiCanhDanhGiaNgay,
   DauVetXungDot,
@@ -87,6 +88,17 @@ export class DanhGiaNgayService {
       if (!rule) throw new Error(`Thiếu định nghĩa xung đột ${ma}`);
       daApDung.push(taoDauVet(rule));
     };
+
+    for (const ngay of NGAY_CAM_MOI_VIEC_Q4) {
+      if (
+        ngay.chiThang === boiCanh.chiThang &&
+        ngay.canNgay === boiCanh.canNgay &&
+        ngay.chiNgay === boiCanh.chiNgay
+      ) {
+        camMoiViec = true;
+        ghi('Q4_HARD_' + ngay.suffix);
+      }
+    }
 
     if (coYeuTo(MaYeuTo.NGUYET_PHA) && coBatKy(DUC_HOP)) {
       for (const ma of DUC_HOP)
