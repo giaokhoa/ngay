@@ -4,6 +4,7 @@ import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { QUY_TAC_Q10_AN_GIUONG } from './an-giuong-conflict-rules';
 import { QUY_TAC_Q10_AN_TANG } from './an-tang-conflict-rules';
+import { QUY_TAC_Q10_CAI_TANG_KHAI_TOAN } from './cai-tang-khai-toan-conflict-rules';
 import { QUY_TAC_Q10_CAU_PHUC } from './cau-phuc-conflict-rules';
 import { QUY_TAC_Q10_CAU_TU } from './cau-tu-conflict-rules';
 import { QUY_TAC_Q10_CAU_Y_TRI_BENH } from './cau-y-tri-benh-conflict-rules';
@@ -131,6 +132,7 @@ describe('Q4/Q10 canonical hard days', () => {
     ['KHAI_TRUONG', QUY_TAC_Q10_KHAI_TRUONG],
     ['XUAT_HANH', QUY_TAC_Q10_XUAT_HANH],
     ['AN_TANG', QUY_TAC_Q10_AN_TANG],
+    ['CAI_TANG_KHAI_TOAN', QUY_TAC_Q10_CAI_TANG_KHAI_TOAN],
   ] as const)('%s contains every canonical hard-day ban', (_name, rules) => {
     for (const day of NGAY_CAM_MOI_VIEC_Q4) {
       expect(coHardRule(rules, day.suffix, day.chiThang, day.canNgay, day.chiNgay)).toBe(true);

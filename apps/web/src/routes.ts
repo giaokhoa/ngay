@@ -35,4 +35,5 @@ export const DUONG_DAN = {
   KHAI_TRUONG: '/khai-truong',
   XUAT_HANH: '/xuat-hanh',
   AN_TANG: '/an-tang',
+  CAI_TANG_KHAI_TOAN: '/cai-tang-khai-toan',
 } as const;

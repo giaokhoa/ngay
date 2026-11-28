@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { LoaiCongViec, QuyTacDungSu } from '../activities/activity-rule';
 import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
+import { QUY_TAC_CAI_TANG_KHAI_TOAN } from '../activities/cai-tang-khai-toan-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CAU_Y_TRI_BENH } from '../activities/cau-y-tri-benh-rules';
@@ -81,6 +82,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
   [LoaiCongViec.XUAT_HANH]: QUY_TAC_XUAT_HANH,
   [LoaiCongViec.PHA_VO_DAT]: QUY_TAC_PHA_VO_DAT,
+  [LoaiCongViec.CAI_TANG_KHAI_TOAN]: QUY_TAC_CAI_TANG_KHAI_TOAN,
   [LoaiCongViec.AN_TANG]: QUY_TAC_AN_TANG,
 };
 
@@ -235,6 +237,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.KHAI_TRUONG]: false,
       [LoaiCongViec.XUAT_HANH]: true,
       [LoaiCongViec.PHA_VO_DAT]: false,
+      [LoaiCongViec.CAI_TANG_KHAI_TOAN]: false,
       [LoaiCongViec.AN_TANG]: false,
     };
 
@@ -260,6 +263,27 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('啓攢: 月建 can be released by virtue because it is not residual 土府專忌', () => {
+    const result = danhGia(LoaiCongViec.CAI_TANG_KHAI_TOAN, {
+      yeuTo: [MaYeuTo.NGUYET_KIEN, MaYeuTo.THIEN_DUC],
+    });
+    expect(result.coKy).toBe(false);
+  });
+
+  it('啓攢: 復日/重日 override 鳴吠對 unless source relief applies', () => {
+    for (const factor of [MaYeuTo.PHUC_NHAT, MaYeuTo.TRONG_NHAT] as const) {
+      const result = danhGia(LoaiCongViec.CAI_TANG_KHAI_TOAN, {
+        yeuTo: [factor, MaYeuTo.O_PHE_DOI],
+      });
+      expect(result.coNen).toBe(false);
+      expect(result.coKy).toBe(true);
+    }
+    const relieved = danhGia(LoaiCongViec.CAI_TANG_KHAI_TOAN, {
+      yeuTo: [MaYeuTo.PHUC_NHAT, MaYeuTo.THIEN_DUC],
+    });
+    expect(relieved.coKy).toBe(false);
+  });
 
   it('破土: 月建/土府 remain Kị with virtue, 五墓 can be released', () => {
     const kien = danhGia(LoaiCongViec.PHA_VO_DAT, {

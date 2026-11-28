@@ -1,5 +1,6 @@
 import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
+import { QUY_TAC_CAI_TANG_KHAI_TOAN } from '../activities/cai-tang-khai-toan-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CAU_Y_TRI_BENH } from '../activities/cau-y-tri-benh-rules';
@@ -38,6 +39,7 @@ import {
 } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_Q10_AN_GIUONG } from '../evaluation/an-giuong-conflict-rules';
 import { QUY_TAC_Q10_AN_TANG } from '../evaluation/an-tang-conflict-rules';
+import { QUY_TAC_Q10_CAI_TANG_KHAI_TOAN } from '../evaluation/cai-tang-khai-toan-conflict-rules';
 import { QUY_TAC_Q10_CAU_PHUC } from '../evaluation/cau-phuc-conflict-rules';
 import { QUY_TAC_Q10_CAU_TU } from '../evaluation/cau-tu-conflict-rules';
 import { QUY_TAC_Q10_CAU_Y_TRI_BENH } from '../evaluation/cau-y-tri-benh-conflict-rules';
@@ -157,6 +159,7 @@ export const HOAT_DONG_TRI_THUC: readonly HoatDongTriThuc[] = [
   { code: LoaiCongViec.KHAI_TRUONG, tenViet: 'Khai trương', tenHan: '開市' },
   { code: LoaiCongViec.XUAT_HANH, tenViet: 'Xuất hành', tenHan: '行幸遣使〈出行同〉' },
   { code: LoaiCongViec.AN_TANG, tenViet: 'An táng', tenHan: '安葬' },
+  { code: LoaiCongViec.CAI_TANG_KHAI_TOAN, tenViet: 'Cải táng (Khai toản)', tenHan: '啓攢' },
 ];
 
 export function taoDanhMucTriThuc(): DanhMucTriThuc {
@@ -199,6 +202,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
       ...activityRules(QUY_TAC_XUAT_HANH_Q11),
       ...activityRules(QUY_TAC_XUAT_HANH_BO_SUNG_Q10, 'Q10'),
       ...activityRules(QUY_TAC_AN_TANG),
+      ...activityRules(QUY_TAC_CAI_TANG_KHAI_TOAN),
       ...legacyWeddingConflictRules(),
       ...conflictRules(LoaiCongViec.CUOI_HOI, QUY_TAC_Q10_CUOI_HOI_Q4),
       ...conflictRules(LoaiCongViec.DI_CHUYEN, QUY_TAC_Q10_DI_CHUYEN),
@@ -235,6 +239,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
       ...conflictRules(LoaiCongViec.KHAI_TRUONG, QUY_TAC_Q10_KHAI_TRUONG),
       ...conflictRules(LoaiCongViec.XUAT_HANH, QUY_TAC_Q10_XUAT_HANH),
       ...conflictRules(LoaiCongViec.AN_TANG, QUY_TAC_Q10_AN_TANG),
+      ...conflictRules(LoaiCongViec.CAI_TANG_KHAI_TOAN, QUY_TAC_Q10_CAI_TANG_KHAI_TOAN),
     ],
   };
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { LoaiCongViec, QuyTacDungSu } from './activity-rule';
 import { QUY_TAC_AN_GIUONG } from './an-giuong-rules';
 import { QUY_TAC_AN_TANG } from './an-tang-rules';
+import { QUY_TAC_CAI_TANG_KHAI_TOAN } from './cai-tang-khai-toan-rules';
 import { QUY_TAC_CAU_PHUC } from './cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from './cau-tu-rules';
 import { QUY_TAC_CAU_Y_TRI_BENH } from './cau-y-tri-benh-rules';
@@ -108,6 +109,8 @@ export class DungSuService {
         return QUY_TAC_XUAT_HANH;
       case LoaiCongViec.PHA_VO_DAT:
         return QUY_TAC_PHA_VO_DAT;
+      case LoaiCongViec.CAI_TANG_KHAI_TOAN:
+        return QUY_TAC_CAI_TANG_KHAI_TOAN;
       case LoaiCongViec.AN_TANG:
         return QUY_TAC_AN_TANG;
     }

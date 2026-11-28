@@ -425,6 +425,17 @@ export class XemNgayController {
     return this.goi(() => taoKetQuaCongKhai(this.xemNgay.xemAnTang(thoiDiem, muiGioHopLe)));
   }
 
+  @Get('cai-tang-khai-toan')
+  xemCaiTangKhaiToan(
+    @Query('thoiDiem') thoiDiemText: string | undefined,
+    @Query('muiGio') muiGio: string | undefined,
+  ) {
+    const { thoiDiem, muiGioHopLe } = docInput(thoiDiemText, muiGio);
+    return this.goi(() =>
+      taoKetQuaCongKhai(this.xemNgay.xemCaiTangKhaiToan(thoiDiem, muiGioHopLe)),
+    );
+  }
+
   private goi<T>(thucThi: () => T): T {
     try {
       return thucThi();
