@@ -143,6 +143,18 @@ Ngoài ra test Việt/source-independent hiện có vẫn chạy:
 - 天倉;
 - 天賊.
 
+### Q7
+
+`hoang-hac-dao.spec.ts`, `selected-hour.spec.ts` và `docs/research/q7-day-hour-auxiliary.md` khóa scope đã implement bằng Hán source pin, đồng thời đã đối chiếu working scan bản Việt theo đúng trang in:
+
+- 12 thần Hoàng/Hắc đạo và phép tháng→ngày, ngày→giờ;
+- Bảo Quang thay tên Thiên Đức của riêng vòng Hoàng đạo này;
+- Hắc đạo chỉ bổ sung kị cho nhóm việc nguồn nêu;
+- Thiên Quan, Phúc Tinh, Hỷ Thần, Bát Lộc;
+- Nhật Kiến/Hợp và Nhật Phá/Hại/Hình.
+
+Không phát hiện discrepancy Việt/Hán trong scope trên. Q7 vẫn chỉ là oracle một phần.
+
 ### Q10
 
 `han-q10-semantic-oracle.spec.ts` không copy nguyên matrix production.
@@ -171,7 +183,8 @@ Bug đã được thêm regression và sửa trong evaluator.
 - dùng sinh niên, không bắt sinh nhật/giờ sinh;
 - năm/tháng/ngày/giờ của thời điểm chọn so với mệnh;
 - Can-Chi giờ theo Ngũ Thử Độn;
-- giờ phá, hình, Ngũ Bất Ngộ;
+- giờ Hoàng/Hắc đạo và các marker Q7 đã implement;
+- giờ phá, hình, hại, Ngũ Bất Ngộ;
 - giờ trợ ngày, tam hợp/lục hợp, Lộc, Mã;
 - xung năm sinh ở trụ giờ.
 
