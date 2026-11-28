@@ -62,6 +62,42 @@ export class XemNgayController {
     return this.goi(() => taoKetQuaCongKhai(this.xemNgay.xemXuatHanh(thoiDiem, muiGioHopLe)));
   }
 
+  @Get('tong-quan-thang')
+  xemTongQuanThang(
+    @Query('ngaySinh') ngaySinh: string | undefined,
+    @Query('nam') namText: string | undefined,
+    @Query('thang') thangText: string | undefined,
+    @Query('muiGio') muiGio: string | undefined,
+  ) {
+    const ngaySinhHopLe = docNgaySinh(ngaySinh);
+    const nam = docSoNguyen('nam', namText, 1, 9999);
+    const thang = docSoNguyen('thang', thangText, 1, 12);
+    if (!muiGio) {
+      throw new BadRequestException('Cần múi giờ IANA');
+    }
+
+    return this.goi(() => {
+      const result = this.xemNgay.xemTongQuanThang(ngaySinhHopLe, nam, thang, muiGio);
+
+      return {
+        ...result,
+        ngay: result.ngay.map((ngay) => ({
+          ...ngay,
+          theoCongViec: Object.fromEntries(
+            Object.entries(ngay.theoCongViec).map(([congViec, danhGia]) => [
+              congViec,
+              {
+                ...danhGia,
+                nen: danhGia.nen.map(lamSachMoTaCongKhai),
+                ky: danhGia.ky.map(lamSachMoTaCongKhai),
+              },
+            ]),
+          ),
+        })),
+      };
+    });
+  }
+
   @Get('thang')
   xemThang(
     @Query('congViec') congViecText: string | undefined,
@@ -173,6 +209,19 @@ function taoNguonCongKhai(nguon: ThamChieuNguon): ThamChieuNguonCongKhai {
     loaiNguon: nguon.loaiNguon,
     daXacMinh: nguon.daXacMinh,
   };
+}
+
+function docNgaySinh(value: string | undefined): string {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    throw new BadRequestException('ngaySinh phải có dạng YYYY-MM-DD');
+  }
+
+  const nam = Number(value.slice(0, 4));
+  if (nam < 1900 || nam > 2100) {
+    throw new BadRequestException('Năm sinh phải trong khoảng 1900 đến 2100');
+  }
+
+  return value;
 }
 
 function docCongViec(value: string | undefined): LoaiCongViec {

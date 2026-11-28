@@ -118,6 +118,52 @@ export interface KetQuaChiTietNgayApi {
   gio: readonly GioThucHienApi[];
 }
 
+export type MaCongViecApi =
+  'CUOI_HOI' | 'DI_CHUYEN' | 'DONG_THO' | 'SUA_CUNG_THAT' | 'KHAI_TRUONG' | 'XUAT_HANH' | 'AN_TANG';
+
+export type XepLoaiNgayApi = 'TOT' | 'TRUNG_BINH' | 'NEN_TRANH' | 'DAI_KY' | 'XUNG_TUOI';
+
+export interface DanhGiaCongViecTongQuanApi {
+  congViec: MaCongViecApi;
+  caNhanHoa: 'DAY_DU' | 'CAN_THEM_NGUOI' | 'CAN_NGUOI_MAT';
+  xepLoai: XepLoaiNgayApi;
+  coNen: boolean;
+  coKy: boolean;
+  camMoiViec: boolean;
+  nen: readonly string[];
+  ky: readonly string[];
+}
+
+export interface NgayTongQuanApi {
+  ngayDanSu: string;
+  canChiNgay: { can: string; chi: string };
+  canChiThang: { can: string; chi: string };
+  canChiNam: { can: string; chi: string };
+  truc: string;
+  xungTuoi: readonly {
+    namSinh: number;
+    canChiNamSinh: { can: string; chi: string };
+    tru: 'NAM' | 'THANG' | 'NGAY' | 'GIO';
+    mucDo: 'KHONG_XUNG' | 'XUNG_CHI' | 'THIEN_KHAC_DIA_XUNG';
+    xung: boolean;
+    moTa: string;
+  }[];
+  theoCongViec: Readonly<Record<MaCongViecApi, DanhGiaCongViecTongQuanApi>>;
+  thongKe: Readonly<Record<XepLoaiNgayApi, number>>;
+}
+
+export interface KetQuaTongQuanThangApi {
+  nam: number;
+  thang: number;
+  muiGio: string;
+  nguoi: {
+    ngaySinh: string;
+    namSinh: number;
+    canChiNamSinh: { can: string; chi: string };
+  };
+  ngay: readonly NgayTongQuanApi[];
+}
+
 export interface KetQuaXemThangApi {
   congViec: string;
   nam: number;
@@ -136,6 +182,43 @@ export interface KetQuaXemThangApi {
     DAI_KY: number;
     XUNG_TUOI: number;
   };
+}
+
+export function taoUrlTongQuanThang(
+  ngaySinh: string,
+  nam: number,
+  thang: number,
+  muiGio: string,
+): string {
+  const query = new URLSearchParams({
+    ngaySinh,
+    nam: String(nam),
+    thang: String(thang),
+    muiGio,
+  });
+
+  return '/date-selection/tong-quan-thang?' + query.toString();
+}
+
+export async function xemTongQuanThang(
+  ngaySinh: string,
+  nam: number,
+  thang: number,
+  muiGio: string,
+  signal?: AbortSignal,
+): Promise<KetQuaTongQuanThangApi> {
+  const response = await fetch(taoUrlTongQuanThang(ngaySinh, nam, thang, muiGio), {
+    signal,
+  });
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as { message?: string } | null;
+    throw new Error(
+      body?.message ?? 'Không thể xem tổng quan tháng (HTTP ' + response.status + ')',
+    );
+  }
+
+  return (await response.json()) as KetQuaTongQuanThangApi;
 }
 
 export function taoUrlXemThang(

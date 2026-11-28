@@ -95,6 +95,23 @@ describe('XemNgayController XUAT_HANH endpoint', () => {
   });
 });
 
+describe('XemNgayController tổng quan tháng', () => {
+  it('nhận ngày sinh đầy đủ và trả đủ bảy nhóm việc', () => {
+    const result = taoController().xemTongQuanThang('1990-02-03', '2026', '11', 'Asia/Ho_Chi_Minh');
+
+    expect(result.nguoi.canChiNamSinh).toEqual({ can: 'KY', chi: 'TI' });
+    expect(result.ngay).toHaveLength(30);
+    expect(Object.keys(result.ngay[0]?.theoCongViec ?? {})).toHaveLength(7);
+    expect(JSON.stringify(result)).not.toMatch(/\bQ\d+\b|Quyển\s+\d+/i);
+  });
+
+  it('từ chối ngày sinh sai định dạng', () => {
+    expect(() =>
+      taoController().xemTongQuanThang('03/02/1990', '2026', '11', 'Asia/Ho_Chi_Minh'),
+    ).toThrow(BadRequestException);
+  });
+});
+
 describe('XemNgayController xem tháng theo năm sinh', () => {
   it('cưới hỏi yêu cầu và nhận hai năm sinh', () => {
     const result = taoController().xemThang(

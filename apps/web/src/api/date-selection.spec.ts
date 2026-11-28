@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   taoUrlChiTietNgay,
+  taoUrlTongQuanThang,
   taoUrlXemAnTang,
   taoUrlXemCuoiHoi,
   taoUrlXemDiChuyen,
@@ -28,6 +29,17 @@ describe('date-selection URLs', () => {
     expect(parsed.pathname).toBe('/date-selection/' + duongDan);
     expect(parsed.searchParams.get('thoiDiem')).toBe('2026-11-27T05:00:00.000Z');
     expect(parsed.searchParams.get('muiGio')).toBe('Asia/Ho_Chi_Minh');
+  });
+
+  it('tạo query tổng quan tháng từ ngày sinh đầy đủ mà không cần công việc', () => {
+    const url = taoUrlTongQuanThang('1990-02-03', 2026, 11, 'Asia/Ho_Chi_Minh');
+
+    const parsed = new URL(url, 'https://ngay.local');
+    expect(parsed.pathname).toBe('/date-selection/tong-quan-thang');
+    expect(parsed.searchParams.get('ngaySinh')).toBe('1990-02-03');
+    expect(parsed.searchParams.get('nam')).toBe('2026');
+    expect(parsed.searchParams.get('thang')).toBe('11');
+    expect(parsed.searchParams.get('congViec')).toBeNull();
   });
 
   it('tạo query chi tiết ngày với năm sinh', () => {

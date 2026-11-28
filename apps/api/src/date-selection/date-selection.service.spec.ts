@@ -172,6 +172,38 @@ describe('XemNgayService XUAT_HANH end-to-end', () => {
   });
 });
 
+describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
+  it('tự suy Can-Chi năm sinh theo ngày sinh và mốc Lập Xuân', () => {
+    const result = taoService().xemTongQuanThang('1990-02-03', 2026, 11, 'Asia/Ho_Chi_Minh');
+
+    expect(result.nguoi.canChiNamSinh).toEqual({ can: 'KY', chi: 'TI' });
+    expect(result.ngay).toHaveLength(30);
+  });
+
+  it('cùng một ngày giữ kết luận độc lập cho từng công việc', () => {
+    const result = taoService().xemTongQuanThang('1990-06-15', 2026, 11, 'Asia/Ho_Chi_Minh');
+
+    expect(
+      result.ngay.some(
+        (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
+      ),
+    ).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 7)).toBe(true);
+  });
+
+  it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
+    const result = taoService().xemTongQuanThang('1984-06-15', 2026, 11, 'Asia/Ho_Chi_Minh');
+
+    expect(result.ngay.every((ngay) => ngay.theoCongViec.KHAI_TRUONG.xepLoai === 'XUNG_TUOI')).toBe(
+      true,
+    );
+    expect(result.ngay.every((ngay) => ngay.theoCongViec.AN_TANG.xepLoai !== 'XUNG_TUOI')).toBe(
+      true,
+    );
+    expect(result.ngay[0]?.theoCongViec.AN_TANG.caNhanHoa).toBe('CAN_NGUOI_MAT');
+  });
+});
+
 describe('XemNgayService xem tháng + tương chủ', () => {
   it('trả đủ ngày trong tháng và xếp loại không dùng điểm cộng trừ', () => {
     const result = taoService().xemThang(2026, 11, 'Asia/Ho_Chi_Minh', LoaiCongViec.AN_TANG, [
