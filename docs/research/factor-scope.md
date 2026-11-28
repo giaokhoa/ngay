@@ -113,7 +113,7 @@ Hán bản Quyển 5 xác nhận cùng nhóm và còn có các ngày/phép phứ
 - Phục Nhật;
 - Minh Phệ / Minh Phệ Đối.
 
-Quyển 5 hiện đã được inventory đủ **30/30 section** tại `docs/research/q5-full-inventory.md`. 25 identity đang production có Hán oracle; các section ghép được ghi partial, Thiên Đạo giữ directional; Vô Lộc dùng context năm/tháng/trung khí thay vì danh sách ngày cứng.
+Quyển 5 hiện đã được inventory đủ **30/30 section** tại `docs/research/q5-full-inventory.md`. 26 identity đang production có Hán oracle; các section ghép được ghi partial, Thiên Đạo giữ directional; Vô Lộc dùng context năm/tháng/trung khí thay vì danh sách ngày cứng.
 
 ### Guardrail Thiên Đức
 
