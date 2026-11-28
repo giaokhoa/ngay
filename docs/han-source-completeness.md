@@ -129,19 +129,14 @@ Ngoài ra test Việt/source-independent hiện có vẫn chạy:
 
 ### Q6
 
-`han-q6-oracle.spec.ts` kiểm toàn bộ nhóm core month→day-branch mà production hiện dùng:
+`han-q6-oracle.spec.ts` kiểm độc lập **toàn bộ factor Q6 hiện đang production**, không chỉ batch core ban đầu:
 
-- 三合;
-- 驛馬;
-- 劫煞;
-- 災煞;
-- 月煞;
-- 月刑;
-- 月害;
-- 六合;
-- 五富;
-- 天倉;
-- 天賊.
+- core month→day-branch: 三合, 驛馬, 劫煞, 災煞, 月煞, 月刑, 月害, 六合, 五富, 天倉, 天賊;
+- wedding/activity blockers: 大時, 天吏, 往亡;
+- moving/auspicious factors: 天馬, 歸忌;
+- earthwork factors: 土符 và 地囊.
+
+Riêng `地囊` oracle khóa bảng đính chính ở `WYG_006-57a..58a`, không dùng bảng `歴例` cũ mà chính sách nói sai 23/48 chữ.
 
 ### Q7
 

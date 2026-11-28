@@ -110,7 +110,7 @@ Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scop
 | Q4 / 月表 calendar positions   | KR3g0051 WYG Q4 + Q20..31          | HAN_ORACLE_TESTED         | han-q4-month-table-oracle.spec.ts             |
 | Q5 factors đang implement      | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED         | han-q5-oracle.spec.ts                         |
 | Q7 13/13 mục đã inventory      | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
-| Q6 core factors đang implement | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED         | han-q6-oracle.spec.ts                         |
+| Q6 factors đang production     | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED         | han-q6-oracle.spec.ts                         |
 | Q10 semantics của 7 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
 | Q11 exact 宜/忌 của 7 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
 | 36-volume corpus inventory     | KR3g0051 + Wikisource Q14 fallback | INVENTORIED               | han-source-manifest.spec.ts                   |
