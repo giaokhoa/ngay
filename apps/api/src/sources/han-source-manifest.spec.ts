@@ -39,6 +39,14 @@ describe('Hán source corpus manifest', () => {
     expect(HAN_CORPUS_MANIFEST.find((item) => item.quyen === 36)?.tep).toBe('KR3g0051_035.txt');
   });
 
+  it('keeps inventoried Q2/Q12/Q13 volumes unimplemented and without oracle claims', () => {
+    for (const quyen of [2, 12, 13]) {
+      const item = HAN_CORPUS_MANIFEST.find((entry) => entry.quyen === quyen);
+      expect(item?.trangThai).toBe('CHUA_IMPLEMENT');
+      expect(item?.phamViOracle).toBeUndefined();
+    }
+  });
+
   it('keeps Q3 unimplemented after its annual/spatial inventory is documented', () => {
     const q3 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 3);
 

@@ -165,6 +165,10 @@ Sau aliases, research:
 
 Không cố “rút công thức đẹp” trước khi bảng nguồn đã được nhập và test.
 
+## Quyển 2 — 24 sơn / địa lý nền
+
+Inventory đầy đủ 12/12 section: `docs/research/q2-full-inventory.md`. Các phép Chính Ngũ Hành, Song Sơn, Tam Hợp, Hồng Phạm, khắc Sơn Gia và biến quẻ đều cần spatial/compass target; không kéo vào day-factor engine.
+
 ## Quyển 3 — Annual factors
 
 PDF 209 / trang in 207 mở Quyển 3 với các mục như:
@@ -216,6 +220,10 @@ PDF 635 / trang in 628 mở Quyển 8, gồm các nhóm như:
 - các yếu tố phương vị khác.
 
 Inventory đầy đủ 22/22 mục Việt (24 heading Hán do hai cặp bị tách): `docs/research/q8-full-inventory.md`. Giữ ngoài date-selection cho tới khi có domain tọa/hướng/24 sơn/Cửu cung; không để module `factors` hấp thụ logic phương vị.
+
+## Quyển 12–13 — Công quy thiên văn/lịch quan
+
+Inventory: Q12 8/8 top-level, Q13 2/2. Q12 xác nhận sunrise/sunset phụ thuộc latitude và bảng in chỉ cho Kinh sư; Q13 tiếp tục dùng local horizon Kinh sư. Đây là reference cho future solar-event domain, không phải bảng universal để mở khóa Q7. Chi tiết: `docs/research/q12-full-inventory.md`, `docs/research/q13-full-inventory.md`.
 
 ## Quyển 9 — Oracle, không phải calculator spec duy nhất
 
