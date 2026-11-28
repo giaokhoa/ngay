@@ -395,6 +395,55 @@ describe('XemNgayService CAU_Y_TRI_BENH end-to-end', () => {
   });
 });
 
+describe('XemNgayService SUA_MONG_TAY_CHAN end-to-end', () => {
+  it('orchestrates lunar context -> exact Q11 -> shared grooming Q10 semantics', () => {
+    const result = taoService().xemSuaMongTayChan(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'SUA_MONG_TAY_CHAN'),
+    ).toBe(true);
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+  });
+
+  it('is deterministic for SUA_MONG_TAY_CHAN', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemSuaMongTayChan(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemSuaMongTayChan(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real lunar calendar activates all six 人神所在日 blockers', () => {
+    const service = taoService();
+    const start = new Date('2026-01-01T05:00:00.000Z');
+    const expected = new Set([1, 6, 15, 19, 21, 23]);
+    const found = new Set<number>();
+
+    for (let offset = 0; offset < 45 && found.size < expected.size; offset += 1) {
+      const result = service.xemSuaMongTayChan(
+        new Date(start.getTime() + offset * 86_400_000),
+        'Asia/Ho_Chi_Minh',
+      );
+      for (const item of result.danhGia.dongGop) {
+        if (
+          item.quyTac.dieuKien.loai === 'NGAY_AM' &&
+          expected.has(item.quyTac.dieuKien.ngay) &&
+          item.trangThai === 'HIEU_LUC'
+        ) {
+          found.add(item.quyTac.dieuKien.ngay);
+        }
+      }
+    }
+
+    expect(found).toEqual(expected);
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -540,7 +589,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 18)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 19)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -606,6 +655,7 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       LoaiCongViec.GIAI_TRU,
       LoaiCongViec.CHINH_DUNG_CAT_TOC,
       LoaiCongViec.CAU_Y_TRI_BENH,
+      LoaiCongViec.SUA_MONG_TAY_CHAN,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);

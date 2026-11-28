@@ -127,6 +127,15 @@ export class XemNgayController {
     return this.goi(() => taoKetQuaCongKhai(this.xemNgay.xemCauYTriBenh(thoiDiem, muiGioHopLe)));
   }
 
+  @Get('sua-mong-tay-chan')
+  xemSuaMongTayChan(
+    @Query('thoiDiem') thoiDiemText: string | undefined,
+    @Query('muiGio') muiGio: string | undefined,
+  ) {
+    const { thoiDiem, muiGioHopLe } = docInput(thoiDiemText, muiGio);
+    return this.goi(() => taoKetQuaCongKhai(this.xemNgay.xemSuaMongTayChan(thoiDiem, muiGioHopLe)));
+  }
+
   @Get('dong-tho')
   xemDongTho(
     @Query('thoiDiem') thoiDiemText: string | undefined,

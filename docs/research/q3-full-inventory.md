@@ -88,9 +88,9 @@ Current contracts:
 
 Q3 lại chủ yếu nói `方/地/向`. Nếu chỉ thêm Can/Chi năm vào factor context rồi emit “THÁI TUẾ = Kị ngày” sẽ làm sai loại dữ liệu.
 
-## Quan hệ với 18 vertical hiện tại
+## Quan hệ với 19 vertical hiện tại
 
-Q10/Q11 có các tên trùng như `劫煞`, `災煞`, `小耗`, `大煞`, nhưng current production mappings của chúng thuộc Q4/Q5/Q6 month/day layers. Không có `MaYeuTo` Q3-specific như Thái Tuế/Tuế Phá/Tuế Đức annual direction trong exact 18 vertical hiện tại.
+Q10/Q11 có các tên trùng như `劫煞`, `災煞`, `小耗`, `大煞`, nhưng current production mappings của chúng thuộc Q4/Q5/Q6 month/day layers. Không có `MaYeuTo` Q3-specific như Thái Tuế/Tuế Phá/Tuế Đức annual direction trong exact 19 vertical hiện tại.
 
 Khi product mở **direction-aware** selection, Q3 phải được thiết kế thành spatial layer riêng trước khi nối vào activity semantics.
 
