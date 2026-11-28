@@ -170,6 +170,21 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
     },
   );
 
+  it('祈福: 天狗/寅日 suppresses Nên without inventing Kị (WYG 010-74a..74b)', () => {
+    const thienCau = danhGia(LoaiCongViec.CAU_PHUC, {
+      chiNgay: DiaChi.TUAT,
+      yeuTo: [MaYeuTo.THIEN_CAU, MaYeuTo.THIEN_DUC],
+    });
+    const dan = danhGia(LoaiCongViec.CAU_PHUC, {
+      chiNgay: DiaChi.DAN,
+      yeuTo: [MaYeuTo.THIEN_DUC],
+    });
+    expect(thienCau.coNen).toBe(false);
+    expect(thienCau.coKy).toBe(false);
+    expect(dan.coNen).toBe(false);
+    expect(dan.coKy).toBe(false);
+  });
+
   it('祈福: 月建 + 天徳 removes Kị, but 己未月建 does not use 天徳合 alone', () => {
     const relieved = danhGia(LoaiCongViec.CAU_PHUC, {
       truc: ThapNhiTruc.KIEN,

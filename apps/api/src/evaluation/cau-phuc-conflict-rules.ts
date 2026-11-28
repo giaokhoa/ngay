@@ -43,6 +43,23 @@ const CORE_SHARED: readonly QuyTacXungDotDataDriven[] = QUY_TAC_Q10_KHAI_TRUONG.
 }).map(chuyenSangCauPhuc);
 
 export const QUY_TAC_Q10_CAU_PHUC: readonly QuyTacXungDotDataDriven[] = [
+  // WYG_010-74a..74b: 天狗/寅日忌祭祀時，不註宜求福祈嗣 — suppress Nên, do not invent Kị.
+  {
+    ma: 'CAU_PHUC_Q10_THIEN_CAU_BO_NEN',
+    dieuKien: { coTatCaYeuTo: [MaYeuTo.THIEN_CAU] },
+    phepXuLy: { loai: 'BO_NEN' },
+    precedence: 200,
+    moTa: 'Ngày Thiên Cẩu không ghi Nên Cầu phúc; không tạo Kị riêng cho Cầu phúc.',
+    nguon: nguonHanQ10('天狗寅日', 'WYG_010-74a..74b'),
+  },
+  {
+    ma: 'CAU_PHUC_Q10_DAN_BO_NEN',
+    dieuKien: { chiNgay: [DiaChi.DAN] },
+    phepXuLy: { loai: 'BO_NEN' },
+    precedence: 200,
+    moTa: 'Ngày Dần không ghi Nên Cầu phúc; không tạo Kị riêng cho Cầu phúc.',
+    nguon: nguonHanQ10('天狗寅日', 'WYG_010-74a..74b'),
+  },
   // 月建 — WYG_010-27a..28b.
   {
     ma: 'CAU_PHUC_Q10_KIEN_KY_MUI_DUC_HOP_VAN_KY',

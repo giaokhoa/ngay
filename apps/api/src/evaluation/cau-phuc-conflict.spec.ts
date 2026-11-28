@@ -12,6 +12,26 @@ import { TrangThaiDongGop } from './evaluation-domain';
 const service = new DanhGiaNgayService();
 
 describe('CAU_PHUC Q10 conflict resolver', () => {
+  it('Thiên Cẩu hoặc ngày Dần chỉ bỏ Nên Cầu phúc, không tạo Kị riêng', () => {
+    const thienCau = danhGia({
+      chiNgay: DiaChi.TUAT,
+      yeuTo: [MaYeuTo.THIEN_CAU, MaYeuTo.THIEN_DUC],
+    });
+    const dan = danhGia({
+      chiNgay: DiaChi.DAN,
+      yeuTo: [MaYeuTo.THIEN_DUC],
+    });
+
+    expect(thienCau.coNen).toBe(false);
+    expect(thienCau.coKy).toBe(false);
+    expect(dan.coNen).toBe(false);
+    expect(dan.coKy).toBe(false);
+    expect(thienCau.xungDotDaApDung.some((x) => x.ma === 'CAU_PHUC_Q10_THIEN_CAU_BO_NEN')).toBe(
+      true,
+    );
+    expect(dan.xungDotDaApDung.some((x) => x.ma === 'CAU_PHUC_Q10_DAN_BO_NEN')).toBe(true);
+  });
+
   it('Kiến nhật thường Kị; gặp Thiên Đức thì bỏ Kị và giữ Nên', () => {
     const thuong = danhGia({ truc: ThapNhiTruc.KIEN });
     const coDuc = danhGia({ truc: ThapNhiTruc.KIEN, yeuTo: [MaYeuTo.THIEN_DUC] });

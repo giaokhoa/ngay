@@ -81,6 +81,18 @@ Ví dụ đã regression:
 - Tứ Phế + Đức vẫn Kị; Tứ Phế + Nguyệt Phá → mọi việc đều Kị;
 - Nguyệt Yếm Mão/Dậu + Nguyệt Phá + Tai Sát → mọi việc đều Kị dù có Đức.
 
+### Thiên Cẩu / ngày Dần: bỏ Nên, không thành Kị
+
+Q10 `WYG_010-74a..74b` ghi `凡天狗寅日忌祭祀不註宜求福祈嗣`.
+
+Production vì vậy áp hai global `BO_NEN` cho Cầu phúc khi có Thiên Cẩu hoặc ngày Dần:
+
+- bỏ toàn bộ contribution Nên;
+- không tạo Kị Cầu phúc mới;
+- nếu đồng thời có một Kị khác thì Kị đó vẫn xử lý độc lập.
+
+Đây là đối xứng với Tế tự: Thiên Cẩu/ngày Dần là Kị Tế tự, nhưng đối với Cầu phúc/Cầu tự chỉ là “không chú Nên”.
+
 ### Du Họa
 
 Rule riêng `GIU_KY_DU_CO_CAT`: Đức/Hợp/Thiên Xá không giải Kị Cầu phúc.
