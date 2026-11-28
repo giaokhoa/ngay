@@ -1,5 +1,5 @@
 import { timThoiDiemPhaTrang } from './astronomy/ephemeris';
-import { NgayDanSu, soSanhNgayDanSu } from './civil-date';
+import { congNgayDanSu, NgayDanSu, soSanhNgayDanSu } from './civil-date';
 import { taoThoiDiemGiuaNgayTaiMuiGio, tinhNgayDanSuTaiMuiGio } from './civil-date-timezone';
 import { CanChi } from './domain/sexagenary-cycle';
 import { tinhCanChiNgay } from './sexagenary-day';
@@ -13,6 +13,9 @@ export interface ThongTinNgayAm {
   ngayTrongThang: number;
   canChiNgaySoc: CanChi;
   thoiDiemSoc: Date;
+  ngaySocKeTiep: NgayDanSu;
+  ngayCuoiThang: NgayDanSu;
+  laHoiNhat: boolean;
 }
 
 /**
@@ -54,6 +57,17 @@ export function tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongT
     throw new Error(`Không xác định được ngày sóc cho ${ngayDanSu}`);
   }
 
+  const socKeTiep = timThoiDiemPhaTrang(
+    0,
+    new Date(hienTai.soc.getTime() + MOT_NGAY_MILLISECOND),
+    CUA_SO_TIM_SOC_NGAY,
+  );
+  if (!socKeTiep) {
+    throw new Error(`Không xác định được sóc kế tiếp cho ${ngayDanSu}`);
+  }
+  const ngaySocKeTiep = tinhNgayDanSuTaiMuiGio(socKeTiep, muiGio);
+  const ngayCuoiThang = congNgayDanSu(ngaySocKeTiep, -1);
+
   const ngayTrongThang = soSanhNgayDanSu(ngayDanSu, hienTai.ngay) + 1;
   if (ngayTrongThang < 1 || ngayTrongThang > 30) {
     throw new Error(`Ngày âm ngoài phạm vi 1..30: ${ngayTrongThang} cho ${ngayDanSu}`);
@@ -64,6 +78,9 @@ export function tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongT
     ngayTrongThang,
     canChiNgaySoc: tinhCanChiNgay(hienTai.ngay),
     thoiDiemSoc: new Date(hienTai.soc.getTime()),
+    ngaySocKeTiep,
+    ngayCuoiThang,
+    laHoiNhat: ngayDanSu === ngayCuoiThang,
   };
   boNhoNgayAm.set(khoa, ketQua);
   return saoChepThongTin(ketQua);

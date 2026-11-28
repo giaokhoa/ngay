@@ -71,6 +71,26 @@ describe('TinhTietKhiService', () => {
     expect(service.tinhChiThangTaiThoiDiem(new Date(giaoTiet.getTime() + 1))).toBe(chiSau);
   });
 
+  it.each([
+    ['2026-03-19', true],
+    ['2026-06-20', true],
+    ['2026-09-22', true],
+    ['2026-12-21', true],
+    ['2026-03-20', false],
+  ] as const)('Tứ Ly theo ngày dân sự Việt Nam: %s -> %s', (ngayDanSu, expected) => {
+    expect(service.laNgayTuLy(ngayDanSu, 'Asia/Ho_Chi_Minh')).toBe(expected);
+  });
+
+  it.each([
+    ['2026-02-03', true],
+    ['2026-05-04', true],
+    ['2026-08-06', true],
+    ['2026-11-06', true],
+    ['2026-02-04', false],
+  ] as const)('Tứ Tuyệt theo ngày dân sự Việt Nam: %s -> %s', (ngayDanSu, expected) => {
+    expect(service.laNgayTuTuyet(ngayDanSu, 'Asia/Ho_Chi_Minh')).toBe(expected);
+  });
+
   it('trung khí hiện hành đổi đúng tại instant giao trung khí', () => {
     const vuThuy = service.tinhThoiDiemTietKhi(2026, TietKhi.VU_THUY);
     expect(service.tinhTrungKhiHienHanh(new Date(vuThuy.getTime() - 1))).toBe(TietKhi.DAI_HAN);

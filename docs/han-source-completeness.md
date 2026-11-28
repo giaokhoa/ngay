@@ -72,7 +72,7 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |     3 | 義例一      | CHUA_IMPLEMENT  | 36/36 mục đã inventory; annual spatial layer, current contract thiếu hướng/tọa-hướng                            |
 |     4 | 義例二      | ORACLE_MOT_PHAN | 12 Trực shared identities, 月厭/厭對, 陰陽不將                                                                  |
 |     5 | 義例三      | ORACLE_MOT_PHAN | 25 production identities; 無禄 context-aware Q5/Q10; Đức/Hợp, special days, 王日/民日, 四廢/五墓/八專/鳴吠…     |
-|     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục inventory; 27 factor production-computable/Hán-oracle, gồm 普護/福生/聖心/益後/續世 và 上朔/反支/月忌 |
+|     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục inventory; 29 factor production-computable/Hán-oracle, gồm 普護/福生/聖心/益後/續世 và 上朔/反支/月忌 |
 |     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model                    |
 |     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain                       |
 |     9 | 立成        | ORACLE_MOT_PHAN | full structure: 10 niên + 30 nguyệt + 2 trang nhật + 6 biểu thời; oracle subset                                 |
@@ -164,7 +164,7 @@ Ngoài ra test Việt/source-independent hiện có vẫn chạy:
 
 Riêng `地囊` oracle khóa bảng đính chính ở `WYG_006-57a..58a`, không dùng bảng `歴例` cũ mà chính sách nói sai 23/48 chữ.
 
-`docs/research/q6-full-inventory.md` khóa **40/40 mục Quyển 6**. 27 factor hiện production-computable. Thượng Sóc/Phản Chi/Nguyệt Kị đã được mở khóa bằng Can Chi năm + astronomical new-moon/lunar-day context; các mục còn lại vẫn explicit `OUT_OF_SCOPE`/`META` hoặc blocker khác.
+`docs/research/q6-full-inventory.md` khóa **40/40 mục Quyển 6**. 29 factor hiện production-computable. Thượng Sóc/Phản Chi/Nguyệt Kị đã được mở khóa bằng Can Chi năm + astronomical new-moon/lunar-day context; các mục còn lại vẫn explicit `OUT_OF_SCOPE`/`META` hoặc blocker khác.
 
 ### Q7
 

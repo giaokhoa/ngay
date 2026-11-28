@@ -45,6 +45,14 @@ export class TinhLichService {
     return this.tinhTietKhiService.tinhTrungKhiHienHanh(thoiDiem);
   }
 
+  laNgayTuLy(ngayDanSu: NgayDanSu, muiGio: string): boolean {
+    return this.tinhTietKhiService.laNgayTuLy(ngayDanSu, muiGio);
+  }
+
+  laNgayTuTuyet(ngayDanSu: NgayDanSu, muiGio: string): boolean {
+    return this.tinhTietKhiService.laNgayTuTuyet(ngayDanSu, muiGio);
+  }
+
   tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongTinNgayAm {
     return tinhThongTinNgayAm(ngayDanSu, muiGio);
   }
