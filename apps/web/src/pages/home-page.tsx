@@ -146,6 +146,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.SUA_BUONG_SAN_PHU,
   },
   {
+    ma: 'DAT_COI_XAY_GIA',
+    ten: 'Đặt cối xay, giã',
+    moTa: 'Chọn ngày đặt cối xay, giã theo Tam Hợp hoặc Khai nhật; Bình nhật không phải Kị riêng của việc này.',
+    to: DUONG_DAN.DAT_COI_XAY_GIA,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

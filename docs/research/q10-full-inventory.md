@@ -15,7 +15,7 @@ Q10 cung cấp **semantic conflict/exception layer**: một thần cát/hung có
 
 - không biến Q10 thành một bảng điểm chung;
 - identity/factor calculator vẫn lấy từ Q4–Q7;
-- exact semantics hiện machine-oracle cho 24 vertical đang production;
+- exact semantics hiện machine-oracle cho 25 vertical đang production;
 - các mục còn lại được inventory rõ để không bị hiểu là “chưa đọc”.
 
 ## Inventory 51/51 mục Việt = 99 heading Hán
@@ -74,7 +74,7 @@ Q10 cung cấp **semantic conflict/exception layer**: một thần cát/hung có
 |  50 | 表例附                                 | META                           | appendix/table examples, not factor identity                                                      |
 |  51 | 百忌日                                 | REFERENCE_APPENDIX             | located; not current production rule                                                              |
 
-## Coverage của 24 vertical
+## Coverage của 25 vertical
 
 Current Q10 resolver/source vectors khóa exact semantics cho:
 
@@ -97,6 +97,7 @@ Current Q10 resolver/source vectors khóa exact semantics cho:
 - Nạp tiền của;
 - Mở kho xuất hàng, tiền;
 - Sửa buồng sản phụ;
+- Đặt cối xay, giã;
 - Động thổ;
 - Sửa cung thất;
 - Khai trương;
@@ -107,4 +108,4 @@ Current Q10 resolver/source vectors khóa exact semantics cho:
 
 ## Kết luận
 
-**Q10 đã inventory đủ 51/51 mục Việt, tương ứng 99/99 heading TOC Hán.** Oracle runtime vẫn partial theo 24 vertical; inventory đầy đủ không được dùng để claim mọi activity/rule Q10 đã encode.
+**Q10 đã inventory đủ 51/51 mục Việt, tương ứng 99/99 heading TOC Hán.** Oracle runtime vẫn partial theo 25 vertical; inventory đầy đủ không được dùng để claim mọi activity/rule Q10 đã encode.
