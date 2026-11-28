@@ -7,6 +7,7 @@ import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
+import { QUY_TAC_GIAI_TRU } from '../activities/giai-tru-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
@@ -36,6 +37,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
   [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
+  [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
@@ -44,10 +46,13 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
 };
 
 const ALL_ACTIVITIES = Object.values(LoaiCongViec);
-const ACTIVITIES_WITH_ORDINARY_Q10_KY = ALL_ACTIVITIES.filter(
+const ACTIVITIES_WITH_TU_PHE_KY = ALL_ACTIVITIES.filter(
   (activity) => activity !== LoaiCongViec.NHAP_HOC && activity !== LoaiCongViec.TE_TU,
 );
-const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_ORDINARY_Q10_KY.filter(
+const ACTIVITIES_WITH_NGUYET_PHA_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
+  (activity) => activity !== LoaiCongViec.GIAI_TRU,
+);
+const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
   (activity) =>
     activity !== LoaiCongViec.YEN_HOI &&
     activity !== LoaiCongViec.KHANH_THUONG &&
@@ -56,7 +61,7 @@ const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_ORDINARY_Q10_KY.filter(
 );
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
-  it.each(ACTIVITIES_WITH_ORDINARY_Q10_KY)(
+  it.each(ACTIVITIES_WITH_NGUYET_PHA_KY)(
     '%s: 月破 + 天徳 remains Kị (WYG 010-29a..30b)',
     (activity) => {
       const result = danhGia(activity, {
@@ -68,7 +73,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
     },
   );
 
-  it.each(ACTIVITIES_WITH_ORDINARY_Q10_KY)(
+  it.each(ACTIVITIES_WITH_TU_PHE_KY)(
     '%s: 四廢 + 月徳 remains Kị (WYG 010-58a..58b)',
     (activity) => {
       const result = danhGia(activity, {
@@ -144,6 +149,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.TE_TU]: false,
       [LoaiCongViec.CAU_PHUC]: false,
       [LoaiCongViec.CAU_TU]: false,
+      [LoaiCongViec.GIAI_TRU]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -173,6 +179,56 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('解除: ordinary 月破 and special-calendar days stay exempt, while 四廢 / 五墓 remain source-driven Kị', () => {
+    const pha = danhGia(LoaiCongViec.GIAI_TRU, {
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC],
+    });
+    const special = danhGia(LoaiCongViec.GIAI_TRU, {
+      yeuTo: [MaYeuTo.VO_LOC, MaYeuTo.TU_LY, MaYeuTo.THIEN_DUC],
+    });
+    const tuPhe = danhGia(LoaiCongViec.GIAI_TRU, {
+      yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.NGUYET_DUC],
+    });
+    const nguMo = danhGia(LoaiCongViec.GIAI_TRU, {
+      chiThang: DiaChi.NGO,
+      yeuTo: [MaYeuTo.NGU_MO, MaYeuTo.NGUYET_DUC],
+    });
+
+    expect(pha.coKy).toBe(false);
+    expect(special.coKy).toBe(false);
+    expect(tuPhe.coKy).toBe(true);
+    expect(nguMo.coKy).toBe(false);
+  });
+
+  it('解除: 月破 overlaps can restore Kị / hard-ban exactly as WYG 010-29b..30a', () => {
+    const hard = danhGia(LoaiCongViec.GIAI_TRU, {
+      chiThang: DiaChi.TY,
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.TAI_SAT],
+    });
+    const withVirtue = danhGia(LoaiCongViec.GIAI_TRU, {
+      chiThang: DiaChi.TY,
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.TAI_SAT, MaYeuTo.THIEN_DUC],
+    });
+    expect(hard.camMoiViec).toBe(true);
+    expect(withVirtue.camMoiViec).toBe(false);
+    expect(withVirtue.coKy).toBe(true);
+  });
+
+  it('解除: 天願 is not a Nên factor; 死氣 with virtue is released unless 辰戌月 meets 月厭', () => {
+    const tianYuan = danhGia(LoaiCongViec.GIAI_TRU, { yeuTo: [MaYeuTo.THIEN_NGUYEN] });
+    const relieved = danhGia(LoaiCongViec.GIAI_TRU, {
+      yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.THIEN_DUC],
+    });
+    const blocked = danhGia(LoaiCongViec.GIAI_TRU, {
+      chiThang: DiaChi.THIN,
+      yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
+    });
+    expect(tianYuan.coNen).toBe(false);
+    expect(tianYuan.coKy).toBe(false);
+    expect(relieved.coKy).toBe(false);
+    expect(blocked.coKy).toBe(true);
+  });
 
   it('求嗣: 天狗/寅日 suppresses Nên without inventing Kị (WYG 010-74a..74b)', () => {
     const thienCau = danhGia(LoaiCongViec.CAU_TU, {

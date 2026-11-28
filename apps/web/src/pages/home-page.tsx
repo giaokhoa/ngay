@@ -92,6 +92,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.CAU_TU,
   },
   {
+    ma: 'GIAI_TRU',
+    ten: 'Giải trừ',
+    moTa: 'Chọn ngày giải trừ theo Giải Thần, Trừ Thần và các điều kị đã đối chiếu.',
+    to: DUONG_DAN.GIAI_TRU,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
@@ -162,6 +168,8 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   THIEN_LAI: 'Thiên Lại',
   DU_HOA: 'Du Họa',
   GIAI_THAN: 'Giải Thần',
+  TU_THAN: 'Tử Thần',
+  TU_KHI: 'Tử Khí',
   VO_LOC: 'Vô Lộc',
   TU_LY: 'Tứ Ly',
   TU_TUYET: 'Tứ Tuyệt',
