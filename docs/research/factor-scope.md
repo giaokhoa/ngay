@@ -215,7 +215,7 @@ PDF 635 / trang in 628 mở Quyển 8, gồm các nhóm như:
 - Tọa sát/Hướng sát;
 - các yếu tố phương vị khác.
 
-Defer khỏi MVP date-selection. Không để module `factors` hấp thụ logic phương vị khi product chưa có input hướng/phương.
+Inventory đầy đủ 22/22 mục Việt (24 heading Hán do hai cặp bị tách): `docs/research/q8-full-inventory.md`. Giữ ngoài date-selection cho tới khi có domain tọa/hướng/24 sơn/Cửu cung; không để module `factors` hấp thụ logic phương vị.
 
 ## Quyển 9 — Oracle, không phải calculator spec duy nhất
 

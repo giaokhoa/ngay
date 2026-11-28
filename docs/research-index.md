@@ -70,6 +70,14 @@ Chi tiết: `docs/research/q3-full-inventory.md`.
 
 Chi tiết core: `docs/research/q4-aliases-bat-tuong.md`. Inventory đủ Q4: `docs/research/q4-full-inventory.md`.
 
+## Spatial/advanced — Quyển 8
+
+| Scope                           | Trạng thái  | Product        | Ghi chú                                                                 |
+| ------------------------------- | ----------- | -------------- | ----------------------------------------------------------------------- |
+| 22/22 mục Việt (24 heading Hán) | INVENTORIED | CHUA_IMPLEMENT | phi cung, 24 sơn, tọa-hướng, Cửu cung; thiếu spatial/Nine-Palace domain |
+
+Chi tiết: `docs/research/q8-full-inventory.md`.
+
 ## Day/hour — Quyển 7
 
 | Chủ đề                     | Trạng thái    | Product     | Nguồn / blocker                                |
