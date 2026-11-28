@@ -23,6 +23,7 @@ import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAN_NAP_GIA_SUC } from '../activities/nhan-nap-gia-suc-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_PHA_NHA_HUY_TUONG } from '../activities/pha-nha-huy-tuong-rules';
+import { QUY_TAC_PHA_VO_DAT } from '../activities/pha-vo-dat-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
@@ -963,6 +964,31 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
     ],
     hanOnly: ['YEU_TO:NGUYET_YEM'],
   },
+  [LoaiCongViec.PHA_VO_DAT]: {
+    tieuDeHan: '破土',
+    anchor: 'KR3g0051_WYG_011-25b',
+    nen: ['YEU_TO:O_PHE', 'YEU_TO:O_PHE_DOI'],
+    ky: [
+      'YEU_TO:NGUYET_KIEN',
+      'YEU_TO:THO_PHU',
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_HAI',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:THO_PHU_TIN',
+      'YEU_TO:DIA_NANG',
+      'YEU_TO:PHUC_NHAT',
+      'YEU_TO:TRONG_NHAT',
+      'THO_VUONG',
+    ],
+  },
   [LoaiCongViec.AN_TANG]: {
     tieuDeHan: '安葬',
     anchor: 'KR3g0051_WYG_011-25b..26a',
@@ -1031,6 +1057,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
   [LoaiCongViec.XUAT_HANH]: QUY_TAC_XUAT_HANH_Q11,
+  [LoaiCongViec.PHA_VO_DAT]: QUY_TAC_PHA_VO_DAT,
   [LoaiCongViec.AN_TANG]: QUY_TAC_AN_TANG,
 };
 

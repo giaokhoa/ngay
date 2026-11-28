@@ -38,6 +38,7 @@ export enum LoaiCongViec {
   SUA_CUNG_THAT = 'SUA_CUNG_THAT',
   KHAI_TRUONG = 'KHAI_TRUONG',
   XUAT_HANH = 'XUAT_HANH',
+  PHA_VO_DAT = 'PHA_VO_DAT',
   AN_TANG = 'AN_TANG',
 }
 

@@ -41,6 +41,32 @@ export const DINH_NGHIA_O_PHE: DinhNghiaYeuToCanChiCoDinh = {
   ),
 };
 
+export const DINH_NGHIA_O_PHE_DOI: DinhNghiaYeuToCanChiCoDinh = {
+  ma: MaYeuTo.O_PHE_DOI,
+  loai: LoaiYeuTo.THAN_SAT,
+  tenKhac: [],
+  canChiNgay: [
+    cc(BINH, TY),
+    cc(CANH, TY),
+    cc(NHAM, TY),
+    cc(GIAP, DAN),
+    cc(BINH, DAN),
+    cc(CANH, DAN),
+    cc(NHAM, DAN),
+    cc(AT, MAO),
+    cc(DINH, MAO),
+    cc(TAN, MAO),
+    cc(QUY, MAO),
+  ],
+  nguon: taoNguon(
+    470,
+    'Ô Phệ Đối',
+    '鳴吠對',
+    'Dùng Lập thành cuối mục: 11 ngày tiểu táng/phá thổ; không dùng danh sách truyền cũ 10 ngày.',
+    'Q5 起例/立成 chốt 11 ngày: 丙庚壬子、甲丙庚壬寅、乙丁辛癸卯; bỏ 甲子/戊 và sửa lỗi truyền cũ 甲午.',
+  ),
+};
+
 export const DINH_NGHIA_PHUC_NHAT: DinhNghiaYeuToTheoCanNgay = {
   ma: MaYeuTo.PHUC_NHAT,
   loai: LoaiYeuTo.THAN_SAT,

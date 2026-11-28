@@ -206,6 +206,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.NHAN_NAP_GIA_SUC,
   },
   {
+    ma: 'PHA_VO_DAT',
+    ten: 'Phá, vỡ đất',
+    moTa: 'Q11 Nên Ô Phệ và Ô Phệ Đối; xét riêng Phục/Trọng, Ngũ Mộ, Thổ Phủ, Thổ Phù, Địa Nang và Thổ Vượng.',
+    to: DUONG_DAN.PHA_VO_DAT,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
@@ -302,6 +308,7 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   VANG_VONG: 'Vãng Vong',
   BAT_CHUYEN: 'Bát Chuyên',
   O_PHE: 'Ô Phệ',
+  O_PHE_DOI: 'Ô Phệ Đối',
   PHUC_NHAT: 'Phục Nhật',
   TRONG_NHAT: 'Trọng Nhật',
 };

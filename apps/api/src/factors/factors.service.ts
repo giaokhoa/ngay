@@ -4,6 +4,7 @@ import { tinhMuaTheoChiThang } from '../calendar/season';
 import { tinhThapNhiTruc } from '../calendar/twelve-officer';
 import {
   DINH_NGHIA_O_PHE,
+  DINH_NGHIA_O_PHE_DOI,
   DINH_NGHIA_PHUC_NHAT,
   DINH_NGHIA_TRONG_NHAT,
 } from './an-tang-factor-definitions';
@@ -200,6 +201,10 @@ export class TinhYeuToNgayService {
 
     if (DINH_NGHIA_O_PHE.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
       ketQua.push(DINH_NGHIA_O_PHE);
+    }
+
+    if (DINH_NGHIA_O_PHE_DOI.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {
+      ketQua.push(DINH_NGHIA_O_PHE_DOI);
     }
 
     if (DINH_NGHIA_PHUC_NHAT.canNgayTheoChiThang[boiCanh.chiThang] === boiCanh.canNgay) {
