@@ -74,7 +74,7 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |     5 | 義例三      | ORACLE_MOT_PHAN | Đức/Hợp, special days, 王日/民日, 四廢/四忌/四窮/五墓/八專/復日/重日/鳴吠…                             |
 |     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục đã inventory; 18 factor production có Hán oracle, phần còn lại explicit out-of-scope/blocked |
 |     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model           |
-|     8 | 義例六      | CHUA_IMPLEMENT  | —                                                                                                      |
+|     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain              |
 |     9 | 立成        | ORACLE_MOT_PHAN | cross-check một số factor Q5/Q6                                                                        |
 |    10 | 宜忌        | ORACLE_MOT_PHAN | semantic vectors cho 7 vertical hiện implement                                                         |
 |    11 | 用事        | ORACLE_MOT_PHAN | exact 宜/忌 cho 7 vertical hiện implement                                                              |
@@ -101,6 +101,10 @@ Tổng hiện tại:
 ### Q3
 
 `docs/research/q3-full-inventory.md` khóa **36/36 mục đánh số** của Quyển 3 (cộng closing `總論` không đánh số). Q3 vẫn `CHUA_IMPLEMENT`: calendar đã có Can Chi năm theo Lập Xuân nhưng factor/evaluation context không có spatial target; phần lớn Q3 là `所理之地/方/向`, không phải day factor. Các tên trùng `劫煞/災煞/小耗/官符/大煞` không được nhập với identity Q4/Q6 hiện có.
+
+### Q8
+
+`docs/research/q8-full-inventory.md` khóa **22/22 mục đánh số của bản Việt**. Hán có 24 heading do tách `歲禄/飛天禄` và `灸退/獨火`. Q8 vẫn `CHUA_IMPLEMENT`: output chủ yếu là phi cung/24 sơn/tọa-hướng/Cửu cung, current product chưa có spatial target/Nine-Palace domain.
 
 ### Q4
 

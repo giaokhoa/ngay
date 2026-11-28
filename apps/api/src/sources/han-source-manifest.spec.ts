@@ -39,11 +39,18 @@ describe('Hán source corpus manifest', () => {
     expect(HAN_CORPUS_MANIFEST.find((item) => item.quyen === 36)?.tep).toBe('KR3g0051_035.txt');
   });
 
-  it('keeps Q3 unimplemented even after its annual/spatial inventory is documented', () => {
+  it('keeps Q3 unimplemented after its annual/spatial inventory is documented', () => {
     const q3 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 3);
 
     expect(q3?.trangThai).toBe('CHUA_IMPLEMENT');
     expect(q3?.phamViOracle).toBeUndefined();
+  });
+
+  it('keeps Q8 unimplemented after its spatial inventory is documented', () => {
+    const q8 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 8);
+
+    expect(q8?.trangThai).toBe('CHUA_IMPLEMENT');
+    expect(q8?.phamViOracle).toBeUndefined();
   });
 
   it('records Q4 as 29/29 section inventory without inventing standalone factors', () => {
