@@ -33,6 +33,19 @@ describe('Hán source corpus manifest', () => {
     });
   });
 
+  it('keeps all twelve month-table volumes partial rather than claiming a 720-row oracle', () => {
+    const monthly = HAN_CORPUS_MANIFEST.filter((item) => item.quyen >= 20 && item.quyen <= 31);
+
+    expect(monthly).toHaveLength(12);
+    expect(monthly.every((item) => item.trangThai === 'ORACLE_MOT_PHAN')).toBe(true);
+    expect(monthly.map((item) => item.tep)).toEqual(
+      Array.from(
+        { length: 12 },
+        (_, index) => `KR3g0051_${String(index + 19).padStart(3, '0')}.txt`,
+      ),
+    );
+  });
+
   it('keeps Q14–19 annual tables unimplemented while preserving their six source blocks', () => {
     const annual = HAN_CORPUS_MANIFEST.filter((item) => item.quyen >= 14 && item.quyen <= 19);
 
