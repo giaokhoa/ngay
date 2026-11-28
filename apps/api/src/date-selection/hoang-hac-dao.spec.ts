@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { LoaiCongViec } from '../activities/activity-rule';
 import { DIA_CHI_THEO_THU_TU, DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
+import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
+import { tinhThapNhiTruc } from '../calendar/twelve-officer';
 import {
   hacDaoKyViec,
   tinhDauGioThamKhao,
@@ -56,6 +58,22 @@ describe('Hán oracle — 黃道黑道, WYG 007-7b..12a', () => {
       expect(than.filter((item) => item.loai === 'HOANG_DAO')).toHaveLength(6);
       expect(than.filter((item) => item.loai === 'HAC_DAO')).toHaveLength(6);
     }
+  });
+
+  it('không đồng nhất 黃黑道十二神 với 建除十二神 như Q7 WYG_007-8b đã bác', () => {
+    // Tháng Dần: ngày Mão là Trực Trừ nhưng thần Q7 lại là Chu Tước Hắc đạo.
+    expect(tinhThapNhiTruc(DiaChi.DAN, DiaChi.MAO)).toBe(ThapNhiTruc.TRU);
+    expect(tinhThanNgay(DiaChi.DAN, DiaChi.MAO)).toMatchObject({
+      ma: 'CHU_TUOC',
+      loai: 'HAC_DAO',
+    });
+
+    // Cũng tháng Dần: ngày Thìn là Trực Mãn nhưng thần Q7 là Kim Quỹ Hoàng đạo.
+    expect(tinhThapNhiTruc(DiaChi.DAN, DiaChi.THIN)).toBe(ThapNhiTruc.MAN);
+    expect(tinhThanNgay(DiaChi.DAN, DiaChi.THIN)).toMatchObject({
+      ma: 'KIM_QUY',
+      loai: 'HOANG_DAO',
+    });
   });
 
   it('甲子 day uses Q32 hour-table shen order (申青龍 酉明堂 ...)', () => {

@@ -7,6 +7,7 @@ import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
+import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
@@ -22,6 +23,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.CUOI_HOI]: QUY_TAC_CUOI_HOI,
   [LoaiCongViec.DI_CHUYEN]: QUY_TAC_DI_CHUYEN,
   [LoaiCongViec.AN_GIUONG]: QUY_TAC_AN_GIUONG,
+  [LoaiCongViec.QUAN_DAI]: QUY_TAC_QUAN_DAI,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
@@ -67,6 +69,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.CUOI_HOI]: true,
       [LoaiCongViec.DI_CHUYEN]: true,
       [LoaiCongViec.AN_GIUONG]: false,
+      [LoaiCongViec.QUAN_DAI]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -97,7 +100,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
     },
   );
 
-  it('月厭 + 月徳 month Dần keeps 般移 Kị but releases 安牀 (WYG 010-47b..48a)', () => {
+  it('月厭 + 月徳 month Dần keeps 般移 Kị but releases 安牀 and 冠帶 (WYG 010-47b..48a)', () => {
     const diChuyen = danhGia(LoaiCongViec.DI_CHUYEN, {
       chiThang: DiaChi.DAN,
       yeuTo: [MaYeuTo.NGUYET_YEM, MaYeuTo.NGUYET_DUC],
@@ -106,9 +109,14 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       chiThang: DiaChi.DAN,
       yeuTo: [MaYeuTo.NGUYET_YEM, MaYeuTo.NGUYET_DUC],
     });
+    const quanDai = danhGia(LoaiCongViec.QUAN_DAI, {
+      chiThang: DiaChi.DAN,
+      yeuTo: [MaYeuTo.NGUYET_YEM, MaYeuTo.NGUYET_DUC],
+    });
 
     expect(diChuyen.coKy).toBe(true);
     expect(anGiuong.coKy).toBe(false);
+    expect(quanDai.coKy).toBe(false);
   });
 
   it('行幸遣使: 天賊 + 天徳 still Kị (WYG 010-56b..57a)', () => {

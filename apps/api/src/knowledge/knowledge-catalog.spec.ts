@@ -6,7 +6,7 @@ import { taoDanhMucTriThuc } from './knowledge-catalog';
 describe('Postgres knowledge catalog mirror', () => {
   const catalog = taoDanhMucTriThuc();
 
-  it('covers all eight implemented activities', () => {
+  it('covers all nine implemented activities', () => {
     expect(catalog.hoatDong.map((item) => item.code).sort()).toEqual(
       Object.values(LoaiCongViec).sort(),
     );

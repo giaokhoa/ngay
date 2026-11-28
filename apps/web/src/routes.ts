@@ -3,6 +3,7 @@ export const DUONG_DAN = {
   CUOI_HOI: '/cuoi-hoi',
   DI_CHUYEN: '/di-chuyen',
   AN_GIUONG: '/an-giuong',
+  QUAN_DAI: '/quan-dai',
   DONG_THO: '/dong-tho',
   SUA_CUNG_THAT: '/sua-cung-that',
   KHAI_TRUONG: '/khai-truong',
