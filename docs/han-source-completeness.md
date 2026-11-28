@@ -69,7 +69,7 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 | ----: | ----------- | --------------- | ------------------------------------------------------------------------------------------------------ |
 |     1 | 本原一      | ORACLE_MOT_PHAN | Can/Chi, Thổ Vượng                                                                                     |
 |     2 | 本原二      | CHUA_IMPLEMENT  | —                                                                                                      |
-|     3 | 義例一      | CHUA_IMPLEMENT  | —                                                                                                      |
+|     3 | 義例一      | CHUA_IMPLEMENT  | 36/36 mục đã inventory; annual spatial layer, current contract thiếu hướng/tọa-hướng                   |
 |     4 | 義例二      | ORACLE_MOT_PHAN | 12 Trực shared identities, 月厭/厭對, 陰陽不將                                                         |
 |     5 | 義例三      | ORACLE_MOT_PHAN | Đức/Hợp, special days, 王日/民日, 四廢/四忌/四窮/五墓/八專/復日/重日/鳴吠…                             |
 |     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục đã inventory; 18 factor production có Hán oracle, phần còn lại explicit out-of-scope/blocked |
@@ -97,6 +97,10 @@ Tổng hiện tại:
 - **0 quyển** được đánh dấu full-volume oracle.
 
 ## Double-entry oracle hiện có
+
+### Q3
+
+`docs/research/q3-full-inventory.md` khóa **36/36 mục đánh số** của Quyển 3 (cộng closing `總論` không đánh số). Q3 vẫn `CHUA_IMPLEMENT`: calendar đã có Can Chi năm theo Lập Xuân nhưng factor/evaluation context không có spatial target; phần lớn Q3 là `所理之地/方/向`, không phải day factor. Các tên trùng `劫煞/災煞/小耗/官符/大煞` không được nhập với identity Q4/Q6 hiện có.
 
 ### Q4
 
