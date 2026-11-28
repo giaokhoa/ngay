@@ -106,7 +106,8 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     revision: KANRIPO_KR3G0051_REVISION,
     sha256: '22a7783d06d7b63a3927b60f62f76342f80115e8e919d0e624cfdd137e975a8a',
     trangThai: 'ORACLE_MOT_PHAN',
-    phamViOracle: 'Cross-check bảng Lập thành cho một số factor Q5/Q6.',
+    phamViOracle:
+      '4/4 phần Lập thành đã inventory: 10 biểu niên thần + 30 biểu nguyệt thần + 2 trang nhật thần + 6 biểu thời thần; oracle subset cho Q4–Q7/Q32–34.',
   },
   {
     quyen: 10,
@@ -329,7 +330,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: '6924cd0e4087bdf2f3f85293b44f21448550472b5a0371895b1e0695ceeaf4ce',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '六十日時辰定局: source vectors cho Can-Chi giờ, Nhật Kiến/Lộc/Mã, Nhật Phá/Hình và Ngũ Bất Ngộ.',
+      '3/3 mục Q32 structural-inventory; 六十日時辰定局 có oracle subset cho Can-Chi giờ/quan hệ ngày-giờ; 貴登天門/四大吉時 còn blocked theo location/time model.',
   },
   {
     quyen: 33,
@@ -339,7 +340,8 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     revision: KANRIPO_KR3G0051_REVISION,
     sha256: 'adef32b89b2d117ec9800a0fef043ee40471db459561852de661f0d44acb5b87',
     trangThai: 'ORACLE_MOT_PHAN',
-    phamViOracle: '相主: dùng sinh niên, tránh xung/khắc mệnh; năm nặng hơn tháng, ngày, giờ.',
+    phamViOracle:
+      '14 mục Việt secondary = 15 heading Hán đã structural-inventory; exact Việt T2 scan pending. 相主 oracle: dùng sinh niên, tránh xung/khắc mệnh.',
   },
   {
     quyen: 34,
@@ -350,7 +352,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: 'f604b900815e06feae28fd0e494ff9abbc3defbc4c68ba43219b1b8c159c2edd',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '用時法: giờ trợ ngày, tam hợp/lục hợp/lộc/mã; tránh giờ phá, hình và Ngũ Bất Ngộ.',
+      '12/12 heading Hán = 10 mục Việt secondary structural-inventory; exact Việt T2 scan pending. 用時法 oracle subset; solar/spatial headings blocked.',
   },
   {
     quyen: 35,

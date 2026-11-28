@@ -132,6 +132,10 @@ Chi tiết: `docs/research/q8-full-inventory.md`.
 | XUAT_HANH / 行幸遣使〈出行同〉 | activities | T1 Q11 p849 + Q10 + Hán Q11/Q10 | ORACLE_TESTED | xuat-hanh-rules.ts + derived Q10 resolver | xuat-hanh-rules.spec.ts / xuat-hanh-conflict.spec.ts     | Q11 Việt thiếu 月厭; bổ sung blocker từ Q10; docs/research/activity-xuat-hanh.md |
 | AN_TANG / 安葬                 | activities | T1 Q11 p862 + Q5/Q10 + Hán      | ORACLE_TESTED | an-tang-rules.ts + full Q10 resolver      | an-tang-rules.spec.ts / an-tang-conflict.spec.ts         | Ô Phệ final 13 ngày; Phục/Trọng source-lock; docs/research/activity-an-tang.md   |
 
+## Reference tables — Lập thành Q9
+
+Q9 đã inventory full structure 10 niên + 30 nguyệt + 2 trang nhật + 6 biểu thời; xem `docs/research/q9-full-inventory.md`. Đây là double-entry oracle, không phải calculator spec duy nhất.
+
 ## Reference tables — Niên biểu
 
 Q14–19 đã inventory đủ 6 block × 10 năm, xem `docs/research/q14-q19-annual-tables.md`. Đây là bảng spatial theo năm để future-oracle Q3/Q8; current date-selection không consume. Q14 giữ Wikisource fallback pin, Q15–19 Kanripo.
@@ -148,6 +152,17 @@ Q20–31 đã inventory đủ 12/12 volume structure; xem `docs/research/q20-q31
 | Q36 Biện ngụy | Hán 27/27 headings; secondary Việt TOC 26 items; exact T2 scan pending | ANTI_ORACLE / source-review only |
 
 Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inventory.md`.
+
+## Oracle/reference — Quyển 9, 32–34
+
+| Quyển | Structural inventory                           | Product/oracle                                                    |
+| ----: | ---------------------------------------------- | ----------------------------------------------------------------- |
+|     9 | 4 phần = 10 niên + 30 nguyệt + 2 nhật + 6 thời | ORACLE_PARTIAL; index/cross-check, không calculator spec duy nhất |
+|    32 | 3/3 mục Hán                                    | ORACLE_PARTIAL; 60-day hour subset; advanced hour rules blocked   |
+|    33 | 15 Hán headings / 14 secondary Việt items      | ORACLE_PARTIAL; `相主`; exact T2 scan pending                     |
+|    34 | 12 Hán headings / 10 secondary Việt items      | ORACLE_PARTIAL; `用時法`; exact T2 scan pending                   |
+
+Chi tiết: `docs/research/q9-full-inventory.md`, `docs/research/q32-full-inventory.md`, `docs/research/q33-full-inventory.md`, `docs/research/q34-full-inventory.md`.
 
 ## Hán double-entry coverage
 
