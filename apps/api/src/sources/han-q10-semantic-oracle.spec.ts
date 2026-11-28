@@ -20,6 +20,7 @@ import { QUY_TAC_LAP_KHE_UOC_GIAO_DICH } from '../activities/lap-khe-uoc-giao-di
 import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
 import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from '../activities/mo-kho-xuat-hang-tien-rules';
 import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
+import { QUY_TAC_NHAN_NAP_GIA_SUC } from '../activities/nhan-nap-gia-suc-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_PHA_NHA_HUY_TUONG } from '../activities/pha-nha-huy-tuong-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
@@ -71,6 +72,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC,
   [LoaiCongViec.TRONG_TROT]: QUY_TAC_TRONG_TROT,
   [LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM]: QUY_TAC_CHAN_THA_GIA_SUC_GIA_CAM,
+  [LoaiCongViec.NHAN_NAP_GIA_SUC]: QUY_TAC_NHAN_NAP_GIA_SUC,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -224,6 +226,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: false,
       [LoaiCongViec.TRONG_TROT]: true,
       [LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM]: false,
+      [LoaiCongViec.NHAN_NAP_GIA_SUC]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -276,6 +279,28 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('納畜: same Kị resolver as 牧養 but 收日 is Nên', () => {
+    const harvest = danhGia(LoaiCongViec.NHAN_NAP_GIA_SUC, { truc: ThapNhiTruc.THU, yeuTo: [] });
+    const monthAversion = danhGia(LoaiCongViec.NHAN_NAP_GIA_SUC, {
+      chiThang: DiaChi.DAN,
+      yeuTo: [MaYeuTo.NGUYET_YEM, MaYeuTo.NGUYET_DUC],
+    });
+    const deathQi = danhGia(LoaiCongViec.NHAN_NAP_GIA_SUC, { yeuTo: [MaYeuTo.TU_KHI] });
+    expect(harvest.coNen).toBe(true);
+    expect(harvest.coKy).toBe(false);
+    expect(monthAversion.coKy).toBe(false);
+    expect(deathQi.coKy).toBe(false);
+  });
+
+  it('納畜: 長星 / 短星 are supplemental Q10 Kị without polluting Q11 baseline', () => {
+    for (const factor of [MaYeuTo.TRUONG_TINH, MaYeuTo.DOAN_TINH]) {
+      const result = danhGia(LoaiCongViec.NHAN_NAP_GIA_SUC, {
+        yeuTo: [factor, MaYeuTo.THIEN_DUC],
+      });
+      expect(result.coKy).toBe(true);
+    }
   });
 
   it('牧養: 月厭 relief applies, 月害 follows exact branches, 死氣 is not a Kị', () => {

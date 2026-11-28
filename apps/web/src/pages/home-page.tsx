@@ -200,6 +200,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.CHAN_THA_GIA_SUC_GIA_CAM,
   },
   {
+    ma: 'NHAN_NAP_GIA_SUC',
+    ten: 'Nhận, nạp gia súc',
+    moTa: 'Q11 có 13 Nên / 13 Kị; Thu nhật là Nên. Q10 bổ sung Kị Trường Tinh và Đoản Tinh.',
+    to: DUONG_DAN.NHAN_NAP_GIA_SUC,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
