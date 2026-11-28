@@ -3,6 +3,8 @@ export type LoaiSaiKhacNguonHan =
   | 'VIET_TOC_TIEU_DE'
   | 'TRUYEN_BAN'
   | 'TRANSCRIPTION_GLYPH'
+  | 'TRANSCRIPTION_OMISSION'
+  | 'INTERNAL_SOURCE_TENSION'
   | 'SOURCE_CORRECTION';
 
 export interface SaiKhacNguonHan {
@@ -114,6 +116,36 @@ export const SAI_KHAC_NGUON_HAN: readonly SaiKhacNguonHan[] = [
     moTa: 'TOC Việt exact mục 24 in “Thiên đạo”, nhưng thân bài p982 in “Lục đạo (sáu con đường)” và nội dung khớp Hán 六道.',
     chinhSachProduction:
       'Xem “Thiên đạo” ở TOC là typo title; canonical identity của section là Lục Đạo/六道, không tạo factor Thiên Đạo riêng.',
+  },
+  {
+    ma: 'Q7_NGU_BAT_NGO_COMMENTARY_VS_Q32_TABLE',
+    loai: 'INTERNAL_SOURCE_TENSION',
+    quyen: 7,
+    muc: '五不遇',
+    anchorHan: 'KR3g0051_WYG_007-38b..39a / KR3g0051_WYG_031-2a..29a',
+    moTa: 'Q7 biện rằng nếu chi giờ tương sinh với nhật Can/Chi thì lại không phải 五不遇, thậm chí nêu ngày Thổ gặp giờ Dần/Mão. Nhưng bảng vận hành Q32 六十日時辰定局 vẫn đánh 五不遇 theo các cặp Can cố định, gồm Mậu nhật giờ Dần; exact Việt Q32 cũng in như vậy.',
+    chinhSachProduction:
+      'Selected-hour theo Q32 operational table: giữ mapping Can ngày → giờ Ngũ Bất Ngộ hiện tại. Không tự thêm branch-khắc và không tự triệt theo tàng khí từ lời biện Q7; tension phải được giữ công khai trong provenance cho tới khi có source rule rõ hơn.',
+  },
+  {
+    ma: 'Q32_KY_HOI_KANRIPO_JI_AS_SI',
+    loai: 'TRANSCRIPTION_GLYPH',
+    quyen: 32,
+    muc: '六十日時辰定局・己亥日',
+    anchorHan: 'KR3g0051_WYG_031-17a..17b',
+    moTa: 'Kanripo text chép header 巳亥日十二時. Exact Việt Tập II p667–668 in Kỷ Hợi; vị trí trong vòng 60 ngày cũng bắt buộc là 己亥. Hai giờ Sửu/Hợi đều giữ Ngũ Bất Ngộ.',
+    chinhSachProduction:
+      'Normalize header thành 己亥 khi xây Q32 machine oracle; giữ raw 巳亥 chỉ trong provenance transcription.',
+  },
+  {
+    ma: 'Q32_NHAM_TY_KANRIPO_ROW_OMITTED',
+    loai: 'TRANSCRIPTION_OMISSION',
+    quyen: 32,
+    muc: '六十日時辰定局・壬子日',
+    anchorHan: 'KR3g0051_WYG_031-23a',
+    moTa: 'Kanripo text nhảy trực tiếp từ 辛亥 sang 癸丑, thiếu toàn row 壬子. Exact Việt Tập II p671–672 có đầy đủ Nhâm Tý; giờ Thân in Thanh Long / Ngũ Bất Ngộ. Registry chỉ kết luận text transcription bị thiếu, không kết luận ảnh WYG gốc thiếu row.',
+    chinhSachProduction:
+      'Khôi phục 壬子 theo exact Việt + thứ tự 60 Can-Chi khi xây Q32 oracle; không coi khoảng trống Kanripo text là nghiệp vụ “không có ngày”.',
   },
   {
     ma: 'Q10_KIEP_SAT_TI_HOI_RELIEF_PAIR',

@@ -66,7 +66,7 @@ describe('giờ thực hiện theo bảng giờ Hán', () => {
     expect(lay(gio, DiaChi.TUAT).lyDoTranh).toContain('Giờ hình ngày');
   });
 
-  it('Ngũ Bất Ngộ khớp bảng Q7/Q31, không over-flag giờ cùng hành khắc', () => {
+  it('Ngũ Bất Ngộ khớp bảng vận hành Q32, không over-flag giờ cùng hành khắc', () => {
     const vectors = [
       [{ can: ThienCan.GIAP, chi: DiaChi.TY }, [DiaChi.NGO]],
       [{ can: ThienCan.AT, chi: DiaChi.SUU }, [DiaChi.TI]],
@@ -100,6 +100,17 @@ describe('giờ thực hiện theo bảng giờ Hán', () => {
       nguoiLienQuan: [],
     });
     expect(lay(giapTy, DiaChi.MUI).lyDoTranh).not.toContain('Ngũ Bất Ngộ');
+  });
+
+  it('giữ Mậu nhật giờ Dần theo Q32 dù Q7 có lời biện về chi tương sinh', () => {
+    const gio = xetCacGioTrongNgay({
+      canChiNgay: { can: ThienCan.MAU, chi: DiaChi.THIN },
+      canChiNam: { can: ThienCan.GIAP, chi: DiaChi.DAN },
+      canChiThang: { can: ThienCan.BINH, chi: DiaChi.MAO },
+      nguoiLienQuan: [],
+    });
+
+    expect(lay(gio, DiaChi.DAN).lyDoTranh).toContain('Ngũ Bất Ngộ');
   });
 
   it('xung năm sinh ưu tiên loại giờ dù giờ có điều thuận', () => {

@@ -36,14 +36,28 @@
 - p.593–594: Nhật Kiến/Hợp là cát, Nhật Phá/Hại/Hình là hung; việc lớn mới xét thêm năm/tháng, khớp `WYG_007-24b`.
 - p.595–598: Tứ Đại Cát Thời khớp phép Tứ Sát Một và mô hình vị trí/khắc giờ của Hán.
 - p.599–615: Quý Đăng Thiên Môn khớp Nguyệt tướng gia thời, Âm/Dương quý và phân ngày/đêm.
-- p.616–618: Ngũ Bất Ngộ không được suy thành mọi trường hợp “hành Can giờ khắc hành Can ngày”. Bảng khóa theo Can ngày: Giáp→Ngọ, Ất→Tỵ, Bính→Thìn, Đinh→Mão, Mậu→Dần, Kỷ→Sửu/Hợi, Canh→Tý/Tuất, Tân→Dậu, Nhâm→Thân, Quý→Mùi; phần Thích Ý còn nhấn mạnh phải xét chi giờ tương sinh với nhật Can/Chi trước khi kết luận.
+- p.616–618: Ngũ Bất Ngộ. Vòng trên của đồ p.616 khóa 10 cặp **Can ngày → Can giờ khắc**: Giáp→Canh, Ất→Tân, Bính→Nhâm, Đinh→Quý, Mậu→Giáp, Kỷ→Ất, Canh→Bính, Tân→Đinh, Nhâm→Mậu, Quý→Kỷ. Vòng dưới minh họa thuyết `時支尅日支` được dẫn ra để biện (Thủy↔Thổ, Mộc↔Kim, Hỏa↔Thủy...), **không phải exception lookup**. Phần Thích Ý/biện giải nói chi có khí tạp và nếu chi giờ tương sinh với nhật Can/Chi thì lại không phải Ngũ Bất Ngộ, thậm chí nêu ngày Thổ gặp giờ Dần/Mão làm phản ví dụ.
 - p.619–622: Cửu Xú khớp danh sách mười ngày và điều kiện “chân Cửu Xú” phải có Đại Cát lâm nhật chi; không được chỉ nhìn day identity.
 - p.623–625: Tuần trung Không vong — Giáp Tý tuần khuyết Tuất/Hợi; Giáp Tuất khuyết Thân/Dậu; Giáp Thân khuyết Ngọ/Mùi; Giáp Ngọ khuyết Thìn/Tỵ; Giáp Thìn khuyết Dần/Mão; Giáp Dần khuyết Tý/Sửu. Sách nói Không vong không thể đồng loạt coi là hung.
 - p.626–627: Triệt lộ Không vong — Giáp/Kỷ→Thân/Dậu; Ất/Canh→Ngọ/Mùi; Bính/Tân→Thìn/Tỵ; Đinh/Nhâm→Dần/Mão; Mậu/Quý→Tý/Sửu/Tuất/Hợi. Phần Thích Ý không cho phép biến nó thành veto phổ quát.
 
-Hán `WYG_007-37b..39a` xác nhận Ngũ Bất Ngộ. `WYG_007-45b..46b` xác nhận 旬中空亡 và lời bác cách coi mọi Không vong là hung; `WYG_007-47b` xác nhận 截路空亡. Bảng 60 ngày `WYG_031` khớp các vị trí `旬空`/`路空` và mapping Ngũ Bất Ngộ.
+Hán `WYG_007-37b..39a` xác nhận Ngũ Bất Ngộ. `WYG_007-45b..46b` xác nhận 旬中空亡 và lời bác cách coi mọi Không vong là hung; `WYG_007-47b` xác nhận 截路空亡.
 
-Không phát hiện discrepancy Việt/Hán trong scope Q7 đang implement.
+### Tension nội bộ Q7 ↔ Q32 về Ngũ Bất Ngộ
+
+Q7 prose và Q32 operational table không hoàn toàn hòa giải được bằng một công thức duy nhất:
+
+- Q7 `WYG_007-38b..39a` nói sau khi Can giờ khắc Can ngày vẫn phải xét chi giờ có tương sinh với nhật Can/Chi hay không; nếu tương sinh thì “lại không phải 五不遇”, và đặt câu hỏi vì sao cứ ngày Thổ gặp giờ Dần/Mão lại gọi Ngũ Bất Ngộ.
+- Nhưng Q32 `六十日時辰定局` vẫn đánh `五不遇` theo candidate cố định của Can ngày trong bảng 60 ngày × 12 giờ. Exact Việt Tập II xác nhận trực tiếp các case như **Bính Dần–Thìn, Đinh Mão–Mão, Mậu Thìn–Dần** và toàn 10 lớp Can đầu tiên; tức Mậu nhật giờ Dần vẫn được bảng vận hành đánh Ngũ Bất Ngộ.
+- Vì module `selected-hour` đang hiện thực **bảng giờ vận hành Q32**, production theo Q32 concrete oracle, không tự áp hidden-qi cancellation từ prose Q7. Đây là policy có chủ đích, không phải bỏ sót lời biện.
+- Tension được đăng ký ở `Q7_NGU_BAT_NGO_COMMENTARY_VS_Q32_TABLE`; nếu sau này có product mode riêng cho phép luận biện/khí tạp thì phải tách semantics thay vì âm thầm thay bảng Q32.
+
+Kanripo Q32 còn có hai defect transcription đã được exact Việt source-lock:
+
+- `WYG_031-17a..17b`: header `己亥` bị chép thành `巳亥`; Việt p.667–668 in **Kỷ Hợi**, và cả Sửu/Hợi đều có Ngũ Bất Ngộ.
+- `WYG_031-23a`: Kanripo text nhảy từ `辛亥` sang `癸丑`, thiếu toàn row `壬子`; Việt p.671–672 có **Nhâm Tý**, trong đó giờ Thân in “Thanh Long / Ngũ Bất Ngộ”. Registry chỉ coi **text transcription** bị thiếu, không suy rằng ảnh WYG gốc thiếu row.
+
+Ngoài tension nội bộ trên, không phát hiện discrepancy Việt/Hán làm thay đổi mapping operational Q7/Q32 đang production.
 
 ## Inventory đủ Quyển 7
 
@@ -60,7 +74,7 @@ Quyển 7 có 13 đầu mục theo mục lục Hán. Tất cả 13 mục đã đ
 |   7 | Nhật Kiến/Phá/Hợp/Hại/Hình   | ORACLE_TESTED | IMPLEMENTED | Quan hệ chi ngày ↔ chi giờ                                                                                        |
 |   8 | Tứ Đại Cát Thời / Tứ Sát Một | COMPARED      | BLOCKED     | Nguồn dùng 24 vị trí/`八干四卦` và các khắc trong giờ; model 12 thời thần hiện tại không đủ độ phân giải          |
 |   9 | Quý Đăng Thiên Môn           | COMPARED      | BLOCKED     | Cần Nguyệt tướng, Âm/Dương quý theo sunrise/sunset và phép gia thời; không được rút xuống lookup 12 giờ           |
-|  10 | Ngũ Bất Ngộ                  | ORACLE_TESTED | IMPLEMENTED | Mapping Q7/Q31; đã sửa heuristic over-flag ở #108                                                                 |
+|  10 | Ngũ Bất Ngộ                  | ORACLE_TESTED | IMPLEMENTED | Production theo operational table Q32; Q7 prose có tension đã registry, không tự triệt theo tàng khí              |
 |  11 | Cửu Xú                       | COMPARED      | BLOCKED     | “Chân Cửu Xú” cần Đại Cát lâm nhật chi theo Nguyệt tướng + giờ chính xác; biên tiết có thể đổi trong bucket 2 giờ |
 |  12 | Tuần trung Không vong        | ORACLE_TESTED | INFO_MARKER | Sách tự bác cách coi toàn bộ Không vong là hung                                                                   |
 |  13 | Triệt lộ Không vong          | ORACLE_TESTED | INFO_MARKER | Hiển thị tham khảo, không blanket veto                                                                            |
@@ -86,7 +100,7 @@ Bốn mục này được giữ ở `COMPARED`, không để một agent sau t�
 ## Oracle/test
 
 - `hoang-hac-dao.spec.ts`: 12 khởi điểm, vòng 12 thần, sáu Hoàng/sáu Hắc, Giáp Tý giờ theo bảng Hán, 4 cụm thần giờ và whitelist activity.
-- `selected-hour.spec.ts`: ưu tiên điều kị dù cùng giờ có Phúc Tinh, Lộc, Hỷ, Mã; giờ Phá/Hình/Hại; Ngũ Bất Ngộ đúng bảng; Không vong chỉ là dấu tham khảo.
+- `selected-hour.spec.ts`: ưu tiên điều kị dù cùng giờ có Phúc Tinh, Lộc, Hỷ, Mã; giờ Phá/Hình/Hại; Ngũ Bất Ngộ theo operational Q32, gồm regression Mậu nhật–Dần để không bị lời biện Q7 vô tình đổi semantics; Không vong chỉ là dấu tham khảo.
 - `hoang-hac-dao.spec.ts`: oracle `旬空`/`路空` trực tiếp với Giáp Tý, Giáp Thìn và Mậu Tý theo bảng Q31.
 - `date-selection.service.spec.ts`: cross-activity, same-month Hắc kị đúng năm nhóm, không ảnh hưởng `danhGia` gốc.
 

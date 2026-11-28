@@ -107,7 +107,7 @@ Chi tiết: `docs/research/q8-full-inventory.md`.
 | Nhật Kiến/Phá/Hợp/Hại/Hình | ORACLE_TESTED | IMPLEMENTED | Q7/Q31                                         |
 | Tứ Đại Cát Thời            | COMPARED      | BLOCKED     | cần model 24 vị trí/khắc giờ                   |
 | Quý Đăng Thiên Môn         | COMPARED      | BLOCKED     | cần Nguyệt tướng + sunrise/sunset + time model |
-| Ngũ Bất Ngộ                | ORACLE_TESTED | IMPLEMENTED | mapping Q7/Q31; regression #108                |
+| Ngũ Bất Ngộ                | ORACLE_TESTED | IMPLEMENTED | operational Q32; Q7 prose tension đã registry  |
 | Cửu Xú                     | COMPARED      | BLOCKED     | cần Nguyệt tướng tại instant giờ               |
 | Tuần trung Không vong      | ORACLE_TESTED | INFO_MARKER | không blanket veto                             |
 | Triệt lộ Không vong        | ORACLE_TESTED | INFO_MARKER | không blanket veto                             |
