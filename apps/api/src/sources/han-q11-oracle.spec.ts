@@ -20,6 +20,7 @@ import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from '../activities/mo-kho-xuat-hang-ti
 import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
+import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
@@ -73,6 +74,12 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
     ],
+  },
+  [LoaiCongViec.QUET_DON_NHA_CUA]: {
+    tieuDeHan: '掃舍宇',
+    anchor: 'KR3g0051_WYG_011-22b',
+    nen: ['TRUC:TRU', 'YEU_TO:NGU_LY'],
+    ky: [],
   },
   [LoaiCongViec.DAT_COI_XAY_GIA]: {
     tieuDeHan: '安碓磑',
@@ -826,6 +833,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.SUA_MONG_TAY_CHAN]: QUY_TAC_SUA_MONG_TAY_CHAN,
   [LoaiCongViec.SUA_BUONG_SAN_PHU]: QUY_TAC_SUA_BUONG_SAN_PHU,
   [LoaiCongViec.DAT_COI_XAY_GIA]: QUY_TAC_DAT_COI_XAY_GIA,
+  [LoaiCongViec.QUET_DON_NHA_CUA]: QUY_TAC_QUET_DON_NHA_CUA,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,

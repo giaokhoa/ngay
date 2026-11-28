@@ -20,6 +20,7 @@ import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from '../activities/mo-kho-xuat-hang-ti
 import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
+import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
@@ -54,6 +55,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.SUA_MONG_TAY_CHAN]: QUY_TAC_SUA_MONG_TAY_CHAN,
   [LoaiCongViec.SUA_BUONG_SAN_PHU]: QUY_TAC_SUA_BUONG_SAN_PHU,
   [LoaiCongViec.DAT_COI_XAY_GIA]: QUY_TAC_DAT_COI_XAY_GIA,
+  [LoaiCongViec.QUET_DON_NHA_CUA]: QUY_TAC_QUET_DON_NHA_CUA,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -69,14 +71,16 @@ const ACTIVITIES_WITH_TU_PHE_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.NHAP_HOC &&
     activity !== LoaiCongViec.TE_TU &&
     activity !== LoaiCongViec.CHINH_DUNG_CAT_TOC &&
-    activity !== LoaiCongViec.SUA_MONG_TAY_CHAN,
+    activity !== LoaiCongViec.SUA_MONG_TAY_CHAN &&
+    activity !== LoaiCongViec.QUET_DON_NHA_CUA,
 );
 const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
   (activity) =>
     activity !== LoaiCongViec.NHAP_HOC &&
     activity !== LoaiCongViec.TE_TU &&
     activity !== LoaiCongViec.GIAI_TRU &&
-    activity !== LoaiCongViec.CAU_Y_TRI_BENH,
+    activity !== LoaiCongViec.CAU_Y_TRI_BENH &&
+    activity !== LoaiCongViec.QUET_DON_NHA_CUA,
 );
 const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
   (activity) =>
@@ -188,6 +192,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.MO_KHO_XUAT_HANG_TIEN]: false,
       [LoaiCongViec.SUA_BUONG_SAN_PHU]: false,
       [LoaiCongViec.DAT_COI_XAY_GIA]: false,
+      [LoaiCongViec.QUET_DON_NHA_CUA]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -240,6 +245,39 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('掃舍宇: 除日/除神 are Nên while ordinary 月破/四廢 remain non-Kị', () => {
+    for (const factor of [MaYeuTo.NGUYET_PHA, MaYeuTo.TU_PHE]) {
+      const result = danhGia(LoaiCongViec.QUET_DON_NHA_CUA, {
+        truc: ThapNhiTruc.TRU,
+        yeuTo: [factor],
+      });
+      expect(result.coNen).toBe(true);
+      expect(result.coKy).toBe(false);
+    }
+    const truThan = danhGia(LoaiCongViec.QUET_DON_NHA_CUA, {
+      yeuTo: [MaYeuTo.NGU_LY],
+    });
+    expect(truThan.coNen).toBe(true);
+    expect(truThan.coKy).toBe(false);
+  });
+
+  it('掃舍宇 stays exempt from 無祿 and 上朔四離四絶晦日 restrictions', () => {
+    for (const factor of [
+      MaYeuTo.VO_LOC,
+      MaYeuTo.THUONG_SOC,
+      MaYeuTo.TU_LY,
+      MaYeuTo.TU_TUYET,
+      MaYeuTo.HOI_NHAT,
+    ] as const) {
+      const result = danhGia(LoaiCongViec.QUET_DON_NHA_CUA, {
+        truc: ThapNhiTruc.TRU,
+        yeuTo: [factor],
+      });
+      expect(result.coNen).toBe(true);
+      expect(result.coKy).toBe(false);
+    }
   });
 
   it('安碓磑: 平日/死神 are not baseline Kị while 三合/開日 are Nên', () => {

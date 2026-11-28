@@ -13,6 +13,7 @@ import { TrangNapTai } from './pages/nap-tai-page';
 import { TrangMoKhoXuatHangTien } from './pages/mo-kho-xuat-hang-tien-page';
 import { TrangSuaBuongSanPhu } from './pages/sua-buong-san-phu-page';
 import { TrangDatCoiXayGia } from './pages/dat-coi-xay-gia-page';
+import { TrangQuetDonNhaCua } from './pages/quet-don-nha-cua-page';
 import { TrangGiaiTru } from './pages/giai-tru-page';
 import { TrangDiChuyen } from './pages/moving-page';
 import { TrangDongTho, TrangSuaCungThat } from './pages/earthwork-pages';
@@ -111,6 +112,10 @@ export const boDinhTuyen = createBrowserRouter([
   {
     path: DUONG_DAN.DAT_COI_XAY_GIA,
     Component: TrangDatCoiXayGia,
+  },
+  {
+    path: DUONG_DAN.QUET_DON_NHA_CUA,
+    Component: TrangQuetDonNhaCua,
   },
   {
     path: DUONG_DAN.DONG_THO,
