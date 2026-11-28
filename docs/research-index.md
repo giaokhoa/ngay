@@ -50,6 +50,14 @@ Chi tiết core: `docs/research/core-monthly-factors.md`. Inventory đủ 40/40 
 
 Chi tiết core: `docs/research/virtue-special-day-factors.md`. Inventory đủ Q5: `docs/research/q5-full-inventory.md`.
 
+## Foundations — Quyển 1
+
+| Scope                              | Trạng thái                   | Product                                                                                   |
+| ---------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------- |
+| 17/17 mục Việt = 28/28 heading Hán | INVENTORIED / ORACLE_PARTIAL | Can/Chi, Ngũ Thử/Ngũ Hổ, Thổ Vượng implemented; phần còn lại foundation/reference/spatial |
+
+Chi tiết: `docs/research/q1-full-inventory.md`.
+
 ## Foundations — Quyển 2
 
 | Scope         | Trạng thái  | Product        | Ghi chú                                                                 |
