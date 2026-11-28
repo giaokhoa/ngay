@@ -68,23 +68,17 @@ Nguồn Việt:
 Hán bản Quyển 6 xác nhận nhóm:
 `三合, 驛馬, 劫煞, 災煞, 月煞, 月刑, 月害, 六合, 五富, 天倉, 天賊`.
 
-### Chưa kéo vào batch đầu
+### Trạng thái sau audit đầy đủ
 
-Các yếu tố còn lại của Quyển 6 như:
+Quyển 6 đã được inventory đủ **40/40 mục** tại `docs/research/q6-full-inventory.md`.
 
-- Đại thời/Đại bại/Hàm trì;
-- Du họa;
-- Thiên lại/Trí tử;
-- Binh cát;
-- Yếu an, Ngọc vũ, Kim đường, Kính an, Phổ hộ, Phúc sinh;
-- Dương đức, Âm đức, Thiên mã;
-- Binh cấm, Địa nang, Thổ phù;
-- Đại sát, Quy kị, Vãng vong, Khí vãng vong;
-- Thượng sóc, Phản chi;
-- Tứ ly/Tứ tuyệt;
-- Ngày Nguyệt kị.
+- 18 factor đang production đã có Hán oracle độc lập;
+- các mục công thức rõ nhưng không thuộc 7 exact Q11 vertical được giữ `OUT_OF_SCOPE`;
+- Cửu Thần Tổng Luận là `META`, không phải calculator riêng;
+- Thượng Sóc bị `BLOCKED_CONTEXT` vì factor context chưa mang Can năm;
+- Phản Chi và Ngày Nguyệt Kị bị `BLOCKED_CALENDAR` vì cần ngày sóc/ngày âm lịch.
 
-Không bỏ chúng; chỉ tách khỏi batch đầu để review/test nhỏ.
+Không còn mục Q6 “để sau nhưng chưa rõ vì sao”.
 
 ## Phase 2A.2 — Virtue and special-day factors, Quyển 5
 
