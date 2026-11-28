@@ -151,6 +151,12 @@ describe('XemNgayController', () => {
     ).toBe(true);
   });
 
+  it('trả kết quả MAY_DO có exact Q11 + supplemental Q10 provenance', () => {
+    const result = taoController().xemMayDo('2026-11-27T05:00:00.000Z', 'Asia/Ho_Chi_Minh');
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'MAY_DO')).toBe(true);
+  });
+
   it('từ chối thiếu input', () => {
     expect(() => taoController().xemCuoiHoi(undefined, 'Asia/Ho_Chi_Minh')).toThrow(
       BadRequestException,
@@ -204,12 +210,12 @@ describe('XemNgayController XUAT_HANH endpoint', () => {
 });
 
 describe('XemNgayController tổng quan tháng', () => {
-  it('nhận ngày sinh đầy đủ và trả đủ mười chín nhóm việc', () => {
+  it('nhận ngày sinh đầy đủ và trả đủ hai mươi nhóm việc', () => {
     const result = taoController().xemTongQuanThang('1990-02-03', '2026', '11', 'Asia/Ho_Chi_Minh');
 
     expect(result.nguoi.canChiNamSinh).toEqual({ can: 'KY', chi: 'TI' });
     expect(result.ngay).toHaveLength(30);
-    expect(Object.keys(result.ngay[0]?.theoCongViec ?? {})).toHaveLength(19);
+    expect(Object.keys(result.ngay[0]?.theoCongViec ?? {})).toHaveLength(20);
     expect(JSON.stringify(result)).not.toMatch(/\bQ\d+\b|Quyển\s+\d+/i);
   });
 
