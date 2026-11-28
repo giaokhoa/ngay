@@ -28,10 +28,16 @@ describe('production web server', () => {
     const server = taoMayChuWeb({ distDir, apiOrigin: 'http://127.0.0.1:9' });
     const baseUrl = await listen(server);
 
-    const page = await fetch(baseUrl + '/rules');
+    const page = await fetch(baseUrl + '/cuoi-hoi');
     expect(page.status).toBe(200);
     expect(await page.text()).toContain('<div id="root">demo</div>');
     expect(page.headers.get('content-security-policy')).toContain("default-src 'self'");
+    expect(page.headers.get('content-security-policy')).toContain(
+      "script-src 'self' https://static.cloudflareinsights.com",
+    );
+    expect(page.headers.get('content-security-policy')).toContain(
+      "connect-src 'self' https://cloudflareinsights.com",
+    );
     expect(page.headers.get('x-frame-options')).toBe('DENY');
     expect(page.headers.get('cache-control')).toBe('no-cache');
     expect(page.headers.get('x-request-id')).toBeTruthy();

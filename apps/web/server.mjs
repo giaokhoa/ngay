@@ -198,7 +198,7 @@ function datSecurityHeaders(response) {
   response.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
   response.setHeader(
     'Content-Security-Policy',
-    "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'",
+    "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; base-uri 'self'; frame-ancestors 'none'; object-src 'none'",
   );
 }
 
