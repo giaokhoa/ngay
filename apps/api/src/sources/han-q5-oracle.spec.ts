@@ -35,6 +35,7 @@ import { DINH_NGHIA_CUU_KHONG, DINH_NGHIA_TU_HAO } from '../factors/khai-truong-
 import { MaQuaiThienDuc } from '../factors/domain/heavenly-virtue-position';
 import { CAC_NGAY_CANDIDATE_VO_LOC } from '../factors/vo-loc-definition';
 import { DINH_NGHIA_GIAI_THAN } from '../factors/q5-giai-than-definition';
+import { CHI_NGAY_NGU_HU_THEO_MUA } from '../factors/q5-ngu-hu-definition';
 
 const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
 const { GIAP, AT, BINH, DINH, MAU, KY, CANH, TAN, NHAM, QUY } = ThienCan;
@@ -222,6 +223,15 @@ describe('independent Hán Q5 oracle — WYG / Kanripo KR3g0051', () => {
       [Mua.HA]: THIN,
       [Mua.THU]: TY,
       [Mua.DONG]: DAN,
+    });
+  });
+
+  it('五虚 matches 春巳酉丑 夏申子辰 秋亥卯未 冬寅午戌', () => {
+    expect(CHI_NGAY_NGU_HU_THEO_MUA).toEqual({
+      [Mua.XUAN]: [TI, DAU, SUU],
+      [Mua.HA]: [THAN, TY, THIN],
+      [Mua.THU]: [HOI, MAO, MUI],
+      [Mua.DONG]: [DAN, NGO, TUAT],
     });
   });
 

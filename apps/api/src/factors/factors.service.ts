@@ -24,6 +24,7 @@ import {
 import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
 import { DINH_NGHIA_MAU_THUONG } from './maternal-storehouse-definition';
 import { DINH_NGHIA_NGU_HOP, DINH_NGHIA_NGU_LY } from './q5-fixed-branch-factor-definitions';
+import { DINH_NGHIA_NGU_HU } from './q5-ngu-hu-definition';
 import { DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6 } from './q6-ritual-factor-definitions';
 import { DINH_NGHIA_DU_HOA } from './q6-du-hoa-definition';
 import { DINH_NGHIA_GIAI_THAN } from './q5-giai-than-definition';
@@ -168,6 +169,10 @@ export class TinhYeuToNgayService {
 
     if (khopCanChi(DINH_NGHIA_NGU_MO.canChiNgayTheoChiThang[boiCanh.chiThang], boiCanh)) {
       ketQua.push(DINH_NGHIA_NGU_MO);
+    }
+
+    if (DINH_NGHIA_NGU_HU.chiNgayTheoMua[mua].includes(boiCanh.chiNgay)) {
+      ketQua.push(DINH_NGHIA_NGU_HU);
     }
 
     if (DINH_NGHIA_BAT_CHUYEN.canChiNgay.some((canChi) => khopCanChi(canChi, boiCanh))) {

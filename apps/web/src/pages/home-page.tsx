@@ -221,6 +221,7 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   TU_KY: 'Tứ Kị',
   TU_CUNG: 'Tứ Cùng',
   NGU_MO: 'Ngũ Mộ',
+  NGU_HU: 'Ngũ Hư',
   VANG_VONG: 'Vãng Vong',
   BAT_CHUYEN: 'Bát Chuyên',
   O_PHE: 'Ô Phệ',
