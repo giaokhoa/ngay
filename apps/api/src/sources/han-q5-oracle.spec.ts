@@ -27,6 +27,7 @@ import {
   DINH_NGHIA_TU_PHE,
 } from '../factors/q5-wedding-blocker-definitions';
 import { MaYeuTo } from '../factors/domain/factor-code';
+import { DINH_NGHIA_CUU_KHONG, DINH_NGHIA_TU_HAO } from '../factors/khai-truong-factor-definitions';
 import { MaQuaiThienDuc } from '../factors/domain/heavenly-virtue-position';
 
 const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
@@ -230,6 +231,32 @@ describe('independent Hán Q5 oracle — WYG / Kanripo KR3g0051', () => {
       [Mua.HA]: DAU,
       [Mua.THU]: TY,
       [Mua.DONG]: MAO,
+    });
+  });
+
+  it('九空 matches 正月辰逆行四季', () => {
+    expect(DINH_NGHIA_CUU_KHONG.chiNgayTheoChiThang).toEqual({
+      [DAN]: [THIN],
+      [MAO]: [SUU],
+      [THIN]: [TUAT],
+      [TI]: [MUI],
+      [NGO]: [THIN],
+      [MUI]: [SUU],
+      [THAN]: [TUAT],
+      [DAU]: [MUI],
+      [TUAT]: [THIN],
+      [HOI]: [SUU],
+      [TY]: [TUAT],
+      [SUU]: [MUI],
+    });
+  });
+
+  it('四耗 matches 春壬子 夏乙卯 秋戊午 冬辛酉', () => {
+    expect(mapCanChiTheoMua(DINH_NGHIA_TU_HAO.canChiNgayTheoMua)).toEqual({
+      [Mua.XUAN]: 'NHAM:TY',
+      [Mua.HA]: 'AT:MAO',
+      [Mua.THU]: 'MAU:NGO',
+      [Mua.DONG]: 'TAN:DAU',
     });
   });
 
