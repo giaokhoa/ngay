@@ -180,7 +180,8 @@ export function TrangChu() {
             required
           />
           <small>
-            Ngày sinh dùng để tự xác định năm Can-Chi quanh mốc Lập Xuân; không dựng Bát Tự giả.
+            Ngày sinh dùng để xác định năm Can-Chi quanh mốc Lập Xuân; nếu sinh đúng ngày giao tiết,
+            hệ thống sẽ yêu cầu thêm giờ sinh thay vì đoán.
           </small>
         </label>
 
@@ -406,7 +407,13 @@ function ChiTietTongQuanNgay({
 
       <div className="luoi-danh-gia-cong-viec">
         {danhSach.map((item) => (
-          <TheDanhGiaCongViec key={item.ma} item={item} danhGia={ngay.theoCongViec[item.ma]} />
+          <TheDanhGiaCongViec
+            key={item.ma}
+            item={item}
+            danhGia={ngay.theoCongViec[item.ma]}
+            ngaySinh={ngaySinh}
+            ngayDanSu={ngay.ngayDanSu}
+          />
         ))}
       </div>
     </section>
@@ -416,10 +423,18 @@ function ChiTietTongQuanNgay({
 function TheDanhGiaCongViec({
   item,
   danhGia,
+  ngaySinh,
+  ngayDanSu,
 }: {
   item: (typeof CONG_VIEC)[number];
   danhGia: DanhGiaCongViecTongQuanApi;
+  ngaySinh: string;
+  ngayDanSu: string;
 }) {
+  const query = new URLSearchParams({
+    ngaySinh,
+    thang: ngayDanSu.slice(0, 7),
+  });
   return (
     <article className={'the-danh-gia-cong-viec muc-' + danhGia.xepLoai.toLowerCase()}>
       <div className="dau-the-danh-gia">
@@ -459,7 +474,7 @@ function TheDanhGiaCongViec({
         ) : null}
       </div>
 
-      <Link className="mo-chi-tiet-cong-viec" to={item.to}>
+      <Link className="mo-chi-tiet-cong-viec" to={item.to + '?' + query.toString()}>
         Xem kỹ việc này →
       </Link>
     </article>

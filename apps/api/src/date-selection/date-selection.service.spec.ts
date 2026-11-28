@@ -180,6 +180,12 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
     expect(result.ngay).toHaveLength(30);
   });
 
+  it('không giả định 12 giờ trưa khi sinh đúng ngày Lập Xuân', () => {
+    expect(() => taoService().xemTongQuanThang('2026-02-04', 2026, 11, 'Asia/Ho_Chi_Minh')).toThrow(
+      /Sinh đúng ngày Lập Xuân cần giờ sinh/,
+    );
+  });
+
   it('cùng một ngày giữ kết luận độc lập cho từng công việc', () => {
     const result = taoService().xemTongQuanThang('1990-06-15', 2026, 11, 'Asia/Ho_Chi_Minh');
 

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   taoUrlChiTietNgay,
+  taoUrlChiTietNgayTheoNgaySinh,
   taoUrlTongQuanThang,
   taoUrlXemAnTang,
   taoUrlXemCuoiHoi,
@@ -10,6 +11,7 @@ import {
   taoUrlXemKhaiTruong,
   taoUrlXemSuaCungThat,
   taoUrlXemThang,
+  taoUrlXemThangTheoNgaySinh,
   taoUrlXemXuatHanh,
 } from './date-selection';
 
@@ -40,6 +42,33 @@ describe('date-selection URLs', () => {
     expect(parsed.searchParams.get('nam')).toBe('2026');
     expect(parsed.searchParams.get('thang')).toBe('11');
     expect(parsed.searchParams.get('congViec')).toBeNull();
+  });
+
+  it('tạo query drill-down tháng với ngày sinh đầy đủ', () => {
+    const url = taoUrlXemThangTheoNgaySinh('CUOI_HOI', 2026, 11, 'Asia/Ho_Chi_Minh', [
+      '1990-02-03',
+      '1992-06-10',
+    ]);
+
+    const parsed = new URL(url, 'https://ngay.local');
+    expect(parsed.pathname).toBe('/date-selection/thang');
+    expect(parsed.searchParams.getAll('ngaySinh')).toEqual(['1990-02-03', '1992-06-10']);
+    expect(parsed.searchParams.get('namSinh')).toBeNull();
+    expect(parsed.searchParams.get('truocLapXuan')).toBeNull();
+  });
+
+  it('tạo query chi tiết ngày drill-down với ngày sinh đầy đủ', () => {
+    const url = taoUrlChiTietNgayTheoNgaySinh(
+      'XUAT_HANH',
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+      ['1990-02-03'],
+    );
+
+    const parsed = new URL(url, 'https://ngay.local');
+    expect(parsed.pathname).toBe('/date-selection/chi-tiet');
+    expect(parsed.searchParams.getAll('ngaySinh')).toEqual(['1990-02-03']);
+    expect(parsed.searchParams.get('namSinh')).toBeNull();
   });
 
   it('tạo query chi tiết ngày với năm sinh', () => {

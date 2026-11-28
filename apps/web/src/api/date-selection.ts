@@ -183,6 +183,7 @@ export interface KetQuaXemThangApi {
   muiGio: string;
   nguoiLienQuan: readonly {
     namSinh: number;
+    ngaySinh?: string;
     truocLapXuan: boolean;
     canChiNamSinh: { can: string; chi: string };
   }[];
@@ -231,6 +232,86 @@ export async function xemTongQuanThang(
   }
 
   return (await response.json()) as KetQuaTongQuanThangApi;
+}
+
+export function taoUrlXemThangTheoNgaySinh(
+  congViec: string,
+  nam: number,
+  thang: number,
+  muiGio: string,
+  ngaySinh: readonly string[],
+): string {
+  const query = new URLSearchParams({
+    congViec,
+    nam: String(nam),
+    thang: String(thang),
+    muiGio,
+  });
+
+  for (const value of ngaySinh) {
+    query.append('ngaySinh', value);
+  }
+
+  return '/date-selection/thang?' + query.toString();
+}
+
+export function taoUrlChiTietNgayTheoNgaySinh(
+  congViec: string,
+  thoiDiem: Date,
+  muiGio: string,
+  ngaySinh: readonly string[],
+): string {
+  const query = new URLSearchParams({
+    congViec,
+    thoiDiem: thoiDiem.toISOString(),
+    muiGio,
+  });
+
+  for (const value of ngaySinh) {
+    query.append('ngaySinh', value);
+  }
+
+  return '/date-selection/chi-tiet?' + query.toString();
+}
+
+export async function xemThangTheoNgaySinh(
+  congViec: string,
+  nam: number,
+  thang: number,
+  muiGio: string,
+  ngaySinh: readonly string[],
+  signal?: AbortSignal,
+): Promise<KetQuaXemThangApi> {
+  const response = await fetch(taoUrlXemThangTheoNgaySinh(congViec, nam, thang, muiGio, ngaySinh), {
+    signal,
+  });
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as { message?: string } | null;
+    throw new Error(body?.message ?? 'Không thể xem tháng (HTTP ' + response.status + ')');
+  }
+
+  return (await response.json()) as KetQuaXemThangApi;
+}
+
+export async function xemChiTietNgayTheoNgaySinh(
+  congViec: string,
+  thoiDiem: Date,
+  muiGio: string,
+  ngaySinh: readonly string[],
+  signal?: AbortSignal,
+): Promise<KetQuaChiTietNgayApi> {
+  const response = await fetch(
+    taoUrlChiTietNgayTheoNgaySinh(congViec, thoiDiem, muiGio, ngaySinh),
+    { signal },
+  );
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as { message?: string } | null;
+    throw new Error(body?.message ?? 'Không thể xem chi tiết ngày (HTTP ' + response.status + ')');
+  }
+
+  return (await response.json()) as KetQuaChiTietNgayApi;
 }
 
 export function taoUrlXemThang(

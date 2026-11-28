@@ -106,6 +106,7 @@ export class XemNgayController {
     @Query('muiGio') muiGio: string | undefined,
     @Query('namSinh') namSinhQuery: string | string[] | undefined,
     @Query('truocLapXuan') truocLapXuanQuery: string | string[] | undefined,
+    @Query('ngaySinh') ngaySinhQuery?: string | string[],
   ) {
     const congViec = docCongViec(congViecText);
     const nam = docSoNguyen('nam', namText, 1, 9999);
@@ -114,8 +115,14 @@ export class XemNgayController {
       throw new BadRequestException('Cần múi giờ IANA');
     }
 
-    const nguoiLienQuan = docNguoiLienQuan(congViec, namSinhQuery, truocLapXuanQuery);
+    const ngaySinh = docNgaySinhLienQuan(congViec, ngaySinhQuery);
+    if (ngaySinh.length > 0) {
+      return this.goi(() =>
+        this.xemNgay.xemThangTheoNgaySinh(nam, thang, muiGio, congViec, ngaySinh),
+      );
+    }
 
+    const nguoiLienQuan = docNguoiLienQuan(congViec, namSinhQuery, truocLapXuanQuery);
     return this.goi(() => this.xemNgay.xemThang(nam, thang, muiGio, congViec, nguoiLienQuan));
   }
 
@@ -126,13 +133,19 @@ export class XemNgayController {
     @Query('muiGio') muiGio: string | undefined,
     @Query('namSinh') namSinhQuery: string | string[] | undefined,
     @Query('truocLapXuan') truocLapXuanQuery: string | string[] | undefined,
+    @Query('ngaySinh') ngaySinhQuery?: string | string[],
   ) {
     const congViec = docCongViec(congViecText);
     const { thoiDiem, muiGioHopLe } = docInput(thoiDiemText, muiGio);
-    const nguoiLienQuan = docNguoiLienQuan(congViec, namSinhQuery, truocLapXuanQuery);
+    const ngaySinh = docNgaySinhLienQuan(congViec, ngaySinhQuery);
+    const nguoiLienQuan =
+      ngaySinh.length > 0 ? null : docNguoiLienQuan(congViec, namSinhQuery, truocLapXuanQuery);
 
     return this.goi(() => {
-      const result = this.xemNgay.xemChiTietNgay(thoiDiem, muiGioHopLe, congViec, nguoiLienQuan);
+      const result =
+        ngaySinh.length > 0
+          ? this.xemNgay.xemChiTietNgayTheoNgaySinh(thoiDiem, muiGioHopLe, congViec, ngaySinh)
+          : this.xemNgay.xemChiTietNgay(thoiDiem, muiGioHopLe, congViec, nguoiLienQuan ?? []);
 
       return {
         ketQuaNgay: taoKetQuaCongKhai(result.ketQuaNgay),
@@ -229,6 +242,25 @@ function docCongViec(value: string | undefined): LoaiCongViec {
     throw new BadRequestException('Công việc không hợp lệ');
   }
   return value as LoaiCongViec;
+}
+
+function docNgaySinhLienQuan(
+  congViec: LoaiCongViec,
+  ngaySinhQuery: string | string[] | undefined,
+): readonly string[] {
+  const ngaySinh = chuyenThanhMang(ngaySinhQuery);
+  if (ngaySinh.length === 0) return [];
+
+  const soNguoiBatBuoc = congViec === LoaiCongViec.CUOI_HOI ? 2 : 1;
+  if (ngaySinh.length !== soNguoiBatBuoc) {
+    throw new BadRequestException(
+      congViec === LoaiCongViec.CUOI_HOI
+        ? 'Cưới hỏi cần ngày sinh của hai người'
+        : 'Cần ngày sinh của người chủ sự',
+    );
+  }
+
+  return ngaySinh.map((value) => docNgaySinh(value));
 }
 
 function docNguoiLienQuan(

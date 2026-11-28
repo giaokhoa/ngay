@@ -8,6 +8,7 @@ import {
   tinhNgayDanSuTaiMuiGio,
 } from '../calendar/civil-date-timezone';
 import { CanChi } from '../calendar/domain/sexagenary-cycle';
+import { TietKhi } from '../calendar/domain/solar-term';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { DanhGiaNgayService } from '../evaluation/evaluation.service';
 import { KetQuaDanhGia, TrangThaiDongGop } from '../evaluation/evaluation-domain';
@@ -51,6 +52,8 @@ export type KetQuaXemNgayAnTang = KetQuaXemNgay;
 export interface NguoiLienQuanXemNgay {
   namSinh: number;
   truocLapXuan?: boolean;
+  ngaySinh?: string;
+  canChiNamSinh?: CanChi;
 }
 
 const TAT_CA_CONG_VIEC = Object.values(LoaiCongViec) as readonly LoaiCongViec[];
@@ -127,6 +130,7 @@ export interface KetQuaXemThang {
   muiGio: string;
   nguoiLienQuan: readonly {
     namSinh: number;
+    ngaySinh?: string;
     truocLapXuan: boolean;
     canChiNamSinh: CanChi;
   }[];
@@ -171,6 +175,20 @@ export class XemNgayService {
     return this.xem(thoiDiem, muiGio, LoaiCongViec.AN_TANG);
   }
 
+  xemChiTietNgayTheoNgaySinh(
+    thoiDiem: Date,
+    muiGio: string,
+    congViec: LoaiCongViec,
+    ngaySinh: readonly string[],
+  ): KetQuaChiTietNgay {
+    return this.xemChiTietNgay(
+      thoiDiem,
+      muiGio,
+      congViec,
+      ngaySinh.map((value) => this.taoNguoiLienQuanTuNgaySinh(value, muiGio)),
+    );
+  }
+
   xemChiTietNgay(
     thoiDiem: Date,
     muiGio: string,
@@ -205,9 +223,9 @@ export class XemNgayService {
       throw new RangeError('Tháng xem phải từ 1 đến 12');
     }
 
-    const thoiDiemSinh = taoThoiDiemGiuaNgayTaiMuiGio(ngaySinh, muiGio);
-    const namSinh = Number(ngaySinh.slice(0, 4));
-    const canChiNamSinh = this.lich.tinhCanChiNamTaiThoiDiem(thoiDiemSinh);
+    const nguoiDangXem = this.taoNguoiLienQuanTuNgaySinh(ngaySinh, muiGio);
+    const namSinh = nguoiDangXem.namSinh;
+    const canChiNamSinh = nguoiDangXem.canChiNamSinh!;
     const soNgay = new Date(Date.UTC(nam, thang, 0)).getUTCDate();
     const ngay: NgayTongQuan[] = [];
 
@@ -296,6 +314,22 @@ export class XemNgayService {
     };
   }
 
+  xemThangTheoNgaySinh(
+    nam: number,
+    thang: number,
+    muiGio: string,
+    congViec: LoaiCongViec,
+    ngaySinh: readonly string[],
+  ): KetQuaXemThang {
+    return this.xemThang(
+      nam,
+      thang,
+      muiGio,
+      congViec,
+      ngaySinh.map((value) => this.taoNguoiLienQuanTuNgaySinh(value, muiGio)),
+    );
+  }
+
   xemThang(
     nam: number,
     thang: number,
@@ -333,9 +367,9 @@ export class XemNgayService {
       const xungTuoi = nguoiLienQuan
         .map((nguoi, nguoiIndex) => {
           const kiemTra = [
-            xetNamSinhVoiTru(nguoi.namSinh, canChiNam, 'NAM', nguoi.truocLapXuan ?? false),
-            xetNamSinhVoiTru(nguoi.namSinh, canChiThang, 'THANG', nguoi.truocLapXuan ?? false),
-            xetNamSinhVoiTru(nguoi.namSinh, ketQua.canChiNgay, 'NGAY', nguoi.truocLapXuan ?? false),
+            xetNguoiLienQuanVoiTru(nguoi, canChiNam, 'NAM'),
+            xetNguoiLienQuanVoiTru(nguoi, canChiThang, 'THANG'),
+            xetNguoiLienQuanVoiTru(nguoi, ketQua.canChiNgay, 'NGAY'),
           ].filter((item) => item.xung);
 
           return {
@@ -343,12 +377,7 @@ export class XemNgayService {
             namSinh: nguoi.namSinh,
             canChiNamSinh:
               kiemTra[0]?.canChiNamSinh ??
-              xetNamSinhVoiTru(
-                nguoi.namSinh,
-                ketQua.canChiNgay,
-                'NGAY',
-                nguoi.truocLapXuan ?? false,
-              ).canChiNamSinh,
+              xetNguoiLienQuanVoiTru(nguoi, ketQua.canChiNgay, 'NGAY').canChiNamSinh,
             xung: kiemTra,
           };
         })
@@ -383,11 +412,32 @@ export class XemNgayService {
       muiGio,
       nguoiLienQuan: nguoiLienQuan.map((nguoi) => ({
         namSinh: nguoi.namSinh,
+        ngaySinh: nguoi.ngaySinh,
         truocLapXuan: nguoi.truocLapXuan ?? false,
-        canChiNamSinh: tinhCanChiNamSinh(nguoi.namSinh, nguoi.truocLapXuan ?? false),
+        canChiNamSinh:
+          nguoi.canChiNamSinh ?? tinhCanChiNamSinh(nguoi.namSinh, nguoi.truocLapXuan ?? false),
       })),
       ngay,
       thongKe,
+    };
+  }
+
+  private taoNguoiLienQuanTuNgaySinh(ngaySinh: string, muiGio: string): NguoiLienQuanXemNgay {
+    const namSinh = Number(ngaySinh.slice(0, 4));
+    const lapXuan = this.lich.tinhThoiDiemTietKhi(namSinh, TietKhi.LAP_XUAN);
+    const ngayLapXuan = tinhNgayDanSuTaiMuiGio(lapXuan, muiGio);
+
+    if (ngaySinh === ngayLapXuan) {
+      throw new RangeError(
+        'Sinh đúng ngày Lập Xuân cần giờ sinh để xác định năm Can-Chi trước hay sau giao tiết',
+      );
+    }
+
+    const thoiDiemSinh = taoThoiDiemGiuaNgayTaiMuiGio(ngaySinh, muiGio);
+    return {
+      ngaySinh,
+      namSinh,
+      canChiNamSinh: this.lich.tinhCanChiNamTaiThoiDiem(thoiDiemSinh),
     };
   }
 
@@ -430,6 +480,18 @@ export class XemNgayService {
       giaiThich: taoGiaiThich(danhGia),
     };
   }
+}
+
+function xetNguoiLienQuanVoiTru(
+  nguoi: NguoiLienQuanXemNgay,
+  canChiTru: CanChi,
+  tru: Parameters<typeof xetCanChiNamSinhVoiTru>[3],
+): KetQuaXetNamSinh {
+  if (nguoi.canChiNamSinh) {
+    return xetCanChiNamSinhVoiTru(nguoi.namSinh, nguoi.canChiNamSinh, canChiTru, tru);
+  }
+
+  return xetNamSinhVoiTru(nguoi.namSinh, canChiTru, tru, nguoi.truocLapXuan ?? false);
 }
 
 function xepLoaiNgay(

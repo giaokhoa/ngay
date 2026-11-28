@@ -619,21 +619,6 @@ details.the[open] summary {
   text-transform: uppercase;
 }
 
-.chon-lap-xuan {
-  display: flex !important;
-  grid-template-columns: none !important;
-  gap: 8px !important;
-  align-items: center;
-  color: #665e52;
-  font-weight: 700 !important;
-}
-
-.chon-lap-xuan input {
-  width: 17px;
-  height: 17px;
-  margin: 0;
-}
-
 .hanh-dong-xem-thang {
   grid-column: 1 / -1;
   display: flex;

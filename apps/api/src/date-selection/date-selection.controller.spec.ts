@@ -112,6 +112,74 @@ describe('XemNgayController tổng quan tháng', () => {
   });
 });
 
+describe('XemNgayController drill-down theo ngày sinh đầy đủ', () => {
+  it('tự suy Lập Xuân cho trang công việc và giữ ngày sinh trong response', () => {
+    const result = taoController().xemThang(
+      'KHAI_TRUONG',
+      '2026',
+      '11',
+      'Asia/Ho_Chi_Minh',
+      undefined,
+      undefined,
+      '1990-02-03',
+    );
+
+    expect(result.nguoiLienQuan[0]?.ngaySinh).toBe('1990-02-03');
+    expect(result.nguoiLienQuan[0]?.canChiNamSinh).toEqual({
+      can: 'KY',
+      chi: 'TI',
+    });
+  });
+
+  it('báo cần giờ sinh nếu sinh đúng ngày Lập Xuân', () => {
+    expect(() =>
+      taoController().xemThang(
+        'KHAI_TRUONG',
+        '2026',
+        '11',
+        'Asia/Ho_Chi_Minh',
+        undefined,
+        undefined,
+        '2026-02-04',
+      ),
+    ).toThrow(BadRequestException);
+  });
+
+  it('cưới hỏi nhận hai ngày sinh đầy đủ', () => {
+    const result = taoController().xemThang(
+      'CUOI_HOI',
+      '2026',
+      '11',
+      'Asia/Ho_Chi_Minh',
+      undefined,
+      undefined,
+      ['1990-02-03', '1992-06-10'],
+    );
+
+    expect(result.nguoiLienQuan.map((item) => item.ngaySinh)).toEqual(['1990-02-03', '1992-06-10']);
+  });
+
+  it('chi tiết ngày dùng cùng Can-Chi năm sinh cho lớp chọn giờ', () => {
+    const result = taoController().xemChiTiet(
+      'XUAT_HANH',
+      '2026-11-27T05:00:00.000Z',
+      'Asia/Ho_Chi_Minh',
+      undefined,
+      undefined,
+      '1984-06-15',
+    );
+
+    expect(result.gio).toHaveLength(12);
+    expect(
+      result.gio.some((item) =>
+        item.xungTuoi.some(
+          (xung) => xung.canChiNamSinh.can === 'GIAP' && xung.canChiNamSinh.chi === 'TY',
+        ),
+      ),
+    ).toBe(true);
+  });
+});
+
 describe('XemNgayController xem tháng theo năm sinh', () => {
   it('cưới hỏi yêu cầu và nhận hai năm sinh', () => {
     const result = taoController().xemThang(
