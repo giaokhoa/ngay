@@ -17,7 +17,7 @@ Status: HAN_INVENTORIED / VIET_EXACT_VERIFIED_WITH_DISCREPANCY / ORACLE_PARTIAL
 | 月吉神總論           | REFERENCE_SEMANTIC            | tổng luận cát thần tháng; không override Nghĩa lệ Q4–Q6                                 |
 | 月凶神總論           | REFERENCE_SEMANTIC            | exact Việt mục 2 gộp hai heading                                                        |
 | 諸家年月日吉凶神附論 | SOURCE_REVIEW                 | so sánh các nhà, không standalone calculator                                            |
-| 制煞要法             | REFERENCE_CONFLICT_POLICY     | nguyên tắc chế hóa; không thay exact Q10 semantics của 26 vertical                      |
+| 制煞要法             | REFERENCE_CONFLICT_POLICY     | nguyên tắc chế hóa; không thay exact Q10 semantics của 27 vertical                      |
 | 四柱法               | PARTIAL_FOUNDATION            | calendar đã có năm/tháng/ngày/giờ Can Chi, nhưng chưa claim full Q34 four-pillar method |
 | 用日法               | REFERENCE / PARTIAL           | ngày-selection hiện dựa Q4–Q11 exact rules, không claim encode toàn mục này             |
 | 用時法               | ORACLE_TESTED_PARTIAL         | selected-hour: trợ ngày, hợp/lộc/mã; tránh phá/hình/Ngũ Bất Ngộ                         |

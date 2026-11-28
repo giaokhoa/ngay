@@ -76,8 +76,8 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model                    |
 |     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain                       |
 |     9 | 立成        | ORACLE_MOT_PHAN | full structure; oracle subset gồm 長星/短星 exact table cross-check Q19–30, cùng các identity production khác   |
-|    10 | 宜忌        | ORACLE_MOT_PHAN | 51/51 mục Việt = 99/99 heading Hán inventoried; semantic oracle exact cho 26 current vertical                   |
-|    11 | 用事        | ORACLE_MOT_PHAN | 73/73 canonical activity sections inventoried; 26 oracle-tested, 47 out-of-scope current product                |
+|    10 | 宜忌        | ORACLE_MOT_PHAN | 51/51 mục Việt = 99/99 heading Hán inventoried; semantic oracle exact cho 27 current vertical                   |
+|    11 | 用事        | ORACLE_MOT_PHAN | 73/73 canonical activity sections inventoried; 27 oracle-tested, 46 out-of-scope current product                |
 |    12 | 公規一      | CHUA_IMPLEMENT  | 8/8 top-level inventory; lịch quan/thiên văn, sunrise tables latitude-specific                                  |
 |    13 | 公規二      | CHUA_IMPLEMENT  | 2/2 top-level inventory; canh lậu/trung tinh + tinh đồ, bảng Kinh sư                                            |
 |    14 | 年表一      | CHUA_IMPLEMENT  | exact T2 p5; 甲子→癸酉, Wikisource fallback; spatial year table                                                 |
@@ -118,7 +118,7 @@ Tổng hiện tại:
 
 `docs/research/q4-full-inventory.md` khóa **29/29 section mục lục Q4**. Ngoài shared-position/Bất Tương oracle, Q10 layer đã source-lock hard days, Tuế Bạc/Trục Trận, Âm/Dương Thác và các nhánh Nguyệt Yếm. Các mục Hành Ngoan/Liễu Lệ/Cô Thần là semantic input, không bị biến thành factor độc lập.
 
-Ngoài oracle vị trí/Âm Dương Bất Tương, Q10 hard-day coverage của các hội Âm/Dương Q4 đã được canonical hóa tại `q4-hard-days.ts`: 34 identity/vector từ `WYG_010-48a..49b`, gồm Đại/Tiểu Hội, Tam Âm, Âm Vị, các giao phá/xung, các Âm Thác hard-overlap và Tuyệt Âm/Tuyệt Dương. Cùng set này được test áp cho đủ 26 vertical; trước fix, Cưới hỏi bỏ sót toàn bộ lớp này và ba matrix cũ bỏ sót Tuyệt Âm/Tuyệt Dương.
+Ngoài oracle vị trí/Âm Dương Bất Tương, Q10 hard-day coverage của các hội Âm/Dương Q4 đã được canonical hóa tại `q4-hard-days.ts`: 34 identity/vector từ `WYG_010-48a..49b`, gồm Đại/Tiểu Hội, Tam Âm, Âm Vị, các giao phá/xung, các Âm Thác hard-overlap và Tuyệt Âm/Tuyệt Dương. Cùng set này được test áp cho đủ 27 vertical; trước fix, Cưới hỏi bỏ sót toàn bộ lớp này và ba matrix cũ bỏ sót Tuyệt Âm/Tuyệt Dương.
 
 - Nguyệt biểu
 
@@ -212,7 +212,7 @@ Không phát hiện discrepancy Việt/Hán trong scope đã production. **Secti
 
 ### Q10
 
-`docs/research/q10-full-inventory.md` khóa **51/51 mục đánh số bản Việt = 99/99 heading TOC Hán**. Raw grep 101 heading Hán có thêm hai heading nội dung lặp `以上所宜/以上所忌`, không phải denominator. Exact semantic oracle hiện vẫn giới hạn 26 vertical production; các nhóm khác source-only/blocked/out-of-scope có trạng thái explicit.
+`docs/research/q10-full-inventory.md` khóa **51/51 mục đánh số bản Việt = 99/99 heading TOC Hán**. Raw grep 101 heading Hán có thêm hai heading nội dung lặp `以上所宜/以上所忌`, không phải denominator. Exact semantic oracle hiện vẫn giới hạn 27 vertical production; các nhóm khác source-only/blocked/out-of-scope có trạng thái explicit.
 
 `han-q10-semantic-oracle.spec.ts` không copy nguyên matrix production.
 
@@ -261,7 +261,7 @@ Bug đã được thêm regression và sửa trong evaluator.
 
 Kết quả:
 
-- 25 vertical khớp Hán Q11 exact theo production fixture;
+- 26 vertical khớp Hán Q11 exact theo production fixture;
 - XUAT_HANH lệch đúng một mục đã đăng ký: Hán Q11 có `月厭`, bản Việt Q11 p.849 không in. Quan đới có discrepancy chiều ngược ở bản Việt p.848 (thêm Bế) nhưng production theo Hán Q11 nên fixture vẫn exact. Tế tự cũng production theo Hán Q11 cho `福生`, vì Việt p.844 lược Phúc Sinh; sai khác đã registry explicit.
 
 ## Discrepancy registry

@@ -158,6 +158,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.QUET_DON_NHA_CUA,
   },
   {
+    ma: 'TRANG_TRI_TUONG',
+    ten: 'Trang trí tường',
+    moTa: 'Chọn ngày trang trí, sửa sang bề mặt tường theo Bình nhật; bản Việt p.859 lược dòng Nên nhưng Hán Q11 và Q10 đều xác nhận.',
+    to: DUONG_DAN.TRANG_TRI_TUONG,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

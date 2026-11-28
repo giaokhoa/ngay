@@ -37,6 +37,7 @@ import { QUY_TAC_Q10_NHAP_HOC } from './nhap-hoc-conflict-rules';
 import { QUY_TAC_Q10_QUAN_DAI } from './quan-dai-conflict-rules';
 import { QUY_TAC_Q10_QUET_DON_NHA_CUA } from './quet-don-nha-cua-conflict-rules';
 import { QUY_TAC_Q10_TE_TU } from './te-tu-conflict-rules';
+import { QUY_TAC_Q10_TRANG_TRI_TUONG } from './trang-tri-tuong-conflict-rules';
 import { QUY_TAC_Q10_XUAT_HANH } from './xuat-hanh-conflict-rules';
 import { QUY_TAC_Q10_YEN_HOI } from './yen-hoi-conflict-rules';
 import { QUY_TAC_Q10_CUOI_HOI_Q4 } from './cuoi-hoi-q4-conflict-rules';
@@ -129,6 +130,9 @@ export class DanhGiaNgayService {
     }
     if (congViec === LoaiCongViec.QUET_DON_NHA_CUA) {
       return danhGiaQuetDonNhaCua(dongGop, boiCanh);
+    }
+    if (congViec === LoaiCongViec.TRANG_TRI_TUONG) {
+      return danhGiaTrangTriTuong(dongGop, boiCanh);
     }
     if (congViec === LoaiCongViec.DONG_THO || congViec === LoaiCongViec.SUA_CUNG_THAT) {
       return danhGiaCongViecDat(congViec, dongGop, boiCanh);
@@ -786,6 +790,29 @@ function danhGiaQuetDonNhaCua(
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
     coKy: resolved.camMoiViec || resolved.coKyBoSung,
+    camMoiViec: resolved.camMoiViec,
+    dongGop,
+    xungDotDaApDung: resolved.xungDotDaApDung,
+  };
+}
+
+function danhGiaTrangTriTuong(
+  dongGop: DongGopDanhGia[],
+  boiCanh: BoiCanhDanhGiaNgay,
+): KetQuaDanhGia {
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.TRANG_TRI_TUONG,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_TRANG_TRI_TUONG,
+  );
+  const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
+  return {
+    coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
+    coKy:
+      resolved.camMoiViec ||
+      resolved.coKyBoSung ||
+      hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
     camMoiViec: resolved.camMoiViec,
     dongGop,
     xungDotDaApDung: resolved.xungDotDaApDung,

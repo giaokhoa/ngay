@@ -24,6 +24,7 @@ import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
+import { QUY_TAC_TRANG_TRI_TUONG } from '../activities/trang-tri-tuong-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
 import { DiaChi } from '../calendar/domain/earthly-branch';
@@ -56,6 +57,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.SUA_BUONG_SAN_PHU]: QUY_TAC_SUA_BUONG_SAN_PHU,
   [LoaiCongViec.DAT_COI_XAY_GIA]: QUY_TAC_DAT_COI_XAY_GIA,
   [LoaiCongViec.QUET_DON_NHA_CUA]: QUY_TAC_QUET_DON_NHA_CUA,
+  [LoaiCongViec.TRANG_TRI_TUONG]: QUY_TAC_TRANG_TRI_TUONG,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -91,7 +93,8 @@ const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
     activity !== LoaiCongViec.MAY_DO &&
     activity !== LoaiCongViec.NAP_TAI &&
     activity !== LoaiCongViec.MO_KHO_XUAT_HANG_TIEN &&
-    activity !== LoaiCongViec.DAT_COI_XAY_GIA,
+    activity !== LoaiCongViec.DAT_COI_XAY_GIA &&
+    activity !== LoaiCongViec.TRANG_TRI_TUONG,
 );
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
@@ -193,6 +196,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.SUA_BUONG_SAN_PHU]: false,
       [LoaiCongViec.DAT_COI_XAY_GIA]: false,
       [LoaiCongViec.QUET_DON_NHA_CUA]: false,
+      [LoaiCongViec.TRANG_TRI_TUONG]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -245,6 +249,32 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('修飾垣墻: 平日 is Nên and 死神 does not turn it into Kị', () => {
+    const result = danhGia(LoaiCongViec.TRANG_TRI_TUONG, {
+      truc: ThapNhiTruc.BINH,
+      yeuTo: [MaYeuTo.TU_THAN],
+    });
+    expect(result.coNen).toBe(true);
+    expect(result.coKy).toBe(false);
+  });
+
+  it('修飾垣墻 stays exempt from 無祿 and 上朔四離四絶晦日 restrictions', () => {
+    for (const factor of [
+      MaYeuTo.VO_LOC,
+      MaYeuTo.THUONG_SOC,
+      MaYeuTo.TU_LY,
+      MaYeuTo.TU_TUYET,
+      MaYeuTo.HOI_NHAT,
+    ] as const) {
+      const result = danhGia(LoaiCongViec.TRANG_TRI_TUONG, {
+        truc: ThapNhiTruc.BINH,
+        yeuTo: [factor],
+      });
+      expect(result.coNen).toBe(true);
+      expect(result.coKy).toBe(false);
+    }
   });
 
   it('掃舍宇: 除日/除神 are Nên while ordinary 月破/四廢 remain non-Kị', () => {

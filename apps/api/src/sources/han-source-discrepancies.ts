@@ -19,6 +19,16 @@ export interface SaiKhacNguonHan {
 
 export const SAI_KHAC_NGUON_HAN: readonly SaiKhacNguonHan[] = [
   {
+    ma: 'Q11_TRANG_TRI_TUONG_VIET_THIEU_BINH_NHAT',
+    loai: 'VIET_HAN_NOI_DUNG',
+    quyen: 11,
+    muc: '修飾垣墻',
+    anchorHan: 'KR3g0051_WYG_011-22b..23a / KR3g0051_WYG_010-19a',
+    moTa: 'Hán Q11 修飾垣墻 ghi 宜平日; Hán Q10 平日 cũng ghi trực tiếp 宜修飾垣墻平治道塗. Exact Việt Tập I p.859 chỉ in dòng Kị của “Trang trí tường”, lược toàn bộ dòng Nên.',
+    chinhSachProduction:
+      'Giữ Bình nhật là Nên Trang trí tường theo Hán Q11 + Q10 đồng thuận. Không gắn bản Việt p.859 làm provenance cho riêng rule Nên; giữ omission trong discrepancy registry.',
+  },
+  {
     ma: 'Q11_GIAI_TRU_VIET_THEM_THIEN_NGUYEN',
     loai: 'VIET_HAN_NOI_DUNG',
     quyen: 11,

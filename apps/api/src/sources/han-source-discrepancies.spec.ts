@@ -17,6 +17,14 @@ describe('Hán source discrepancy registry', () => {
     }
   });
 
+  it('registers the Q11 Trang trí tường missing Bình nhật discrepancy explicitly', () => {
+    expect(laySaiKhacNguonHan('Q11_TRANG_TRI_TUONG_VIET_THIEU_BINH_NHAT')).toMatchObject({
+      loai: 'VIET_HAN_NOI_DUNG',
+      quyen: 11,
+      muc: '修飾垣墻',
+    });
+  });
+
   it('registers the Q11 Giải trừ extra Thiên Nguyện discrepancy explicitly', () => {
     expect(laySaiKhacNguonHan('Q11_GIAI_TRU_VIET_THEM_THIEN_NGUYEN')).toMatchObject({
       loai: 'VIET_HAN_NOI_DUNG',
