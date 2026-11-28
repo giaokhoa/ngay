@@ -50,6 +50,14 @@ Chi tiết core: `docs/research/core-monthly-factors.md`. Inventory đủ 40/40 
 
 Chi tiết core: `docs/research/virtue-special-day-factors.md`. Inventory đủ Q5: `docs/research/q5-full-inventory.md`.
 
+## Foundations — Quyển 2
+
+| Scope         | Trạng thái  | Product        | Ghi chú                                                                 |
+| ------------- | ----------- | -------------- | ----------------------------------------------------------------------- |
+| 12/12 section | INVENTORIED | CHUA_IMPLEMENT | 24 sơn, compass/ngũ hành địa lý, biến quẻ; thiếu spatial/compass target |
+
+Chi tiết: `docs/research/q2-full-inventory.md`.
+
 ## Annual/spatial — Quyển 3
 
 | Scope                                 | Trạng thái  | Product        | Ghi chú                                                                                        |
