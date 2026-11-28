@@ -28,8 +28,10 @@
 - p.592: Bát Lộc là Lộc vị của nhật Can, khớp `WYG_007-23b`.
 - p.593–594: Nhật Kiến/Hợp là cát, Nhật Phá/Hại/Hình là hung; việc lớn mới xét thêm năm/tháng, khớp `WYG_007-24b`.
 - p.616–618: Ngũ Bất Ngộ không được suy thành mọi trường hợp “hành Can giờ khắc hành Can ngày”. Bảng khóa theo Can ngày: Giáp→Ngọ, Ất→Tỵ, Bính→Thìn, Đinh→Mão, Mậu→Dần, Kỷ→Sửu/Hợi, Canh→Tý/Tuất, Tân→Dậu, Nhâm→Thân, Quý→Mùi; phần Thích Ý còn nhấn mạnh phải xét chi giờ tương sinh với nhật Can/Chi trước khi kết luận.
+- p.623–625: Tuần trung Không vong — Giáp Tý tuần khuyết Tuất/Hợi; Giáp Tuất khuyết Thân/Dậu; Giáp Thân khuyết Ngọ/Mùi; Giáp Ngọ khuyết Thìn/Tỵ; Giáp Thìn khuyết Dần/Mão; Giáp Dần khuyết Tý/Sửu. Sách nói Không vong không thể đồng loạt coi là hung.
+- p.626–627: Triệt lộ Không vong — Giáp/Kỷ→Thân/Dậu; Ất/Canh→Ngọ/Mùi; Bính/Tân→Thìn/Tỵ; Đinh/Nhâm→Dần/Mão; Mậu/Quý→Tý/Sửu/Tuất/Hợi. Phần Thích Ý không cho phép biến nó thành veto phổ quát.
 
-Hán `WYG_007-37b..39a` xác nhận cùng điểm: định nghĩa mở đầu là thời Can khắc nhật Can, nhưng ngay sau đó loại trường hợp chi giờ có quan hệ tương sinh với nhật Can/Chi. Bảng 60 ngày `WYG_031` khớp đúng mapping giờ ở trên.
+Hán `WYG_007-37b..39a` xác nhận Ngũ Bất Ngộ. `WYG_007-45b..46b` xác nhận 旬中空亡 và lời bác cách coi mọi Không vong là hung; `WYG_007-47b` xác nhận 截路空亡. Bảng 60 ngày `WYG_031` khớp các vị trí `旬空`/`路空` và mapping Ngũ Bất Ngộ.
 
 Không phát hiện discrepancy Việt/Hán trong scope Q7 đang implement.
 
@@ -40,12 +42,13 @@ Không phát hiện discrepancy Việt/Hán trong scope Q7 đang implement.
 - Hoàng đạo tự thân không biến một ngày đang Kị thành Tốt; giờ Hoàng đạo cũng không thắng được Phá/Hình/Hại/Ngũ Bất Ngộ.
 - Công khai tên thần, lý do thực dụng, không công khai mã nghiên cứu.
 - Không suy luận Thiên Ất Quý Nhân khi thiếu vị trí và giờ mặt trời mọc/lặn. Chính Hán `WYG_007-18a` nói nên dùng ngày mọc/lặn thực tế thay vì ranh giới Mão/Dậu mặc định.
-- Không coi 旬中空亡/截路空亡 là blanket veto; sách Q7 có tranh luận và bác cách áp đại trà.
+- `旬中空亡` / `截路空亡` được trả ra như dấu **tham khảo**, không thêm `lyDoTranh` và không tự đổi xếp loại giờ; sách Q7 bác cách áp đại trà như một blanket veto.
 
 ## Oracle/test
 
 - `hoang-hac-dao.spec.ts`: 12 khởi điểm, vòng 12 thần, sáu Hoàng/sáu Hắc, Giáp Tý giờ theo bảng Hán, 4 cụm thần giờ và whitelist activity.
-- `selected-hour.spec.ts`: ưu tiên điều kị dù cùng giờ có Phúc Tinh, Lộc, Hỷ, Mã; giờ Phá/Hình/Hại.
+- `selected-hour.spec.ts`: ưu tiên điều kị dù cùng giờ có Phúc Tinh, Lộc, Hỷ, Mã; giờ Phá/Hình/Hại; Ngũ Bất Ngộ đúng bảng; Không vong chỉ là dấu tham khảo.
+- `hoang-hac-dao.spec.ts`: oracle `旬空`/`路空` trực tiếp với Giáp Tý, Giáp Thìn và Mậu Tý theo bảng Q31.
 - `date-selection.service.spec.ts`: cross-activity, same-month Hắc kị đúng năm nhóm, không ảnh hưởng `danhGia` gốc.
 
 ## Không claim

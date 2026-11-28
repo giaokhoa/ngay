@@ -1321,6 +1321,12 @@ button.o-ngay.dang-chon {
   font-weight: 800;
 }
 
+.dau-gio-tham-khao {
+  color: #756d62;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
 .nhan-gio {
   width: fit-content;
   border-radius: 999px;

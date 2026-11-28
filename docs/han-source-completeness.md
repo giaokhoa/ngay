@@ -151,7 +151,9 @@ Ngoài ra test Việt/source-independent hiện có vẫn chạy:
 - Bảo Quang thay tên Thiên Đức của riêng vòng Hoàng đạo này;
 - Hắc đạo chỉ bổ sung kị cho nhóm việc nguồn nêu;
 - Thiên Quan, Phúc Tinh, Hỷ Thần, Bát Lộc;
-- Nhật Kiến/Hợp và Nhật Phá/Hại/Hình.
+- Nhật Kiến/Hợp và Nhật Phá/Hại/Hình;
+- Ngũ Bất Ngộ theo bảng đã hiệu chỉnh;
+- Tuần trung Không vong và Triệt lộ Không vong dưới dạng marker tham khảo, không blanket veto.
 
 Không phát hiện discrepancy Việt/Hán trong scope trên. Q7 vẫn chỉ là oracle một phần.
 

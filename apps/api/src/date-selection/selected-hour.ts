@@ -4,8 +4,10 @@ import { CanChi } from '../calendar/domain/sexagenary-cycle';
 import type { NguoiLienQuanXemNgay } from './date-selection.service';
 import {
   NHAN_DAU_THAN_GIO,
+  MaDauGioThamKhao,
   MaDauThanGio,
   ThanHoangHac,
+  tinhDauGioThamKhao,
   tinhDauThanGio,
   tinhThanGio,
 } from './hoang-hac-dao';
@@ -23,6 +25,7 @@ export interface GioDuocChon {
   canChiGio: CanChi;
   thanHoangHac: ThanHoangHac;
   dauThanGio: readonly MaDauThanGio[];
+  dauGioThamKhao: readonly MaDauGioThamKhao[];
   khoangGio: string;
   xepLoai: XepLoaiGio;
   lyDoTot: readonly string[];
@@ -200,6 +203,7 @@ export function xetCacGioTrongNgay(input: {
     const canChiGio = tinhCanChiGio(input.canChiNgay.can, chiGio);
     const thanHoangHac = tinhThanGio(input.canChiNgay.chi, chiGio);
     const dauThanGio = tinhDauThanGio(input.canChiNgay.can, chiGio);
+    const dauGioThamKhao = tinhDauGioThamKhao(input.canChiNgay, chiGio);
     const lyDoTot: string[] = [];
     const lyDoTranh: string[] = [];
 
@@ -282,6 +286,7 @@ export function xetCacGioTrongNgay(input: {
       canChiGio,
       thanHoangHac,
       dauThanGio,
+      dauGioThamKhao,
       khoangGio: KHOANG_GIO[chiGio],
       xepLoai,
       lyDoTot,
