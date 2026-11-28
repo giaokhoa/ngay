@@ -1682,7 +1682,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 34)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 35)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -1761,6 +1761,10 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       LoaiCongViec.PHA_NHA_HUY_TUONG,
       LoaiCongViec.TROC_NA_BAT_BO,
       LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC,
+      LoaiCongViec.TRONG_TROT,
+      LoaiCongViec.CHAN_THA_GIA_SUC_GIA_CAM,
+      LoaiCongViec.NHAN_NAP_GIA_SUC,
+      LoaiCongViec.PHA_VO_DAT,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);
@@ -1866,6 +1870,95 @@ describe('XemNgayService chi tiết ngày + giờ thực hiện', () => {
       ),
     ).toBe(true);
     expect(result.gio.some((item) => item.xungTuoi.length > 0)).toBe(true);
+  });
+});
+
+describe('XemNgayService PHA_VO_DAT end-to-end', () => {
+  it('orchestrates calendar/factors -> exact 2/18 Q11 -> source-resolved Q10', () => {
+    const result = taoService().xemPhaVoDat(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'PHA_VO_DAT')).toBe(
+      true,
+    );
+  });
+
+  it('is deterministic for PHA_VO_DAT', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemPhaVoDat(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemPhaVoDat(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real calendar keeps Minh Phệ Nên, Phục/Ngũ Mộ relief and earth/special blockers exact', () => {
+    const service = taoService();
+    const oPhe = service.xemPhaVoDat(new Date('2026-01-10T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const oPheDoi = service.xemPhaVoDat(new Date('2026-01-16T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const phucBlock = service.xemPhaVoDat(new Date('2026-02-09T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const phucRelief = service.xemPhaVoDat(
+      new Date('2026-05-22T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const nguMoRelief = service.xemPhaVoDat(
+      new Date('2027-07-06T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const nguyetKy = service.xemPhaVoDat(new Date('2026-01-11T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const voLoc = service.xemPhaVoDat(new Date('2026-06-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const thoPhuTin = service.xemPhaVoDat(new Date('2026-01-14T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const thoVuong = service.xemPhaVoDat(new Date('2026-01-17T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const hard = service.xemPhaVoDat(new Date('2026-01-02T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+
+    expect(oPhe.yeuTo.some((item) => item.ma === MaYeuTo.O_PHE)).toBe(true);
+    expect(oPhe.danhGia.coNen).toBe(true);
+    expect(oPhe.danhGia.coKy).toBe(false);
+
+    expect(oPheDoi.yeuTo.some((item) => item.ma === MaYeuTo.O_PHE_DOI)).toBe(true);
+    expect(oPheDoi.danhGia.coNen).toBe(true);
+    expect(oPheDoi.danhGia.coKy).toBe(false);
+
+    expect(phucBlock.yeuTo.some((item) => item.ma === MaYeuTo.PHUC_NHAT)).toBe(true);
+    expect(phucBlock.yeuTo.some((item) => item.ma === MaYeuTo.O_PHE_DOI)).toBe(true);
+    expect(phucBlock.danhGia.coNen).toBe(false);
+    expect(phucBlock.danhGia.coKy).toBe(true);
+    expect(phucBlock.giaiThich.biLoai.some((text) => text.startsWith('O_PHE_DOI:'))).toBe(true);
+
+    expect(phucRelief.yeuTo.some((item) => item.ma === MaYeuTo.PHUC_NHAT)).toBe(true);
+    expect(phucRelief.yeuTo.some((item) => item.ma === MaYeuTo.LUC_HOP)).toBe(true);
+    expect(phucRelief.danhGia.coKy).toBe(false);
+    expect(phucRelief.giaiThich.biLoai.some((text) => text.startsWith('PHUC_NHAT:'))).toBe(true);
+
+    expect(nguMoRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGU_MO)).toBe(true);
+    expect(nguMoRelief.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_DUC)).toBe(true);
+    expect(nguMoRelief.danhGia.coKy).toBe(false);
+    expect(nguMoRelief.giaiThich.biLoai.some((text) => text.startsWith('NGU_MO:'))).toBe(true);
+
+    expect(nguyetKy.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_KY)).toBe(true);
+    expect(nguyetKy.yeuTo.some((item) => item.ma === MaYeuTo.O_PHE)).toBe(true);
+    expect(nguyetKy.danhGia.coNen).toBe(false);
+    expect(nguyetKy.danhGia.coKy).toBe(false);
+
+    expect(voLoc.yeuTo.some((item) => item.ma === MaYeuTo.VO_LOC)).toBe(true);
+    expect(voLoc.yeuTo.some((item) => item.ma === MaYeuTo.O_PHE)).toBe(true);
+    expect(voLoc.danhGia.coNen).toBe(false);
+    expect(voLoc.danhGia.coKy).toBe(false);
+
+    expect(thoPhuTin.yeuTo.some((item) => item.ma === MaYeuTo.THO_PHU_TIN)).toBe(true);
+    expect(thoPhuTin.danhGia.coKy).toBe(true);
+
+    expect(thoVuong.dangThoVuong).toBe(true);
+    expect(thoVuong.danhGia.coKy).toBe(true);
+    expect(
+      thoVuong.danhGia.dongGop.some(
+        (item) => item.quyTac.dieuKien.loai === 'THO_VUONG' && item.trangThai === 'HIEU_LUC',
+      ),
+    ).toBe(true);
+
+    expect(hard.danhGia.camMoiViec).toBe(true);
+    expect(hard.danhGia.coKy).toBe(true);
   });
 });
 

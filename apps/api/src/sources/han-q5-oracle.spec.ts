@@ -5,6 +5,7 @@ import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { Mua } from '../calendar/domain/season';
 import {
   DINH_NGHIA_O_PHE,
+  DINH_NGHIA_O_PHE_DOI,
   DINH_NGHIA_PHUC_NHAT,
   DINH_NGHIA_TRONG_NHAT,
 } from '../factors/an-tang-factor-definitions';
@@ -467,6 +468,24 @@ describe('independent Hán Q5 oracle — WYG / Kanripo KR3g0051', () => {
     ]);
     expect(DINH_NGHIA_O_PHE.canChiNgay.map(khoaCanChi)).not.toContain('CANH:DAN');
     expect(DINH_NGHIA_O_PHE.canChiNgay.map(khoaCanChi)).not.toContain('NHAM:DAN');
+  });
+
+  it('鳴吠對 uses the final Hán 起例/立成 11-day correction', () => {
+    expect(DINH_NGHIA_O_PHE_DOI.canChiNgay.map(khoaCanChi)).toEqual([
+      'BINH:TY',
+      'CANH:TY',
+      'NHAM:TY',
+      'GIAP:DAN',
+      'BINH:DAN',
+      'CANH:DAN',
+      'NHAM:DAN',
+      'AT:MAO',
+      'DINH:MAO',
+      'TAN:MAO',
+      'QUY:MAO',
+    ]);
+    expect(DINH_NGHIA_O_PHE_DOI.canChiNgay.map(khoaCanChi)).not.toContain('GIAP:TY');
+    expect(DINH_NGHIA_O_PHE_DOI.canChiNgay.map(khoaCanChi)).not.toContain('GIAP:NGO');
   });
 
   it('重日 resolves the 己/巳 transcription ambiguity contextually as Tỵ + Hợi', () => {

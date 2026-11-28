@@ -8,7 +8,7 @@ Khóa toàn bộ 30 section trong mục lục Quyển 5, tách rõ:
 
 - identity đã production + Hán oracle;
 - section chỉ production một phần;
-- mục đã hiểu nhưng không thuộc 34 vertical hiện tại;
+- mục đã hiểu nhưng không thuộc 35 vertical hiện tại;
 - mục cần context ngoài day-factor engine.
 
 Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quyết định activity vẫn theo Q11/Q10.
@@ -52,7 +52,7 @@ Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quy
 |  27 | Giải Thần / 解神                                                   | ORACLE_TESTED         | IMPLEMENTED         | Việt p462–463 + Hán `WYG_005-59b..60a`; Giải trừ prerequisite                                                      |
 |  28 | Phục Nhật / 復日                                                   | ORACLE_TESTED         | IMPLEMENTED         | monthly day stem                                                                                                   |
 |  29 | Minh Phệ / 鳴吠日                                                  | ORACLE_TESTED         | IMPLEMENTED         | production code `O_PHE`; final Lập thành 13 ngày                                                                   |
-|  30 | Minh Phệ Đối / 鳴吠對日                                            | COMPARED              | OUT_OF_SCOPE        | identity riêng; current AN_TANG exact Q11 chỉ dùng 鳴吠, không tự nhập chung                                       |
+|  30 | Minh Phệ Đối / 鳴吠對日                                            | ORACLE_TESTED         | IMPLEMENTED         | production code `O_PHE_DOI`; final Lập thành 11 ngày; dependency của `PHA_VO_DAT`                                  |
 
 ## Những section cần lưu ý
 
@@ -70,7 +70,7 @@ Hán `WYG_005-34b..37b` khóa đủ năm loại:
 - Dân: Xuân Ngọ, Hạ Dậu, Thu Tý, Đông Mão;
 - Thủ: sau phần hiệu đính dùng Xuân Thìn, Hạ Mùi, Thu Tuất, Đông Sửu.
 
-Product hiện chỉ có Vương Nhật + Dân Nhật vì 34 vertical hiện tại chỉ cần hai identity này. Không tạo ba factor còn lại chỉ để đủ section.
+Product hiện chỉ có Vương Nhật + Dân Nhật vì 35 vertical hiện tại chỉ cần hai identity này. Không tạo ba factor còn lại chỉ để đủ section.
 
 ### Vô Lộc
 
@@ -86,13 +86,13 @@ Trọng Nhật, Ngũ Hợp và Ngũ Ly hiện production; Yến hội tạo depe
 
 ### Minh Phệ và Minh Phệ Đối
 
-Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùng final 13 ngày, không dùng danh sách truyền cũ 14 ngày. Minh Phệ Đối là nhóm riêng cho phá thổ/tiểu táng; không được suy bằng cách “đối xung” runtime rồi nhập vào `O_PHE`.
+Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùng final 13 ngày, không dùng danh sách truyền cũ 14 ngày. Minh Phệ Đối là nhóm riêng cho phá thổ/tiểu táng; production `O_PHE_DOI` dùng final Lập thành 11 ngày, không suy bằng cách “đối xung” runtime rồi nhập vào `O_PHE`.
 
 ## Product policy
 
-- **26 identity Q5 production** có Hán oracle độc lập.
+- **27 identity Q5 production** có Hán oracle độc lập.
 - Section partial không được quảng bá thành full implementation chỉ vì một identity bên trong đã có code.
-- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 34 vertical không cần.
+- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 35 vertical không cần.
 - `Vô Lộc` đã production bằng context năm/tháng/trung khí; vẫn tuyệt đối không dùng như blanket blocker.
 - Giải Thần production theo cặp tháng `Thân/Thân, Tuất/Tuất, Tý/Tý, Dần/Dần, Thìn/Thìn, Ngọ/Ngọ`; dependency trực tiếp của Giải trừ.
 - Khi mở activity mới, dependency Q11 sẽ quyết định mục nào được kéo vào production.

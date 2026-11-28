@@ -91,6 +91,7 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   VANG_VONG: 'Vãng Vong',
   BAT_CHUYEN: 'Bát Chuyên',
   O_PHE: 'Ô Phệ',
+  O_PHE_DOI: 'Ô Phệ Đối',
   PHUC_NHAT: 'Phục Nhật',
   TRONG_NHAT: 'Trọng Nhật',
 };

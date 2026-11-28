@@ -65,7 +65,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: '93e4a01b085403bd50da4f1efdd107bab4e39a3b1e2247acb958e87dc51eb9c4',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '30/30 section đã inventory; toàn bộ 26 identity Q5 production có Hán oracle. 天道 directional; 無禄 context-aware theo Q10; các mục còn lại explicit out-of-scope/partial.',
+      '30/30 section đã inventory; toàn bộ 27 identity Q5 production có Hán oracle. 天道 directional; 無禄 context-aware theo Q10; các mục còn lại explicit out-of-scope/partial.',
   },
   {
     quyen: 6,
@@ -118,7 +118,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: '48327766b9f9b1acaaac986e7f86a653d06a15e532d835dce9316ef40d8acdd5',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '51/51 mục Việt = 99/99 heading TOC Hán đã inventory; exact conflict semantics oracle cho 34 vertical, phần còn lại explicit source-only/blocked/out-of-scope.',
+      '51/51 mục Việt = 99/99 heading TOC Hán đã inventory; exact conflict semantics oracle cho 35 vertical, phần còn lại explicit source-only/blocked/out-of-scope.',
   },
   {
     quyen: 11,
@@ -129,7 +129,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: 'b81db33eba341b0de0e2cc36b704db8e6d89200fb8182b6cb85e69df619df1be',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '73/73 canonical Dụng sự sections đã inventory; exact 宜/忌 oracle cho 34 current vertical, 39 section còn lại out-of-scope current product. Prefatory catalogs: 67/37/60 việc.',
+      '73/73 canonical Dụng sự sections đã inventory; exact 宜/忌 oracle cho 35 current vertical, 38 section còn lại out-of-scope current product. Prefatory catalogs: 67/37/60 việc.',
   },
   {
     quyen: 12,

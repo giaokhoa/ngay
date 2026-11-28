@@ -23,6 +23,7 @@ import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAN_NAP_GIA_SUC } from '../activities/nhan-nap-gia-suc-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_PHA_NHA_HUY_TUONG } from '../activities/pha-nha-huy-tuong-rules';
+import { QUY_TAC_PHA_VO_DAT } from '../activities/pha-vo-dat-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
@@ -79,6 +80,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,
   [LoaiCongViec.XUAT_HANH]: QUY_TAC_XUAT_HANH,
+  [LoaiCongViec.PHA_VO_DAT]: QUY_TAC_PHA_VO_DAT,
   [LoaiCongViec.AN_TANG]: QUY_TAC_AN_TANG,
 };
 
@@ -232,6 +234,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
       [LoaiCongViec.XUAT_HANH]: true,
+      [LoaiCongViec.PHA_VO_DAT]: false,
       [LoaiCongViec.AN_TANG]: false,
     };
 
@@ -257,6 +260,39 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('破土: 月建/土府 remain Kị with virtue, 五墓 can be released', () => {
+    const kien = danhGia(LoaiCongViec.PHA_VO_DAT, {
+      yeuTo: [MaYeuTo.NGUYET_KIEN, MaYeuTo.THIEN_DUC],
+    });
+    const thoPhu = danhGia(LoaiCongViec.PHA_VO_DAT, {
+      yeuTo: [MaYeuTo.THO_PHU, MaYeuTo.NGUYET_DUC],
+    });
+    const nguMo = danhGia(LoaiCongViec.PHA_VO_DAT, {
+      chiThang: DiaChi.NGO,
+      yeuTo: [MaYeuTo.NGU_MO, MaYeuTo.NGUYET_DUC],
+    });
+    expect(kien.coKy).toBe(true);
+    expect(thoPhu.coKy).toBe(true);
+    expect(nguMo.coKy).toBe(false);
+  });
+
+  it('破土: 復日/重日 keep Kị over 鳴吠/鳴吠對 unless virtue relief applies', () => {
+    const phuc = danhGia(LoaiCongViec.PHA_VO_DAT, {
+      yeuTo: [MaYeuTo.PHUC_NHAT, MaYeuTo.O_PHE],
+    });
+    const trong = danhGia(LoaiCongViec.PHA_VO_DAT, {
+      yeuTo: [MaYeuTo.TRONG_NHAT, MaYeuTo.O_PHE_DOI],
+    });
+    const relieved = danhGia(LoaiCongViec.PHA_VO_DAT, {
+      yeuTo: [MaYeuTo.PHUC_NHAT, MaYeuTo.THIEN_DUC],
+    });
+    expect(phuc.coNen).toBe(false);
+    expect(phuc.coKy).toBe(true);
+    expect(trong.coNen).toBe(false);
+    expect(trong.coKy).toBe(true);
+    expect(relieved.coKy).toBe(false);
+  });
 
   it('修置産室: 月建/土府 stay Kị with virtue while 死氣 can be released', () => {
     const kien = danhGia(LoaiCongViec.SUA_BUONG_SAN_PHU, {

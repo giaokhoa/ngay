@@ -90,6 +90,7 @@ export enum MaYeuTo {
   XUC_THUY_LONG = 'XUC_THUY_LONG',
 
   O_PHE = 'O_PHE',
+  O_PHE_DOI = 'O_PHE_DOI',
   PHUC_NHAT = 'PHUC_NHAT',
   TRONG_NHAT = 'TRONG_NHAT',
   NGU_HOP = 'NGU_HOP',

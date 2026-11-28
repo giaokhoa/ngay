@@ -30,6 +30,20 @@ const ORACLE_O_PHE = new Set([
   khoa(QUY, DAU),
 ]);
 
+const ORACLE_O_PHE_DOI = new Set([
+  khoa(BINH, TY),
+  khoa(CANH, TY),
+  khoa(NHAM, TY),
+  khoa(GIAP, DAN),
+  khoa(BINH, DAN),
+  khoa(CANH, DAN),
+  khoa(NHAM, DAN),
+  khoa(AT, MAO),
+  khoa(DINH, MAO),
+  khoa(TAN, MAO),
+  khoa(QUY, MAO),
+]);
+
 const ORACLE_PHUC_NHAT: Readonly<Record<DiaChi, ThienCan>> = {
   [DAN]: GIAP,
   [MAO]: AT,
@@ -78,6 +92,40 @@ describe('Ô Phệ 鳴吠 — final 13-day Lập thành oracle', () => {
   it('rejects Canh Dần and Nhâm Dần from the older transmitted 14-day list', () => {
     expect(ORACLE_O_PHE.has(khoa(CANH, DAN))).toBe(false);
     expect(ORACLE_O_PHE.has(khoa(NHAM, DAN))).toBe(false);
+  });
+});
+
+describe('Ô Phệ Đối 鳴吠對 — final 11-day Lập thành oracle', () => {
+  const service = new TinhYeuToNgayService();
+
+  for (const chiThang of DIA_CHI_THEO_THU_TU) {
+    for (const canChi of VONG_60_CAN_CHI) {
+      const nenCo = ORACLE_O_PHE_DOI.has(khoa(canChi.can, canChi.chi));
+
+      it(`${chiThang} / ${canChi.can} ${canChi.chi}: ${nenCo ? 'co' : 'khong co'} O Phe Doi`, () => {
+        const result = service.tinh({
+          chiThang,
+          canNgay: canChi.can,
+          chiNgay: canChi.chi,
+          dangThoVuong: false,
+        });
+        expect(result.some((factor) => factor.ma === MaYeuTo.O_PHE_DOI)).toBe(nenCo);
+      });
+    }
+  }
+
+  it('final source set has exactly 11 days', () => {
+    expect(ORACLE_O_PHE_DOI.size).toBe(11);
+  });
+
+  it('includes Canh Dần/Nhâm Dần and excludes transmitted-error Giáp Ngọ', () => {
+    expect(ORACLE_O_PHE_DOI.has(khoa(CANH, DAN))).toBe(true);
+    expect(ORACLE_O_PHE_DOI.has(khoa(NHAM, DAN))).toBe(true);
+    expect(ORACLE_O_PHE_DOI.has(khoa(GIAP, NGO))).toBe(false);
+  });
+
+  it('excludes pure-yang Giáp Tý from final 11-day set', () => {
+    expect(ORACLE_O_PHE_DOI.has(khoa(GIAP, TY))).toBe(false);
   });
 });
 
@@ -136,6 +184,7 @@ describe('AN_TANG factor provenance', () => {
 
   it.each([
     [MaYeuTo.O_PHE, DAN, GIAP, NGO],
+    [MaYeuTo.O_PHE_DOI, DAN, CANH, DAN],
     [MaYeuTo.PHUC_NHAT, DAN, GIAP, DAN],
     [MaYeuTo.TRONG_NHAT, DAN, GIAP, TI],
   ] as const)('%s keeps verified Việt + Hán refs', (ma, chiThang, canNgay, chiNgay) => {
