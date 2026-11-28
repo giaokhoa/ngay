@@ -10,6 +10,7 @@ import { MaYeuTo } from '../factors/domain/factor-code';
 import { DINH_NGHIA_YEU_TO_THEO_CHI_THANG } from '../factors/factor-definitions';
 import { DINH_NGHIA_QUY_KY, DINH_NGHIA_THIEN_MA } from '../factors/moving-factor-definitions';
 import { DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6 } from '../factors/q6-ritual-factor-definitions';
+import { DINH_NGHIA_DU_HOA } from '../factors/q6-du-hoa-definition';
 import { DINH_NGHIA_BLOCKER_CUOI_HOI_QUYEN_6 } from '../factors/q6-wedding-blocker-definitions';
 
 const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
@@ -262,6 +263,20 @@ const HAN_Q6_RITUAL_MONTHLY: Readonly<Record<string, BangHanQ6>> = {
 };
 
 const HAN_Q6_PRODUCTION_MONTHLY: Readonly<Record<string, BangHanQ6>> = {
+  [MaYeuTo.DU_HOA]: {
+    [DAN]: [TI],
+    [MAO]: [DAN],
+    [THIN]: [HOI],
+    [TI]: [THAN],
+    [NGO]: [TI],
+    [MUI]: [DAN],
+    [THAN]: [HOI],
+    [DAU]: [THAN],
+    [TUAT]: [TI],
+    [HOI]: [DAN],
+    [TY]: [HOI],
+    [SUU]: [THAN],
+  },
   [MaYeuTo.DAI_THOI]: {
     [DAN]: [MAO],
     [MAO]: [TY],
@@ -403,6 +418,7 @@ function productionQ6Monthly() {
   return [
     ...DINH_NGHIA_BLOCKER_CUOI_HOI_QUYEN_6,
     ...DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6,
+    DINH_NGHIA_DU_HOA,
     DINH_NGHIA_THIEN_MA,
     DINH_NGHIA_QUY_KY,
     DINH_NGHIA_THO_PHU_TIN,
@@ -418,7 +434,7 @@ describe('independent Hán Q6 oracle — ritual monthly factors', () => {
     },
   );
 
-  it('covers exactly 福生 聖心 益後 續世 and no inferred 血忌 alias', () => {
+  it('covers exactly 普護 福生 聖心 益後 續世 and no inferred 血忌 alias', () => {
     expect(new Set(DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.map((item) => item.ma))).toEqual(
       new Set([
         MaYeuTo.PHO_HO,

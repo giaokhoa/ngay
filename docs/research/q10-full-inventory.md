@@ -52,7 +52,7 @@ Q10 cung cấp **semantic conflict/exception layer**: một thần cát/hung có
 |  28 | 月刑                                   | ORACLE_TESTED                  | Q6 production                                                                                     |
 |  29 | 月害・月厭〈地火〉                     | ORACLE_TESTED_PARTIAL          | Nguyệt Hại/Nguyệt Yếm production; Địa Hỏa shared identity                                         |
 |  30 | 厭對〈招搖〉・大時〈大敗/咸池〉        | ORACLE_TESTED_PARTIAL          | Yếm Đối/Đại Thời production; aliases not all standalone                                           |
-|  31 | 遊禍・天吏〈致死〉・死氣               | PARTIAL_IMPLEMENTED            | Thiên Lại production; others source-only/currently unmodeled                                      |
+|  31 | 遊禍・天吏〈致死〉・死氣               | PARTIAL_IMPLEMENTED            | Du Họa + Thiên Lại production; 死氣 remains source-only                                           |
 |  32 | 小耗・天賊・四擊・四耗                 | PARTIAL_IMPLEMENTED            | Tiểu Hao/Thiên Tặc/Tứ Hao production; Tứ Kích source-only                                         |
 |  33 | 四廢                                   | ORACLE_TESTED                  | Q5 production                                                                                     |
 |  34 | 四忌・四窮〈八龍/七鳥/九虎/六蛇〉      | ORACLE_TESTED_PARTIAL          | Tứ Kị/Tứ Cùng production; attached aliases not standalone                                         |

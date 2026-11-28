@@ -8,7 +8,7 @@ Khóa toàn bộ 30 section trong mục lục Quyển 5, tách rõ:
 
 - identity đã production + Hán oracle;
 - section chỉ production một phần;
-- mục đã hiểu nhưng không thuộc 11 exact Q13 vertical hiện tại;
+- mục đã hiểu nhưng không thuộc 13 vertical hiện tại;
 - mục cần context ngoài day-factor engine.
 
 Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quyết định activity vẫn theo Q11/Q10.
