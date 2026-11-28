@@ -44,10 +44,10 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 |  19 | Kim Đường / 金堂              | COMPARED      | OUT_OF_SCOPE       | monthly factor                                                                       |
 |  20 | Kính An / 敬安                | COMPARED      | OUT_OF_SCOPE       | Việt p515; monthly factor                                                            |
 |  21 | Phổ Hộ / 普護                 | COMPARED      | OUT_OF_SCOPE       | monthly factor                                                                       |
-|  22 | Phúc Sinh / 福生              | COMPARED      | OUT_OF_SCOPE       | Việt p517; monthly factor                                                            |
-|  23 | Thánh Tâm / 聖心              | COMPARED      | OUT_OF_SCOPE       | monthly factor                                                                       |
-|  24 | Ích Hậu / 益後                | COMPARED      | OUT_OF_SCOPE       | monthly factor                                                                       |
-|  25 | Tục Thế / 續世〈血忌〉        | COMPARED      | OUT_OF_SCOPE       | monthly factor; Huyết Kị là tên gắn trong mục                                        |
+|  22 | Phúc Sinh / 福生              | ORACLE_TESTED | IMPLEMENTED        | Việt p517 + Hán `WYG_006-40b..41a`; Tế tự prerequisite                               |
+|  23 | Thánh Tâm / 聖心              | ORACLE_TESTED | IMPLEMENTED        | Việt p518 + Hán `WYG_006-41b..42a`; Tế tự prerequisite                               |
+|  24 | Ích Hậu / 益後                | ORACLE_TESTED | IMPLEMENTED        | Việt p520 + Hán `WYG_006-43b..44a`; Tế tự prerequisite                               |
+|  25 | Tục Thế / 續世〈血忌〉        | ORACLE_TESTED | IMPLEMENTED        | Việt p522 + Hán `WYG_006-44b..45a`; không suy Huyết Kị thành alias                   |
 |  26 | Cửu Thần Tổng Luận / 九神總論 | COMPARED      | META               | đoạn luận chung Yếu An→Tục Thế, không phải factor thứ mười                           |
 |  27 | Dương Đức / 陽徳              | COMPARED      | OUT_OF_SCOPE       | Việt p527; monthly Nạp Giáp sequence                                                 |
 |  28 | Âm Đức / 陰徳                 | COMPARED      | OUT_OF_SCOPE       | Việt p529; monthly Nạp Giáp sequence                                                 |
@@ -78,7 +78,7 @@ Hán Q6 cho bảng tháng trực tiếp (`正月午...`). Có thể encode bằn
 
 Yếu An, Ngọc Vũ, Kim Đường, Kính An, Phổ Hộ, Phúc Sinh, Thánh Tâm, Ích Hậu, Tục Thế đều có lịch lệ tháng→chi rõ. `九神總論` là phần luận chung, không phải calculator riêng.
 
-Bản Việt exact scan đã mở trực tiếp các trang Ngọc Vũ p513, Kính An p515, Phúc Sinh p517 và phần tổng luận; Hán Q6 khớp cấu trúc.
+Phúc Sinh, Thánh Tâm, Ích Hậu và Tục Thế đã production vì trở thành prerequisite trực tiếp của Tế tự. Exact Việt đã mở p517, p518, p520, p522 và Hán Q6 khớp từng bảng. Yếu An/Ngọc Vũ/Kim Đường/Kính An/Phổ Hộ vẫn out-of-scope current activity dependencies. `續世〈血忌〉` ở mục lục không được dùng để suy Huyết Kị là alias của Tục Thế; body Q6 đang source-lock Tục Thế như một cát thần riêng.
 
 ### Dương Đức / Âm Đức
 
@@ -130,7 +130,7 @@ Bản Việt p562–563 và Hán `WYG_006-74b..76a` cùng ghi tục lấy **mồ
 
 ## Product policy
 
-- 21 factor Q6 hiện production-computable và có oracle/test độc lập, gồm cả Thượng Sóc, Phản Chi, Nguyệt Kị.
+- 25 factor Q6 hiện production-computable và có oracle/test độc lập, gồm cả Phúc Sinh, Thánh Tâm, Ích Hậu, Tục Thế và Thượng Sóc/Phản Chi/Nguyệt Kị.
 - Ba factor mới chỉ đi vào factor engine; không tự thay đổi 7 activity vertical nếu exact Q11/Q10 không dùng chúng.
 - Không thêm các mục còn lại vào activity scoring nếu exact Q11/Q10 không cần.
 - `OUT_OF_SCOPE` nghĩa là công thức đã hiểu nhưng không thuộc current product claim, không phải “không tồn tại”.
@@ -139,4 +139,4 @@ Bản Việt p562–563 và Hán `WYG_006-74b..76a` cùng ghi tục lấy **mồ
 
 ## Kết luận
 
-**Quyển 6 đã inventory đủ 40/40 mục.** 21 factor hiện production-computable/Hán-oracle; phần còn lại có trạng thái explicit. Thượng Sóc/Phản Chi/Nguyệt Kị không còn blocker calendar/context.
+**Quyển 6 đã inventory đủ 40/40 mục.** 25 factor hiện production-computable/Hán-oracle; phần còn lại có trạng thái explicit. Thượng Sóc/Phản Chi/Nguyệt Kị không còn blocker calendar/context.

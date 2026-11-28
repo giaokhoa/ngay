@@ -76,7 +76,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: 'f7920ffe391d73acc3fd259e7d3454f58f4a906678e68d3497b24466f53a734a',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '40/40 mục đã inventory; 21 factor production-computable có Hán oracle. 反支/月忌/上朔 đã mở khóa bằng year/lunar context; phần còn lại explicit out-of-scope/meta.',
+      '40/40 mục đã inventory; 25 factor production-computable có Hán oracle. 反支/月忌/上朔 đã mở khóa bằng year/lunar context; phần còn lại explicit out-of-scope/meta.',
   },
   {
     quyen: 7,

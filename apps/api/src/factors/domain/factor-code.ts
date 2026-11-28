@@ -81,6 +81,10 @@ export enum MaYeuTo {
   TRONG_NHAT = 'TRONG_NHAT',
   NGU_HOP = 'NGU_HOP',
   NGU_LY = 'NGU_LY',
+  PHUC_SINH = 'PHUC_SINH',
+  THANH_TAM = 'THANH_TAM',
+  ICH_HAU = 'ICH_HAU',
+  TUC_THE = 'TUC_THE',
 
   THUONG_SOC = 'THUONG_SOC',
   PHAN_CHI = 'PHAN_CHI',
