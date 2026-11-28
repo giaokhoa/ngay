@@ -1,5 +1,7 @@
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 
+import { SAI_KHAC_NGUON_HAN } from '../sources/han-source-discrepancies';
+import { HAN_CORPUS_MANIFEST } from '../sources/han-source-manifest';
 import { KhoTriThucPostgresService } from './knowledge.service';
 
 @Controller('knowledge')
@@ -18,6 +20,26 @@ export class KhoTriThucController {
   @Get('stats')
   thongKe() {
     return this.kho.thongKe();
+  }
+
+  @Get('source-coverage')
+  baoPhuNguon() {
+    const partial = HAN_CORPUS_MANIFEST.filter(
+      (item) => item.trangThai === 'ORACLE_MOT_PHAN',
+    ).length;
+    const unimplemented = HAN_CORPUS_MANIFEST.filter(
+      (item) => item.trangThai === 'CHUA_IMPLEMENT',
+    ).length;
+
+    return {
+      title: '欽定協紀辨方書',
+      volumes: HAN_CORPUS_MANIFEST.length,
+      hanOraclePartialVolumes: partial,
+      unimplementedVolumes: unimplemented,
+      fullVolumeOracleCount: 0,
+      discrepancies: SAI_KHAC_NGUON_HAN,
+      manifest: HAN_CORPUS_MANIFEST,
+    };
   }
 
   @Get('rules')

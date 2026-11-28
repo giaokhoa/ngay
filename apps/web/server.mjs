@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const DEFAULT_PORT = 8080;
 const DEFAULT_HOST = '0.0.0.0';
 const DEFAULT_API_ORIGIN = 'http://127.0.0.1:3000';
-const PROXY_PREFIXES = ['/date-selection', '/knowledge', '/health'];
+const PROXY_PREFIXES = ['/date-selection', '/health'];
 const HOP_BY_HOP = new Set([
   'connection',
   'keep-alive',
@@ -47,7 +47,11 @@ export function taoMayChuWeb({
     try {
       const url = new URL(request.url || '/', 'http://localhost');
 
-      if (url.pathname === '/metrics') {
+      if (
+        url.pathname === '/metrics' ||
+        url.pathname === '/knowledge' ||
+        url.pathname.startsWith('/knowledge/')
+      ) {
         response.statusCode = 404;
         response.setHeader('Content-Type', 'text/plain; charset=utf-8');
         response.end('Not found');

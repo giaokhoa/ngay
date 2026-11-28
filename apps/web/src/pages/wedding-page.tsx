@@ -1,4 +1,3 @@
-import { xemNgayCuoiHoi } from '../api/date-selection';
 import { TrangXemNgay } from '../components/activity-date-page';
 
 export function TrangCuoiHoi() {
@@ -6,8 +5,9 @@ export function TrangCuoiHoi() {
     <TrangXemNgay
       tieuDe="Lễ cưới, đón dâu"
       nhanNguon="嫁娶"
-      moTa="Kết quả dựa trên Dụng sự Quyển 11 và các ngoại lệ Nghi kị Quyển 10, không dùng điểm số cộng trừ tùy ý."
-      taiKetQua={xemNgayCuoiHoi}
+      moTa="Chọn ngày cưới theo các điều nên, kị và ngoại lệ của Hiệp Kỷ; có xét năm sinh của cả hai người."
+      congViec="CUOI_HOI"
+      nhanNguoi={['Cô dâu', 'Chú rể']}
     />
   );
 }

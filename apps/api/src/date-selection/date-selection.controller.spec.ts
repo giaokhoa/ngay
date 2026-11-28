@@ -29,6 +29,10 @@ describe('XemNgayController', () => {
     expect(result.ngayDanSu).toBe('2026-11-27');
     expect(result.giaiThich).toBeDefined();
     expect(result.danhGia.dongGop.every((item) => item.quyTac.nguon.length > 0)).toBe(true);
+
+    const source = result.danhGia.dongGop[0]?.quyTac.nguon[0];
+    expect(source).toBeDefined();
+    expect(Object.keys(source ?? {}).sort()).toEqual(['daXacMinh', 'loaiNguon']);
   });
 
   it('trả kết quả DI_CHUYEN có explanation và Q11 provenance', () => {
@@ -88,6 +92,57 @@ describe('XemNgayController XUAT_HANH endpoint', () => {
     expect(result.ngayDanSu).toBe('2026-11-27');
     expect(result.danhGia.dongGop.length).toBeGreaterThan(0);
     expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'XUAT_HANH')).toBe(true);
+  });
+});
+
+describe('XemNgayController xem tháng theo năm sinh', () => {
+  it('cưới hỏi yêu cầu và nhận hai năm sinh', () => {
+    const result = taoController().xemThang(
+      'CUOI_HOI',
+      '2026',
+      '11',
+      'Asia/Ho_Chi_Minh',
+      ['1990', '1992'],
+      ['false', 'true'],
+    );
+
+    expect(result.congViec).toBe('CUOI_HOI');
+    expect(result.ngay).toHaveLength(30);
+  });
+
+  it('từ chối cưới hỏi thiếu một người', () => {
+    expect(() =>
+      taoController().xemThang('CUOI_HOI', '2026', '11', 'Asia/Ho_Chi_Minh', '1990', undefined),
+    ).toThrow(BadRequestException);
+  });
+
+  it('các việc khác yêu cầu một năm sinh chủ sự', () => {
+    const result = taoController().xemThang(
+      'AN_TANG',
+      '2026',
+      '11',
+      'Asia/Ho_Chi_Minh',
+      '1984',
+      'false',
+    );
+
+    expect(result.thongKe.XUNG_TUOI).toBe(30);
+  });
+});
+
+describe('XemNgayController chi tiết ngày + giờ', () => {
+  it('trả ngày public đã làm sạch cùng 12 giờ', () => {
+    const result = taoController().xemChiTiet(
+      'XUAT_HANH',
+      '2026-11-27T05:00:00.000Z',
+      'Asia/Ho_Chi_Minh',
+      '1984',
+      'false',
+    );
+
+    expect(result.gio).toHaveLength(12);
+    expect(result.ketQuaNgay.ngayDanSu).toBe('2026-11-27');
+    expect(JSON.stringify(result.ketQuaNgay)).not.toMatch(/\bQ\d+\b|Quyển\s+\d+/i);
   });
 });
 

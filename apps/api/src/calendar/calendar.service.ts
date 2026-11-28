@@ -7,6 +7,7 @@ import { CanChi } from './domain/sexagenary-cycle';
 import { TietKhi } from './domain/solar-term';
 import { ThapNhiTruc } from './domain/twelve-officer';
 import { tinhCanChiNgay } from './sexagenary-day';
+import { tinhCanChiNamTheoLapXuan, tinhCanChiThang } from './sexagenary-year-month';
 import { TinhTietKhiService } from './solar-term.service';
 import { tinhThapNhiTruc } from './twelve-officer';
 
@@ -19,6 +20,16 @@ export class TinhLichService {
 
   tinhCanChiNgay(ngayDanSu: NgayDanSu): CanChi {
     return tinhCanChiNgay(ngayDanSu);
+  }
+
+  tinhCanChiNamTaiThoiDiem(thoiDiem: Date): CanChi {
+    return tinhCanChiNamTheoLapXuan(thoiDiem, this.tinhTietKhiService);
+  }
+
+  tinhCanChiThangTaiThoiDiem(thoiDiem: Date): CanChi {
+    const canChiNam = this.tinhCanChiNamTaiThoiDiem(thoiDiem);
+    const chiThang = this.tinhChiThangTaiThoiDiem(thoiDiem);
+    return tinhCanChiThang(canChiNam.can, chiThang);
   }
 
   tinhThoiDiemTietKhi(nam: number, tietKhi: TietKhi): Date {

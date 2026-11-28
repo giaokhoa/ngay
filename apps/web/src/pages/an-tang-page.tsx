@@ -1,4 +1,3 @@
-import { xemNgayAnTang } from '../api/date-selection';
 import { TrangXemNgay } from '../components/activity-date-page';
 
 export function TrangAnTang() {
@@ -6,8 +5,9 @@ export function TrangAnTang() {
     <TrangXemNgay
       tieuDe="An táng"
       nhanNguon="安葬"
-      moTa="Dụng sự Quyển 11 cho an táng, giữ riêng với phá thổ và cải táng; Quyển 10 xử lý đầy đủ Nguyệt Kiến, Nguyệt Yếm, Phục/Trọng và Ô Phệ."
-      taiKetQua={xemNgayAnTang}
+      moTa="Chọn ngày an táng theo Hiệp Kỷ, lấy năm sinh người mất làm mệnh chính và xét các điều nên, kị liên quan."
+      congViec="AN_TANG"
+      nhanNguoi={['Người mất']}
     />
   );
 }

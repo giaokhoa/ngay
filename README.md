@@ -41,12 +41,13 @@ Health probes:
 Web hiện dùng relative API path, nên deployment baseline là same-origin/reverse proxy.
 Không bật CORS wildcard. Chi tiết: `docs/decisions/0009-production-runtime-baseline.md`.
 
-## PostgreSQL rule catalog demo
+## Internal knowledge catalog
 
-PostgreSQL là query/audit catalog cho Q10/Q11 + provenance; engine xem ngày vẫn tính
-in-memory bằng TypeScript. Chi tiết boundary: `docs/decisions/0010-postgres-knowledge-catalog.md`.
+PostgreSQL chỉ phục vụ research/audit nội bộ và không được public qua web edge.
+Engine xem ngày vẫn tính in-memory bằng TypeScript. Chi tiết kỹ thuật nằm trong
+`docs/decisions/0010-postgres-knowledge-catalog.md`.
 
-Khởi động Postgres local:
+Khởi động Postgres cho development/research:
 
 ```bash
 pnpm pg:up
@@ -56,28 +57,8 @@ set -a
 set +a
 ```
 
-Terminal 1:
-
-```bash
-pnpm --filter @ngay/api build
-pnpm --filter @ngay/api start:prod
-```
-
-Khi `DATABASE_URL` có giá trị, API tự tạo schema và sync generated mirror từ catalog
-type-safe hiện tại.
-
-Terminal 2:
-
-```bash
-pnpm --filter @ngay/web exec vite --host 0.0.0.0
-```
-
-Mở:
-
-- `http://localhost:5173/rules`
-- `http://localhost:3000/knowledge/stats`
-- ví dụ query:
-  `/knowledge/rules?activity=AN_TANG&layer=Q10&target=PHUC_NHAT&book=10&page=823`
+Khi `DATABASE_URL` có giá trị, API tự tạo schema và sync knowledge mirror.
+Các endpoint knowledge chỉ dành cho mạng/API nội bộ.
 
 Dừng Postgres:
 
@@ -113,7 +94,7 @@ export POSTGRES_PASSWORD='change-me-demo-password'
 pnpm prod:up
 ```
 
-Mở `http://localhost:8080/rules`. Chỉ web port được publish; API/Postgres nằm trong
+Mở `http://localhost:8080/`. Chỉ web port được publish; API/Postgres nằm trong
 private compose network.
 
 Observability:
