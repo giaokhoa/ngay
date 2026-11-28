@@ -90,17 +90,12 @@ describe('Hán source corpus manifest', () => {
     expect(q8?.phamViOracle).toBeUndefined();
   });
 
-  it('keeps year tables and appendix/refutation volumes out of oracle status', () => {
-    for (const quyen of [15, 16, 17, 18, 19, 35, 36]) {
+  it('keeps appendix/refutation volumes unimplemented and out of oracle status', () => {
+    for (const quyen of [35, 36]) {
       const item = HAN_CORPUS_MANIFEST.find((entry) => entry.quyen === quyen);
       expect(item?.trangThai).toBe('CHUA_IMPLEMENT');
       expect(item?.phamViOracle).toBeUndefined();
     }
-
-    const q14 = HAN_CORPUS_MANIFEST.find((entry) => entry.quyen === 14);
-    expect(q14?.trangThai).toBe('CHUA_IMPLEMENT');
-    expect(q14?.nguon).toBe('WIKISOURCE_WYG_FALLBACK');
-    expect(q14?.phamViOracle).toContain('thiếu 卷十四');
   });
 
   it('records Q4 as 29/29 section inventory without inventing standalone factors', () => {

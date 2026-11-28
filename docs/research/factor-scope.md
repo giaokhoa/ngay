@@ -275,3 +275,10 @@ Một factor chỉ vào production khi:
 - không xung đột với alias mapping đã xác minh.
 
 Nếu chưa đủ, issue phải giữ `status:blocked-source` hoặc research status thấp hơn VERIFIED.
+
+## Quyển 35–36 — Phụ lục và Biện ngụy
+
+- Q35: Phụ lục, Hán 16 heading; public Việt TOC 13 mục, exact scan pending một điểm quanh `竒門三元`.
+- Q36: Biện ngụy, Hán 27 heading; phải dùng như anti-oracle/refutation source, không biến heading thành factor.
+
+Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inventory.md`.

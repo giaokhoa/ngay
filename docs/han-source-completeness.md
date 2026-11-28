@@ -178,6 +178,12 @@ Không phát hiện discrepancy Việt/Hán trong scope đã production. **Secti
 
 `docs/research/q14-q19-annual-tables.md` khóa 6/6 block niên biểu, range 60/60 Can-Chi. Q14 dùng fallback Wikisource revision pin vì Kanripo thiếu 卷十四; Q15–19 dùng Kanripo. Đây là spatial annual tables cho Q3/Q8, chưa phải day-selection oracle. Kanripo transcription có một số dị tự như `己`→`巳` ở row heading, nên không parse thẳng làm production data trước normalization/scan cross-check.
 
+### Q35–36
+
+- Q35: `docs/research/q35-full-inventory.md` khóa Hán **16/16 heading**. Secondary Việt Tập 2 TOC có 13 mục: mục 6 gộp `百忌日/祀竈日/洗頭日`, còn `竒門三元` không hiện trên TOC public. Exact canonical scan pending nên chưa gọi đây là discrepancy Việt/Hán đã xác nhận.
+- Q36: `docs/research/q36-full-inventory.md` khóa Hán **27/27 heading**. Secondary Việt TOC có 26 mục do gộp `章光` + `五合五離`. Q36 là **辨訛 — anti-oracle/refutation source**, không phải factor catalog.
+- Cả hai giữ `CHUA_IMPLEMENT` và không có `phamViOracle` runtime claim.
+
 ### Q12–13
 
 - Q12: `docs/research/q12-full-inventory.md`, **8/8 top-level section**. Bảng sunrise/sunset in sách là cho Kinh sư 39°55′; source nói các tỉnh phải tính lại theo latitude + solar declination.
