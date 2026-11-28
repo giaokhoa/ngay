@@ -6,6 +6,7 @@ import { QUY_TAC_AN_TANG } from './an-tang-rules';
 import { QUY_TAC_CAU_PHUC } from './cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from './cau-tu-rules';
 import { QUY_TAC_CUOI_HOI } from './cuoi-hoi-rules';
+import { QUY_TAC_GIAI_TRU } from './giai-tru-rules';
 import { QUY_TAC_DI_CHUYEN } from './di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from './earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from './khai-truong-rules';
@@ -40,6 +41,8 @@ export class DungSuService {
         return QUY_TAC_CAU_PHUC;
       case LoaiCongViec.CAU_TU:
         return QUY_TAC_CAU_TU;
+      case LoaiCongViec.GIAI_TRU:
+        return QUY_TAC_GIAI_TRU;
       case LoaiCongViec.DONG_THO:
         return QUY_TAC_DONG_THO;
       case LoaiCongViec.SUA_CUNG_THAT:

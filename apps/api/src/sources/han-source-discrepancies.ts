@@ -19,6 +19,16 @@ export interface SaiKhacNguonHan {
 
 export const SAI_KHAC_NGUON_HAN: readonly SaiKhacNguonHan[] = [
   {
+    ma: 'Q11_GIAI_TRU_VIET_THEM_THIEN_NGUYEN',
+    loai: 'VIET_HAN_NOI_DUNG',
+    quyen: 11,
+    muc: '解除',
+    anchorHan: 'KR3g0051_WYG_011-15b / KR3g0051_WYG_010-11b..12a',
+    moTa: 'Exact Việt Tập I p.852 (working scan PDF page 859) in Thiên Nguyện trong dòng Nên Giải trừ. Hán Q11 解除 không có 天願; Q10 mục 天願 còn nói thẳng “不用以解除療病者療解無取合義”.',
+    chinhSachProduction:
+      'Không dùng Thiên Nguyện như Nên Giải trừ. Production theo Hán Q11 + Q10; giữ mục Việt p.852 như discrepancy có regression, không normalize ngầm bản scan Việt.',
+  },
+  {
     ma: 'Q11_TE_TU_VIET_THIEU_PHUC_SINH',
     loai: 'VIET_HAN_NOI_DUNG',
     quyen: 11,

@@ -17,6 +17,14 @@ describe('Hán source discrepancy registry', () => {
     }
   });
 
+  it('registers the Q11 Giải trừ extra Thiên Nguyện discrepancy explicitly', () => {
+    expect(laySaiKhacNguonHan('Q11_GIAI_TRU_VIET_THEM_THIEN_NGUYEN')).toMatchObject({
+      loai: 'VIET_HAN_NOI_DUNG',
+      quyen: 11,
+      muc: '解除',
+    });
+  });
+
   it('registers the Q11 Tế tự missing Phúc Sinh discrepancy explicitly', () => {
     expect(laySaiKhacNguonHan('Q11_TE_TU_VIET_THIEU_PHUC_SINH')).toMatchObject({
       loai: 'VIET_HAN_NOI_DUNG',
