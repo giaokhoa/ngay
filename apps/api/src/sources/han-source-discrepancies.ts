@@ -19,6 +19,16 @@ export interface SaiKhacNguonHan {
 
 export const SAI_KHAC_NGUON_HAN: readonly SaiKhacNguonHan[] = [
   {
+    ma: 'Q11_TE_TU_VIET_THIEU_PHUC_SINH',
+    loai: 'VIET_HAN_NOI_DUNG',
+    quyen: 11,
+    muc: '祭祀',
+    anchorHan: 'KR3g0051_WYG_011-6a',
+    moTa: 'Hán Q11 祭祀 ghi liền 普護、福生、聖心、益後、續世 trong dòng 宜. Exact Việt Tập I p.844 (working scan PDF page 850) in Phổ Hộ rồi nhảy sang Thánh Tâm, thiếu Phúc Sinh.',
+    chinhSachProduction:
+      'Production giữ Phúc Sinh là Nên Tế tự theo Hán Q11 + Q6 福生 source-lock. Các mục còn lại dùng Việt/Hán đồng thuận; không normalize ngầm bản scan Việt.',
+  },
+  {
     ma: 'Q11_QUAN_DAI_VIET_THEM_BE_NHAT',
     loai: 'VIET_HAN_NOI_DUNG',
     quyen: 11,

@@ -10,6 +10,7 @@ import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
+import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_XUAT_HANH_Q11 } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
 
@@ -60,6 +61,29 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
     ],
+  },
+  [LoaiCongViec.TE_TU]: {
+    tieuDeHan: '祭祀',
+    anchor: 'KR3g0051_WYG_011-6a',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:THIEN_VU',
+      'TRUC:KHAI',
+      'YEU_TO:PHO_HO',
+      'YEU_TO:PHUC_SINH',
+      'YEU_TO:THANH_TAM',
+      'YEU_TO:ICH_HAU',
+      'YEU_TO:TUC_THE',
+    ],
+    ky: ['YEU_TO:THIEN_CAU', 'CHI_NGAY:DAN'],
   },
   [LoaiCongViec.KHANH_THUONG]: {
     tieuDeHan: '慶賜賞賀',
@@ -404,6 +428,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.NHAP_HOC]: QUY_TAC_NHAP_HOC,
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
+  [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,

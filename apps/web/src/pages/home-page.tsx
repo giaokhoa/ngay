@@ -74,6 +74,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.KHANH_THUONG,
   },
   {
+    ma: 'TE_TU',
+    ten: 'Cúng tế',
+    moTa: 'Chọn ngày cúng tế theo cát thần và các điều kị đã đối chiếu.',
+    to: DUONG_DAN.TE_TU,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
@@ -125,6 +131,7 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   LUC_HOP: 'Lục Hợp',
   NGU_HOP: 'Ngũ Hợp',
   NGU_LY: 'Ngũ Ly',
+  THIEN_CAU: 'Thiên Cẩu',
   PHO_HO: 'Phổ Hộ',
   PHUC_SINH: 'Phúc Sinh',
   THANH_TAM: 'Thánh Tâm',

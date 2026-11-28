@@ -10,6 +10,7 @@ import { TrangKhanhThuong } from './pages/khanh-thuong-page';
 import { TrangNhapHoc } from './pages/nhap-hoc-page';
 import { TrangQuanDai } from './pages/quan-dai-page';
 import { TrangXuatHanh } from './pages/xuat-hanh-page';
+import { TrangTeTu } from './pages/te-tu-page';
 import { TrangYenHoi } from './pages/yen-hoi-page';
 import { TrangCuoiHoi } from './pages/wedding-page';
 import { DUONG_DAN } from './routes';
@@ -46,6 +47,10 @@ export const boDinhTuyen = createBrowserRouter([
   {
     path: DUONG_DAN.KHANH_THUONG,
     Component: TrangKhanhThuong,
+  },
+  {
+    path: DUONG_DAN.TE_TU,
+    Component: TrangTeTu,
   },
   {
     path: DUONG_DAN.DONG_THO,
