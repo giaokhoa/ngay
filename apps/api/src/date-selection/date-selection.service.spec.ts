@@ -749,6 +749,48 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
   });
 });
 
+describe('XemNgayService Q10 shared calendar annotations end-to-end', () => {
+  it('real Vô Lộc suppresses Nên without inventing Kị for trade', () => {
+    const result = taoService().xemLapKheUocGiaoDich(
+      new Date('2026-01-07T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.yeuTo.some((item) => item.ma === MaYeuTo.VO_LOC)).toBe(true);
+    expect(result.danhGia.coNen).toBe(false);
+    expect(result.danhGia.coKy).toBe(false);
+    expect(result.giaiThich.xungDot.some((text) => text.startsWith('Vô Lộc:'))).toBe(true);
+  });
+
+  it('real Hối nhật removes Nên but does not create the generic special-day Kị', () => {
+    const result = taoService().xemLapKheUocGiaoDich(
+      new Date('2026-01-18T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.yeuTo.some((item) => item.ma === MaYeuTo.HOI_NHAT)).toBe(true);
+    expect(result.danhGia.coNen).toBe(false);
+    expect(result.giaiThich.xungDot.some((text) => text.startsWith('Hối nhật:'))).toBe(true);
+    expect(
+      result.danhGia.xungDotDaApDung.some((item) =>
+        item.ma.endsWith('_THUONG_SOC_TU_LY_TU_TUYET_KY'),
+      ),
+    ).toBe(false);
+  });
+
+  it('real Tứ Ly creates supplemental Kị for a non-exempt activity', () => {
+    const result = taoService().xemLapKheUocGiaoDich(
+      new Date('2026-03-19T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.yeuTo.some((item) => item.ma === MaYeuTo.TU_LY)).toBe(true);
+    expect(result.danhGia.coKy).toBe(true);
+    expect(
+      result.danhGia.xungDotDaApDung.some((item) =>
+        item.ma.endsWith('_THUONG_SOC_TU_LY_TU_TUYET_KY'),
+      ),
+    ).toBe(true);
+  });
+});
+
 describe('XemNgayService xem tháng + tương chủ', () => {
   it('trả đủ ngày trong tháng và xếp loại không dùng điểm cộng trừ', () => {
     const result = taoService().xemThang(2026, 11, 'Asia/Ho_Chi_Minh', LoaiCongViec.AN_TANG, [

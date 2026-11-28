@@ -85,12 +85,19 @@ describe('CAU_PHUC Q10 conflict resolver', () => {
     expect(hard.camMoiViec).toBe(true);
   });
 
-  it('Tứ Ly / Tứ Tuyệt / Hối vẫn Kị dù có Thiên Đức vì Cầu phúc không thuộc nhóm miễn', () => {
-    for (const ma of [MaYeuTo.TU_LY, MaYeuTo.TU_TUYET, MaYeuTo.HOI_NHAT]) {
+  it('Tứ Ly / Tứ Tuyệt vẫn Kị riêng Cầu phúc nhưng không tự xóa Nên Thiên Đức', () => {
+    for (const ma of [MaYeuTo.TU_LY, MaYeuTo.TU_TUYET]) {
       const result = danhGia({ yeuTo: [ma, MaYeuTo.THIEN_DUC] });
       expect(result.coKy).toBe(true);
       expect(result.coNen).toBe(true);
     }
+  });
+
+  it('Hối nhật giữ Kị riêng Cầu phúc và phụ chú Q10 đồng thời bỏ Nên', () => {
+    const result = danhGia({ yeuTo: [MaYeuTo.HOI_NHAT, MaYeuTo.THIEN_DUC] });
+    expect(result.coKy).toBe(true);
+    expect(result.coNen).toBe(false);
+    expect(result.xungDotDaApDung.some((x) => x.ma.endsWith('_HOI_NHAT_BO_NEN'))).toBe(true);
   });
 
   it('shared Q10 core: Đại Thời Dần bỏ Kị, còn Nguyệt Phá + Đức vẫn Kị', () => {
