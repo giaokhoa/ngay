@@ -180,6 +180,7 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   TU_LY: 'Tứ Ly',
   TU_TUYET: 'Tứ Tuyệt',
   HOI_NHAT: 'Hối nhật',
+  SOC_HUYEN_VONG: 'Sóc–Huyền–Vọng',
   THIEN_TAC: 'Thiên Tặc',
   TU_PHE: 'Tứ Phế',
   TU_KY: 'Tứ Kị',

@@ -36,6 +36,7 @@ import {
   laTuLy,
   laTuTuyet,
 } from './special-calendar-day-definitions';
+import { DINH_NGHIA_SOC_HUYEN_VONG, laSocHuyenVong } from './soc-huyen-vong-definition';
 import {
   DINH_NGHIA_DAN_NHAT,
   DINH_NGHIA_QUY_KY,
@@ -233,6 +234,7 @@ export class TinhYeuToNgayService {
     if (laTuLy(boiCanh)) ketQua.push(DINH_NGHIA_TU_LY);
     if (laTuTuyet(boiCanh)) ketQua.push(DINH_NGHIA_TU_TUYET);
     if (laHoiNhat(boiCanh)) ketQua.push(DINH_NGHIA_HOI_NHAT);
+    if (laSocHuyenVong(boiCanh)) ketQua.push(DINH_NGHIA_SOC_HUYEN_VONG);
 
     if (laVoLoc(boiCanh, new Set(ketQua.map((item) => item.ma)))) {
       ketQua.push(DINH_NGHIA_VO_LOC);

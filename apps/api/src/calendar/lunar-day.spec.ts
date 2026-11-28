@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { tinhThongTinNgayAm } from './lunar-day';
+import { laNgaySocHuyenVong, tinhThongTinNgayAm } from './lunar-day';
 
 const MUI_GIO_VIET_NAM = 'Asia/Ho_Chi_Minh';
 
@@ -44,6 +44,28 @@ describe('tinhThongTinNgayAm', () => {
       expect(info.ngayTrongThang).toBeGreaterThanOrEqual(29);
       expect(info.ngayTrongThang).toBeLessThanOrEqual(30);
     }
+  });
+
+  it.each([
+    ['2024-02-10', 'Sóc'],
+    ['2024-02-16', 'Thượng huyền'],
+    ['2024-02-24', 'Vọng'],
+    ['2024-03-03', 'Hạ huyền'],
+  ] as const)('%s là ngày phase %s theo ngày dân sự Việt Nam', (ngayDanSu, tenPha) => {
+    expect(tenPha.length).toBeGreaterThan(0);
+    expect(laNgaySocHuyenVong(ngayDanSu, MUI_GIO_VIET_NAM)).toBe(true);
+  });
+
+  it.each([
+    '2024-02-09',
+    '2024-02-11',
+    '2024-02-17',
+    '2024-02-23',
+    '2024-02-25',
+    '2024-03-02',
+    '2024-03-04',
+  ])('%s không bị kéo sang ngày phase kế cận', (ngayDanSu) => {
+    expect(laNgaySocHuyenVong(ngayDanSu, MUI_GIO_VIET_NAM)).toBe(false);
   });
 
   it('đếm ngày âm theo ngày dân sự từ sóc', () => {
