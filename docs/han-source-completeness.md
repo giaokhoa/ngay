@@ -100,6 +100,8 @@ Tổng hiện tại:
 
 ### Q4
 
+`docs/research/q4-full-inventory.md` khóa **29/29 section mục lục Q4**. Ngoài shared-position/Bất Tương oracle, Q10 layer đã source-lock hard days, Tuế Bạc/Trục Trận, Âm/Dương Thác và các nhánh Nguyệt Yếm. Các mục Hành Ngoan/Liễu Lệ/Cô Thần là semantic input, không bị biến thành factor độc lập.
+
 Ngoài oracle vị trí/Âm Dương Bất Tương, Q10 hard-day coverage của các hội Âm/Dương Q4 đã được canonical hóa tại `q4-hard-days.ts`: 34 identity/vector từ `WYG_010-48a..49b`, gồm Đại/Tiểu Hội, Tam Âm, Âm Vị, các giao phá/xung, các Âm Thác hard-overlap và Tuyệt Âm/Tuyệt Dương. Cùng set này được test áp cho đủ 7 vertical; trước fix, Cưới hỏi bỏ sót toàn bộ lớp này và ba matrix cũ bỏ sót Tuyệt Âm/Tuyệt Dương.
 
 - Nguyệt biểu

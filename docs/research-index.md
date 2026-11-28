@@ -60,7 +60,7 @@ Chi tiết core: `docs/research/virtue-special-day-factors.md`. Inventory đủ 
 | Yếm Đối / Lục Nghi / Chiêu Diêu | factors | T1 Q4 p353 + Hán Q4     | ORACLE_TESTED | q4-shared-position-definitions.ts | q4-shared-position-factors.spec.ts | cùng vị trí nhưng semantics khác nhau           |
 | Âm Dương Bất Tương              | factors | T1 Q4 p356-358 + Hán Q4 | ORACLE_TESTED | bat-tuong-definition.ts           | bat-tuong.spec.ts                  | table-driven 12 tháng × Can Chi                 |
 
-Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
+Chi tiết core: `docs/research/q4-aliases-bat-tuong.md`. Inventory đủ Q4: `docs/research/q4-full-inventory.md`.
 
 ## Day/hour — Quyển 7
 
@@ -107,7 +107,7 @@ Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scop
 
 | Scope                          | Hán source pin                     | Trạng thái                | Test                                          |
 | ------------------------------ | ---------------------------------- | ------------------------- | --------------------------------------------- |
-| Q4 / 月表 calendar positions   | KR3g0051 WYG Q4 + Q20..31          | HAN_ORACLE_TESTED         | han-q4-month-table-oracle.spec.ts             |
+| Q4 29/29 section inventory     | KR3g0051 WYG Q4/Q10 + Q20..31      | HAN_ORACLE_TESTED_PARTIAL | q4-hard/yem specs + month-table oracle        |
 | Q5 30/30 section inventory     | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED_PARTIAL | han-q5-oracle.spec.ts                         |
 | Q7 13/13 mục đã inventory      | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
 | Q6 40/40 mục đã inventory      | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED_PARTIAL | han-q6-oracle.spec.ts                         |
