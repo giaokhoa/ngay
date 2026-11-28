@@ -27,7 +27,7 @@ export interface DinhNghiaYeuToTapCanChiTheoMua extends DinhNghiaYeuTo {
 export const DINH_NGHIA_CUU_KHAM: DinhNghiaYeuToTheoChiThang = {
   ma: MaYeuTo.CUU_KHAM,
   loai: LoaiYeuTo.THAN_SAT,
-  tenKhac: [],
+  tenKhac: ['Cửu Tiêu'],
   chiNgayTheoChiThang: {
     [DAN]: [THIN],
     [MAO]: [TY],

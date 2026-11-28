@@ -8,7 +8,7 @@ Khóa toàn bộ 30 section trong mục lục Quyển 5, tách rõ:
 
 - identity đã production + Hán oracle;
 - section chỉ production một phần;
-- mục đã hiểu nhưng không thuộc 31 vertical hiện tại;
+- mục đã hiểu nhưng không thuộc 32 vertical hiện tại;
 - mục cần context ngoài day-factor engine.
 
 Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quyết định activity vẫn theo Q11/Q10.
@@ -21,38 +21,38 @@ Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quy
 
 ## Inventory 30 section
 
-|   # | Section Q5                                                         | Research              | Product             | Ghi chú                                                                                                    |
-| --: | ------------------------------------------------------------------ | --------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------- |
-|   1 | Thiên Đạo – Thiên Đức / 天道 天徳                                  | ORACLE_TESTED_PARTIAL | PARTIAL_IMPLEMENTED | Thiên Đức ngày đã implement; Thiên Đạo là phương vị, không ép thành day factor                             |
-|   2 | Nguyệt Đức / 月徳                                                  | ORACLE_TESTED         | IMPLEMENTED         | month→day stem                                                                                             |
-|   3 | Thiên Đức Hợp / 天徳合                                             | ORACLE_TESTED         | IMPLEMENTED         | bốn tháng trọng không có day-stem match                                                                    |
-|   4 | Nguyệt Đức Hợp / 月徳合                                            | ORACLE_TESTED         | IMPLEMENTED         | month→day stem                                                                                             |
-|   5 | Nguyệt Không / 月空                                                | ORACLE_TESTED         | IMPLEMENTED         | month→day stem                                                                                             |
-|   6 | Thiên Ân / 天恩                                                    | ORACLE_TESTED         | IMPLEMENTED         | 15 Can-Chi cố định                                                                                         |
-|   7 | Thiên Xá / 天赦                                                    | ORACLE_TESTED         | IMPLEMENTED         | seasonal Can-Chi                                                                                           |
-|   8 | Thiên Nguyện / 天願                                                | ORACLE_TESTED         | IMPLEMENTED         | month→Can-Chi                                                                                              |
-|   9 | Mẫu Thương / 母倉                                                  | ORACLE_TESTED         | IMPLEMENTED         | seasonal branches + Thổ Vượng override                                                                     |
-|  10 | Nguyệt Ân / 月恩                                                   | ORACLE_TESTED         | IMPLEMENTED         | month→day stem                                                                                             |
-|  11 | Tứ Tướng / 四相                                                    | ORACLE_TESTED         | IMPLEMENTED         | seasonal day stems                                                                                         |
-|  12 | Thời Đức / 時徳                                                    | ORACLE_TESTED         | IMPLEMENTED         | seasonal day branch                                                                                        |
-|  13 | Vương–Quan–Thủ–Tướng–Dân Nhật / 王官守相民日                       | ORACLE_TESTED_PARTIAL | PARTIAL_IMPLEMENTED | Vương Nhật + Dân Nhật current product; Quan/Thủ/Tướng không có current Q11 dependency                      |
-|  14 | Tứ Kích / 四擊                                                     | COMPARED              | OUT_OF_SCOPE        | seasonal branch; nguồn nêu kị quân sự/phòng biên                                                           |
-|  15 | Cửu Không / 九空                                                   | ORACLE_TESTED         | IMPLEMENTED         | Giêng Thìn, nghịch bốn quý                                                                                 |
-|  16 | Ngũ Mộ / 五墓                                                      | ORACLE_TESTED         | IMPLEMENTED         | monthly Can-Chi grouping                                                                                   |
-|  17 | Tứ Hao / 四耗                                                      | ORACLE_TESTED         | IMPLEMENTED         | Xuân Nhâm Tý, Hạ Ất Mão, Thu Mậu Ngọ, Đông Tân Dậu                                                         |
-|  18 | Tứ Phế / 四廢                                                      | ORACLE_TESTED         | IMPLEMENTED         | seasonal Can-Chi pairs                                                                                     |
-|  19 | Tứ Kị – Tứ Cùng / 四忌 四窮〈八龍七鳥九虎六蛇〉                    | ORACLE_TESTED         | IMPLEMENTED         | Tứ Kị + Tứ Cùng là production identities; bốn tên phụ mô tả cặp theo mùa, không nhân đôi factor            |
-|  20 | Cửu Khảm – Cửu Tiêu / 九坎〈九焦〉                                 | ORACLE_TESTED         | IMPLEMENTED         | Việt p442–443 + Hán Q5 hiệu đính; Cửu Khảm production cho `乘船渡水`                                       |
-|  21 | Ngũ Hư / 五虚                                                      | ORACLE_TESTED         | IMPLEMENTED         | Việt p444–445 + Hán WYG_005-47b..48a; Xuân Tỵ-Dậu-Sửu, Hạ Thân-Tý-Thìn, Thu Hợi-Mão-Mùi, Đông Dần-Ngọ-Tuất |
-|  22 | Bát Phong – Xúc Thủy Long / 八風 觸水龍                            | ORACLE_TESTED         | IMPLEMENTED         | Việt p446–447 + Hán `WYG_005-48b..50b`; production cho `乘船渡水`                                          |
-|  23 | Bảo–Nghĩa–Chế–Chuyên–Phạt Nhật / 寶義制專伐日                      | COMPARED              | OUT_OF_SCOPE        | Can-Chi ngũ hành classification; nhiều semantics quân sự, không current dependency                         |
-|  24 | Bát Chuyên / 八專                                                  | ORACLE_TESTED         | IMPLEMENTED         | 5 ngày theo bản hiệu đính                                                                                  |
-|  25 | Vô Lộc / 無禄                                                      | ORACLE_TESTED         | IMPLEMENTED_CONTEXT | 10 candidate + Q10 relief theo Đức/năm/tháng/trung khí; không blanket-block                                |
-|  26 | Trọng Nhật – Ngũ Hợp – Ngũ Ly〈Trừ Thần〉 / 重日 五合 五離〈除神〉 | ORACLE_TESTED         | IMPLEMENTED         | Trọng Nhật + Ngũ Hợp + Ngũ Ly production; Trừ Thần là alias của Ngũ Ly                                     |
-|  27 | Giải Thần / 解神                                                   | ORACLE_TESTED         | IMPLEMENTED         | Việt p462–463 + Hán `WYG_005-59b..60a`; Giải trừ prerequisite                                              |
-|  28 | Phục Nhật / 復日                                                   | ORACLE_TESTED         | IMPLEMENTED         | monthly day stem                                                                                           |
-|  29 | Minh Phệ / 鳴吠日                                                  | ORACLE_TESTED         | IMPLEMENTED         | production code `O_PHE`; final Lập thành 13 ngày                                                           |
-|  30 | Minh Phệ Đối / 鳴吠對日                                            | COMPARED              | OUT_OF_SCOPE        | identity riêng; current AN_TANG exact Q11 chỉ dùng 鳴吠, không tự nhập chung                               |
+|   # | Section Q5                                                         | Research              | Product             | Ghi chú                                                                                                            |
+| --: | ------------------------------------------------------------------ | --------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+|   1 | Thiên Đạo – Thiên Đức / 天道 天徳                                  | ORACLE_TESTED_PARTIAL | PARTIAL_IMPLEMENTED | Thiên Đức ngày đã implement; Thiên Đạo là phương vị, không ép thành day factor                                     |
+|   2 | Nguyệt Đức / 月徳                                                  | ORACLE_TESTED         | IMPLEMENTED         | month→day stem                                                                                                     |
+|   3 | Thiên Đức Hợp / 天徳合                                             | ORACLE_TESTED         | IMPLEMENTED         | bốn tháng trọng không có day-stem match                                                                            |
+|   4 | Nguyệt Đức Hợp / 月徳合                                            | ORACLE_TESTED         | IMPLEMENTED         | month→day stem                                                                                                     |
+|   5 | Nguyệt Không / 月空                                                | ORACLE_TESTED         | IMPLEMENTED         | month→day stem                                                                                                     |
+|   6 | Thiên Ân / 天恩                                                    | ORACLE_TESTED         | IMPLEMENTED         | 15 Can-Chi cố định                                                                                                 |
+|   7 | Thiên Xá / 天赦                                                    | ORACLE_TESTED         | IMPLEMENTED         | seasonal Can-Chi                                                                                                   |
+|   8 | Thiên Nguyện / 天願                                                | ORACLE_TESTED         | IMPLEMENTED         | month→Can-Chi                                                                                                      |
+|   9 | Mẫu Thương / 母倉                                                  | ORACLE_TESTED         | IMPLEMENTED         | seasonal branches + Thổ Vượng override                                                                             |
+|  10 | Nguyệt Ân / 月恩                                                   | ORACLE_TESTED         | IMPLEMENTED         | month→day stem                                                                                                     |
+|  11 | Tứ Tướng / 四相                                                    | ORACLE_TESTED         | IMPLEMENTED         | seasonal day stems                                                                                                 |
+|  12 | Thời Đức / 時徳                                                    | ORACLE_TESTED         | IMPLEMENTED         | seasonal day branch                                                                                                |
+|  13 | Vương–Quan–Thủ–Tướng–Dân Nhật / 王官守相民日                       | ORACLE_TESTED_PARTIAL | PARTIAL_IMPLEMENTED | Vương Nhật + Dân Nhật current product; Quan/Thủ/Tướng không có current Q11 dependency                              |
+|  14 | Tứ Kích / 四擊                                                     | COMPARED              | OUT_OF_SCOPE        | seasonal branch; nguồn nêu kị quân sự/phòng biên                                                                   |
+|  15 | Cửu Không / 九空                                                   | ORACLE_TESTED         | IMPLEMENTED         | Giêng Thìn, nghịch bốn quý                                                                                         |
+|  16 | Ngũ Mộ / 五墓                                                      | ORACLE_TESTED         | IMPLEMENTED         | monthly Can-Chi grouping                                                                                           |
+|  17 | Tứ Hao / 四耗                                                      | ORACLE_TESTED         | IMPLEMENTED         | Xuân Nhâm Tý, Hạ Ất Mão, Thu Mậu Ngọ, Đông Tân Dậu                                                                 |
+|  18 | Tứ Phế / 四廢                                                      | ORACLE_TESTED         | IMPLEMENTED         | seasonal Can-Chi pairs                                                                                             |
+|  19 | Tứ Kị – Tứ Cùng / 四忌 四窮〈八龍七鳥九虎六蛇〉                    | ORACLE_TESTED         | IMPLEMENTED         | Tứ Kị + Tứ Cùng là production identities; bốn tên phụ mô tả cặp theo mùa, không nhân đôi factor                    |
+|  20 | Cửu Khảm – Cửu Tiêu / 九坎〈九焦〉                                 | ORACLE_TESTED         | IMPLEMENTED         | Việt p442–443 + Hán Q5 hiệu đính; Cửu Khảm production cho `乘船渡水`; cùng identity mang alias Cửu Tiêu cho `栽種` |
+|  21 | Ngũ Hư / 五虚                                                      | ORACLE_TESTED         | IMPLEMENTED         | Việt p444–445 + Hán WYG_005-47b..48a; Xuân Tỵ-Dậu-Sửu, Hạ Thân-Tý-Thìn, Thu Hợi-Mão-Mùi, Đông Dần-Ngọ-Tuất         |
+|  22 | Bát Phong – Xúc Thủy Long / 八風 觸水龍                            | ORACLE_TESTED         | IMPLEMENTED         | Việt p446–447 + Hán `WYG_005-48b..50b`; production cho `乘船渡水`                                                  |
+|  23 | Bảo–Nghĩa–Chế–Chuyên–Phạt Nhật / 寶義制專伐日                      | COMPARED              | OUT_OF_SCOPE        | Can-Chi ngũ hành classification; nhiều semantics quân sự, không current dependency                                 |
+|  24 | Bát Chuyên / 八專                                                  | ORACLE_TESTED         | IMPLEMENTED         | 5 ngày theo bản hiệu đính                                                                                          |
+|  25 | Vô Lộc / 無禄                                                      | ORACLE_TESTED         | IMPLEMENTED_CONTEXT | 10 candidate + Q10 relief theo Đức/năm/tháng/trung khí; không blanket-block                                        |
+|  26 | Trọng Nhật – Ngũ Hợp – Ngũ Ly〈Trừ Thần〉 / 重日 五合 五離〈除神〉 | ORACLE_TESTED         | IMPLEMENTED         | Trọng Nhật + Ngũ Hợp + Ngũ Ly production; Trừ Thần là alias của Ngũ Ly                                             |
+|  27 | Giải Thần / 解神                                                   | ORACLE_TESTED         | IMPLEMENTED         | Việt p462–463 + Hán `WYG_005-59b..60a`; Giải trừ prerequisite                                                      |
+|  28 | Phục Nhật / 復日                                                   | ORACLE_TESTED         | IMPLEMENTED         | monthly day stem                                                                                                   |
+|  29 | Minh Phệ / 鳴吠日                                                  | ORACLE_TESTED         | IMPLEMENTED         | production code `O_PHE`; final Lập thành 13 ngày                                                                   |
+|  30 | Minh Phệ Đối / 鳴吠對日                                            | COMPARED              | OUT_OF_SCOPE        | identity riêng; current AN_TANG exact Q11 chỉ dùng 鳴吠, không tự nhập chung                                       |
 
 ## Những section cần lưu ý
 
@@ -70,7 +70,7 @@ Hán `WYG_005-34b..37b` khóa đủ năm loại:
 - Dân: Xuân Ngọ, Hạ Dậu, Thu Tý, Đông Mão;
 - Thủ: sau phần hiệu đính dùng Xuân Thìn, Hạ Mùi, Thu Tuất, Đông Sửu.
 
-Product hiện chỉ có Vương Nhật + Dân Nhật vì 31 vertical hiện tại chỉ cần hai identity này. Không tạo ba factor còn lại chỉ để đủ section.
+Product hiện chỉ có Vương Nhật + Dân Nhật vì 32 vertical hiện tại chỉ cần hai identity này. Không tạo ba factor còn lại chỉ để đủ section.
 
 ### Vô Lộc
 
@@ -92,7 +92,7 @@ Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùn
 
 - **26 identity Q5 production** có Hán oracle độc lập.
 - Section partial không được quảng bá thành full implementation chỉ vì một identity bên trong đã có code.
-- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 31 vertical không cần.
+- OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 32 vertical không cần.
 - `Vô Lộc` đã production bằng context năm/tháng/trung khí; vẫn tuyệt đối không dùng như blanket blocker.
 - Giải Thần production theo cặp tháng `Thân/Thân, Tuất/Tuất, Tý/Tý, Dần/Dần, Thìn/Thìn, Ngọ/Ngọ`; dependency trực tiếp của Giải trừ.
 - Khi mở activity mới, dependency Q11 sẽ quyết định mục nào được kéo vào production.

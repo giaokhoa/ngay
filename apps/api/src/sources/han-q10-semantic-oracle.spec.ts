@@ -29,6 +29,7 @@ import { QUY_TAC_SUA_SANG_DUONG_SA } from '../activities/sua-sang-duong-sa-rules
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_TRANG_TRI_TUONG } from '../activities/trang-tri-tuong-rules';
 import { QUY_TAC_TROC_NA_BAT_BO } from '../activities/troc-na-bat-bo-rules';
+import { QUY_TAC_TRONG_TROT } from '../activities/trong-trot-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
 import { DiaChi } from '../calendar/domain/earthly-branch';
@@ -67,6 +68,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.PHA_NHA_HUY_TUONG]: QUY_TAC_PHA_NHA_HUY_TUONG,
   [LoaiCongViec.TROC_NA_BAT_BO]: QUY_TAC_TROC_NA_BAT_BO,
   [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC,
+  [LoaiCongViec.TRONG_TROT]: QUY_TAC_TRONG_TROT,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -218,6 +220,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.PHA_NHA_HUY_TUONG]: false,
       [LoaiCongViec.TROC_NA_BAT_BO]: false,
       [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: false,
+      [LoaiCongViec.TRONG_TROT]: true,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -270,6 +273,46 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('栽種: 地火 survives 月厭 relief; 九焦 and 乙日 remain Kị', () => {
+    const earthFire = danhGia(LoaiCongViec.TRONG_TROT, {
+      chiThang: DiaChi.DAN,
+      yeuTo: [MaYeuTo.NGUYET_YEM, MaYeuTo.DIA_HOA, MaYeuTo.NGUYET_DUC],
+    });
+    const nineScorch = danhGia(LoaiCongViec.TRONG_TROT, {
+      yeuTo: [MaYeuTo.CUU_KHAM, MaYeuTo.THIEN_DUC],
+    });
+    const yiDay = danhGia(LoaiCongViec.TRONG_TROT, {
+      canNgay: ThienCan.AT,
+      yeuTo: [],
+    });
+    expect(earthFire.coKy).toBe(true);
+    expectTrangThai(earthFire.dongGop, MaYeuTo.NGUYET_YEM, TrangThaiDongGop.HIEU_LUC);
+    expectTrangThai(earthFire.dongGop, MaYeuTo.DIA_HOA, TrangThaiDongGop.HIEU_LUC);
+    expect(nineScorch.coKy).toBe(true);
+    expect(yiDay.coKy).toBe(true);
+  });
+
+  it('栽種: 死氣 gets four-virtue relief except 辰戌 + 月厭', () => {
+    const relieved = danhGia(LoaiCongViec.TRONG_TROT, {
+      yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.THIEN_DUC],
+    });
+    const blocked = danhGia(LoaiCongViec.TRONG_TROT, {
+      chiThang: DiaChi.THIN,
+      yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
+    });
+    expect(relieved.coKy).toBe(false);
+    expect(blocked.coKy).toBe(true);
+  });
+
+  it('栽種: 月忌 suppresses Nên without inventing Kị', () => {
+    const result = danhGia(LoaiCongViec.TRONG_TROT, {
+      truc: ThapNhiTruc.KHAI,
+      yeuTo: [MaYeuTo.NGUYET_KY],
+    });
+    expect(result.coNen).toBe(false);
+    expect(result.coKy).toBe(false);
   });
 
   it('乘船渡水: 招搖 and 八風 release only by their exact cát sets', () => {

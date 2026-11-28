@@ -28,6 +28,7 @@ import { QUY_TAC_SUA_MONG_TAY_CHAN } from './sua-mong-tay-chan-rules';
 import { QUY_TAC_SUA_SANG_DUONG_SA } from './sua-sang-duong-sa-rules';
 import { QUY_TAC_TE_TU } from './te-tu-rules';
 import { QUY_TAC_TROC_NA_BAT_BO } from './troc-na-bat-bo-rules';
+import { QUY_TAC_TRONG_TROT } from './trong-trot-rules';
 import { QUY_TAC_TRANG_TRI_TUONG } from './trang-tri-tuong-rules';
 import { QUY_TAC_XUAT_HANH } from './xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from './yen-hoi-rules';
@@ -88,6 +89,8 @@ export class DungSuService {
         return QUY_TAC_TROC_NA_BAT_BO;
       case LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC:
         return QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC;
+      case LoaiCongViec.TRONG_TROT:
+        return QUY_TAC_TRONG_TROT;
       case LoaiCongViec.DONG_THO:
         return QUY_TAC_DONG_THO;
       case LoaiCongViec.SUA_CUNG_THAT:

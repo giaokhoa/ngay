@@ -5,6 +5,7 @@ import { DungSuService } from '../activities/activities.service';
 import { TinhLichService } from '../calendar/calendar.service';
 import { TinhThoVuongService } from '../calendar/earth-reign.service';
 import { DiaChi } from '../calendar/domain/earthly-branch';
+import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { TietKhi } from '../calendar/domain/solar-term';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { TinhTietKhiService } from '../calendar/solar-term.service';
@@ -1183,6 +1184,114 @@ describe('XemNgayService DI_THUYEN_VUOT_SONG_NUOC end-to-end', () => {
   });
 });
 
+describe('XemNgayService TRONG_TROT end-to-end', () => {
+  it('orchestrates calendar/factors -> exact 13/21 Q11 -> source-resolved Q10', () => {
+    const result = taoService().xemTrongTrot(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'TRONG_TROT')).toBe(
+      true,
+    );
+  });
+
+  it('is deterministic for TRONG_TROT', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemTrongTrot(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemTrongTrot(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real calendar keeps crop residual, relief, typed-day and suppressor semantics exact', () => {
+    const service = taoService();
+    const clean = service.xemTrongTrot(new Date('2026-01-03T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const earthFire = service.xemTrongTrot(
+      new Date('2026-02-17T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const deathQiRelief = service.xemTrongTrot(
+      new Date('2027-03-04T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const deathQiBlocked = service.xemTrongTrot(
+      new Date('2026-04-28T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const nineScorch = service.xemTrongTrot(
+      new Date('2026-01-31T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const yiDay = service.xemTrongTrot(new Date('2026-01-01T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const monthTaboo = service.xemTrongTrot(
+      new Date('2026-03-11T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const voLoc = service.xemTrongTrot(new Date('2026-02-18T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    const earthReign = service.xemTrongTrot(
+      new Date('2026-01-17T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const deathSpirit = service.xemTrongTrot(
+      new Date('2026-02-12T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(clean.danhGia.coNen).toBe(true);
+    expect(clean.danhGia.coKy).toBe(false);
+
+    expect(earthFire.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_YEM)).toBe(true);
+    expect(earthFire.yeuTo.some((item) => item.ma === MaYeuTo.DIA_HOA)).toBe(true);
+    expect(earthFire.danhGia.coKy).toBe(true);
+    expect(earthFire.giaiThich.ky).toEqual(expect.arrayContaining(['NGUYET_YEM', 'DIA_HOA']));
+
+    expect(deathQiRelief.yeuTo.some((item) => item.ma === MaYeuTo.TU_KHI)).toBe(true);
+    expect(deathQiRelief.danhGia.coKy).toBe(false);
+    expect(deathQiRelief.giaiThich.biLoai.some((text) => text.startsWith('TU_KHI:'))).toBe(true);
+
+    expect(deathQiBlocked.chiThang).toBe(DiaChi.THIN);
+    expect(deathQiBlocked.yeuTo.some((item) => item.ma === MaYeuTo.TU_KHI)).toBe(true);
+    expect(deathQiBlocked.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_YEM)).toBe(true);
+    expect(deathQiBlocked.danhGia.coKy).toBe(true);
+    expect(deathQiBlocked.giaiThich.ky).toContain('TU_KHI');
+
+    expect(nineScorch.yeuTo.some((item) => item.ma === MaYeuTo.CUU_KHAM)).toBe(true);
+    expect(nineScorch.yeuTo.some((item) => item.ma === MaYeuTo.THIEN_DUC_HOP)).toBe(true);
+    expect(nineScorch.danhGia.coKy).toBe(true);
+    expect(nineScorch.giaiThich.ky).toContain('CUU_KHAM');
+
+    expect(yiDay.canChiNgay.can).toBe(ThienCan.AT);
+    expect(yiDay.danhGia.coKy).toBe(true);
+    expect(
+      yiDay.danhGia.dongGop.some(
+        (item) =>
+          item.quyTac.dieuKien.loai === 'CAN_NGAY' && item.quyTac.dieuKien.can === ThienCan.AT,
+      ),
+    ).toBe(true);
+
+    expect(monthTaboo.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_KY)).toBe(true);
+    expect(monthTaboo.danhGia.coNen).toBe(false);
+    expect(monthTaboo.danhGia.coKy).toBe(false);
+    expect(
+      monthTaboo.danhGia.xungDotDaApDung.some(
+        (item) => item.ma === 'TRONG_TROT_Q10_NGUYET_KY_BO_NEN',
+      ),
+    ).toBe(true);
+
+    expect(voLoc.yeuTo.some((item) => item.ma === MaYeuTo.VO_LOC)).toBe(true);
+    expect(voLoc.danhGia.coNen).toBe(false);
+    expect(voLoc.danhGia.coKy).toBe(false);
+
+    expect(earthReign.dangThoVuong).toBe(true);
+    expect(earthReign.danhGia.coKy).toBe(true);
+
+    expect(deathSpirit.yeuTo.some((item) => item.ma === MaYeuTo.TU_THAN)).toBe(true);
+    expect(deathSpirit.danhGia.coKy).toBe(false);
+    expect(deathSpirit.giaiThich.xungDot.some((text) => /NGUYET_|TRUC_/.test(text))).toBe(false);
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -1328,7 +1437,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 31)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 32)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
