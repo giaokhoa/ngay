@@ -188,6 +188,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.DI_THUYEN_VUOT_SONG_NUOC,
   },
   {
+    ma: 'TRONG_TROT',
+    ten: 'Trồng trọt',
+    moTa: 'Q11 có 13 Nên / 21 Kị; xét riêng Tử Thần, Địa Hỏa, Tử Khí và Cửu Tiêu cùng các nhánh đất Q10.',
+    to: DUONG_DAN.TRONG_TROT,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
@@ -232,7 +238,8 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   TIEU_HAO: 'Tiểu Hao',
   TU_HAO: 'Tứ Hao',
   CUU_KHONG: 'Cửu Không',
-  CUU_KHAM: 'Cửu Khảm',
+  CUU_KHAM: 'Cửu Khảm / Cửu Tiêu',
+  DIA_HOA: 'Địa Hỏa',
   BAT_PHONG: 'Bát Phong',
   XUC_THUY_LONG: 'Xúc Thủy Long',
   DICH_MA: 'Dịch Mã / Thiên Hậu',

@@ -28,6 +28,7 @@ import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules
 import { QUY_TAC_SUA_SANG_DUONG_SA } from '../activities/sua-sang-duong-sa-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_TROC_NA_BAT_BO } from '../activities/troc-na-bat-bo-rules';
+import { QUY_TAC_TRONG_TROT } from '../activities/trong-trot-rules';
 import { QUY_TAC_TRANG_TRI_TUONG } from '../activities/trang-tri-tuong-rules';
 import { QUY_TAC_XUAT_HANH_Q11 } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
@@ -78,6 +79,48 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:VANG_VONG',
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.TRONG_TROT]: {
+    tieuDeHan: '栽種',
+    anchor: 'KR3g0051_WYG_011-24b',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:MAU_THUONG',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:DAN_NHAT',
+      'TRUC:KHAI',
+      'YEU_TO:NGU_PHU',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_KIEN',
+      'YEU_TO:THO_PHU',
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'YEU_TO:TU_THAN',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DIA_HOA',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_KHI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'YEU_TO:CUU_KHAM',
+      'YEU_TO:THO_PHU_TIN',
+      'YEU_TO:DIA_NANG',
+      'CAN_NGAY:AT',
+      'THO_VUONG',
     ],
   },
   [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: {
@@ -909,6 +952,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.PHA_NHA_HUY_TUONG]: QUY_TAC_PHA_NHA_HUY_TUONG,
   [LoaiCongViec.TROC_NA_BAT_BO]: QUY_TAC_TROC_NA_BAT_BO,
   [LoaiCongViec.DI_THUYEN_VUOT_SONG_NUOC]: QUY_TAC_DI_THUYEN_VUOT_SONG_NUOC,
+  [LoaiCongViec.TRONG_TROT]: QUY_TAC_TRONG_TROT,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
