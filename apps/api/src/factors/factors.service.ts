@@ -28,6 +28,14 @@ import { DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6 } from './q6-ritual-factor-definition
 import { DINH_NGHIA_DU_HOA } from './q6-du-hoa-definition';
 import { DINH_NGHIA_VO_LOC, laVoLoc } from './vo-loc-definition';
 import {
+  DINH_NGHIA_HOI_NHAT,
+  DINH_NGHIA_TU_LY,
+  DINH_NGHIA_TU_TUYET,
+  laHoiNhat,
+  laTuLy,
+  laTuTuyet,
+} from './special-calendar-day-definitions';
+import {
   DINH_NGHIA_DAN_NHAT,
   DINH_NGHIA_QUY_KY,
   DINH_NGHIA_THIEN_MA,
@@ -215,6 +223,9 @@ export class TinhYeuToNgayService {
     if (laThuongSoc(boiCanh)) ketQua.push(DINH_NGHIA_THUONG_SOC);
     if (laPhanChi(boiCanh)) ketQua.push(DINH_NGHIA_PHAN_CHI);
     if (laNguyetKy(boiCanh)) ketQua.push(DINH_NGHIA_NGUYET_KY);
+    if (laTuLy(boiCanh)) ketQua.push(DINH_NGHIA_TU_LY);
+    if (laTuTuyet(boiCanh)) ketQua.push(DINH_NGHIA_TU_TUYET);
+    if (laHoiNhat(boiCanh)) ketQua.push(DINH_NGHIA_HOI_NHAT);
 
     if (laVoLoc(boiCanh, new Set(ketQua.map((item) => item.ma)))) {
       ketQua.push(DINH_NGHIA_VO_LOC);

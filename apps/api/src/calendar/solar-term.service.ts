@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 import { timThoiDiemMatTroiDatKinhDo } from './astronomy/ephemeris';
+import { congNgayDanSu, NgayDanSu, phanTichNgayDanSu } from './civil-date';
+import { tinhNgayDanSuTaiMuiGio } from './civil-date-timezone';
 import { DiaChi } from './domain/earthly-branch';
 import { DINH_NGHIA_TIET_KHI_THEO_NAM, TietKhi } from './domain/solar-term';
 
@@ -61,6 +63,24 @@ export class TinhTietKhiService {
     return new Map(ketQua);
   }
 
+  laNgayTuLy(ngayDanSu: NgayDanSu, muiGio: string): boolean {
+    return this.laNgayTruocMotTrongCacTietKhi(ngayDanSu, muiGio, [
+      TietKhi.XUAN_PHAN,
+      TietKhi.HA_CHI,
+      TietKhi.THU_PHAN,
+      TietKhi.DONG_CHI,
+    ]);
+  }
+
+  laNgayTuTuyet(ngayDanSu: NgayDanSu, muiGio: string): boolean {
+    return this.laNgayTruocMotTrongCacTietKhi(ngayDanSu, muiGio, [
+      TietKhi.LAP_XUAN,
+      TietKhi.LAP_HA,
+      TietKhi.LAP_THU,
+      TietKhi.LAP_DONG,
+    ]);
+  }
+
   tinhTrungKhiHienHanh(thoiDiem: Date): TietKhi {
     if (Number.isNaN(thoiDiem.getTime())) {
       throw new RangeError('Thoi diem khong hop le');
@@ -116,6 +136,19 @@ export class TinhTietKhiService {
     }
 
     return chiThang;
+  }
+
+  private laNgayTruocMotTrongCacTietKhi(
+    ngayDanSu: NgayDanSu,
+    muiGio: string,
+    cacTietKhi: readonly TietKhi[],
+  ): boolean {
+    const { nam } = phanTichNgayDanSu(ngayDanSu);
+    return cacTietKhi.some((tietKhi) => {
+      const thoiDiem = this.tinhThoiDiemTietKhi(nam, tietKhi);
+      const ngayTietKhi = tinhNgayDanSuTaiMuiGio(thoiDiem, muiGio);
+      return congNgayDanSu(ngayTietKhi, -1) === ngayDanSu;
+    });
   }
 
   private kiemTraNam(nam: number): void {

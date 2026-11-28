@@ -65,7 +65,7 @@ Q10 cung cấp **semantic conflict/exception layer**: một thần cát/hung có
 |  41 | 天刑・朱雀・白虎・天牢・元武・勾陳     | ORACLE_TESTED_Q7               | six Hắc đạo spirits supplementary; not universal veto                                             |
 |  42 | 無禄日                                 | IMPLEMENTED_CONTEXT_FACTOR     | 10 candidate + Q10 relief theo Đức/năm/tháng/trung khí; 癸亥 override                             |
 |  43 | 反支                                   | IMPLEMENTED_FACTOR             | sóc/new-moon context production; semantics activity vẫn source-driven                             |
-|  44 | 上朔・四離・四絶・晦日                 | PARTIAL_IMPLEMENTED            | Thượng Sóc production; 四離/四絶/晦日 retained source-only                                        |
+|  44 | 上朔・四離・四絶・晦日                 | IMPLEMENTED_FACTOR_SET         | all four identities production; activity semantics remain source-resolved                         |
 |  45 | 冬至・夏至・春分・秋分                 | CALENDAR_REFERENCE             | solar-term calendar primitive, not standalone score factor                                        |
 |  46 | 土王用事・伏社・朔弦望                 | PARTIAL_IMPLEMENTED            | Thổ Vượng implemented; Phục Xã/Sóc-Huyền-Vọng not current day factors                             |
 |  47 | 月忌日・十五日                         | PARTIAL_IMPLEMENTED            | 月忌日 5/14/23 production; 十五日 remains source-only                                             |
