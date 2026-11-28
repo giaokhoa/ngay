@@ -128,6 +128,14 @@ Chi tiết: `docs/research/q8-full-inventory.md`.
 
 Q14–19 đã inventory đủ 6 block × 10 năm, xem `docs/research/q14-q19-annual-tables.md`. Đây là bảng spatial theo năm để future-oracle Q3/Q8; current date-selection không consume. Q14 giữ Wikisource fallback pin, Q15–19 Kanripo.
 
+## Reference tables — Nguyệt biểu
+
+Q20–31 đã inventory đủ 12/12 volume structure; xem `docs/research/q20-q31-month-tables.md`. Mỗi volume = một tháng tiết khí + design bảng 60 Can-Chi ngày. Current Hán oracle chỉ claim subset đã test, không claim 720-row full oracle.
+
+## Reference tables — Nguyệt biểu
+
+Q20–31 đã inventory đủ 12/12 volume structure; xem `docs/research/q20-q31-month-tables.md`. Mỗi volume = một tháng tiết khí + design bảng 60 Can-Chi ngày. Current Hán oracle chỉ claim subset đã test, không claim 720-row full oracle.
+
 ## Hán double-entry coverage
 
 Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scope có expected/vector
