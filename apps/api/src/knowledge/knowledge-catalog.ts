@@ -13,6 +13,7 @@ import {
   QUY_TAC_XUNG_DOT_CUOI_HOI,
   taoNguonXungDotQuyen10,
 } from '../evaluation/cuoi-hoi-conflict-rules';
+import { QUY_TAC_Q10_CUOI_HOI_Q4 } from '../evaluation/cuoi-hoi-q4-conflict-rules';
 import { QUY_TAC_Q10_DI_CHUYEN } from '../evaluation/di-chuyen-conflict-rules';
 import { QUY_TAC_Q10_CONG_VIEC_DAT } from '../evaluation/earthwork-conflict-rules';
 import { QUY_TAC_Q10_KHAI_TRUONG } from '../evaluation/khai-truong-conflict-rules';
@@ -71,6 +72,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
       ...activityRules(QUY_TAC_XUAT_HANH_BO_SUNG_Q10, 'Q10'),
       ...activityRules(QUY_TAC_AN_TANG),
       ...legacyWeddingConflictRules(),
+      ...conflictRules(LoaiCongViec.CUOI_HOI, QUY_TAC_Q10_CUOI_HOI_Q4),
       ...conflictRules(LoaiCongViec.DI_CHUYEN, QUY_TAC_Q10_DI_CHUYEN),
       ...conflictRules(LoaiCongViec.DONG_THO, QUY_TAC_Q10_CONG_VIEC_DAT),
       ...conflictRules(LoaiCongViec.SUA_CUNG_THAT, QUY_TAC_Q10_CONG_VIEC_DAT),

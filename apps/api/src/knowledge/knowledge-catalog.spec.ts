@@ -35,6 +35,26 @@ describe('Postgres knowledge catalog mirror', () => {
     );
   });
 
+  it('mirrors the migrated Q4 wedding rules without keeping duplicate legacy hard-day rows', () => {
+    expect(
+      catalog.quyTac.some(
+        (rule) =>
+          rule.hoatDong === LoaiCongViec.CUOI_HOI &&
+          rule.kieu === 'CONFLICT' &&
+          rule.ma === 'CUOI_HOI_Q10_Q4_HARD_DAI_HOI_1',
+      ),
+    ).toBe(true);
+
+    expect(
+      catalog.quyTac.some(
+        (rule) =>
+          rule.hoatDong === LoaiCongViec.CUOI_HOI &&
+          rule.kieu === 'LEGACY_CONFLICT' &&
+          rule.ma.includes('Q4_HARD_'),
+      ),
+    ).toBe(false);
+  });
+
   it('preserves the XUAT_HANH Q10-sourced Nguyệt Yếm base blocker', () => {
     const rule = catalog.quyTac.find((item) => item.ma === 'XUAT_HANH_Q10_KY_NGUYET_YEM');
 

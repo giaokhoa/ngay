@@ -52,7 +52,8 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     revision: KANRIPO_KR3G0051_REVISION,
     sha256: 'e6a130bd92c80a328af5872067d906e0734d47a6bce5ff62586d7796bca486ae',
     trangThai: 'ORACLE_MOT_PHAN',
-    phamViOracle: 'Thần cùng vị trí 12 Trực, Nguyệt Kiến/Yếm/Yếm Đối, Bất Tương.',
+    phamViOracle:
+      '29/29 section đã inventory; 12 Trực/shared positions, 月建/月厭/厭對/不將 và Q10 semantic layer Đại/Tiểu Hội, 歲薄/逐陣, 錯/xung, 絕陰陽 đều source-lock.',
   },
   {
     quyen: 5,
