@@ -1,13 +1,13 @@
 # Quyển 32 — Nhật biểu full inventory
 
-Status: HAN_INVENTORIED / VIET_SECONDARY_TOC / EXACT_VIET_SCAN_PENDING / ORACLE_PARTIAL
+Status: HAN_INVENTORIED / VIET_EXACT_VERIFIED / ORACLE_PARTIAL
 
 ## Nguồn và denominator
 
 - Hán: Kanripo `KR3g0051_031.txt`, revision pin, 卷三十二 `日表`.
 - Hán mục lục có **3 heading chính**.
-- Canonical Việt Tập 2 đã có fingerprint 1001 trang trong `docs/source-catalog.md`, nhưng exact file hiện không mount trong execution context.
-- Secondary public TOC Tập 2 cũng liệt kê **3 mục**, chỉ dùng để corroborate structure; chưa phải page-level Việt double-entry.
+- Exact canonical Việt Tập II đã được mở trực tiếp và có đúng **3 mục**, khớp Hán.
+- Trang in: 六十日時辰定局 p651, 貴登天門時定局 p677, 四大吉時定局 p683.
 
 ## Inventory 3/3
 
@@ -30,4 +30,4 @@ Các source vectors hiện production được khóa trong:
 
 ## Kết luận
 
-**Q32 đã structural-inventory đủ 3/3 mục.** Oracle vẫn partial: bảng 60 ngày đang dùng một subset có test; Quý Đăng Thiên Môn và Tứ Đại Cát Thời giữ blocked đúng theo input/time model.
+**Q32 đã exact Việt/Hán structural-double-entry đủ 3/3 mục.** Oracle vẫn partial: bảng 60 ngày đang dùng một subset có test; Quý Đăng Thiên Môn và Tứ Đại Cát Thời giữ blocked đúng theo input/time model.

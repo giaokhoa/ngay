@@ -31,13 +31,18 @@ Catalog này chỉ lưu fingerprint/provenance. Repository **không commit bản
 File này có thể là bản tải/copy đã được repack và **không byte-identical** với canonical Tập 1 ở trên.
 Không được dùng hash của working copy để thay identity của file user upload.
 
-## Secondary structural corroboration cho Tập 2 khi exact scan không mount
+## Exact Tập 2 verification
 
-Khi execution context không có working copy của canonical Tập 2, repo có thể dùng **secondary public TOC** chỉ để corroborate tên quyển/mục:
+Canonical Tập II ở trên đã được mở lại trong audit exact Việt/Hán:
 
-- `https://thuvienpdf.net/hiep-ky-bien-phuong-thu-tap-2`
+- page count thực: **1001 PDF pages**;
+- SHA-256 khớp canonical fingerprint `2bd06dc981e8146c7de68243ebcf58d063ed7a9961c66dc66c3d5f173772672c`;
+- toàn dải scan đã được rà ở contact-sheet level;
+- title/TOC và các điểm lệch Q14–36 đã được mở chi tiết.
 
-Nguồn này **không thay** fingerprint canonical Tập 2, không được dùng để claim đã kiểm trang/bảng Việt và không được làm oracle cell-by-cell. Mọi wording/chênh mục phải giữ `VIET_EXACT_PENDING` cho tới khi mở được scan canonical.
+Page map và discrepancy exact nằm ở `docs/research/t2-exact-viet-han-crosscheck.md`.
+
+Secondary public TOC chỉ còn là **fallback corroboration** khi một execution context tương lai không mount được exact scan. Nó không được thay fingerprint canonical, không được dùng để claim page-level verification và không được làm oracle cell-by-cell.
 
 ## Hán bản
 

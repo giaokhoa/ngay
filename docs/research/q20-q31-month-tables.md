@@ -1,6 +1,6 @@
 # Quyển 20–31 — inventory Nguyệt biểu 12 tháng
 
-Status: STRUCTURE_INVENTORIED / ORACLE_PARTIAL
+Status: STRUCTURE_INVENTORIED / VIET_EXACT_VERIFIED / ORACLE_PARTIAL
 
 ## Phạm vi
 
@@ -15,7 +15,7 @@ Mười hai quyển `月表一` → `月表十二` tương ứng **12 tháng ti�
 
 Nguồn Hán: Kanripo `KR3g0051_019.txt` → `_030.txt`, revision pin.
 
-Tập II Việt có canonical fingerprint trong source catalog nhưng working copy hiện không mount; batch này không claim Việt row-by-row double-entry. Secondary public TOC chỉ corroborate Q20–31 là 12 “Biểu tháng” liên tiếp, không dùng làm oracle cell-by-cell.
+Exact canonical Tập II đã được mở trực tiếp. Mười hai Nguyệt biểu bắt đầu ở trang in **311/339/367/396/423/451/480/507/535/565/594/622**, khớp mapping 12 tháng Hán. Exact scan xác nhận structure/page map; audit vẫn không claim 720 row đã cell-by-cell oracle-tested.
 
 ## Mapping 12 quyển
 
@@ -79,10 +79,10 @@ Muốn nâng Q20–31 từ partial lên full-table oracle cần:
 
 1. canonical normalization layer cho glyph/typo đã source-lock;
 2. parser 60 row × 12 tháng;
-3. independent comparison với Tập II scan/canonical row images;
+3. mở rộng independent comparison với canonical Tập II từ structural/header vectors sang từng row image;
 4. discrepancy registry cho mọi khác biệt Việt/Hán/transcription;
 5. chỉ sau đó mới dùng table cells như machine expected rộng.
 
 ## Kết luận
 
-**Q20–31 đã inventory đủ 12/12 volume structure, mỗi quyển là một tháng tiết khí với design bảng 60 Can-Chi ngày.** Oracle coverage vẫn partial và được giữ trung thực trong manifest.
+**Q20–31 đã exact Việt/Hán structural-double-entry đủ 12/12 volume, mỗi quyển là một tháng tiết khí với design bảng 60 Can-Chi ngày.** Oracle coverage vẫn partial: exact scan đã gỡ blocker nguồn Việt nhưng chưa biến 720 cell thành machine oracle.

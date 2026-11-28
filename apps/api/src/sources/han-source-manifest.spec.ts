@@ -140,9 +140,9 @@ describe('Hán source corpus manifest', () => {
     expect(q32?.trangThai).toBe('ORACLE_MOT_PHAN');
     expect(q32?.phamViOracle).toMatch(/3\/3.*貴登天門.*四大吉時/);
     expect(q33?.trangThai).toBe('ORACLE_MOT_PHAN');
-    expect(q33?.phamViOracle).toMatch(/14 mục Việt secondary = 15 heading Hán.*相主/);
+    expect(q33?.phamViOracle).toMatch(/14 mục Việt exact = 15 heading Hán.*論用盤針.*羅經圖.*相主/);
     expect(q34?.trangThai).toBe('ORACLE_MOT_PHAN');
-    expect(q34?.phamViOracle).toMatch(/12\/12 heading Hán = 10 mục Việt secondary.*用時法/);
+    expect(q34?.phamViOracle).toMatch(/12 heading Hán = 10 mục Việt exact.*時刻方位圖.*用時法/);
   });
 
   it('records Q4 as 29/29 section inventory without inventing standalone factors', () => {

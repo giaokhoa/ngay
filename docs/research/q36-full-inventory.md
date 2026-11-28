@@ -1,6 +1,6 @@
 # Quyển 36 — Biện ngụy inventory
 
-Status: HAN_INVENTORIED / VIET_SECONDARY_TOC / EXACT_VIET_SCAN_PENDING / ANTI_ORACLE
+Status: HAN_INVENTORIED / VIET_EXACT_VERIFIED_WITH_TOC_TYPO / ANTI_ORACLE
 
 ## Vai trò đặc biệt
 
@@ -8,7 +8,7 @@ Q36 `辨訛` không phải danh sách “thần sát cần implement”. Lời m
 
 Vì vậy Q36 là nguồn **anti-oracle / discrepancy authority**: nếu một rule Internet/thông thư bị Q36 bác, repo phải dùng nó để chặn hoặc hạ cấp rule, không được thấy heading rồi tạo `MaYeuTo` cùng tên.
 
-Exact Tập 2 scan Việt hiện không có trong execution context. Secondary public TOC chỉ corroborate structure.
+Exact canonical Tập II đã được mở trực tiếp. Q36 bắt đầu p892; TOC exact có 26 mục và thân bài đã được kiểm ở các điểm mapping khác Hán.
 
 ## Hán inventory 27/27 heading
 
@@ -40,9 +40,11 @@ Exact Tập 2 scan Việt hiện không có trong execution context. Secondary p
 26. 五符擇時
 27. 九僊時
 
-## Secondary Việt TOC
+## Exact Việt mapping
 
-Public Tập 2 TOC có **26 mục đánh số**. Cấu trúc chênh một vì mục 17 gộp “Chương quang – Ngũ hợp – Ngũ ly”, tương ứng hai heading Hán `章光` + `五合五離`. Một số wording trên website có dấu hiệu OCR/biên tập, nên không dùng làm canonical Vietnamese naming trước khi mở exact scan.
+Exact Việt có **26 mục đánh số**. Cấu trúc chênh một vì mục 17 gộp “Chương quang – Ngũ hợp – Ngũ ly”, tương ứng hai heading Hán `章光` + `五合五離`; không thiếu nội dung.
+
+Một typo title riêng đã được xác nhận: TOC Việt mục 24 in **“Thiên đạo”**, nhưng thân bài p982 in **“Lục đạo (sáu con đường)”** và nội dung khớp Hán `六道`. Registry ghi `Q36_LUC_DAO_TOC_THIEN_DAO` để không tạo nhầm identity “Thiên đạo”.
 
 ## Product policy
 
@@ -54,4 +56,4 @@ Public Tập 2 TOC có **26 mục đánh số**. Cấu trúc chênh một vì m�
 
 ## Kết luận
 
-**Hán Q36 đã inventory 27/27 heading; secondary Việt TOC có 26 mục do một mục gộp hai heading.** Exact Việt scan còn pending. Quyển này được khóa vai trò `ANTI_ORACLE`, tránh lỗi nghiêm trọng “biện ngụy → implement”.
+**Q36 đã exact Việt/Hán mapping: 27 heading Hán ↔ 26 mục Việt do grouping `章光 + 五合五離`; TOC “Thiên đạo” là typo, thân bài `Lục đạo/六道` khớp Hán.** Quyển này được khóa vai trò `ANTI_ORACLE`, tránh lỗi nghiêm trọng “biện ngụy → implement”.

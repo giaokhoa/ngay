@@ -76,7 +76,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: 'f7920ffe391d73acc3fd259e7d3454f58f4a906678e68d3497b24466f53a734a',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '40/40 mục đã inventory; 18 factor production có Hán oracle. 反支/月忌/上朔 explicit blocked theo calendar/context; phần còn lại out-of-scope current verticals.',
+      '40/40 mục đã inventory; 21 factor production-computable có Hán oracle. 反支/月忌/上朔 đã mở khóa bằng year/lunar context; phần còn lại explicit out-of-scope/meta.',
   },
   {
     quyen: 7,
@@ -332,7 +332,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: '6924cd0e4087bdf2f3f85293b44f21448550472b5a0371895b1e0695ceeaf4ce',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '3/3 mục Q32 structural-inventory; 六十日時辰定局 có oracle subset cho Can-Chi giờ/quan hệ ngày-giờ; 貴登天門/四大吉時 còn blocked theo location/time model.',
+      '3/3 mục Q32 exact Việt/Hán structural-inventory; 六十日時辰定局 có oracle subset; 貴登天門/四大吉時 còn blocked theo location/time model.',
   },
   {
     quyen: 33,
@@ -343,7 +343,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: 'adef32b89b2d117ec9800a0fef043ee40471db459561852de661f0d44acb5b87',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '14 mục Việt secondary = 15 heading Hán đã structural-inventory; exact Việt T2 scan pending. 相主 oracle: dùng sinh niên, tránh xung/khắc mệnh.',
+      '14 mục Việt exact = 15 heading Hán; mục 13 gộp 論用盤針+羅經圖. 相主 oracle: dùng sinh niên, tránh xung/khắc mệnh.',
   },
   {
     quyen: 34,
@@ -354,7 +354,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: 'f604b900815e06feae28fd0e494ff9abbc3defbc4c68ba43219b1b8c159c2edd',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '12/12 heading Hán = 10 mục Việt secondary structural-inventory; exact Việt T2 scan pending. 用時法 oracle subset; solar/spatial headings blocked.',
+      '12 heading Hán = 10 mục Việt exact; 月吉/月凶 gộp, 時刻方位圖 bị lược ở Việt. 用時法 oracle subset; solar/spatial headings blocked.',
   },
   {
     quyen: 35,
