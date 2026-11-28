@@ -68,6 +68,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.YEN_HOI,
   },
   {
+    ma: 'KHANH_THUONG',
+    ten: 'Chúc mừng ban thưởng',
+    moTa: 'Chọn ngày chúc mừng, ban thưởng hoặc thưởng công.',
+    to: DUONG_DAN.KHANH_THUONG,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

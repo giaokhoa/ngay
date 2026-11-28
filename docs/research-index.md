@@ -122,19 +122,20 @@ Chi tiết: `docs/research/q8-full-inventory.md`.
 
 ## Activities — Quyển 11
 
-| Chủ đề                         | Module     | Nguồn chính                     | Trạng thái    | Implementation                            | Oracle test                                              | Ghi chú                                                                                |
-| ------------------------------ | ---------- | ------------------------------- | ------------- | ----------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| CUOI_HOI / 嫁娶                | activities | T1 Q11 p851 + Hán Q11           | ORACLE_TESTED | cuoi-hoi-rules.ts + Q10 resolver          | cuoi-hoi-rules.spec.ts / cuoi-hoi-conflict.spec.ts       | docs/research/activity-cuoi-hoi.md                                                     |
-| DI_CHUYEN / 般移〈移徙同〉     | activities | T1 Q11 + Hán Q11                | ORACLE_TESTED | di-chuyen-rules.ts + data-driven Q10      | di-chuyen-conflict.spec.ts                               | docs/research/activity-di-chuyen.md                                                    |
-| AN_GIUONG / 安牀               | activities | T1 Q11 p852 + Hán Q11           | ORACLE_TESTED | an-giuong-rules.ts + Q10 resolver         | an-giuong-rules.spec.ts / an-giuong-conflict.spec.ts     | docs/research/activity-an-giuong.md                                                    |
-| QUAN_DAI / 冠帶                | activities | T1 Q11 p848 + Hán Q11/Q10       | ORACLE_TESTED | quan-dai-rules.ts + source-resolved Q10   | quan-dai-rules.spec.ts / quan-dai-conflict.spec.ts       | Việt p848 thêm Bế; Hán Q11 + Việt/Hán Q10 không Kị; docs/research/activity-quan-dai.md |
-| NHAP_HOC / 入學                | activities | T1 Q11 p848 + Hán Q11/Q10       | ORACLE_TESTED | nhap-hoc-rules.ts + universal hard Q10    | nhap-hoc-rules.spec.ts / nhap-hoc-conflict.spec.ts       | Q11 `忌無`; chỉ giữ Q10 `諸事皆忌`; docs/research/activity-nhap-hoc.md                 |
-| YEN_HOI / 宴會                 | activities | T1 Q11 p848 + Hán Q5/Q10/Q11    | ORACLE_TESTED | yen-hoi-rules.ts + data-driven Q10        | yen-hoi-rules.spec.ts / yen-hoi-conflict.spec.ts         | Ngũ Hợp/Ngũ Ly production; docs/research/activity-yen-hoi.md                           |
-| DONG_THO / 興造動土            | activities | T1 Q11 p855 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10             | earthwork-rules.spec.ts / earthwork-conflict.spec.ts     | docs/research/activity-dong-tho-sua-cung-that.md                                       |
-| SUA_CUNG_THAT / 修宮室         | activities | T1 Q11 p854 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10             | earthwork-rules.spec.ts / earthwork-conflict.spec.ts     | docs/research/activity-dong-tho-sua-cung-that.md                                       |
-| KHAI_TRUONG / 開市             | activities | T1 Q11 p857 + Hán Q11           | ORACLE_TESTED | khai-truong-rules.ts + full Q10           | khai-truong-rules.spec.ts / khai-truong-conflict.spec.ts | docs/research/activity-khai-truong.md                                                  |
-| XUAT_HANH / 行幸遣使〈出行同〉 | activities | T1 Q11 p849 + Q10 + Hán Q11/Q10 | ORACLE_TESTED | xuat-hanh-rules.ts + derived Q10 resolver | xuat-hanh-rules.spec.ts / xuat-hanh-conflict.spec.ts     | Q11 Việt thiếu 月厭; bổ sung blocker từ Q10; docs/research/activity-xuat-hanh.md       |
-| AN_TANG / 安葬                 | activities | T1 Q11 p862 + Q5/Q10 + Hán      | ORACLE_TESTED | an-tang-rules.ts + full Q10 resolver      | an-tang-rules.spec.ts / an-tang-conflict.spec.ts         | Ô Phệ final 13 ngày; Phục/Trọng source-lock; docs/research/activity-an-tang.md         |
+| Chủ đề                         | Module     | Nguồn chính                     | Trạng thái    | Implementation                            | Oracle test                                                | Ghi chú                                                                                |
+| ------------------------------ | ---------- | ------------------------------- | ------------- | ----------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| CUOI_HOI / 嫁娶                | activities | T1 Q11 p851 + Hán Q11           | ORACLE_TESTED | cuoi-hoi-rules.ts + Q10 resolver          | cuoi-hoi-rules.spec.ts / cuoi-hoi-conflict.spec.ts         | docs/research/activity-cuoi-hoi.md                                                     |
+| DI_CHUYEN / 般移〈移徙同〉     | activities | T1 Q11 + Hán Q11                | ORACLE_TESTED | di-chuyen-rules.ts + data-driven Q10      | di-chuyen-conflict.spec.ts                                 | docs/research/activity-di-chuyen.md                                                    |
+| AN_GIUONG / 安牀               | activities | T1 Q11 p852 + Hán Q11           | ORACLE_TESTED | an-giuong-rules.ts + Q10 resolver         | an-giuong-rules.spec.ts / an-giuong-conflict.spec.ts       | docs/research/activity-an-giuong.md                                                    |
+| QUAN_DAI / 冠帶                | activities | T1 Q11 p848 + Hán Q11/Q10       | ORACLE_TESTED | quan-dai-rules.ts + source-resolved Q10   | quan-dai-rules.spec.ts / quan-dai-conflict.spec.ts         | Việt p848 thêm Bế; Hán Q11 + Việt/Hán Q10 không Kị; docs/research/activity-quan-dai.md |
+| NHAP_HOC / 入學                | activities | T1 Q11 p848 + Hán Q11/Q10       | ORACLE_TESTED | nhap-hoc-rules.ts + universal hard Q10    | nhap-hoc-rules.spec.ts / nhap-hoc-conflict.spec.ts         | Q11 `忌無`; chỉ giữ Q10 `諸事皆忌`; docs/research/activity-nhap-hoc.md                 |
+| YEN_HOI / 宴會                 | activities | T1 Q11 p848 + Hán Q5/Q10/Q11    | ORACLE_TESTED | yen-hoi-rules.ts + data-driven Q10        | yen-hoi-rules.spec.ts / yen-hoi-conflict.spec.ts           | Ngũ Hợp/Ngũ Ly production; docs/research/activity-yen-hoi.md                           |
+| KHANH_THUONG / 慶賜賞賀        | activities | T1 Q11 p848 + Hán Q10/Q11       | ORACLE_TESTED | khanh-thuong-rules.ts + Yến hội Q10 core  | khanh-thuong-rules.spec.ts / khanh-thuong-conflict.spec.ts | Dậu chỉ bỏ Nên, không thành Kị; docs/research/activity-khanh-thuong.md                 |
+| DONG_THO / 興造動土            | activities | T1 Q11 p855 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10             | earthwork-rules.spec.ts / earthwork-conflict.spec.ts       | docs/research/activity-dong-tho-sua-cung-that.md                                       |
+| SUA_CUNG_THAT / 修宮室         | activities | T1 Q11 p854 + Hán Q11           | ORACLE_TESTED | earthwork-rules.ts + full Q10             | earthwork-rules.spec.ts / earthwork-conflict.spec.ts       | docs/research/activity-dong-tho-sua-cung-that.md                                       |
+| KHAI_TRUONG / 開市             | activities | T1 Q11 p857 + Hán Q11           | ORACLE_TESTED | khai-truong-rules.ts + full Q10           | khai-truong-rules.spec.ts / khai-truong-conflict.spec.ts   | docs/research/activity-khai-truong.md                                                  |
+| XUAT_HANH / 行幸遣使〈出行同〉 | activities | T1 Q11 p849 + Q10 + Hán Q11/Q10 | ORACLE_TESTED | xuat-hanh-rules.ts + derived Q10 resolver | xuat-hanh-rules.spec.ts / xuat-hanh-conflict.spec.ts       | Q11 Việt thiếu 月厭; bổ sung blocker từ Q10; docs/research/activity-xuat-hanh.md       |
+| AN_TANG / 安葬                 | activities | T1 Q11 p862 + Q5/Q10 + Hán      | ORACLE_TESTED | an-tang-rules.ts + full Q10 resolver      | an-tang-rules.spec.ts / an-tang-conflict.spec.ts           | Ô Phệ final 13 ngày; Phục/Trọng source-lock; docs/research/activity-an-tang.md         |
 
 ## Reference tables — Lập thành Q9
 
@@ -161,8 +162,8 @@ Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inven
 
 |      Quyển | Structural inventory                    | Product/oracle                                                                                            |
 | ---------: | --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 10 Nghi kị | 51/51 mục Việt = 99/99 Hán TOC headings | exact semantic oracle cho 11 current vertical; remaining groups explicit source-only/blocked/out-of-scope |
-| 11 Dụng sự | 73/73 canonical activity sections       | 11 ORACLE_TESTED; 62 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
+| 10 Nghi kị | 51/51 mục Việt = 99/99 Hán TOC headings | exact semantic oracle cho 12 current vertical; remaining groups explicit source-only/blocked/out-of-scope |
+| 11 Dụng sự | 73/73 canonical activity sections       | 12 ORACLE_TESTED; 61 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
 
 Chi tiết: `docs/research/q10-full-inventory.md`, `docs/research/q11-full-inventory.md`.
 
@@ -192,8 +193,8 @@ Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scop
 | Q5 30/30 section inventory      | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED_PARTIAL | han-q5-oracle.spec.ts                         |
 | Q7 13/13 mục đã inventory       | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
 | Q6 40/40 mục đã inventory       | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED_PARTIAL | han-q6-oracle.spec.ts                         |
-| Q10 semantics của 11 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
-| Q11 exact 宜/忌 của 11 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
+| Q10 semantics của 12 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
+| Q11 exact 宜/忌 của 12 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
 | 36-volume corpus inventory      | KR3g0051 + Wikisource Q14 fallback | INVENTORIED               | han-source-manifest.spec.ts                   |
 
 Full-volume status: **0/36**.
