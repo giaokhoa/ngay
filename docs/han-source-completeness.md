@@ -80,14 +80,14 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |    11 | 用事        | ORACLE_MOT_PHAN | exact 宜/忌 cho 7 vertical hiện implement                                                              |
 |    12 | 公規一      | CHUA_IMPLEMENT  | 8/8 top-level inventory; lịch quan/thiên văn, sunrise tables latitude-specific                         |
 |    13 | 公規二      | CHUA_IMPLEMENT  | 2/2 top-level inventory; canh lậu/trung tinh + tinh đồ, bảng Kinh sư                                   |
-|    14 | 年表一      | CHUA_IMPLEMENT  | Wikisource fallback; chưa implement                                                                    |
-| 15–19 | 年表二–六   | CHUA_IMPLEMENT  | —                                                                                                      |
+|    14 | 年表一      | CHUA_IMPLEMENT  | annual table block 甲子→癸酉; Wikisource fallback, spatial year table                                  |
+| 15–19 | 年表二–六   | CHUA_IMPLEMENT  | 5 annual blocks tiếp theo; cùng Q14 phủ 60/60 Can-Chi, spatial year tables                             |
 | 20–31 | 月表一–十二 | ORACLE_MOT_PHAN | month boundary/bảng tháng/Trực và các factor đã implement                                              |
 |    32 | 日表        | ORACLE_MOT_PHAN | 60-day hour-table source vectors cho chọn giờ                                                          |
 |    33 | 利用一      | ORACLE_MOT_PHAN | tương chủ theo sinh niên, xung/khắc mệnh                                                               |
 |    34 | 利用二      | ORACLE_MOT_PHAN | nguyên tắc dùng giờ: trợ ngày, hợp/lộc/mã, tránh phá/hình/Ngũ Bất Ngộ                                  |
-|    35 | 附錄        | CHUA_IMPLEMENT  | —                                                                                                      |
-|    36 | 辨訛        | CHUA_IMPLEMENT  | —                                                                                                      |
+|    35 | 附錄        | CHUA_IMPLEMENT  | Hán 16 heading; public Việt TOC 13 mục; exact T2 scan pending                                          |
+|    36 | 辨訛        | CHUA_IMPLEMENT  | Hán 27 heading; anti-oracle/refutation role; public Việt TOC 26 mục; exact scan pending                |
 
 Tổng hiện tại:
 
@@ -173,6 +173,10 @@ Riêng `地囊` oracle khóa bảng đính chính ở `WYG_006-57a..58a`, không
 - Tuần trung Không vong và Triệt lộ Không vong dưới dạng marker tham khảo, không blanket veto.
 
 Không phát hiện discrepancy Việt/Hán trong scope đã production. **Section inventory Q7 đã đủ 13/13 đầu mục**, nhưng Q7 vẫn chỉ là oracle một phần: Thiên Ất, Tứ Đại Cát Thời, Quý Đăng Thiên Môn và Cửu Xú chưa production vì contract hiện tại thiếu location/sunrise-sunset hoặc độ phân giải thời gian cần thiết.
+
+### Q14–19 Niên biểu
+
+`docs/research/q14-q19-annual-tables.md` khóa 6/6 block niên biểu, range 60/60 Can-Chi. Q14 dùng fallback Wikisource revision pin vì Kanripo thiếu 卷十四; Q15–19 dùng Kanripo. Đây là spatial annual tables cho Q3/Q8, chưa phải day-selection oracle. Kanripo transcription có một số dị tự như `己`→`巳` ở row heading, nên không parse thẳng làm production data trước normalization/scan cross-check.
 
 ### Q12–13
 

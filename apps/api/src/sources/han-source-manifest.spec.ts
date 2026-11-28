@@ -33,6 +33,22 @@ describe('Hán source corpus manifest', () => {
     });
   });
 
+  it('keeps Q14–19 annual tables unimplemented while preserving their six source blocks', () => {
+    const annual = HAN_CORPUS_MANIFEST.filter((item) => item.quyen >= 14 && item.quyen <= 19);
+
+    expect(annual).toHaveLength(6);
+    expect(annual.every((item) => item.trangThai === 'CHUA_IMPLEMENT')).toBe(true);
+    expect(annual[0]?.nguon).toBe('WIKISOURCE_WYG_FALLBACK');
+    expect(annual.slice(1).every((item) => item.nguon === 'KANRIPO_WYG')).toBe(true);
+    expect(annual.slice(1).map((item) => item.tep)).toEqual([
+      'KR3g0051_014.txt',
+      'KR3g0051_015.txt',
+      'KR3g0051_016.txt',
+      'KR3g0051_017.txt',
+      'KR3g0051_018.txt',
+    ]);
+  });
+
   it('maps the Kanripo filename shift after the missing 卷十四 explicitly', () => {
     expect(HAN_CORPUS_MANIFEST.find((item) => item.quyen === 13)?.tep).toBe('KR3g0051_013.txt');
     expect(HAN_CORPUS_MANIFEST.find((item) => item.quyen === 15)?.tep).toBe('KR3g0051_014.txt');
@@ -59,6 +75,19 @@ describe('Hán source corpus manifest', () => {
 
     expect(q8?.trangThai).toBe('CHUA_IMPLEMENT');
     expect(q8?.phamViOracle).toBeUndefined();
+  });
+
+  it('keeps year tables and appendix/refutation volumes out of oracle status', () => {
+    for (const quyen of [15, 16, 17, 18, 19, 35, 36]) {
+      const item = HAN_CORPUS_MANIFEST.find((entry) => entry.quyen === quyen);
+      expect(item?.trangThai).toBe('CHUA_IMPLEMENT');
+      expect(item?.phamViOracle).toBeUndefined();
+    }
+
+    const q14 = HAN_CORPUS_MANIFEST.find((entry) => entry.quyen === 14);
+    expect(q14?.trangThai).toBe('CHUA_IMPLEMENT');
+    expect(q14?.nguon).toBe('WIKISOURCE_WYG_FALLBACK');
+    expect(q14?.phamViOracle).toContain('thiếu 卷十四');
   });
 
   it('records Q4 as 29/29 section inventory without inventing standalone factors', () => {
