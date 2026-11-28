@@ -25,6 +25,7 @@ import { DINH_NGHIA_THIEN_DUC } from './heavenly-virtue-definition';
 import { DINH_NGHIA_MAU_THUONG } from './maternal-storehouse-definition';
 import { DINH_NGHIA_NGU_HOP, DINH_NGHIA_NGU_LY } from './q5-fixed-branch-factor-definitions';
 import { DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6 } from './q6-ritual-factor-definitions';
+import { DINH_NGHIA_DU_HOA } from './q6-du-hoa-definition';
 import {
   DINH_NGHIA_DAN_NHAT,
   DINH_NGHIA_QUY_KY,
@@ -83,6 +84,11 @@ export class TinhYeuToNgayService {
     const thanTeTuQuyen6 = DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6.filter((dinhNghia) =>
       dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
     );
+    const duHoaQuyen6 = DINH_NGHIA_DU_HOA.chiNgayTheoChiThang[boiCanh.chiThang].includes(
+      boiCanh.chiNgay,
+    )
+      ? [DINH_NGHIA_DU_HOA]
+      : [];
     const yeuToDiChuyenTheoThang = [DINH_NGHIA_THIEN_MA, DINH_NGHIA_QUY_KY].filter((dinhNghia) =>
       dinhNghia.chiNgayTheoChiThang[boiCanh.chiThang].includes(boiCanh.chiNgay),
     );
@@ -99,6 +105,7 @@ export class TinhYeuToNgayService {
       ...quanHeThangQuyen4,
       ...blockerQuyen6,
       ...thanTeTuQuyen6,
+      ...duHoaQuyen6,
       ...yeuToDiChuyenTheoThang,
       ...yeuToCongViecDatTheoChi,
       ...yeuToKhaiTruongTheoChi,

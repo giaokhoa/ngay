@@ -24,7 +24,7 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 |   # | Mục Q6                        | Research      | Product hiện tại   | Ghi chú                                                                              |
 | --: | ----------------------------- | ------------- | ------------------ | ------------------------------------------------------------------------------------ |
 |   1 | Tam Hợp / 三合                | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
-|   2 | Lâm Nhật / 臨日               | COMPARED      | OUT_OF_SCOPE       | tháng→chi ngày rõ; không có trong 11 exact Q13 vertical                              |
+|   2 | Lâm Nhật / 臨日               | COMPARED      | OUT_OF_SCOPE       | tháng→chi ngày rõ; không có dependency trong 13 vertical hiện tại                    |
 |   3 | Dịch Mã / 驛馬〈天后〉        | ORACLE_TESTED | IMPLEMENTED        | Thiên Hậu là tên cùng vị trí trong mục này                                           |
 |   4 | Kiếp Sát / 劫煞               | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
 |   5 | Tai Sát / 災煞〈天火〉        | ORACLE_TESTED | IMPLEMENTED        | sách sửa Thiên Hỏa theo cùng vị trí; không tạo Thiên Ngục riêng                      |
@@ -32,14 +32,14 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 |   7 | Nguyệt Hình / 月刑            | ORACLE_TESTED | IMPLEMENTED        | explicit lookup                                                                      |
 |   8 | Nguyệt Hại / 月害             | ORACLE_TESTED | IMPLEMENTED        | Lục Hại                                                                              |
 |   9 | Đại Thời / 大時〈大敗、咸池〉 | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
-|  10 | Du Họa / 遊禍                 | COMPARED      | OUT_OF_SCOPE       | Giêng khởi Tỵ, nghịch tứ mạnh; không có trong 11 exact Q13 vertical                  |
+|  10 | Du Họa / 遊禍                 | ORACLE_TESTED | IMPLEMENTED        | Việt p499 + Hán `WYG_006-22b..23a`; Cầu phúc prerequisite                            |
 |  11 | Thiên Lại / 天吏〈致死〉      | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
 |  12 | Lục Hợp / 六合〈無翹〉        | ORACLE_TESTED | IMPLEMENTED        | sách bác kiêng cưới theo tên Vô Kiều                                                 |
 |  13 | Binh Cát / 兵吉               | COMPARED      | OUT_OF_SCOPE       | thần dụng binh; product không có military vertical                                   |
 |  14 | Ngũ Phú / 五富                | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
 |  15 | Thiên Thương / 天倉           | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
 |  16 | Thiên Tặc / 天賊              | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
-|  17 | Yếu An / 要安                 | COMPARED      | OUT_OF_SCOPE       | monthly factor; không có trong 11 exact Q13 vertical                                 |
+|  17 | Yếu An / 要安                 | COMPARED      | OUT_OF_SCOPE       | monthly factor; không có dependency trong 13 vertical hiện tại                       |
 |  18 | Ngọc Vũ / 玉宇                | COMPARED      | OUT_OF_SCOPE       | Việt p513; monthly factor                                                            |
 |  19 | Kim Đường / 金堂              | COMPARED      | OUT_OF_SCOPE       | monthly factor                                                                       |
 |  20 | Kính An / 敬安                | COMPARED      | OUT_OF_SCOPE       | Việt p515; monthly factor                                                            |
@@ -55,7 +55,7 @@ Khóa phạm vi toàn bộ Quyển 6 để phân biệt ba việc khác nhau:
 |  30 | Binh Cấm / 兵禁               | COMPARED      | OUT_OF_SCOPE       | Việt p535; military-only                                                             |
 |  31 | Địa Nang / 地囊               | ORACLE_TESTED | IMPLEMENTED        | dùng bảng đính chính, không dùng 歴例 sai 23/48 chữ                                  |
 |  32 | Thổ Phù / 土符                | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
-|  33 | Đại Sát / 大煞                | COMPARED      | OUT_OF_SCOPE       | Việt p545; không có trong 11 exact Q13 vertical                                      |
+|  33 | Đại Sát / 大煞                | COMPARED      | OUT_OF_SCOPE       | Việt p545; không có dependency trong 13 vertical hiện tại                            |
 |  34 | Quy Kị / 歸忌                 | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle; sách bác mở rộng kị cưới                                       |
 |  35 | Vãng Vong / 往亡              | ORACLE_TESTED | IMPLEMENTED        | Q6 production oracle                                                                 |
 |  36 | Khí Vãng Vong / 氣往亡        | COMPARED      | OUT_OF_SCOPE       | offset ngày sau 12 tiết; Việt p553–555; không có exact Q11 dependency hiện tại       |
@@ -72,7 +72,7 @@ Hán Q6 cho bảng tháng trực tiếp (`正月午...`). Có thể encode bằn
 
 ### Du Họa
 
-`正月起巳逆行四孟`: Giêng khởi Tỵ, nghịch bốn mạnh. Công thức đủ rõ, nhưng không có dependency current vertical.
+`正月起巳逆行四孟`: Giêng khởi Tỵ, nghịch bốn mạnh. Exact Việt p.499 và Hán `WYG_006-22b..23a` khớp; production map lặp `Tỵ → Dần → Hợi → Thân` theo 12 tháng. Cầu phúc tạo dependency trực tiếp lên factor này.
 
 ### Nhóm Cửu Thần
 
@@ -130,7 +130,7 @@ Bản Việt p562–563 và Hán `WYG_006-74b..76a` cùng ghi tục lấy **mồ
 
 ## Product policy
 
-- 26 factor Q6 hiện production-computable và có oracle/test độc lập, gồm cả Phổ Hộ, Phúc Sinh, Thánh Tâm, Ích Hậu, Tục Thế và Thượng Sóc/Phản Chi/Nguyệt Kị.
+- 27 factor Q6 hiện production-computable và có oracle/test độc lập, gồm cả Phổ Hộ, Phúc Sinh, Thánh Tâm, Ích Hậu, Tục Thế và Thượng Sóc/Phản Chi/Nguyệt Kị.
 - Ba factor mới chỉ đi vào factor engine; không tự thay đổi 7 activity vertical nếu exact Q11/Q10 không dùng chúng.
 - Không thêm các mục còn lại vào activity scoring nếu exact Q11/Q10 không cần.
 - `OUT_OF_SCOPE` nghĩa là công thức đã hiểu nhưng không thuộc current product claim, không phải “không tồn tại”.
@@ -139,4 +139,4 @@ Bản Việt p562–563 và Hán `WYG_006-74b..76a` cùng ghi tục lấy **mồ
 
 ## Kết luận
 
-**Quyển 6 đã inventory đủ 40/40 mục.** 26 factor hiện production-computable/Hán-oracle; phần còn lại có trạng thái explicit. Thượng Sóc/Phản Chi/Nguyệt Kị không còn blocker calendar/context.
+**Quyển 6 đã inventory đủ 40/40 mục.** 27 factor hiện production-computable/Hán-oracle; phần còn lại có trạng thái explicit. Thượng Sóc/Phản Chi/Nguyệt Kị không còn blocker calendar/context.
