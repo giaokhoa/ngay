@@ -124,6 +124,10 @@ Chi tiết: `docs/research/q8-full-inventory.md`.
 | XUAT_HANH / 行幸遣使〈出行同〉 | activities | T1 Q11 p849 + Q10 + Hán Q11/Q10 | ORACLE_TESTED | xuat-hanh-rules.ts + derived Q10 resolver | xuat-hanh-rules.spec.ts / xuat-hanh-conflict.spec.ts     | Q11 Việt thiếu 月厭; bổ sung blocker từ Q10; docs/research/activity-xuat-hanh.md |
 | AN_TANG / 安葬                 | activities | T1 Q11 p862 + Q5/Q10 + Hán      | ORACLE_TESTED | an-tang-rules.ts + full Q10 resolver      | an-tang-rules.spec.ts / an-tang-conflict.spec.ts         | Ô Phệ final 13 ngày; Phục/Trọng source-lock; docs/research/activity-an-tang.md   |
 
+## Reference tables — Niên biểu
+
+Q14–19 đã inventory đủ 6 block × 10 năm, xem `docs/research/q14-q19-annual-tables.md`. Đây là bảng spatial theo năm để future-oracle Q3/Q8; current date-selection không consume. Q14 giữ Wikisource fallback pin, Q15–19 Kanripo.
+
 ## Hán double-entry coverage
 
 Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scope có expected/vector
