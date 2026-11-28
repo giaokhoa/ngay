@@ -9,6 +9,7 @@ import { TrangCauYTriBenh } from './pages/cau-y-tri-benh-page';
 import { TrangSuaMongTayChan } from './pages/sua-mong-tay-chan-page';
 import { TrangMayDo } from './pages/may-do-page';
 import { TrangLapKheUocGiaoDich } from './pages/lap-khe-uoc-giao-dich-page';
+import { TrangNapTai } from './pages/nap-tai-page';
 import { TrangGiaiTru } from './pages/giai-tru-page';
 import { TrangDiChuyen } from './pages/moving-page';
 import { TrangDongTho, TrangSuaCungThat } from './pages/earthwork-pages';
@@ -91,6 +92,10 @@ export const boDinhTuyen = createBrowserRouter([
   {
     path: DUONG_DAN.LAP_KHE_UOC_GIAO_DICH,
     Component: TrangLapKheUocGiaoDich,
+  },
+  {
+    path: DUONG_DAN.NAP_TAI,
+    Component: TrangNapTai,
   },
   {
     path: DUONG_DAN.DONG_THO,

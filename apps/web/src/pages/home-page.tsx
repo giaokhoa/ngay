@@ -128,6 +128,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.LAP_KHE_UOC_GIAO_DICH,
   },
   {
+    ma: 'NAP_TAI',
+    ten: 'Nạp tiền của',
+    moTa: 'Chọn ngày nạp tiền của theo Mẫu Thương, Dân Nhật, Mãn/Thu, Lục Hợp, Ngũ Phú và Thiên Thương; xét thêm Trường Tinh, Đoản Tinh.',
+    to: DUONG_DAN.NAP_TAI,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',
@@ -164,6 +170,8 @@ const NHAN_YEU_TO: Readonly<Record<string, string>> = {
   THO_PHU_TIN: 'Thổ Phù',
   DIA_NANG: 'Địa Nang',
   DAN_NHAT: 'Dân Nhật',
+  MAU_THUONG: 'Mẫu Thương',
+  THIEN_THUONG: 'Thiên Thương',
   VUONG_NHAT: 'Vương Nhật',
   NGU_PHU: 'Ngũ Phú',
   DAI_HAO: 'Đại Hao',

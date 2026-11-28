@@ -15,6 +15,7 @@ import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
 import { QUY_TAC_LAP_KHE_UOC_GIAO_DICH } from '../activities/lap-khe-uoc-giao-dich-rules';
 import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
+import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
@@ -40,6 +41,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
   [LoaiCongViec.MAY_DO]: QUY_TAC_MAY_DO,
+  [LoaiCongViec.NAP_TAI]: QUY_TAC_NAP_TAI,
   [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: QUY_TAC_LAP_KHE_UOC_GIAO_DICH,
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
@@ -76,7 +78,8 @@ const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
     activity !== LoaiCongViec.KHANH_THUONG &&
     activity !== LoaiCongViec.CAU_PHUC &&
     activity !== LoaiCongViec.CAU_TU &&
-    activity !== LoaiCongViec.MAY_DO,
+    activity !== LoaiCongViec.MAY_DO &&
+    activity !== LoaiCongViec.NAP_TAI,
 );
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
@@ -173,6 +176,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.CAU_Y_TRI_BENH]: true,
       [LoaiCongViec.SUA_MONG_TAY_CHAN]: false,
       [LoaiCongViec.MAY_DO]: false,
+      [LoaiCongViec.NAP_TAI]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -203,6 +207,34 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('納財: 收日 is Nên; 閉/五墓 are not baseline Kị', () => {
+    const thu = danhGia(LoaiCongViec.NAP_TAI, { truc: ThapNhiTruc.THU, yeuTo: [] });
+    const be = danhGia(LoaiCongViec.NAP_TAI, {
+      truc: ThapNhiTruc.BE,
+      yeuTo: [MaYeuTo.THIEN_NGUYEN],
+    });
+    const nguMo = danhGia(LoaiCongViec.NAP_TAI, {
+      yeuTo: [MaYeuTo.NGU_MO, MaYeuTo.THIEN_NGUYEN],
+    });
+    expect(thu.coNen).toBe(true);
+    expect(thu.coKy).toBe(false);
+    expect(be.coKy).toBe(false);
+    expect(nguMo.coKy).toBe(false);
+  });
+
+  it('納財: 長星 / 短星 are supplemental Q10 Kị', () => {
+    for (const [ma, trace] of [
+      [MaYeuTo.TRUONG_TINH, 'NAP_TAI_Q10_TRUONG_TINH_KY'],
+      [MaYeuTo.DOAN_TINH, 'NAP_TAI_Q10_DOAN_TINH_KY'],
+    ] as const) {
+      const result = danhGia(LoaiCongViec.NAP_TAI, {
+        yeuTo: [ma, MaYeuTo.THIEN_NGUYEN],
+      });
+      expect(result.coKy).toBe(true);
+      expect(result.xungDotDaApDung.some((x) => x.ma === trace)).toBe(true);
+    }
+  });
 
   it('立劵交易: no 閉 baseline, 五離 has exact cát relief', () => {
     const closed = danhGia(LoaiCongViec.LAP_KHE_UOC_GIAO_DICH, {
