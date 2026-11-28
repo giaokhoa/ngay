@@ -115,6 +115,23 @@ describe('Hán source corpus manifest', () => {
     }
   });
 
+  it('records Q10 as 51 grouped sections while keeping semantic oracle vertical-scoped', () => {
+    const q10 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 10);
+
+    expect(q10?.trangThai).toBe('ORACLE_MOT_PHAN');
+    expect(q10?.phamViOracle).toMatch(/51\/51 mục Việt = 99\/99 heading TOC Hán/);
+    expect(q10?.phamViOracle).toContain('7 vertical');
+  });
+
+  it('records Q11 as 73 canonical activities rather than the 60-item source subcatalog', () => {
+    const q11 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 11);
+
+    expect(q11?.trangThai).toBe('ORACLE_MOT_PHAN');
+    expect(q11?.phamViOracle).toMatch(/73\/73 canonical Dụng sự sections/);
+    expect(q11?.phamViOracle).toContain('66 section còn lại out-of-scope');
+    expect(q11?.phamViOracle).toContain('67/37/60 việc');
+  });
+
   it('records Q32-Q34 structural inventories without claiming full-volume oracle', () => {
     const q32 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 32);
     const q33 = HAN_CORPUS_MANIFEST.find((item) => item.quyen === 33);

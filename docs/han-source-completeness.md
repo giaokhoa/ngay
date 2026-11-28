@@ -76,8 +76,8 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model                 |
 |     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain                    |
 |     9 | 立成        | ORACLE_MOT_PHAN | full structure: 10 niên + 30 nguyệt + 2 trang nhật + 6 biểu thời; oracle subset                              |
-|    10 | 宜忌        | ORACLE_MOT_PHAN | semantic vectors cho 7 vertical hiện implement                                                               |
-|    11 | 用事        | ORACLE_MOT_PHAN | exact 宜/忌 cho 7 vertical hiện implement                                                                    |
+|    10 | 宜忌        | ORACLE_MOT_PHAN | 51/51 mục Việt = 99/99 heading Hán inventoried; semantic oracle exact cho 7 current vertical                 |
+|    11 | 用事        | ORACLE_MOT_PHAN | 73/73 canonical activity sections inventoried; 7 oracle-tested, 66 out-of-scope current product              |
 |    12 | 公規一      | CHUA_IMPLEMENT  | 8/8 top-level inventory; lịch quan/thiên văn, sunrise tables latitude-specific                               |
 |    13 | 公規二      | CHUA_IMPLEMENT  | 2/2 top-level inventory; canh lậu/trung tinh + tinh đồ, bảng Kinh sư                                         |
 |    14 | 年表一      | CHUA_IMPLEMENT  | annual table block 甲子→癸酉; Wikisource fallback, spatial year table                                        |
@@ -210,6 +210,8 @@ Không phát hiện discrepancy Việt/Hán trong scope đã production. **Secti
 
 ### Q10
 
+`docs/research/q10-full-inventory.md` khóa **51/51 mục đánh số bản Việt = 99/99 heading TOC Hán**. Raw grep 101 heading Hán có thêm hai heading nội dung lặp `以上所宜/以上所忌`, không phải denominator. Exact semantic oracle hiện vẫn giới hạn 7 vertical production; các nhóm khác source-only/blocked/out-of-scope có trạng thái explicit.
+
 `han-q10-semantic-oracle.spec.ts` không copy nguyên matrix production.
 
 Nó dùng source vectors để kiểm các mechanism:
@@ -242,6 +244,8 @@ Bug đã được thêm regression và sửa trong evaluator.
 - xung năm sinh ở trụ giờ.
 
 ### Q11
+
+`docs/research/q11-full-inventory.md` khóa **73/73 section Dụng sự canonical**. Ba catalog đầu quyển 67 Ngự dụng / 37 Dân dụng / 60 Thông thư có overlap; thân quyển hợp thành 73 section chi tiết. Đây là lý do không dùng “60 việc” làm denominator full-volume; `修宮室` là một section production riêng ngoài list 60 Thông thư.
 
 `han-q11-oracle.spec.ts` chép expected 宜/忌 độc lập cho:
 
@@ -280,6 +284,10 @@ Policy: khác biệt phải có ID và production policy rõ; không normalize �
 - `HAN_ORACLE_TESTED`: có thêm expected/vector độc lập lấy từ Hán source pin.
 - `ORACLE_MOT_PHAN` ở manifest: chỉ một phần nội dung của cả quyển đã được Hán-oracle.
 - Không có nhãn nào ở trên tự động nghĩa là “full quyển”.
+
+## Structural inventory milestone
+
+Sau các inventory note hiện tại, **36/36 quyển đã có structural denominator/scope explicit** ở mức phù hợp loại nguồn (section, table block, activity catalog hoặc appendix/refutation heading). Điều này chỉ đóng milestone **inventory**, không nâng bất kỳ quyển nào thành full-volume oracle và không thay các blocker exact Việt Tập 2 scan/spatial/time/location đã ghi.
 
 ## Exit criterion để được gọi “full hai nguồn”
 

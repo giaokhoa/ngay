@@ -153,6 +153,15 @@ Q20–31 đã inventory đủ 12/12 volume structure; xem `docs/research/q20-q31
 
 Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inventory.md`.
 
+## Semantics / activities — Quyển 10–11
+
+|      Quyển | Structural inventory                    | Product/oracle                                                                                           |
+| ---------: | --------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| 10 Nghi kị | 51/51 mục Việt = 99/99 Hán TOC headings | exact semantic oracle cho 7 current vertical; remaining groups explicit source-only/blocked/out-of-scope |
+| 11 Dụng sự | 73/73 canonical activity sections       | 7 ORACLE_TESTED; 66 OUT_OF_SCOPE_CURRENT_VERTICALS; source catalogs 67/37/60 overlap                     |
+
+Chi tiết: `docs/research/q10-full-inventory.md`, `docs/research/q11-full-inventory.md`.
+
 ## Oracle/reference — Quyển 9, 32–34
 
 | Quyển | Structural inventory                           | Product/oracle                                                    |
