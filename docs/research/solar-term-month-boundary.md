@@ -1,6 +1,6 @@
 # Research: Tháng theo tiết khí
 
-Status: VERIFIED
+Status: VERIFIED / IMPLEMENTED / ORACLE_TESTED
 
 ## Câu hỏi cần trả lời
 
@@ -59,11 +59,11 @@ Các quyển Nguyệt biểu 20..31 tạo đủ chuỗi 12 tháng.
 Ta cần phân biệt hai thứ:
 
 1. Quy tắc nghiệp vụ “tháng nào bắt đầu ở tiết nào” — VERIFIED.
-2. Thuật toán thiên văn tính chính xác instant của tiết khí trong UTC/timezone — CHƯA VERIFIED ở note này.
+2. Thuật toán thiên văn tính instant tiết khí — production đã self-contained; oracle HKO 2026 kiểm đủ 24 tiết ở độ phân giải phút. Claim hiện tại là oracle-tested cho bộ mốc 2026, không suy rộng thành chứng minh tuyệt đối cho mọi niên đại.
 
 Không được dùng ngày cố định như “Lập Xuân luôn 4/2 lúc 00:00”.
 
-Implementation phải tính/tra instant tiết khí rồi chuyển sang timezone yêu cầu.
+Implementation tính instant tiết khí trong UTC rồi dùng chính instant đó làm ranh Nguyệt kiến; timezone chỉ dùng khi quy chiếu ngày dân sự/UI, không được dời ranh giao tiết về 00:00 địa phương.
 
 ## Oracle / fixture
 
@@ -74,13 +74,13 @@ Oracle từ Nguyệt biểu:
 - ...
 - ngay sau Tiểu Hàn: chiThang = SUU.
 
-Boundary test phải kiểm ngay trước/ngay sau instant giao tiết.
+Boundary test kiểm ngay trước/đúng/ngay sau instant giao tiết. `solar-term.service.spec.ts` khóa đủ 12 lần đổi Chi tháng và đối chiếu 24 mốc HKO 2026; `date-selection.service.spec.ts` khóa thêm integration Q7 tại Lập Xuân để bảo đảm thần Hoàng/Hắc đạo đổi theo Nguyệt kiến dù vẫn cùng ngày dân sự.
 
 ## Trạng thái
 
 - [x] LOCATED
 - [x] COMPARED
 - [x] VERIFIED cho mapping tiết -> chi tháng
-- [ ] VERIFIED cho thuật toán tính instant tiết khí
-- [ ] IMPLEMENTED
-- [ ] ORACLE_TESTED
+- [x] ORACLE_TESTED cho instant tiết khí bằng 24 mốc HKO 2026 ở độ phân giải phút
+- [x] IMPLEMENTED
+- [x] ORACLE_TESTED cho boundary Nguyệt kiến và integration Q7

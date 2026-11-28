@@ -4,6 +4,8 @@ import { LoaiCongViec } from '../activities/activity-rule';
 import { DungSuService } from '../activities/activities.service';
 import { TinhLichService } from '../calendar/calendar.service';
 import { TinhThoVuongService } from '../calendar/earth-reign.service';
+import { DiaChi } from '../calendar/domain/earthly-branch';
+import { TietKhi } from '../calendar/domain/solar-term';
 import { TinhTietKhiService } from '../calendar/solar-term.service';
 import { DanhGiaNgayService } from '../evaluation/evaluation.service';
 import { TinhYeuToNgayService } from '../factors/factors.service';
@@ -72,6 +74,33 @@ describe('XemNgayService DI_CHUYEN end-to-end', () => {
 
     expect(service.xemDiChuyen(input, 'Asia/Ho_Chi_Minh')).toEqual(
       service.xemDiChuyen(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+});
+
+describe('XemNgayService QUAN_DAI end-to-end', () => {
+  it('orchestrates calendar -> factors -> source-resolved Q11 -> Q10 Quan đới resolver', () => {
+    const result = taoService().xemQuanDai(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'QUAN_DAI')).toBe(true);
+    expect(result.danhGia.dongGop.length).toBe(
+      result.giaiThich.nen.length + result.giaiThich.ky.length + result.giaiThich.biLoai.length,
+    );
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.nguon.every((nguon) => nguon.daXacMinh)),
+    ).toBe(true);
+  });
+
+  it('is deterministic for QUAN_DAI', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+
+    expect(service.xemQuanDai(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemQuanDai(input, 'Asia/Ho_Chi_Minh'),
     );
   });
 });
@@ -221,7 +250,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 8)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 9)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -238,6 +267,21 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
 });
 
 describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
+  it('đổi theo Nguyệt kiến đúng instant giao tiết, không chờ ranh ngày hay tháng âm lịch', () => {
+    const tietKhi = new TinhTietKhiService();
+    const lapXuan = tietKhi.tinhThoiDiemTietKhi(2026, TietKhi.LAP_XUAN);
+    const service = taoService();
+    const truoc = service.xemCuoiHoi(new Date(lapXuan.getTime() - 1), 'Asia/Ho_Chi_Minh');
+    const sau = service.xemCuoiHoi(lapXuan, 'Asia/Ho_Chi_Minh');
+
+    // Cùng một ngày dân sự và cùng Can-Chi ngày; chỉ Nguyệt kiến đổi tại giao tiết.
+    expect(truoc.ngayDanSu).toBe(sau.ngayDanSu);
+    expect(truoc.canChiNgay).toEqual(sau.canChiNgay);
+    expect(truoc.chiThang).toBe(DiaChi.SUU);
+    expect(sau.chiThang).toBe(DiaChi.DAN);
+    expect(truoc.thanHoangHac.ma).not.toBe(sau.thanHoangHac.ma);
+  });
+
   it('Hắc đạo is an additional blocker only for the five activities named by Hán source', () => {
     const service = taoService();
     const result = service.xemTongQuanThang('1990-06-15', 2026, 11, 'Asia/Ho_Chi_Minh');
@@ -262,6 +306,7 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
     for (const activity of [
       LoaiCongViec.KHAI_TRUONG,
       LoaiCongViec.AN_GIUONG,
+      LoaiCongViec.QUAN_DAI,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);

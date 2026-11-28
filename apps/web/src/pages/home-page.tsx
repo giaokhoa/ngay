@@ -50,6 +50,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.AN_GIUONG,
   },
   {
+    ma: 'QUAN_DAI',
+    ten: 'Quan đới',
+    moTa: 'Lễ đội mũ hoặc nghi thức trưởng thành theo người chủ sự.',
+    to: DUONG_DAN.QUAN_DAI,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

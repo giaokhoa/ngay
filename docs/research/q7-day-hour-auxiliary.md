@@ -8,7 +8,8 @@
 - Revision `8b5522eb0299afbd575f1cb556e972c71c40c42a`.
 - File `KR3g0051_007.txt`; SHA-256 đã pin ở `han-source-manifest.ts`.
 - `WYG_007-3b..4a`: sáu thần Hoàng đạo và sáu Hắc đạo; **Hắc đạo kị** việc dựng đất/nhà, dời chỗ, đi xa, cưới hỏi, xuất quân. Không mở rộng sang khai trương/an táng khi chưa có nguồn cụ thể.
-- `WYG_007-7b..9b`: thứ tự 12 thần: 青龍, 明堂, 天刑, 朱雀, 金匱, 天德/寶光, 白虎, 玉堂, 天牢, 元武, 司命, 勾陳. Dần/Thân khởi Thanh Long tại Tý, Mão/Dậu tại Dần, Thìn/Tuất tại Thìn, Tỵ/Hợi tại Ngọ, Tý/Ngọ tại Thân, Sửu/Mùi tại Tuất. **Ngày lấy Chi tháng, giờ lấy Chi ngày**.
+- `WYG_007-7b..9b`: thứ tự 12 thần: 青龍, 明堂, 天刑, 朱雀, 金匱, 天德/寶光, 白虎, 玉堂, 天牢, 元武, 司命, 勾陳. Dần/Thân khởi Thanh Long tại Tý, Mão/Dậu tại Dần, Thìn/Tuất tại Thìn, Tỵ/Hợi tại Ngọ, Tý/Ngọ tại Thân, Sửu/Mùi tại Tuất. **Ngày lấy Chi tháng, giờ lấy Chi ngày**. Chi tháng ở đây là **月建 / Nguyệt kiến đổi đúng instant giao `節`**, không phải số tháng âm lịch hay ranh mùng 1; contract nguồn và boundary được khóa riêng tại `solar-term-month-boundary.md`.
+- `WYG_007-8b`: phần `今按` bác cách 邵泰衢 đem Hoàng/Hắc đạo ghép với Kiến-Trừ, kết luận **`萬不能與建除相合`**. Product vì vậy phải giữ `黃黑道十二神` và `建除十二神` là hai hệ độc lập; Trực Trừ không tự đồng nghĩa Hoàng đạo, Trực Mãn không tự đồng nghĩa Hắc đạo.
 - `WYG_007-11b..12a`: tên Bảo Quang được dùng thay cho Thiên Đức Hoàng đạo để tránh trùng với Thiên Đức khác.
 - `WYG_007-19b..20b`: 天官貴人 (theo nhật Can), 福星貴人 (theo nhật Can sinh thời Can).
 - `WYG_007-21b..22b`: 喜神 theo ngày Can, nhưng **không thắng được Nhật Phá**, được chính sách lấy Giáp/Kỷ ngày Dần giờ gặp Thân ngày làm phản ví dụ.
@@ -99,10 +100,10 @@ Bốn mục này được giữ ở `COMPARED`, không để một agent sau t�
 
 ## Oracle/test
 
-- `hoang-hac-dao.spec.ts`: 12 khởi điểm, vòng 12 thần, sáu Hoàng/sáu Hắc, Giáp Tý giờ theo bảng Hán, 4 cụm thần giờ và whitelist activity.
+- `hoang-hac-dao.spec.ts`: 12 khởi điểm, vòng 12 thần, sáu Hoàng/sáu Hắc, regression **anti-conflation với Kiến-Trừ** từ `WYG_007-8b`, Giáp Tý giờ theo bảng Hán, 4 cụm thần giờ và whitelist activity.
 - `selected-hour.spec.ts`: ưu tiên điều kị dù cùng giờ có Phúc Tinh, Lộc, Hỷ, Mã; giờ Phá/Hình/Hại; Ngũ Bất Ngộ theo operational Q32, gồm regression Mậu nhật–Dần để không bị lời biện Q7 vô tình đổi semantics; Không vong chỉ là dấu tham khảo.
 - `hoang-hac-dao.spec.ts`: oracle `旬空`/`路空` trực tiếp với Giáp Tý, Giáp Thìn và Mậu Tý theo bảng Q31.
-- `date-selection.service.spec.ts`: cross-activity, same-month Hắc kị đúng năm nhóm, không ảnh hưởng `danhGia` gốc.
+- `date-selection.service.spec.ts`: cross-activity, Hắc kị đúng năm nhóm, không ảnh hưởng `danhGia` gốc; regression Lập Xuân khóa việc Q7 đổi theo Nguyệt kiến **ngay tại instant giao tiết** trong khi ngày dân sự và Can-Chi ngày vẫn giữ nguyên.
 
 ## Giới hạn claim
 

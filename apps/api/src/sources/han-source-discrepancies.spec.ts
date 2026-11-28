@@ -17,6 +17,14 @@ describe('Hán source discrepancy registry', () => {
     }
   });
 
+  it('registers the Q11 Quan đới Bế nhật discrepancy explicitly', () => {
+    expect(laySaiKhacNguonHan('Q11_QUAN_DAI_VIET_THEM_BE_NHAT')).toMatchObject({
+      loai: 'VIET_HAN_NOI_DUNG',
+      quyen: 11,
+      muc: '冠帶',
+    });
+  });
+
   it('registers the known Q11 月厭 discrepancy explicitly', () => {
     expect(laySaiKhacNguonHan('Q11_XUAT_HANH_NGUYET_YEM')).toMatchObject({
       loai: 'VIET_HAN_NOI_DUNG',

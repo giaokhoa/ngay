@@ -7,6 +7,7 @@ import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
+import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_XUAT_HANH_Q11 } from '../activities/xuat-hanh-rules';
 
 interface HanQ11Fixture {
@@ -55,6 +56,26 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:VANG_VONG',
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.QUAN_DAI]: {
+    tieuDeHan: '冠帶',
+    anchor: 'KR3g0051_WYG_011-11a',
+    nen: ['TRUC:DINH'],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:DAI_THOI',
+      'YEU_TO:THIEN_LAI',
+      'YEU_TO:TU_PHE',
+      'YEU_TO:NGU_MO',
+      'CHI_NGAY:SUU',
     ],
   },
   [LoaiCongViec.AN_GIUONG]: {
@@ -296,6 +317,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.CUOI_HOI]: QUY_TAC_CUOI_HOI,
   [LoaiCongViec.DI_CHUYEN]: QUY_TAC_DI_CHUYEN,
   [LoaiCongViec.AN_GIUONG]: QUY_TAC_AN_GIUONG,
+  [LoaiCongViec.QUAN_DAI]: QUY_TAC_QUAN_DAI,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
   [LoaiCongViec.SUA_CUNG_THAT]: QUY_TAC_SUA_CUNG_THAT,
   [LoaiCongViec.KHAI_TRUONG]: QUY_TAC_KHAI_TRUONG,

@@ -19,6 +19,16 @@ export interface SaiKhacNguonHan {
 
 export const SAI_KHAC_NGUON_HAN: readonly SaiKhacNguonHan[] = [
   {
+    ma: 'Q11_QUAN_DAI_VIET_THEM_BE_NHAT',
+    loai: 'VIET_HAN_NOI_DUNG',
+    quyen: 11,
+    muc: '冠帶',
+    anchorHan: 'KR3g0051_WYG_011-11a / KR3g0051_WYG_010-37b..38a',
+    moTa: 'Exact Việt Tập I p.848 in thêm “ngày Bế” trong Kị Quan đới. Hán Q11 冠帶 không có 閉日; mục 閉日 của cả Việt Q10 p.797 và Hán Q10 cũng không liệt kê 冠帶.',
+    chinhSachProduction:
+      'Không dùng Bế nhật như blocker Quan đới. Production theo Hán Q11 và Q10 Việt/Hán đồng thuận; giữ p.848 như discrepancy source có regression, không normalize ngầm bản scan Việt.',
+  },
+  {
     ma: 'Q11_XUAT_HANH_NGUYET_YEM',
     loai: 'VIET_HAN_NOI_DUNG',
     quyen: 11,

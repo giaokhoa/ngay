@@ -44,6 +44,8 @@ const DANH_SACH_THAN: readonly ThanHoangHac[] = [
   { ma: 'CAU_TRAN', ten: 'Câu Trần', loai: 'HAC_DAO' },
 ];
 
+// Q7 WYG_007-8b bác phép ghép hệ này với 建除十二神: “萬不能與建除相合”.
+// Giữ mapping Hoàng/Hắc đạo độc lập với twelve-officer.ts; không suy loai từ Trực.
 const CHI_THANH_LONG_THEO_CHI_GOC: Readonly<Record<DiaChi, DiaChi>> = {
   [DiaChi.DAN]: DiaChi.TY,
   [DiaChi.THAN]: DiaChi.TY,
