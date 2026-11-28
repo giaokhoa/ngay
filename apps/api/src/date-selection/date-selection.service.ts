@@ -65,6 +65,7 @@ export type KetQuaXemNgayQuetDonNhaCua = KetQuaXemNgay;
 export type KetQuaXemNgayTrangTriTuong = KetQuaXemNgay;
 export type KetQuaXemNgaySuaSangDuongSa = KetQuaXemNgay;
 export type KetQuaXemNgayPhaNhaHuyTuong = KetQuaXemNgay;
+export type KetQuaXemNgayTrocNaBatBo = KetQuaXemNgay;
 export type KetQuaXemNgayDongTho = KetQuaXemNgay;
 export type KetQuaXemNgaySuaCungThat = KetQuaXemNgay;
 export type KetQuaXemNgayKhaiTruong = KetQuaXemNgay;
@@ -263,6 +264,10 @@ export class XemNgayService {
 
   xemPhaNhaHuyTuong(thoiDiem: Date, muiGio: string): KetQuaXemNgayPhaNhaHuyTuong {
     return this.xem(thoiDiem, muiGio, LoaiCongViec.PHA_NHA_HUY_TUONG);
+  }
+
+  xemTrocNaBatBo(thoiDiem: Date, muiGio: string): KetQuaXemNgayTrocNaBatBo {
+    return this.xem(thoiDiem, muiGio, LoaiCongViec.TROC_NA_BAT_BO);
   }
 
   xemDongTho(thoiDiem: Date, muiGio: string): KetQuaXemNgayDongTho {
@@ -562,6 +567,7 @@ export class XemNgayService {
     const chiThang = this.lich.tinhChiThangTaiThoiDiem(thoiDiem);
     const canChiThang = this.lich.tinhCanChiThangTaiThoiDiem(thoiDiem);
     const trungKhiHienHanh = this.lich.tinhTrungKhiHienHanh(thoiDiem);
+    const tietKhiTrongNgay = this.lich.tinhTietKhiTrongNgay(ngayDanSu, muiGio);
     const ngayTuLy = this.lich.laNgayTuLy(ngayDanSu, muiGio);
     const ngayTuTuyet = this.lich.laNgayTuTuyet(ngayDanSu, muiGio);
     const ngaySocHuyenVong = this.lich.laNgaySocHuyenVong(ngayDanSu, muiGio);
@@ -591,6 +597,7 @@ export class XemNgayService {
       truc,
       ngayAmTrongThang: thongTinNgayAm.ngayTrongThang,
       dangThoVuong,
+      tietKhiTrongNgay,
       yeuTo,
     });
 

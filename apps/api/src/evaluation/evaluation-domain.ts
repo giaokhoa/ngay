@@ -1,6 +1,7 @@
 import { QuyTacDungSu } from '../activities/activity-rule';
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
+import { TietKhi } from '../calendar/domain/solar-term';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { MaYeuTo } from '../factors/domain/factor-code';
 import { YeuToNgay } from '../factors/domain/day-factor';
@@ -13,6 +14,7 @@ export interface BoiCanhDanhGiaNgay {
   truc: ThapNhiTruc;
   ngayAmTrongThang?: number;
   dangThoVuong: boolean;
+  tietKhiTrongNgay?: readonly TietKhi[];
   yeuTo: readonly YeuToNgay[];
 }
 

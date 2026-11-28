@@ -176,6 +176,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.PHA_NHA_HUY_TUONG,
   },
   {
+    ma: 'TROC_NA_BAT_BO',
+    ten: 'Tróc nã, bắt bớ',
+    moTa: 'Nên ngày Chấp hoặc Thu; Kị Vãng Vong. Phân/chí và Nguyệt Kị chỉ bỏ Nên theo Q10.',
+    to: DUONG_DAN.TROC_NA_BAT_BO,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

@@ -63,6 +63,15 @@ export class TinhTietKhiService {
     return new Map(ketQua);
   }
 
+  tinhTietKhiTrongNgay(ngayDanSu: NgayDanSu, muiGio: string): readonly TietKhi[] {
+    const { nam } = phanTichNgayDanSu(ngayDanSu);
+    const tatCa = this.tinhTatCaTietKhiTrongNam(nam);
+    return DINH_NGHIA_TIET_KHI_THEO_NAM.filter((item) => {
+      const thoiDiem = tatCa.get(item.tietKhi);
+      return thoiDiem !== undefined && tinhNgayDanSuTaiMuiGio(thoiDiem, muiGio) === ngayDanSu;
+    }).map((item) => item.tietKhi);
+  }
+
   laNgayTuLy(ngayDanSu: NgayDanSu, muiGio: string): boolean {
     return this.laNgayTruocMotTrongCacTietKhi(ngayDanSu, muiGio, [
       TietKhi.XUAN_PHAN,

@@ -29,6 +29,7 @@ describe('DUONG_DAN', () => {
     expect(DUONG_DAN.TRANG_TRI_TUONG).toBe('/trang-tri-tuong');
     expect(DUONG_DAN.SUA_SANG_DUONG_SA).toBe('/sua-sang-duong-sa');
     expect(DUONG_DAN.PHA_NHA_HUY_TUONG).toBe('/pha-nha-huy-tuong');
+    expect(DUONG_DAN.TROC_NA_BAT_BO).toBe('/troc-na-bat-bo');
     expect(DUONG_DAN.DONG_THO).toBe('/dong-tho');
     expect(DUONG_DAN.SUA_CUNG_THAT).toBe('/sua-cung-that');
     expect(DUONG_DAN.KHAI_TRUONG).toBe('/khai-truong');

@@ -1,6 +1,7 @@
 import { DieuKienDungSu, TacDongDungSu } from '../activities/activity-rule';
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
+import { TietKhi } from '../calendar/domain/solar-term';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { MaYeuTo } from '../factors/domain/factor-code';
 import {
@@ -29,6 +30,7 @@ export interface DieuKienQ10 {
   coBatKyYeuTo?: readonly MaYeuTo[];
   khongCoBatKyYeuTo?: readonly MaYeuTo[];
   truc?: readonly ThapNhiTruc[];
+  coBatKyTietKhiTrongNgay?: readonly TietKhi[];
 }
 
 export interface QuyTacXungDotDataDriven {
@@ -260,6 +262,14 @@ function khopDieuKien(condition: DieuKienQ10 | undefined, boiCanh: BoiCanhDanhGi
   if (condition.canNgay && !condition.canNgay.includes(boiCanh.canNgay)) return false;
   if (condition.chiNgay && !condition.chiNgay.includes(boiCanh.chiNgay)) return false;
   if (condition.truc && !condition.truc.includes(boiCanh.truc)) return false;
+  if (
+    condition.coBatKyTietKhiTrongNgay &&
+    !condition.coBatKyTietKhiTrongNgay.some((tietKhi) =>
+      (boiCanh.tietKhiTrongNgay ?? []).includes(tietKhi),
+    )
+  ) {
+    return false;
+  }
 
   if (condition.coTatCaYeuTo && !condition.coTatCaYeuTo.every((ma) => factorSet.has(ma))) {
     return false;

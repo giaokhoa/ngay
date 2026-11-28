@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { LoaiCongViec, QuyTacDungSu, TacDongDungSu } from '../activities/activity-rule';
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
+import { TietKhi } from '../calendar/domain/solar-term';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { LoaiYeuTo } from '../factors/domain/day-factor';
 import { MaYeuTo } from '../factors/domain/factor-code';
@@ -124,6 +125,44 @@ describe('generic Q10 rule resolver', () => {
       'GLOBAL_TO_KIEP',
       'KIEP_REMOVE_WITH_DUC',
     ]);
+  });
+
+  it('global rule có thể match exact tiết khí trong ngày', () => {
+    const nen = dongGopNen(MaYeuTo.THIEN_DUC);
+    const rules: readonly QuyTacXungDotDataDriven[] = [
+      {
+        ma: 'SOLAR_TERM_REMOVE_NEN',
+        dieuKien: { coBatKyTietKhiTrongNgay: [TietKhi.XUAN_PHAN, TietKhi.HA_CHI] },
+        phepXuLy: { loai: 'BO_NEN' },
+        precedence: 10,
+        moTa: 'exact solar-term day suppresses Nên',
+        nguon: [],
+      },
+    ];
+
+    apDungResolverQ10(
+      [nen],
+      boiCanh([MaYeuTo.THIEN_DUC], { tietKhiTrongNgay: [TietKhi.XUAN_PHAN] }),
+      rules,
+    );
+    expect(nen.trangThai).toBe(TrangThaiDongGop.BI_LOAI);
+  });
+
+  it('solar-term condition không match ngày thường', () => {
+    const nen = dongGopNen(MaYeuTo.THIEN_DUC);
+    const rules: readonly QuyTacXungDotDataDriven[] = [
+      {
+        ma: 'SOLAR_TERM_REMOVE_NEN',
+        dieuKien: { coBatKyTietKhiTrongNgay: [TietKhi.DONG_CHI] },
+        phepXuLy: { loai: 'BO_NEN' },
+        precedence: 10,
+        moTa: 'exact solar-term day suppresses Nên',
+        nguon: [],
+      },
+    ];
+
+    apDungResolverQ10([nen], boiCanh([MaYeuTo.THIEN_DUC]), rules);
+    expect(nen.trangThai).toBe(TrangThaiDongGop.HIEU_LUC);
   });
 
   it('global BO_NEN không có danh sách mục tiêu thì bỏ toàn bộ Nên', () => {
@@ -305,7 +344,11 @@ function dongGopKy(ma: MaYeuTo): DongGopDanhGia {
 
 function boiCanh(
   yeuTo: readonly MaYeuTo[],
-  overrides: Partial<{ canNgay: ThienCan; ngayAmTrongThang: number }> = {},
+  overrides: Partial<{
+    canNgay: ThienCan;
+    ngayAmTrongThang: number;
+    tietKhiTrongNgay: readonly TietKhi[];
+  }> = {},
 ) {
   return {
     chiThang: DiaChi.DAN,
@@ -314,6 +357,7 @@ function boiCanh(
     ngayAmTrongThang: overrides.ngayAmTrongThang,
     truc: ThapNhiTruc.KIEN,
     dangThoVuong: false,
+    tietKhiTrongNgay: overrides.tietKhiTrongNgay,
     yeuTo: yeuTo.map((ma) => ({
       ma,
       loai: LoaiYeuTo.THAN_SAT,

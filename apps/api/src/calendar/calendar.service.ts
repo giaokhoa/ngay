@@ -37,6 +37,10 @@ export class TinhLichService {
     return this.tinhTietKhiService.tinhThoiDiemTietKhi(nam, tietKhi);
   }
 
+  tinhTietKhiTrongNgay(ngayDanSu: NgayDanSu, muiGio: string): readonly TietKhi[] {
+    return this.tinhTietKhiService.tinhTietKhiTrongNgay(ngayDanSu, muiGio);
+  }
+
   tinhChiThangTaiThoiDiem(thoiDiem: Date): DiaChi {
     return this.tinhTietKhiService.tinhChiThangTaiThoiDiem(thoiDiem);
   }

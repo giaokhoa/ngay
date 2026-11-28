@@ -72,6 +72,22 @@ describe('TinhTietKhiService', () => {
   });
 
   it.each([
+    ['2026-03-20', TietKhi.XUAN_PHAN],
+    ['2026-06-21', TietKhi.HA_CHI],
+    ['2026-09-23', TietKhi.THU_PHAN],
+    ['2026-12-22', TietKhi.DONG_CHI],
+  ] as const)(
+    'trả exact tiết khí nằm trong ngày dân sự Việt Nam: %s -> %s',
+    (ngayDanSu, tietKhi) => {
+      expect(service.tinhTietKhiTrongNgay(ngayDanSu, 'Asia/Ho_Chi_Minh')).toContain(tietKhi);
+    },
+  );
+
+  it('ngày không có giao tiết trả danh sách rỗng', () => {
+    expect(service.tinhTietKhiTrongNgay('2026-03-21', 'Asia/Ho_Chi_Minh')).toEqual([]);
+  });
+
+  it.each([
     ['2026-03-19', true],
     ['2026-06-20', true],
     ['2026-09-22', true],
