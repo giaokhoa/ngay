@@ -20,7 +20,7 @@ import { QUY_TAC_Q10_DI_CHUYEN } from './di-chuyen-conflict-rules';
 import { QUY_TAC_Q10_CONG_VIEC_DAT } from './earthwork-conflict-rules';
 import { QUY_TAC_Q10_KHAI_TRUONG } from './khai-truong-conflict-rules';
 import { QUY_TAC_Q10_XUAT_HANH } from './xuat-hanh-conflict-rules';
-import { NGAY_CAM_MOI_VIEC_Q4 } from './q4-hard-days';
+import { QUY_TAC_Q10_CUOI_HOI_Q4 } from './cuoi-hoi-q4-conflict-rules';
 import {
   BoiCanhDanhGiaNgay,
   DauVetXungDot,
@@ -66,8 +66,10 @@ export class DanhGiaNgayService {
       return danhGiaAnTang(dongGop, boiCanh);
     }
 
-    const daApDung: DauVetXungDot[] = [];
-    let camMoiViec = false;
+    const q4Resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CUOI_HOI_Q4);
+    const daApDung: DauVetXungDot[] = [...q4Resolved.xungDotDaApDung];
+    let camMoiViec = q4Resolved.camMoiViec;
+    const coKyBoSungQ4 = q4Resolved.coKyBoSung;
 
     const coYeuTo = (ma: MaYeuTo): boolean => boiCanh.yeuTo.some((yeuTo) => yeuTo.ma === ma);
     const coBatKy = (ds: readonly MaYeuTo[]): boolean => ds.some(coYeuTo);
@@ -88,17 +90,6 @@ export class DanhGiaNgayService {
       if (!rule) throw new Error(`Thiếu định nghĩa xung đột ${ma}`);
       daApDung.push(taoDauVet(rule));
     };
-
-    for (const ngay of NGAY_CAM_MOI_VIEC_Q4) {
-      if (
-        ngay.chiThang === boiCanh.chiThang &&
-        ngay.canNgay === boiCanh.canNgay &&
-        ngay.chiNgay === boiCanh.chiNgay
-      ) {
-        camMoiViec = true;
-        ghi('Q4_HARD_' + ngay.suffix);
-      }
-    }
 
     if (coYeuTo(MaYeuTo.NGUYET_PHA) && coBatKy(DUC_HOP)) {
       for (const ma of DUC_HOP)
@@ -269,7 +260,10 @@ export class DanhGiaNgayService {
     const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
     return {
       coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
-      coKy: camMoiViec || hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
+      coKy:
+        camMoiViec ||
+        coKyBoSungQ4 ||
+        hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.KY),
       camMoiViec,
       dongGop,
       xungDotDaApDung: daApDung,
