@@ -252,4 +252,6 @@ Khi thêm một thần sát, quy tắc Dụng sự hoặc Nghi kị, thêm dòng
 
 ## Calendar context — lunar/new-moon
 
+Q10 shared calendar annotations đã source-lock thêm `無祿日` và `上朔 / 四離 / 四絶 / 晦日`: Vô Lộc ngoài nhóm miễn chỉ bỏ Nên; Thượng Sóc/Tứ Ly/Tứ Tuyệt ngoài nhóm miễn tạo Kị bổ sung; Hối nhật chỉ bỏ Nên. Xem `apps/api/src/evaluation/q10-shared-calendar-annotations.ts`.
+
 Q6 `上朔 / 反支 / 月忌日` đã được mở khóa bằng Can Chi năm theo Lập Xuân và astronomical new-moon civil date theo múi giờ. Ngày chứa sóc được coi là mồng 1 cho toàn ngày dân sự địa phương. Xem `apps/api/src/calendar/lunar-day.ts` và `docs/research/q6-full-inventory.md`.

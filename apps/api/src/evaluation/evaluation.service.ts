@@ -42,7 +42,8 @@ import {
   KetQuaDanhGia,
   TrangThaiDongGop,
 } from './evaluation-domain';
-import { apDungResolverQ10 } from './q10-rule-resolver';
+import { apDungResolverQ10, QuyTacXungDotDataDriven } from './q10-rule-resolver';
+import { layQuyTacPhuChuQ10 } from './q10-shared-calendar-annotations';
 
 const DUC_HOP = [
   MaYeuTo.THIEN_DUC,
@@ -110,7 +111,7 @@ export class DanhGiaNgayService {
       return danhGiaLapKheUocGiaoDich(dongGop, boiCanh);
     }
     if (congViec === LoaiCongViec.DONG_THO || congViec === LoaiCongViec.SUA_CUNG_THAT) {
-      return danhGiaCongViecDat(dongGop, boiCanh);
+      return danhGiaCongViecDat(congViec, dongGop, boiCanh);
     }
     if (congViec === LoaiCongViec.KHAI_TRUONG) {
       return danhGiaKhaiTruong(dongGop, boiCanh);
@@ -122,7 +123,12 @@ export class DanhGiaNgayService {
       return danhGiaAnTang(dongGop, boiCanh);
     }
 
-    const q4Resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CUOI_HOI_Q4);
+    const q4Resolved = apDungResolverTheoCongViec(
+      LoaiCongViec.CUOI_HOI,
+      dongGop,
+      boiCanh,
+      QUY_TAC_Q10_CUOI_HOI_Q4,
+    );
     const daApDung: DauVetXungDot[] = [...q4Resolved.xungDotDaApDung];
     let camMoiViec = q4Resolved.camMoiViec;
     const coKyBoSungQ4 = q4Resolved.coKyBoSung;
@@ -341,7 +347,12 @@ function xacDinhCongViec(quyTacDungSu: readonly QuyTacDungSu[]): LoaiCongViec {
 }
 
 function danhGiaDiChuyen(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_DI_CHUYEN);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.DI_CHUYEN,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_DI_CHUYEN,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -357,7 +368,12 @@ function danhGiaDiChuyen(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay)
 }
 
 function danhGiaAnGiuong(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_AN_GIUONG);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.AN_GIUONG,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_AN_GIUONG,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -373,7 +389,12 @@ function danhGiaAnGiuong(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay)
 }
 
 function danhGiaQuanDai(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_QUAN_DAI);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.QUAN_DAI,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_QUAN_DAI,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -389,12 +410,17 @@ function danhGiaQuanDai(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay):
 }
 
 function danhGiaNhapHoc(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_NHAP_HOC);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.NHAP_HOC,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_NHAP_HOC,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
-    coKy: resolved.camMoiViec,
+    coKy: resolved.camMoiViec || resolved.coKyBoSung,
     camMoiViec: resolved.camMoiViec,
     dongGop,
     xungDotDaApDung: resolved.xungDotDaApDung,
@@ -402,7 +428,12 @@ function danhGiaNhapHoc(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay):
 }
 
 function danhGiaYenHoi(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_YEN_HOI);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.YEN_HOI,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_YEN_HOI,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -418,7 +449,12 @@ function danhGiaYenHoi(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): 
 }
 
 function danhGiaKhanhThuong(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_KHANH_THUONG);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.KHANH_THUONG,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_KHANH_THUONG,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -434,7 +470,12 @@ function danhGiaKhanhThuong(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNg
 }
 
 function danhGiaTeTu(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_TE_TU);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.TE_TU,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_TE_TU,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -450,7 +491,12 @@ function danhGiaTeTu(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): Ke
 }
 
 function danhGiaCauPhuc(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CAU_PHUC);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.CAU_PHUC,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_CAU_PHUC,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -466,7 +512,12 @@ function danhGiaCauPhuc(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay):
 }
 
 function danhGiaCauTu(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CAU_TU);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.CAU_TU,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_CAU_TU,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -482,7 +533,12 @@ function danhGiaCauTu(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): K
 }
 
 function danhGiaGiaiTru(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_GIAI_TRU);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.GIAI_TRU,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_GIAI_TRU,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -501,7 +557,12 @@ function danhGiaChinhDungCatToc(
   dongGop: DongGopDanhGia[],
   boiCanh: BoiCanhDanhGiaNgay,
 ): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CHINH_DUNG_CAT_TOC);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.CHINH_DUNG_CAT_TOC,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_CHINH_DUNG_CAT_TOC,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -517,7 +578,12 @@ function danhGiaChinhDungCatToc(
 }
 
 function danhGiaCauYTriBenh(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CAU_Y_TRI_BENH);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.CAU_Y_TRI_BENH,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_CAU_Y_TRI_BENH,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
@@ -535,7 +601,12 @@ function danhGiaSuaMongTayChan(
   dongGop: DongGopDanhGia[],
   boiCanh: BoiCanhDanhGiaNgay,
 ): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_SUA_MONG_TAY_CHAN);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.SUA_MONG_TAY_CHAN,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_SUA_MONG_TAY_CHAN,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
@@ -550,7 +621,12 @@ function danhGiaSuaMongTayChan(
 }
 
 function danhGiaMayDo(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_MAY_DO);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.MAY_DO,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_MAY_DO,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
@@ -568,7 +644,12 @@ function danhGiaLapKheUocGiaoDich(
   dongGop: DongGopDanhGia[],
   boiCanh: BoiCanhDanhGiaNgay,
 ): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_LAP_KHE_UOC_GIAO_DICH);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.LAP_KHE_UOC_GIAO_DICH,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_LAP_KHE_UOC_GIAO_DICH,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
   return {
     coNen: hieuLuc.some((item) => item.quyTac.tacDong === TacDongDungSu.NEN),
@@ -582,8 +663,17 @@ function danhGiaLapKheUocGiaoDich(
   };
 }
 
-function danhGiaCongViecDat(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_CONG_VIEC_DAT);
+function danhGiaCongViecDat(
+  congViec: LoaiCongViec.DONG_THO | LoaiCongViec.SUA_CUNG_THAT,
+  dongGop: DongGopDanhGia[],
+  boiCanh: BoiCanhDanhGiaNgay,
+): KetQuaDanhGia {
+  const resolved = apDungResolverTheoCongViec(
+    congViec,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_CONG_VIEC_DAT,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -599,7 +689,12 @@ function danhGiaCongViecDat(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNg
 }
 
 function danhGiaKhaiTruong(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_KHAI_TRUONG);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.KHAI_TRUONG,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_KHAI_TRUONG,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -615,7 +710,12 @@ function danhGiaKhaiTruong(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNga
 }
 
 function danhGiaXuatHanh(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_XUAT_HANH);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.XUAT_HANH,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_XUAT_HANH,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -631,7 +731,12 @@ function danhGiaXuatHanh(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay)
 }
 
 function danhGiaAnTang(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): KetQuaDanhGia {
-  const resolved = apDungResolverQ10(dongGop, boiCanh, QUY_TAC_Q10_AN_TANG);
+  const resolved = apDungResolverTheoCongViec(
+    LoaiCongViec.AN_TANG,
+    dongGop,
+    boiCanh,
+    QUY_TAC_Q10_AN_TANG,
+  );
   const hieuLuc = dongGop.filter((item) => item.trangThai === TrangThaiDongGop.HIEU_LUC);
 
   return {
@@ -644,6 +749,15 @@ function danhGiaAnTang(dongGop: DongGopDanhGia[], boiCanh: BoiCanhDanhGiaNgay): 
     dongGop,
     xungDotDaApDung: resolved.xungDotDaApDung,
   };
+}
+
+function apDungResolverTheoCongViec(
+  congViec: LoaiCongViec,
+  dongGop: DongGopDanhGia[],
+  boiCanh: BoiCanhDanhGiaNgay,
+  quyTac: readonly QuyTacXungDotDataDriven[],
+) {
+  return apDungResolverQ10(dongGop, boiCanh, [...layQuyTacPhuChuQ10(congViec), ...quyTac]);
 }
 
 function khopDieuKien(dieuKien: DieuKienDungSu, boiCanh: BoiCanhDanhGiaNgay): boolean {
