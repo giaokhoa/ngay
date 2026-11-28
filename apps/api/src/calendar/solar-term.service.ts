@@ -7,6 +7,9 @@ import { DINH_NGHIA_TIET_KHI_THEO_NAM, TietKhi } from './domain/solar-term';
 const MOT_NGAY_MILLISECOND = 86_400_000;
 const SO_NGAY_BAT_DAU_TIM_TIEP = 10;
 const SO_NGAY_CUA_SO_TIM_KIEM = 10;
+const CAC_TRUNG_KHI = DINH_NGHIA_TIET_KHI_THEO_NAM.filter((item) => !item.chiThangMoi).map(
+  (item) => item.tietKhi,
+);
 
 @Injectable()
 export class TinhTietKhiService {
@@ -56,6 +59,33 @@ export class TinhTietKhiService {
     this.boNhoTheoNam.set(nam, ketQua);
 
     return new Map(ketQua);
+  }
+
+  tinhTrungKhiHienHanh(thoiDiem: Date): TietKhi {
+    if (Number.isNaN(thoiDiem.getTime())) {
+      throw new RangeError('Thoi diem khong hop le');
+    }
+
+    const nam = thoiDiem.getUTCFullYear();
+    const ungVien: { tietKhi: TietKhi; thoiDiem: Date }[] = [];
+
+    for (const namCanXet of [nam - 1, nam]) {
+      if (namCanXet < 1) continue;
+      const tatCa = this.tinhTatCaTietKhiTrongNam(namCanXet);
+      for (const tietKhi of CAC_TRUNG_KHI) {
+        const moc = tatCa.get(tietKhi);
+        if (moc && moc.getTime() <= thoiDiem.getTime()) {
+          ungVien.push({ tietKhi, thoiDiem: moc });
+        }
+      }
+    }
+
+    ungVien.sort((a, b) => b.thoiDiem.getTime() - a.thoiDiem.getTime());
+    const hienHanh = ungVien[0];
+    if (!hienHanh) {
+      throw new Error(`Khong tim thay trung khi hien hanh tai ${thoiDiem.toISOString()}`);
+    }
+    return hienHanh.tietKhi;
   }
 
   tinhChiThangTaiThoiDiem(thoiDiem: Date): DiaChi {

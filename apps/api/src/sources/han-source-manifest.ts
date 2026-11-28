@@ -65,7 +65,7 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     sha256: '93e4a01b085403bd50da4f1efdd107bab4e39a3b1e2247acb958e87dc51eb9c4',
     trangThai: 'ORACLE_MOT_PHAN',
     phamViOracle:
-      '30/30 section đã inventory; toàn bộ 24 identity Q5 production có Hán oracle. 天道 directional, 無禄 context-dependent; các mục còn lại explicit out-of-scope/partial.',
+      '30/30 section đã inventory; toàn bộ 25 identity Q5 production có Hán oracle. 天道 directional; 無禄 context-aware theo Q10; các mục còn lại explicit out-of-scope/partial.',
   },
   {
     quyen: 6,

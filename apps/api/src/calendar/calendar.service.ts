@@ -41,6 +41,10 @@ export class TinhLichService {
     return this.tinhTietKhiService.tinhChiThangTaiThoiDiem(thoiDiem);
   }
 
+  tinhTrungKhiHienHanh(thoiDiem: Date): TietKhi {
+    return this.tinhTietKhiService.tinhTrungKhiHienHanh(thoiDiem);
+  }
+
   tinhThongTinNgayAm(ngayDanSu: NgayDanSu, muiGio: string): ThongTinNgayAm {
     return tinhThongTinNgayAm(ngayDanSu, muiGio);
   }

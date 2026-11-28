@@ -47,7 +47,7 @@ Không dùng inventory như lý do tự cộng thêm cát/hung vào product. Quy
 |  22 | Bát Phong – Xúc Thủy Long / 八風 觸水龍                            | COMPARED              | OUT_OF_SCOPE        | water/travel-specific special days; absent current exact Q11 sets                               |
 |  23 | Bảo–Nghĩa–Chế–Chuyên–Phạt Nhật / 寶義制專伐日                      | COMPARED              | OUT_OF_SCOPE        | Can-Chi ngũ hành classification; nhiều semantics quân sự, không current dependency              |
 |  24 | Bát Chuyên / 八專                                                  | ORACLE_TESTED         | IMPLEMENTED         | 5 ngày theo bản hiệu đính                                                                       |
-|  25 | Vô Lộc / 無禄                                                      | COMPARED              | BLOCKED_CONTEXT     | 10 ngày nhưng nguồn nói chỉ tránh tùy năm và bản mệnh, không phải universal day blocker         |
+|  25 | Vô Lộc / 無禄                                                      | ORACLE_TESTED         | IMPLEMENTED_CONTEXT | 10 candidate + Q10 relief theo Đức/năm/tháng/trung khí; không blanket-block                     |
 |  26 | Trọng Nhật – Ngũ Hợp – Ngũ Ly〈Trừ Thần〉 / 重日 五合 五離〈除神〉 | ORACLE_TESTED         | IMPLEMENTED         | Trọng Nhật + Ngũ Hợp + Ngũ Ly production; Trừ Thần là alias của Ngũ Ly                          |
 |  27 | Giải Thần / 解神                                                   | COMPARED              | OUT_OF_SCOPE        | monthly branch pair sequence; không current dependency                                          |
 |  28 | Phục Nhật / 復日                                                   | ORACLE_TESTED         | IMPLEMENTED         | monthly day stem                                                                                |
@@ -74,7 +74,7 @@ Product hiện chỉ có Vương Nhật + Dân Nhật vì exact Q13 current vert
 
 ### Vô Lộc
 
-Hán liệt kê mười ngày `甲辰 乙巳 庚辰 辛巳 丙申 戊戌 丁亥 己丑 壬申 癸亥`, nhưng ngay sau đó nói **chỉ tùy các năm và bản mệnh mà tránh**. Vì vậy không được model thành universal day factor. Nếu activity tương lai cần, evaluator phải nhận year/personal context ở đúng layer.
+Hán Q5 liệt kê mười candidate `甲辰 乙巳 庚辰 辛巳 丙申 戊戌 丁亥 己丑 壬申 癸亥`, nhưng ngay sau đó bác cách khái kị không xét năm-tháng: `填實則不空`. Exact Việt p.455–456 nói cùng điều. Production vì vậy dùng calculator context-aware theo Q10 `WYG_010-67a..68b`: xét Thiên/Nguyệt Đức, chi năm/tháng điền thực, trung khí Thái Dương, hai nhóm Tuế Đức/Hợp, Can năm-tháng-ngày “tam bằng”; riêng `癸亥` vẫn là Vô Lộc dù các lớp trên cùng hội. Thiếu context thì 9 candidate thường không bị suy hung.
 
 ### Trọng Nhật / Ngũ Hợp / Ngũ Ly
 
@@ -90,10 +90,10 @@ Hán cuối mục có **Lập thành hiệu đính**. Production Minh Phệ dùn
 
 ## Product policy
 
-- **24 identity Q5 production** có Hán oracle độc lập.
+- **25 identity Q5 production** có Hán oracle độc lập.
 - Section partial không được quảng bá thành full implementation chỉ vì một identity bên trong đã có code.
 - OUT_OF_SCOPE nghĩa là công thức/source đã hiểu nhưng exact Q11 của 13 vertical không cần.
-- `Vô Lộc` giữ `BLOCKED_CONTEXT`, không dùng như blanket blocker.
+- `Vô Lộc` đã production bằng context năm/tháng/trung khí; vẫn tuyệt đối không dùng như blanket blocker.
 - Khi mở activity mới, dependency Q11 sẽ quyết định mục nào được kéo vào production.
 
 ## Kết luận

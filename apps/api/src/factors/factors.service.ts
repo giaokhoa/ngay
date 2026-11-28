@@ -26,6 +26,7 @@ import { DINH_NGHIA_MAU_THUONG } from './maternal-storehouse-definition';
 import { DINH_NGHIA_NGU_HOP, DINH_NGHIA_NGU_LY } from './q5-fixed-branch-factor-definitions';
 import { DINH_NGHIA_CAC_THAN_TE_TU_QUYEN_6 } from './q6-ritual-factor-definitions';
 import { DINH_NGHIA_DU_HOA } from './q6-du-hoa-definition';
+import { DINH_NGHIA_VO_LOC, laVoLoc } from './vo-loc-definition';
 import {
   DINH_NGHIA_DAN_NHAT,
   DINH_NGHIA_QUY_KY,
@@ -214,6 +215,10 @@ export class TinhYeuToNgayService {
     if (laThuongSoc(boiCanh)) ketQua.push(DINH_NGHIA_THUONG_SOC);
     if (laPhanChi(boiCanh)) ketQua.push(DINH_NGHIA_PHAN_CHI);
     if (laNguyetKy(boiCanh)) ketQua.push(DINH_NGHIA_NGUYET_KY);
+
+    if (laVoLoc(boiCanh, new Set(ketQua.map((item) => item.ma)))) {
+      ketQua.push(DINH_NGHIA_VO_LOC);
+    }
 
     return ketQua.map(taoYeuTo);
   }

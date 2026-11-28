@@ -33,6 +33,7 @@ import {
 import { MaYeuTo } from '../factors/domain/factor-code';
 import { DINH_NGHIA_CUU_KHONG, DINH_NGHIA_TU_HAO } from '../factors/khai-truong-factor-definitions';
 import { MaQuaiThienDuc } from '../factors/domain/heavenly-virtue-position';
+import { CAC_NGAY_CANDIDATE_VO_LOC } from '../factors/vo-loc-definition';
 
 const { TY, SUU, DAN, MAO, THIN, TI, NGO, MUI, THAN, DAU, TUAT, HOI } = DiaChi;
 const { GIAP, AT, BINH, DINH, MAU, KY, CANH, TAN, NHAM, QUY } = ThienCan;
@@ -236,6 +237,21 @@ describe('independent Hán Q5 oracle — WYG / Kanripo KR3g0051', () => {
       [Mua.THU]: TY,
       [Mua.DONG]: MAO,
     });
+  });
+
+  it('無禄 locks the exact ten Q5 candidate days without turning them into unconditional blockers', () => {
+    expect(CAC_NGAY_CANDIDATE_VO_LOC.map((item) => khoaCanChi(item))).toEqual([
+      'GIAP:THIN',
+      'AT:TI',
+      'CANH:THIN',
+      'TAN:TI',
+      'BINH:THAN',
+      'MAU:TUAT',
+      'DINH:HOI',
+      'KY:SUU',
+      'NHAM:THAN',
+      'QUY:HOI',
+    ]);
   });
 
   it('五合 / 五離 match Hán Q5 + Q9 fixed branch oracle', () => {
