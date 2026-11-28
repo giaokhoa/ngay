@@ -128,6 +128,15 @@ Chi tiết: `docs/research/q8-full-inventory.md`.
 
 Q14–19 đã inventory đủ 6 block × 10 năm, xem `docs/research/q14-q19-annual-tables.md`. Đây là bảng spatial theo năm để future-oracle Q3/Q8; current date-selection không consume. Q14 giữ Wikisource fallback pin, Q15–19 Kanripo.
 
+## Appendix / refutation — Quyển 35–36
+
+| Scope         | Research status                                                        | Product                          |
+| ------------- | ---------------------------------------------------------------------- | -------------------------------- |
+| Q35 Phụ lục   | Hán 16/16 headings; secondary Việt TOC 13 items; exact T2 scan pending | CHUA_IMPLEMENT / reference       |
+| Q36 Biện ngụy | Hán 27/27 headings; secondary Việt TOC 26 items; exact T2 scan pending | ANTI_ORACLE / source-review only |
+
+Chi tiết: `docs/research/q35-full-inventory.md`, `docs/research/q36-full-inventory.md`.
+
 ## Hán double-entry coverage
 
 Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scope có expected/vector
