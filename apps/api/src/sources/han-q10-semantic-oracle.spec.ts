@@ -13,6 +13,7 @@ import { QUY_TAC_GIAI_TRU } from '../activities/giai-tru-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
+import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
@@ -37,6 +38,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.NHAP_HOC]: QUY_TAC_NHAP_HOC,
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
+  [LoaiCongViec.MAY_DO]: QUY_TAC_MAY_DO,
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
   [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
@@ -71,7 +73,8 @@ const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
     activity !== LoaiCongViec.YEN_HOI &&
     activity !== LoaiCongViec.KHANH_THUONG &&
     activity !== LoaiCongViec.CAU_PHUC &&
-    activity !== LoaiCongViec.CAU_TU,
+    activity !== LoaiCongViec.CAU_TU &&
+    activity !== LoaiCongViec.MAY_DO,
 );
 
 describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () => {
@@ -167,6 +170,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.CHINH_DUNG_CAT_TOC]: false,
       [LoaiCongViec.CAU_Y_TRI_BENH]: true,
       [LoaiCongViec.SUA_MONG_TAY_CHAN]: false,
+      [LoaiCongViec.MAY_DO]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -196,6 +200,38 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       expect(result.coKy).toBe(true);
     },
   );
+
+  it('裁製: 長星 / 短星 add Q10 Kị without polluting Q11 baseline', () => {
+    const longStar = danhGia(LoaiCongViec.MAY_DO, {
+      yeuTo: [MaYeuTo.TRUONG_TINH, MaYeuTo.THIEN_DUC],
+    });
+    const shortStar = danhGia(LoaiCongViec.MAY_DO, {
+      yeuTo: [MaYeuTo.DOAN_TINH, MaYeuTo.THIEN_DUC],
+    });
+    expect(longStar.coKy).toBe(true);
+    expect(shortStar.coKy).toBe(true);
+    expect(longStar.xungDotDaApDung.some((x) => x.ma === 'MAY_DO_Q10_TRUONG_TINH_KY')).toBe(true);
+    expect(shortStar.xungDotDaApDung.some((x) => x.ma === 'MAY_DO_Q10_DOAN_TINH_KY')).toBe(true);
+  });
+
+  it('裁製: Q10 target branches release/cancel exactly like source, without Khai-trương boNen leakage', () => {
+    const kiepRelieved = danhGia(LoaiCongViec.MAY_DO, {
+      chiThang: DiaChi.DAN,
+      yeuTo: [MaYeuTo.KIEP_SAT, MaYeuTo.THIEN_DUC],
+    });
+    const binhBalanced = danhGia(LoaiCongViec.MAY_DO, {
+      chiThang: DiaChi.MAO,
+      truc: ThapNhiTruc.BINH,
+      yeuTo: [MaYeuTo.NGUYET_DUC, MaYeuTo.VUONG_NHAT],
+    });
+    const tuPhe = danhGia(LoaiCongViec.MAY_DO, {
+      yeuTo: [MaYeuTo.TU_PHE, MaYeuTo.NGUYET_DUC],
+    });
+    expect(kiepRelieved.coKy).toBe(false);
+    expect(binhBalanced.coKy).toBe(false);
+    expect(binhBalanced.coNen).toBe(true);
+    expect(tuPhe.coKy).toBe(true);
+  });
 
   it('整手足甲: shares grooming Q10 targets but not the 丁日 suppression', () => {
     const pha = danhGia(LoaiCongViec.SUA_MONG_TAY_CHAN, {

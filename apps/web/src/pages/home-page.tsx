@@ -116,6 +116,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.SUA_MONG_TAY_CHAN,
   },
   {
+    ma: 'MAY_DO',
+    ten: 'May đo, cắt may quần áo',
+    moTa: 'Chọn ngày may đo hoặc cắt may quần áo theo Vương Nhật, Tam Hợp, Mãn/Khai và Phục Nhật; xét thêm Trường Tinh, Đoản Tinh.',
+    to: DUONG_DAN.MAY_DO,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

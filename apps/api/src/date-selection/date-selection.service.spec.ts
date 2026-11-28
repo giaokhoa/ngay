@@ -444,6 +444,39 @@ describe('XemNgayService SUA_MONG_TAY_CHAN end-to-end', () => {
   });
 });
 
+describe('XemNgayService MAY_DO end-to-end', () => {
+  it('orchestrates calendar/factors -> exact Q11 -> supplemental Q10 star Kị', () => {
+    const result = taoService().xemMayDo(new Date('2026-11-27T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'MAY_DO')).toBe(true);
+  });
+
+  it('is deterministic for MAY_DO', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemMayDo(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemMayDo(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real Q9 Trường Tinh produces named supplemental Q10 Kị', () => {
+    const result = taoService().xemMayDo(new Date('2026-09-12T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    expect(result.yeuTo.some((item) => item.ma === MaYeuTo.TRUONG_TINH)).toBe(true);
+    expect(result.danhGia.coKy).toBe(true);
+    expect(
+      result.danhGia.xungDotDaApDung.some((item) => item.ma === 'MAY_DO_Q10_TRUONG_TINH_KY'),
+    ).toBe(true);
+    expect(result.giaiThich.xungDot.some((text) => text.includes('Trường Tinh'))).toBe(true);
+  });
+
+  it('real Q9 Đoản Tinh produces named supplemental Q10 Kị', () => {
+    const result = taoService().xemMayDo(new Date('2026-09-28T05:00:00.000Z'), 'Asia/Ho_Chi_Minh');
+    expect(result.yeuTo.some((item) => item.ma === MaYeuTo.DOAN_TINH)).toBe(true);
+    expect(result.danhGia.coKy).toBe(true);
+    expect(result.giaiThich.xungDot.some((text) => text.includes('Đoản Tinh'))).toBe(true);
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -589,7 +622,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 19)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 20)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -656,6 +689,7 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       LoaiCongViec.CHINH_DUNG_CAT_TOC,
       LoaiCongViec.CAU_Y_TRI_BENH,
       LoaiCongViec.SUA_MONG_TAY_CHAN,
+      LoaiCongViec.MAY_DO,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);

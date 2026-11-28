@@ -13,6 +13,7 @@ import { QUY_TAC_GIAI_TRU } from '../activities/giai-tru-rules';
 import { QUY_TAC_DONG_THO, QUY_TAC_SUA_CUNG_THAT } from '../activities/earthwork-rules';
 import { QUY_TAC_KHAI_TRUONG } from '../activities/khai-truong-rules';
 import { QUY_TAC_KHANH_THUONG } from '../activities/khanh-thuong-rules';
+import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
@@ -86,6 +87,37 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'NGAY_AM:19',
       'NGAY_AM:21',
       'NGAY_AM:23',
+    ],
+  },
+  [LoaiCongViec.MAY_DO]: {
+    tieuDeHan: '裁製〈裁衣同〉',
+    anchor: 'KR3g0051_WYG_011-17a',
+    nen: [
+      'YEU_TO:THIEN_DUC',
+      'YEU_TO:NGUYET_DUC',
+      'YEU_TO:THIEN_DUC_HOP',
+      'YEU_TO:NGUYET_DUC_HOP',
+      'YEU_TO:THIEN_XA',
+      'YEU_TO:THIEN_NGUYEN',
+      'YEU_TO:NGUYET_AN',
+      'YEU_TO:TU_TUONG',
+      'YEU_TO:THOI_DUC',
+      'YEU_TO:VUONG_NHAT',
+      'YEU_TO:TAM_HOP',
+      'TRUC:MAN',
+      'TRUC:KHAI',
+      'YEU_TO:PHUC_NHAT',
+    ],
+    ky: [
+      'YEU_TO:NGUYET_PHA',
+      'TRUC:BINH',
+      'TRUC:THU',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:TU_PHE',
     ],
   },
   [LoaiCongViec.CAU_Y_TRI_BENH]: {
@@ -633,6 +665,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.NHAP_HOC]: QUY_TAC_NHAP_HOC,
   [LoaiCongViec.YEN_HOI]: QUY_TAC_YEN_HOI,
   [LoaiCongViec.KHANH_THUONG]: QUY_TAC_KHANH_THUONG,
+  [LoaiCongViec.MAY_DO]: QUY_TAC_MAY_DO,
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
   [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
