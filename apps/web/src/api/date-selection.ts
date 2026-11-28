@@ -106,6 +106,7 @@ export interface GioThucHienApi {
   chiGio: string;
   thanHoangHac: ThanHoangHacApi;
   dauThanGio: readonly string[];
+  dauGioThamKhao: readonly ('TUAN_KHONG' | 'TRIET_LO_KHONG')[];
   canChiGio: { can: string; chi: string };
   khoangGio: string;
   xepLoai: 'NEN_DUNG' | 'TRUNG_BINH' | 'NEN_TRANH' | 'XUNG_TUOI';

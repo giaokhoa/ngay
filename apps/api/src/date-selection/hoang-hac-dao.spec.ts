@@ -3,7 +3,13 @@ import { describe, expect, it } from 'vitest';
 import { LoaiCongViec } from '../activities/activity-rule';
 import { DIA_CHI_THEO_THU_TU, DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
-import { hacDaoKyViec, tinhDauThanGio, tinhThanGio, tinhThanNgay } from './hoang-hac-dao';
+import {
+  hacDaoKyViec,
+  tinhDauGioThamKhao,
+  tinhDauThanGio,
+  tinhThanGio,
+  tinhThanNgay,
+} from './hoang-hac-dao';
 
 describe('Hán oracle — 黃道黑道, WYG 007-7b..12a', () => {
   it.each([
@@ -109,5 +115,34 @@ describe('Hán oracle — Q7 Thiên Quan/Phúc Tinh/Hỷ Thần/Bát Lộc', () 
     expect(tinhDauThanGio(ThienCan.NHAM, DiaChi.THIN)).toContain('PHUC_TINH');
     expect(tinhDauThanGio(ThienCan.NHAM, DiaChi.NGO)).toContain('HY_THAN');
     expect(tinhDauThanGio(ThienCan.NHAM, DiaChi.HOI)).toContain('BAT_LOC');
+  });
+});
+
+describe('Hán oracle — Q7 Tuần Không / Triệt Lộ Không', () => {
+  it('甲子: 戌亥旬空, 申酉截路空', () => {
+    const canChiNgay = { can: ThienCan.GIAP, chi: DiaChi.TY };
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.THAN)).toEqual(['TRIET_LO_KHONG']);
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.DAU)).toEqual(['TRIET_LO_KHONG']);
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.TUAT)).toEqual(['TUAN_KHONG']);
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.HOI)).toEqual(['TUAN_KHONG']);
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.NGO)).toEqual([]);
+  });
+
+  it('甲辰: 寅卯旬空, 申酉截路空 theo bảng 60 ngày', () => {
+    const canChiNgay = { can: ThienCan.GIAP, chi: DiaChi.THIN };
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.DAN)).toEqual(['TUAN_KHONG']);
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.MAO)).toEqual(['TUAN_KHONG']);
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.THAN)).toEqual(['TRIET_LO_KHONG']);
+    expect(tinhDauGioThamKhao(canChiNgay, DiaChi.DAU)).toEqual(['TRIET_LO_KHONG']);
+  });
+
+  it('戊子: 午未旬空; 子丑戌亥截路空', () => {
+    const canChiNgay = { can: ThienCan.MAU, chi: DiaChi.TY };
+    for (const chi of [DiaChi.NGO, DiaChi.MUI]) {
+      expect(tinhDauGioThamKhao(canChiNgay, chi)).toContain('TUAN_KHONG');
+    }
+    for (const chi of [DiaChi.TY, DiaChi.SUU, DiaChi.TUAT, DiaChi.HOI]) {
+      expect(tinhDauGioThamKhao(canChiNgay, chi)).toContain('TRIET_LO_KHONG');
+    }
   });
 });

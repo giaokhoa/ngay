@@ -1,6 +1,7 @@
-import { DIA_CHI_THEO_THU_TU, DiaChi } from '../calendar/domain/earthly-branch';
-import { ThienCan } from '../calendar/domain/heavenly-stem';
 import { LoaiCongViec } from '../activities/activity-rule';
+import { DIA_CHI_THEO_THU_TU, DiaChi } from '../calendar/domain/earthly-branch';
+import { THIEN_CAN_THEO_THU_TU, ThienCan } from '../calendar/domain/heavenly-stem';
+import { CanChi } from '../calendar/domain/sexagenary-cycle';
 
 /**
  * Hán oracle: 欽定協紀辨方書 卷七 義例五 "黄道黒道",
@@ -154,4 +155,48 @@ export const NHAN_DAU_THAN_GIO: Readonly<Record<MaDauThanGio, string>> = {
   PHUC_TINH: 'Phúc Tinh Quý Nhân',
   HY_THAN: 'Hỷ Thần',
   BAT_LOC: 'Bát Lộc',
+};
+
+export type MaDauGioThamKhao = 'TUAN_KHONG' | 'TRIET_LO_KHONG';
+
+const CHI_TRIET_LO_THEO_CAN_NGAY: Readonly<Record<ThienCan, readonly DiaChi[]>> = {
+  [ThienCan.GIAP]: [DiaChi.THAN, DiaChi.DAU],
+  [ThienCan.KY]: [DiaChi.THAN, DiaChi.DAU],
+  [ThienCan.AT]: [DiaChi.NGO, DiaChi.MUI],
+  [ThienCan.CANH]: [DiaChi.NGO, DiaChi.MUI],
+  [ThienCan.BINH]: [DiaChi.THIN, DiaChi.TI],
+  [ThienCan.TAN]: [DiaChi.THIN, DiaChi.TI],
+  [ThienCan.DINH]: [DiaChi.DAN, DiaChi.MAO],
+  [ThienCan.NHAM]: [DiaChi.DAN, DiaChi.MAO],
+  [ThienCan.MAU]: [DiaChi.TY, DiaChi.SUU, DiaChi.TUAT, DiaChi.HOI],
+  [ThienCan.QUY]: [DiaChi.TY, DiaChi.SUU, DiaChi.TUAT, DiaChi.HOI],
+};
+
+export function tinhDauGioThamKhao(
+  canChiNgay: CanChi,
+  chiGio: DiaChi,
+): readonly MaDauGioThamKhao[] {
+  const ketQua: MaDauGioThamKhao[] = [];
+  if (chiTuanKhong(canChiNgay).includes(chiGio)) {
+    ketQua.push('TUAN_KHONG');
+  }
+  if (CHI_TRIET_LO_THEO_CAN_NGAY[canChiNgay.can].includes(chiGio)) {
+    ketQua.push('TRIET_LO_KHONG');
+  }
+  return ketQua;
+}
+
+function chiTuanKhong(canChiNgay: CanChi): readonly DiaChi[] {
+  const canIndex = THIEN_CAN_THEO_THU_TU.indexOf(canChiNgay.can);
+  const chiIndex = DIA_CHI_THEO_THU_TU.indexOf(canChiNgay.chi);
+  const chiKhoiTuan = (chiIndex - canIndex + 12) % 12;
+  return [
+    DIA_CHI_THEO_THU_TU[(chiKhoiTuan + 10) % 12]!,
+    DIA_CHI_THEO_THU_TU[(chiKhoiTuan + 11) % 12]!,
+  ];
+}
+
+export const NHAN_DAU_GIO_THAM_KHAO: Readonly<Record<MaDauGioThamKhao, string>> = {
+  TUAN_KHONG: 'Tuần trung Không vong',
+  TRIET_LO_KHONG: 'Triệt lộ Không vong',
 };

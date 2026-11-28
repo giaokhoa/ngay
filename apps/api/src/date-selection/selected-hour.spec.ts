@@ -42,6 +42,10 @@ describe('giờ thực hiện theo bảng giờ Hán', () => {
       xepLoai: 'NEN_TRANH',
       lyDoTranh: expect.arrayContaining(['Giờ hình ngày']),
     });
+    expect(lay(gio, DiaChi.THAN)).toMatchObject({
+      xepLoai: 'NEN_DUNG',
+      dauGioThamKhao: ['TRIET_LO_KHONG'],
+    });
     expect(lay(gio, DiaChi.NGO)).toMatchObject({
       xepLoai: 'NEN_TRANH',
       lyDoTranh: expect.arrayContaining(['Giờ phá ngày', 'Ngũ Bất Ngộ']),

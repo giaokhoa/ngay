@@ -404,6 +404,11 @@ function BangGio({
               {item.thanHoangHac.loai === 'HOANG_DAO' ? 'Hoàng đạo' : 'Hắc đạo'} ·{' '}
               {item.thanHoangHac.ten}
             </small>
+            {item.dauGioThamKhao.length > 0 ? (
+              <small className="dau-gio-tham-khao">
+                Tham khảo · {item.dauGioThamKhao.map(nhanDauGioThamKhao).join(' · ')}
+              </small>
+            ) : null}
             <span className="nhan-gio">{nhanXepLoaiGio(item.xepLoai)}</span>
             {item.lyDoTot.length > 0 ? (
               <ul className="ly-do-gio ly-do-tot">
@@ -594,6 +599,14 @@ function nhanXepLoai(value: NgayTrongThangApi['xepLoai']): string {
     NEN_TRANH: 'Nên tránh',
     DAI_KY: 'Đại kỵ',
     XUNG_TUOI: 'Xung tuổi',
+  };
+  return map[value];
+}
+
+function nhanDauGioThamKhao(value: GioThucHienApi['dauGioThamKhao'][number]): string {
+  const map: Readonly<Record<GioThucHienApi['dauGioThamKhao'][number], string>> = {
+    TUAN_KHONG: 'Tuần trung Không vong',
+    TRIET_LO_KHONG: 'Triệt lộ Không vong',
   };
   return map[value];
 }
