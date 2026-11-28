@@ -38,6 +38,12 @@ import {
 } from './special-calendar-day-definitions';
 import { DINH_NGHIA_SOC_HUYEN_VONG, laSocHuyenVong } from './soc-huyen-vong-definition';
 import {
+  DINH_NGHIA_DOAN_TINH,
+  DINH_NGHIA_TRUONG_TINH,
+  laDoanTinh,
+  laTruongTinh,
+} from './q9-long-short-star-definitions';
+import {
   DINH_NGHIA_DAN_NHAT,
   DINH_NGHIA_QUY_KY,
   DINH_NGHIA_THIEN_MA,
@@ -235,6 +241,8 @@ export class TinhYeuToNgayService {
     if (laTuTuyet(boiCanh)) ketQua.push(DINH_NGHIA_TU_TUYET);
     if (laHoiNhat(boiCanh)) ketQua.push(DINH_NGHIA_HOI_NHAT);
     if (laSocHuyenVong(boiCanh)) ketQua.push(DINH_NGHIA_SOC_HUYEN_VONG);
+    if (laTruongTinh(boiCanh)) ketQua.push(DINH_NGHIA_TRUONG_TINH);
+    if (laDoanTinh(boiCanh)) ketQua.push(DINH_NGHIA_DOAN_TINH);
 
     if (laVoLoc(boiCanh, new Set(ketQua.map((item) => item.ma)))) {
       ketQua.push(DINH_NGHIA_VO_LOC);

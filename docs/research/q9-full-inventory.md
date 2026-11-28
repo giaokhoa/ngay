@@ -43,6 +43,7 @@ Ví dụ đã source-lock trong repo:
 - Thiên Ân và một số special-day cross-check;
 - Phản Chi, Thượng Sóc, Tứ Ly/Tứ Tuyệt và Khí Vãng Vong ở research Q6;
 - final `鳴吠` 13-day correction được Nghĩa lệ + Lập thành cùng xác nhận.
+- `長星 / 短星`: production theo exact nhật-thần table `WYG_009-33b`, cross-check độc lập bằng 12 Nguyệt biểu Q19–30; dùng `chiThang` tiết khí + ngày âm từ Sóc.
 
 Danh sách này **không** có nghĩa 48 bảng/trang đã được machine-oracle toàn bộ.
 

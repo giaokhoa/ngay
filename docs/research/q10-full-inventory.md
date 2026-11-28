@@ -70,7 +70,7 @@ Q10 cung cấp **semantic conflict/exception layer**: một thần cát/hung có
 |  46 | 土王用事・伏社・朔弦望                 | PARTIAL_IMPLEMENTED            | Thổ Vượng + Sóc-Huyền-Vọng production; Phục Xã remains source-only                                |
 |  47 | 月忌日・十五日                         | PARTIAL_IMPLEMENTED            | 月忌日 5/14/23 production; 十五日 remains source-only                                             |
 |  48 | 人神所在日                             | OUT_OF_SCOPE_CURRENT_VERTICALS | located; body-location tradition not current product                                              |
-|  49 | 長星・短星                             | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current dependency                                                                    |
+|  49 | 長星・短星                             | IMPLEMENTED_FACTOR_SET         | production theo Q9 `WYG_009-33b` + Q19–30; Q10 dùng làm Kị 裁製等                                 |
 |  50 | 表例附                                 | META                           | appendix/table examples, not factor identity                                                      |
 |  51 | 百忌日                                 | REFERENCE_APPENDIX             | located; not current production rule                                                              |
 

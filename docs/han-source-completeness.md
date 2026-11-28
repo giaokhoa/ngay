@@ -75,7 +75,7 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 |     6 | 義例四      | ORACLE_MOT_PHAN | 40/40 mục inventory; 29 factor production-computable/Hán-oracle, gồm 普護/福生/聖心/益後/續世 và 上朔/反支/月忌 |
 |     7 | 義例五      | ORACLE_MOT_PHAN | 13/13 mục đã inventory; safe subset đã oracle, 4 mục advanced bị block theo input/time model                    |
 |     8 | 義例六      | CHUA_IMPLEMENT  | 22/22 mục Việt inventory (24 heading Hán); phi cung/24 sơn/Cửu cung, thiếu spatial domain                       |
-|     9 | 立成        | ORACLE_MOT_PHAN | full structure: 10 niên + 30 nguyệt + 2 trang nhật + 6 biểu thời; oracle subset                                 |
+|     9 | 立成        | ORACLE_MOT_PHAN | full structure; oracle subset gồm 長星/短星 exact table cross-check Q19–30, cùng các identity production khác   |
 |    10 | 宜忌        | ORACLE_MOT_PHAN | 51/51 mục Việt = 99/99 heading Hán inventoried; semantic oracle exact cho 19 current vertical                   |
 |    11 | 用事        | ORACLE_MOT_PHAN | 73/73 canonical activity sections inventoried; 19 oracle-tested, 54 out-of-scope current product                |
 |    12 | 公規一      | CHUA_IMPLEMENT  | 8/8 top-level inventory; lịch quan/thiên văn, sunrise tables latitude-specific                                  |
