@@ -27,10 +27,12 @@ import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules
 import { QUY_TAC_SUA_SANG_DUONG_SA } from '../activities/sua-sang-duong-sa-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_TRANG_TRI_TUONG } from '../activities/trang-tri-tuong-rules';
+import { QUY_TAC_TROC_NA_BAT_BO } from '../activities/troc-na-bat-bo-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
 import { DiaChi } from '../calendar/domain/earthly-branch';
 import { ThienCan } from '../calendar/domain/heavenly-stem';
+import { TietKhi } from '../calendar/domain/solar-term';
 import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { LoaiYeuTo, YeuToNgay } from '../factors/domain/day-factor';
 import { MaYeuTo } from '../factors/domain/factor-code';
@@ -62,6 +64,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.TRANG_TRI_TUONG]: QUY_TAC_TRANG_TRI_TUONG,
   [LoaiCongViec.SUA_SANG_DUONG_SA]: QUY_TAC_SUA_SANG_DUONG_SA,
   [LoaiCongViec.PHA_NHA_HUY_TUONG]: QUY_TAC_PHA_NHA_HUY_TUONG,
+  [LoaiCongViec.TROC_NA_BAT_BO]: QUY_TAC_TROC_NA_BAT_BO,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -80,7 +83,8 @@ const ACTIVITIES_WITH_TU_PHE_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.SUA_MONG_TAY_CHAN &&
     activity !== LoaiCongViec.QUET_DON_NHA_CUA &&
     activity !== LoaiCongViec.SUA_SANG_DUONG_SA &&
-    activity !== LoaiCongViec.PHA_NHA_HUY_TUONG,
+    activity !== LoaiCongViec.PHA_NHA_HUY_TUONG &&
+    activity !== LoaiCongViec.TROC_NA_BAT_BO,
 );
 const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
   (activity) =>
@@ -90,7 +94,8 @@ const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.CAU_Y_TRI_BENH &&
     activity !== LoaiCongViec.QUET_DON_NHA_CUA &&
     activity !== LoaiCongViec.SUA_SANG_DUONG_SA &&
-    activity !== LoaiCongViec.PHA_NHA_HUY_TUONG,
+    activity !== LoaiCongViec.PHA_NHA_HUY_TUONG &&
+    activity !== LoaiCongViec.TROC_NA_BAT_BO,
 );
 const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
   (activity) =>
@@ -207,6 +212,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.TRANG_TRI_TUONG]: false,
       [LoaiCongViec.SUA_SANG_DUONG_SA]: false,
       [LoaiCongViec.PHA_NHA_HUY_TUONG]: false,
+      [LoaiCongViec.TROC_NA_BAT_BO]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -259,6 +265,44 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
     expect(result.coKy).toBe(true);
+  });
+
+  it('捕捉: 執日/收日 are Nên and 往亡 remains Kị with cát', () => {
+    const chap = danhGia(LoaiCongViec.TROC_NA_BAT_BO, { truc: ThapNhiTruc.CHAP });
+    const thu = danhGia(LoaiCongViec.TROC_NA_BAT_BO, { truc: ThapNhiTruc.THU });
+    const vangVong = danhGia(LoaiCongViec.TROC_NA_BAT_BO, {
+      truc: ThapNhiTruc.CHAP,
+      yeuTo: [MaYeuTo.VANG_VONG, MaYeuTo.THIEN_XA],
+    });
+    expect(chap.coNen).toBe(true);
+    expect(thu.coNen).toBe(true);
+    expect(vangVong.coKy).toBe(true);
+  });
+
+  it('捕捉: 分至 and 月忌 suppress Nên without inventing Kị', () => {
+    const equinox = danhGia(LoaiCongViec.TROC_NA_BAT_BO, {
+      truc: ThapNhiTruc.CHAP,
+      tietKhiTrongNgay: [TietKhi.XUAN_PHAN],
+    });
+    const monthTaboo = danhGia(LoaiCongViec.TROC_NA_BAT_BO, {
+      truc: ThapNhiTruc.THU,
+      yeuTo: [MaYeuTo.NGUYET_KY],
+    });
+    expect(equinox.coNen).toBe(false);
+    expect(equinox.coKy).toBe(false);
+    expect(monthTaboo.coNen).toBe(false);
+    expect(monthTaboo.coKy).toBe(false);
+  });
+
+  it('捕捉: ordinary 月破/四廢/五墓 do not invent Kị', () => {
+    for (const factor of [MaYeuTo.NGUYET_PHA, MaYeuTo.TU_PHE, MaYeuTo.NGU_MO]) {
+      const result = danhGia(LoaiCongViec.TROC_NA_BAT_BO, {
+        truc: ThapNhiTruc.CHAP,
+        yeuTo: [factor],
+      });
+      expect(result.coNen).toBe(true);
+      expect(result.coKy).toBe(false);
+    }
   });
 
   it('破屋壞垣: 月破 is Nên and 災煞 in 四仲 follows 月破', () => {
@@ -912,7 +956,8 @@ interface Input {
   truc?: ThapNhiTruc;
   ngayAmTrongThang?: number;
   dangThoVuong?: boolean;
-  yeuTo: readonly MaYeuTo[];
+  tietKhiTrongNgay?: readonly TietKhi[];
+  yeuTo?: readonly MaYeuTo[];
 }
 
 function danhGia(activity: LoaiCongViec, input: Input) {
@@ -927,7 +972,8 @@ function taoBoiCanh(input: Input): BoiCanhDanhGiaNgay {
     truc: input.truc ?? ThapNhiTruc.THANH,
     ngayAmTrongThang: input.ngayAmTrongThang,
     dangThoVuong: input.dangThoVuong ?? false,
-    yeuTo: input.yeuTo.map(taoYeuTo),
+    tietKhiTrongNgay: input.tietKhiTrongNgay,
+    yeuTo: (input.yeuTo ?? []).map(taoYeuTo),
   };
 }
 

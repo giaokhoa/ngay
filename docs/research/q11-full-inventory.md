@@ -16,8 +16,8 @@ Ba số này là catalog nguồn **có overlap**, không được cộng thành 
 
 ## Product policy
 
-- 29 section hiện có vertical production được exact Hán oracle.
-- 44 section còn lại là `OUT_OF_SCOPE_CURRENT_VERTICALS`, **không phải chưa locate**.
+- 30 section hiện có vertical production được exact Hán oracle.
+- 43 section còn lại là `OUT_OF_SCOPE_CURRENT_VERTICALS`, **không phải chưa locate**.
 - Không tự map một việc ngoài scope vào vertical gần tên chỉ để tăng coverage.
 - Nếu mở vertical mới, phải research exact Q11 section + Q10 conflict semantics tương ứng trước.
 
@@ -87,8 +87,8 @@ Ba số này là catalog nguồn **có overlap**, không được cộng thành 
 |  60 | 修飾垣墻                 | ORACLE_TESTED                  | `TRANG_TRI_TUONG`; Hán `WYG_011-22b..23a`; Việt p859 thiếu 宜平日 discrepancy      |
 |  61 | 平治道塗                 | ORACLE_TESTED                  | `SUA_SANG_DUONG_SA`; Hán `WYG_011-23a`; Việt p859                                  |
 |  62 | 破屋壊垣                 | ORACLE_TESTED                  | `PHA_NHA_HUY_TUONG`; Hán `WYG_011-23a..23b`; Việt p860                             |
-|  63 | 伐木                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                                               |
-|  64 | 捕捉                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                                               |
+|  63 | 伐木                     | OUT_OF_SCOPE_CURRENT_VERTICALS | blocked model: cần seasonal AND condition 立冬後立春前 ∧ (危日/午日/申日)          |
+|  64 | 捕捉                     | ORACLE_TESTED                  | `TROC_NA_BAT_BO`; Hán `WYG_011-23b`; Việt p860                                     |
 |  65 | 畋獵                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                                               |
 |  66 | 取魚                     | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                                               |
 |  67 | 乘船渡水                 | OUT_OF_SCOPE_CURRENT_VERTICALS | located; no current product vertical                                               |
@@ -101,15 +101,15 @@ Ba số này là catalog nguồn **có overlap**, không được cộng thành 
 
 ## Cross-catalog nuance
 
-Current 29 vertical không phải đều đến từ list 60 Thông thư:
+Current 30 vertical không phải đều đến từ list 60 Thông thư:
 
 - `行幸遣使〈出行同〉`, `嫁娶`, `般移〈移徙同〉`, `興造動土〈修造同〉`, `開市`, `安葬` đều có canonical detailed section;
 - `修宮室` là section riêng trong union 73 dù không xuất hiện như một item độc lập trong list 60 Thông thư; vì thế denominator 60 sẽ làm mất một vertical production thật.
 
 ## Oracle hiện có
 
-`han-q11-oracle.spec.ts` chép expected `宜/忌` độc lập cho đủ 29 vertical. Kết quả source comparison hiện có năm discrepancy production đã registry: Xuất hành — Hán Q11 có `月厭` nhưng Việt p849 không in; Quan đới — Việt p848 in thêm Bế nhưng Hán Q11 và Việt/Hán Q10 không Kị `冠帶` ở Bế nhật; Tế tự — Hán Q11 có `福生` nhưng Việt p844 lược mục này; Giải trừ — Việt p852 in thêm `Thiên Nguyện` nhưng Hán Q11 không có và Q10 còn bác `天願` cho `解除`; Trang trí tường — Hán Q11 + Q10 đều Nên `平日` nhưng Việt p859 lược toàn bộ dòng Nên. Production policy của từng mục nằm trong registry.
+`han-q11-oracle.spec.ts` chép expected `宜/忌` độc lập cho đủ 30 vertical. Kết quả source comparison hiện có năm discrepancy production đã registry: Xuất hành — Hán Q11 có `月厭` nhưng Việt p849 không in; Quan đới — Việt p848 in thêm Bế nhưng Hán Q11 và Việt/Hán Q10 không Kị `冠帶` ở Bế nhật; Tế tự — Hán Q11 có `福生` nhưng Việt p844 lược mục này; Giải trừ — Việt p852 in thêm `Thiên Nguyện` nhưng Hán Q11 không có và Q10 còn bác `天願` cho `解除`; Trang trí tường — Hán Q11 + Q10 đều Nên `平日` nhưng Việt p859 lược toàn bộ dòng Nên. Production policy của từng mục nằm trong registry.
 
 ## Kết luận
 
-**Q11 đã inventory đủ 73/73 section Dụng sự canonical.** 29 section là `ORACLE_TESTED`; 44 section còn lại explicit out-of-scope current product. `ORACLE_MOT_PHAN` vẫn là trạng thái book-level đúng.
+**Q11 đã inventory đủ 73/73 section Dụng sự canonical.** 30 section là `ORACLE_TESTED`; 43 section còn lại explicit out-of-scope current product. `ORACLE_MOT_PHAN` vẫn là trạng thái book-level đúng.

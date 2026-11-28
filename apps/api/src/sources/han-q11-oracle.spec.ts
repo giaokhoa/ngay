@@ -26,6 +26,7 @@ import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
 import { QUY_TAC_SUA_SANG_DUONG_SA } from '../activities/sua-sang-duong-sa-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
+import { QUY_TAC_TROC_NA_BAT_BO } from '../activities/troc-na-bat-bo-rules';
 import { QUY_TAC_TRANG_TRI_TUONG } from '../activities/trang-tri-tuong-rules';
 import { QUY_TAC_XUAT_HANH_Q11 } from '../activities/xuat-hanh-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
@@ -77,6 +78,12 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
     ],
+  },
+  [LoaiCongViec.TROC_NA_BAT_BO]: {
+    tieuDeHan: '捕捉',
+    anchor: 'KR3g0051_WYG_011-23b',
+    nen: ['TRUC:CHAP', 'TRUC:THU'],
+    ky: ['YEU_TO:VANG_VONG'],
   },
   [LoaiCongViec.PHA_NHA_HUY_TUONG]: {
     tieuDeHan: '破屋壞垣',
@@ -887,6 +894,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.TRANG_TRI_TUONG]: QUY_TAC_TRANG_TRI_TUONG,
   [LoaiCongViec.SUA_SANG_DUONG_SA]: QUY_TAC_SUA_SANG_DUONG_SA,
   [LoaiCongViec.PHA_NHA_HUY_TUONG]: QUY_TAC_PHA_NHA_HUY_TUONG,
+  [LoaiCongViec.TROC_NA_BAT_BO]: QUY_TAC_TROC_NA_BAT_BO,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
