@@ -2,7 +2,6 @@ import { DIA_CHI_THEO_THU_TU, DiaChi } from '../calendar/domain/earthly-branch';
 import { THIEN_CAN_THEO_THU_TU, ThienCan } from '../calendar/domain/heavenly-stem';
 import { CanChi } from '../calendar/domain/sexagenary-cycle';
 import type { NguoiLienQuanXemNgay } from './date-selection.service';
-import { KetQuaXetNamSinh, TruThoiDiem, xetNamSinhVoiTru } from './personal-year';
 import {
   NHAN_DAU_THAN_GIO,
   MaDauThanGio,
@@ -10,6 +9,12 @@ import {
   tinhDauThanGio,
   tinhThanGio,
 } from './hoang-hac-dao';
+import {
+  KetQuaXetNamSinh,
+  TruThoiDiem,
+  xetCanChiNamSinhVoiTru,
+  xetNamSinhVoiTru,
+} from './personal-year';
 
 export type XepLoaiGio = 'NEN_DUNG' | 'TRUNG_BINH' | 'NEN_TRANH' | 'XUNG_TUOI';
 
@@ -250,12 +255,19 @@ export function xetCacGioTrongNgay(input: {
 
     const xungTuoi = input.nguoiLienQuan
       .map((nguoi, nguoiIndex) => {
-        const xung = xetNamSinhVoiTru(
-          nguoi.namSinh,
-          canChiGio,
-          'GIO' satisfies TruThoiDiem,
-          nguoi.truocLapXuan ?? false,
-        );
+        const xung = nguoi.canChiNamSinh
+          ? xetCanChiNamSinhVoiTru(
+              nguoi.namSinh,
+              nguoi.canChiNamSinh,
+              canChiGio,
+              'GIO' satisfies TruThoiDiem,
+            )
+          : xetNamSinhVoiTru(
+              nguoi.namSinh,
+              canChiGio,
+              'GIO' satisfies TruThoiDiem,
+              nguoi.truocLapXuan ?? false,
+            );
 
         return {
           nguoiIndex,

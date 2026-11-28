@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
 import {
   DongGopDanhGiaApi,
@@ -8,10 +8,9 @@ import {
   KetQuaXemNgayApi,
   KetQuaXemThangApi,
   NgayTrongThangApi,
-  NguoiLienQuanXemNgayApi,
   ThamChieuNguonApi,
-  xemChiTietNgay,
-  xemThang,
+  xemChiTietNgayTheoNgaySinh,
+  xemThangTheoNgaySinh,
 } from '../api/date-selection';
 import { DUONG_DAN } from '../routes';
 
@@ -78,8 +77,7 @@ export interface CauHinhTrangXemNgay {
 }
 
 interface FormNguoi {
-  namSinh: string;
-  truocLapXuan: boolean;
+  ngaySinh: string;
 }
 
 export function TrangXemNgay({
@@ -89,17 +87,22 @@ export function TrangXemNgay({
   congViec,
   nhanNguoi,
 }: CauHinhTrangXemNgay) {
-  const [thang, setThang] = useState(() => dinhDangThangInput(new Date()));
-  const [nguoi, setNguoi] = useState<readonly FormNguoi[]>(() =>
-    nhanNguoi.map(() => ({ namSinh: '', truocLapXuan: false })),
-  );
+  const [searchParams] = useSearchParams();
+  const [thang, setThang] = useState(() => {
+    const value = searchParams.get('thang');
+    return value && /^\d{4}-\d{2}$/.test(value) ? value : dinhDangThangInput(new Date());
+  });
+  const [nguoi, setNguoi] = useState<readonly FormNguoi[]>(() => {
+    const ngaySinh = searchParams.getAll('ngaySinh');
+    return nhanNguoi.map((_, index) => ({ ngaySinh: ngaySinh[index] ?? '' }));
+  });
   const muiGio = useMemo(
     () => Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Ho_Chi_Minh',
     [],
   );
   const [ketQuaThang, setKetQuaThang] = useState<KetQuaXemThangApi | null>(null);
   const [chiTietNgay, setChiTietNgay] = useState<KetQuaChiTietNgayApi | null>(null);
-  const [nguoiDaXem, setNguoiDaXem] = useState<readonly NguoiLienQuanXemNgayApi[]>([]);
+  const [nguoiDaXem, setNguoiDaXem] = useState<readonly string[]>([]);
   const [ngayDangXem, setNgayDangXem] = useState<string | null>(null);
   const [dangTai, setDangTai] = useState(false);
   const [dangTaiNgay, setDangTaiNgay] = useState(false);
@@ -118,9 +121,9 @@ export function TrangXemNgay({
 
     try {
       const { nam, thangSo } = docThangInput(thang);
-      const nguoiLienQuan = docNguoiLienQuan(nguoi);
-      setNguoiDaXem(nguoiLienQuan);
-      setKetQuaThang(await xemThang(congViec, nam, thangSo, muiGio, nguoiLienQuan));
+      const ngaySinh = docNgaySinh(nguoi);
+      setNguoiDaXem(ngaySinh);
+      setKetQuaThang(await xemThangTheoNgaySinh(congViec, nam, thangSo, muiGio, ngaySinh));
     } catch (error) {
       setKetQuaThang(null);
       setLoi(error instanceof Error ? error.message : 'Không thể xem tháng');
@@ -135,7 +138,9 @@ export function TrangXemNgay({
     setNgayDangXem(ngay);
 
     try {
-      setChiTietNgay(await xemChiTietNgay(congViec, taoNoonLocalDate(ngay), muiGio, nguoiDaXem));
+      setChiTietNgay(
+        await xemChiTietNgayTheoNgaySinh(congViec, taoNoonLocalDate(ngay), muiGio, nguoiDaXem),
+      );
     } catch (error) {
       setChiTietNgay(null);
       setLoi(error instanceof Error ? error.message : 'Không thể xem chi tiết ngày');
@@ -164,11 +169,11 @@ export function TrangXemNgay({
       </header>
 
       <section className="ghi-chu-tuong-chu">
-        <strong>Xét theo năm sinh, không bắt buộc ngày giờ sinh.</strong>
+        <strong>Nhập ngày sinh đầy đủ để tự xác định năm Can-Chi.</strong>
         <p>
-          Hiệp Kỷ dùng năm sinh của người liên quan để tránh xung mệnh. Nếu sinh trước Lập Xuân
-          (thường đầu tháng 2), đánh dấu để dùng Can-Chi của năm trước. Khi chọn được ngày, bước
-          tiếp theo mới xét giờ của thời điểm thực hiện.
+          Phần tương chủ của Hiệp Kỷ vẫn luận theo sinh niên. Ngày sinh chỉ giúp hệ thống xử lý
+          chính xác mốc Lập Xuân; nếu sinh đúng ngày giao tiết thì cần thêm giờ sinh thay vì đoán.
+          Khi chọn được ngày, bước tiếp theo mới xét giờ thực hiện.
         </p>
       </section>
 
@@ -187,25 +192,15 @@ export function TrangXemNgay({
           <fieldset className="truong-nguoi" key={nhanNguoi[index] ?? index}>
             <legend>{nhanNguoi[index] ?? 'Người liên quan'}</legend>
             <label>
-              <span>Năm sinh</span>
+              <span>Ngày sinh</span>
               <input
-                type="number"
-                min="1900"
-                max="2100"
-                inputMode="numeric"
-                placeholder="Ví dụ: 1990"
-                value={item.namSinh}
-                onChange={(event) => suaNguoi(index, { namSinh: event.target.value })}
+                type="date"
+                min="1900-01-01"
+                max="2100-12-31"
+                value={item.ngaySinh}
+                onChange={(event) => suaNguoi(index, { ngaySinh: event.target.value })}
                 required
               />
-            </label>
-            <label className="chon-lap-xuan">
-              <input
-                type="checkbox"
-                checked={item.truocLapXuan}
-                onChange={(event) => suaNguoi(index, { truocLapXuan: event.target.checked })}
-              />
-              <span>Sinh trước Lập Xuân</span>
             </label>
           </fieldset>
         ))}
@@ -284,8 +279,9 @@ function KetQuaThang({
               {nhanCan(nguoi.canChiNamSinh.can)} {nhanDiaChi(nguoi.canChiNamSinh.chi)}
             </strong>
             <small>
-              Sinh năm {nguoi.namSinh}
-              {nguoi.truocLapXuan ? ' · tính theo năm Can-Chi trước' : ''}
+              {nguoi.ngaySinh
+                ? 'Sinh ' + dinhDangNgayViet(nguoi.ngaySinh)
+                : 'Sinh năm ' + nguoi.namSinh}
             </small>
           </div>
         ))}
@@ -561,19 +557,19 @@ function Nguon({ nguon }: { nguon: readonly ThamChieuNguonApi[] }) {
   return <small className="nguon">{labels.join(' · ')}</small>;
 }
 
-function docNguoiLienQuan(nguoi: readonly FormNguoi[]): readonly NguoiLienQuanXemNgayApi[] {
+function docNgaySinh(nguoi: readonly FormNguoi[]): readonly string[] {
   return nguoi.map((item) => {
-    const namSinh = Number(item.namSinh);
-    const namHienTai = new Date().getFullYear();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(item.ngaySinh)) {
+      throw new RangeError('Ngày sinh không hợp lệ');
+    }
 
-    if (!Number.isInteger(namSinh) || namSinh < 1900 || namSinh > namHienTai) {
+    const namSinh = Number(item.ngaySinh.slice(0, 4));
+    const namHienTai = new Date().getFullYear();
+    if (namSinh < 1900 || namSinh > namHienTai) {
       throw new RangeError('Năm sinh phải từ 1900 đến ' + namHienTai);
     }
 
-    return {
-      namSinh,
-      truocLapXuan: item.truocLapXuan,
-    };
+    return item.ngaySinh;
   });
 }
 
