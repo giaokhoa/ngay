@@ -83,7 +83,9 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     tep: 'KR3g0051_007.txt',
     revision: KANRIPO_KR3G0051_REVISION,
     sha256: '2f0e4c0363754cbb50a52d188954d37b3904fa851580176753feafd90c649a35',
-    trangThai: 'CHUA_IMPLEMENT',
+    trangThai: 'ORACLE_MOT_PHAN',
+    phamViOracle:
+      '黃道黑道 ngày/giờ; 日建破合害刑; 天官/福星/喜神/八祿 markers. Không áp 天乙 khi thiếu mặt trời mọc/lặn.',
   },
   {
     quyen: 8,

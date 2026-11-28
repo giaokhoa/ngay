@@ -1985,3 +1985,40 @@ button.o-ngay.dang-chon {
     flex-direction: column;
   }
 }
+
+/* Hoàng/Hắc đạo is a source-backed auxiliary layer, not the activity verdict. */
+.than-hoang-hac {
+  display: inline-block;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 3px 7px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.35;
+  white-space: normal;
+}
+.than-hoang-dao {
+  background: #e3f0e3;
+  color: #325a38;
+}
+.than-hac-dao {
+  background: #f6e8e3;
+  color: #904d43;
+}
+.chu-thich-than-ngay {
+  margin: 0;
+  border-left: 3px solid #b1a18c;
+  padding: 9px 13px;
+  background: #f2ede5;
+  color: #625b50;
+  font-size: 12px;
+  line-height: 1.6;
+}
+button.o-ngay .than-hoang-hac {
+  margin: 3px 0;
+}
+@media (max-width: 680px) {
+  button.o-ngay .than-hoang-hac {
+    grid-column: 2 / -1;
+  }
+}

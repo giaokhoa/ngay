@@ -20,12 +20,15 @@ import {
   xetNamSinhVoiTru,
 } from './personal-year';
 import { GioDuocChon, xetCacGioTrongNgay } from './selected-hour';
+import { ThanHoangHac, hacDaoKyViec, tinhThanNgay } from './hoang-hac-dao';
 
 export interface KetQuaXemNgay {
   ngayDanSu: string;
   canChiNgay: CanChi;
   chiThang: ReturnType<TinhLichService['tinhChiThangTaiThoiDiem']>;
   truc: ThapNhiTruc;
+  thanHoangHac: ThanHoangHac;
+  hacDaoKyCongViec: boolean;
   dangThoVuong: boolean;
   yeuTo: readonly YeuToNgay[];
   danhGia: KetQuaDanhGia;
@@ -63,6 +66,7 @@ export interface XungTuoiNguoi {
 
 export interface NgayTrongThang {
   ngayDanSu: string;
+  thanHoangHac: ThanHoangHac;
   canChiNgay: CanChi;
   canChiThang: CanChi;
   canChiNam: CanChi;
@@ -94,6 +98,7 @@ export interface KetQuaCongViecTongQuan {
 
 export interface NgayTongQuan {
   ngayDanSu: string;
+  thanHoangHac: ThanHoangHac;
   canChiNgay: CanChi;
   canChiThang: CanChi;
   canChiNam: CanChi;
@@ -217,6 +222,7 @@ export class XemNgayService {
       const canChiThang = this.lich.tinhCanChiThangTaiThoiDiem(thoiDiem);
       const canChiNgay = this.lich.tinhCanChiNgay(ngayDanSu);
       const truc = this.lich.tinhTruc(canChiThang.chi, canChiNgay.chi);
+      const thanHoangHac = tinhThanNgay(canChiThang.chi, canChiNgay.chi);
       const xungTuoi = [
         xetCanChiNamSinhVoiTru(namSinh, canChiNamSinh, canChiNam, 'NAM'),
         xetCanChiNamSinhVoiTru(namSinh, canChiNamSinh, canChiThang, 'THANG'),
@@ -234,7 +240,11 @@ export class XemNgayService {
         TAT_CA_CONG_VIEC.map((congViec) => {
           const ketQua = this.xem(thoiDiem, muiGio, congViec);
           const apDungTuoiNguoiDangXem = congViec !== LoaiCongViec.AN_TANG;
-          const xepLoai = xepLoaiNgay(ketQua, apDungTuoiNguoiDangXem && xungTuoi.length > 0);
+          const xepLoai = xepLoaiNgay(
+            ketQua,
+            apDungTuoiNguoiDangXem && xungTuoi.length > 0,
+            congViec,
+          );
           thongKe[xepLoai] += 1;
 
           return [
@@ -249,10 +259,12 @@ export class XemNgayService {
                     : 'DAY_DU',
               xepLoai,
               coNen: ketQua.danhGia.coNen,
-              coKy: ketQua.danhGia.coKy,
+              coKy: ketQua.danhGia.coKy || hacDaoKyViec(thanHoangHac, congViec),
               camMoiViec: ketQua.danhGia.camMoiViec,
               nen: ketQua.giaiThich.nen,
-              ky: ketQua.giaiThich.ky,
+              ky: hacDaoKyViec(thanHoangHac, congViec)
+                ? [...ketQua.giaiThich.ky, 'Hắc đạo: ' + thanHoangHac.ten]
+                : ketQua.giaiThich.ky,
             },
           ];
         }),
@@ -260,6 +272,7 @@ export class XemNgayService {
 
       ngay.push({
         ngayDanSu,
+        thanHoangHac,
         canChiNgay,
         canChiThang,
         canChiNam,
@@ -341,22 +354,25 @@ export class XemNgayService {
         })
         .filter((item) => item.xung.length > 0);
 
-      const xepLoai = xepLoaiNgay(ketQua, xungTuoi.length > 0);
+      const xepLoai = xepLoaiNgay(ketQua, xungTuoi.length > 0, congViec);
       thongKe[xepLoai] += 1;
 
       ngay.push({
         ngayDanSu,
+        thanHoangHac: ketQua.thanHoangHac,
         canChiNgay: ketQua.canChiNgay,
         canChiThang,
         canChiNam,
         truc: ketQua.truc,
         xepLoai,
         coNen: ketQua.danhGia.coNen,
-        coKy: ketQua.danhGia.coKy,
+        coKy: ketQua.danhGia.coKy || hacDaoKyViec(ketQua.thanHoangHac, congViec),
         camMoiViec: ketQua.danhGia.camMoiViec,
         xungTuoi,
         nen: ketQua.giaiThich.nen,
-        ky: ketQua.giaiThich.ky,
+        ky: hacDaoKyViec(ketQua.thanHoangHac, congViec)
+          ? [...ketQua.giaiThich.ky, 'Hắc đạo: ' + ketQua.thanHoangHac.ten]
+          : ketQua.giaiThich.ky,
       });
     }
 
@@ -384,6 +400,7 @@ export class XemNgayService {
     const canChiNgay = this.lich.tinhCanChiNgay(ngayDanSu);
     const chiThang = this.lich.tinhChiThangTaiThoiDiem(thoiDiem);
     const truc = this.lich.tinhTruc(chiThang, canChiNgay.chi);
+    const thanHoangHac = tinhThanNgay(chiThang, canChiNgay.chi);
     const dangThoVuong = this.lich.dangThoVuong(ngayDanSu, muiGio);
     const yeuTo = this.yeuToNgay.tinh({
       chiThang,
@@ -404,6 +421,8 @@ export class XemNgayService {
       ngayDanSu,
       canChiNgay,
       chiThang,
+      thanHoangHac,
+      hacDaoKyCongViec: hacDaoKyViec(thanHoangHac, congViec),
       truc,
       dangThoVuong,
       yeuTo,
@@ -413,10 +432,14 @@ export class XemNgayService {
   }
 }
 
-function xepLoaiNgay(ketQua: KetQuaXemNgay, coXungTuoi: boolean): XepLoaiNgayTrongThang {
+function xepLoaiNgay(
+  ketQua: KetQuaXemNgay,
+  coXungTuoi: boolean,
+  congViec: LoaiCongViec,
+): XepLoaiNgayTrongThang {
   if (coXungTuoi) return 'XUNG_TUOI';
   if (ketQua.danhGia.camMoiViec) return 'DAI_KY';
-  if (ketQua.danhGia.coKy) return 'NEN_TRANH';
+  if (ketQua.danhGia.coKy || hacDaoKyViec(ketQua.thanHoangHac, congViec)) return 'NEN_TRANH';
   if (ketQua.danhGia.coNen) return 'TOT';
   return 'TRUNG_BINH';
 }

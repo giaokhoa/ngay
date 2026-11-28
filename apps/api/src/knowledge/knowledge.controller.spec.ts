@@ -45,8 +45,8 @@ describe('KhoTriThucController', () => {
     const coverage = controller.baoPhuNguon();
 
     expect(coverage.volumes).toBe(36);
-    expect(coverage.hanOraclePartialVolumes).toBe(22);
-    expect(coverage.unimplementedVolumes).toBe(14);
+    expect(coverage.hanOraclePartialVolumes).toBe(23);
+    expect(coverage.unimplementedVolumes).toBe(13);
     expect(coverage.fullVolumeOracleCount).toBe(0);
     expect(coverage.manifest).toHaveLength(36);
     expect(coverage.discrepancies.length).toBeGreaterThanOrEqual(5);

@@ -85,14 +85,15 @@ Chi tiết: `docs/research/q4-aliases-bat-tuong.md`.
 Bảng này là lớp bổ sung cho `ORACLE_TESTED`. Nó chỉ đánh dấu scope có expected/vector
 độc lập từ Hán source pin, không có nghĩa cả quyển đã được implement.
 
-| Scope                          | Hán source pin                     | Trạng thái                | Test                              |
-| ------------------------------ | ---------------------------------- | ------------------------- | --------------------------------- |
-| Q4 / 月表 calendar positions   | KR3g0051 WYG Q4 + Q20..31          | HAN_ORACLE_TESTED         | han-q4-month-table-oracle.spec.ts |
-| Q5 factors đang implement      | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED         | han-q5-oracle.spec.ts             |
-| Q6 core factors đang implement | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED         | han-q6-oracle.spec.ts             |
-| Q10 semantics của 7 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts   |
-| Q11 exact 宜/忌 của 7 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts            |
-| 36-volume corpus inventory     | KR3g0051 + Wikisource Q14 fallback | INVENTORIED               | han-source-manifest.spec.ts       |
+| Scope                          | Hán source pin                     | Trạng thái                | Test                                          |
+| ------------------------------ | ---------------------------------- | ------------------------- | --------------------------------------------- |
+| Q4 / 月表 calendar positions   | KR3g0051 WYG Q4 + Q20..31          | HAN_ORACLE_TESTED         | han-q4-month-table-oracle.spec.ts             |
+| Q5 factors đang implement      | KR3g0051 WYG Q5                    | HAN_ORACLE_TESTED         | han-q5-oracle.spec.ts                         |
+| Q7 12 thần + giờ bổ trợ        | KR3g0051 WYG Q7 / Q32              | HAN_ORACLE_TESTED_PARTIAL | hoang-hac-dao.spec.ts / selected-hour.spec.ts |
+| Q6 core factors đang implement | KR3g0051 WYG Q6                    | HAN_ORACLE_TESTED         | han-q6-oracle.spec.ts                         |
+| Q10 semantics của 7 vertical   | KR3g0051 WYG Q10                   | HAN_ORACLE_TESTED_PARTIAL | han-q10-semantic-oracle.spec.ts               |
+| Q11 exact 宜/忌 của 7 vertical | KR3g0051 WYG Q11                   | HAN_ORACLE_TESTED         | han-q11-oracle.spec.ts                        |
+| 36-volume corpus inventory     | KR3g0051 + Wikisource Q14 fallback | INVENTORIED               | han-source-manifest.spec.ts                   |
 
 Full-volume status: **0/36**.
 

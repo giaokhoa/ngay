@@ -65,35 +65,35 @@ Machine-readable manifest + SHA-256 từng file nằm ở:
 
 Đây là **book-level completeness**, không phải số lượng test.
 
-| Quyển | Hán mục     | Trạng thái      | Scope hiện có                                                              |
-| ----: | ----------- | --------------- | -------------------------------------------------------------------------- |
-|     1 | 本原一      | ORACLE_MOT_PHAN | Can/Chi, Thổ Vượng                                                         |
-|     2 | 本原二      | CHUA_IMPLEMENT  | —                                                                          |
-|     3 | 義例一      | CHUA_IMPLEMENT  | —                                                                          |
-|     4 | 義例二      | ORACLE_MOT_PHAN | 12 Trực shared identities, 月厭/厭對, 陰陽不將                             |
-|     5 | 義例三      | ORACLE_MOT_PHAN | Đức/Hợp, special days, 王日/民日, 四廢/四忌/四窮/五墓/八專/復日/重日/鳴吠… |
-|     6 | 義例四      | ORACLE_MOT_PHAN | 三合/驛馬/劫煞/災煞/月煞/月刑/月害/六合/五富/天倉/天賊                     |
-|     7 | 義例五      | CHUA_IMPLEMENT  | —                                                                          |
-|     8 | 義例六      | CHUA_IMPLEMENT  | —                                                                          |
-|     9 | 立成        | ORACLE_MOT_PHAN | cross-check một số factor Q5/Q6                                            |
-|    10 | 宜忌        | ORACLE_MOT_PHAN | semantic vectors cho 7 vertical hiện implement                             |
-|    11 | 用事        | ORACLE_MOT_PHAN | exact 宜/忌 cho 7 vertical hiện implement                                  |
-|    12 | 公規一      | CHUA_IMPLEMENT  | —                                                                          |
-|    13 | 公規二      | CHUA_IMPLEMENT  | —                                                                          |
-|    14 | 年表一      | CHUA_IMPLEMENT  | Wikisource fallback; chưa implement                                        |
-| 15–19 | 年表二–六   | CHUA_IMPLEMENT  | —                                                                          |
-| 20–31 | 月表一–十二 | ORACLE_MOT_PHAN | month boundary/bảng tháng/Trực và các factor đã implement                  |
-|    32 | 日表        | ORACLE_MOT_PHAN | 60-day hour-table source vectors cho chọn giờ                              |
-|    33 | 利用一      | ORACLE_MOT_PHAN | tương chủ theo sinh niên, xung/khắc mệnh                                   |
-|    34 | 利用二      | ORACLE_MOT_PHAN | nguyên tắc dùng giờ: trợ ngày, hợp/lộc/mã, tránh phá/hình/Ngũ Bất Ngộ      |
-|    35 | 附錄        | CHUA_IMPLEMENT  | —                                                                          |
-|    36 | 辨訛        | CHUA_IMPLEMENT  | —                                                                          |
+| Quyển | Hán mục     | Trạng thái      | Scope hiện có                                                                               |
+| ----: | ----------- | --------------- | ------------------------------------------------------------------------------------------- |
+|     1 | 本原一      | ORACLE_MOT_PHAN | Can/Chi, Thổ Vượng                                                                          |
+|     2 | 本原二      | CHUA_IMPLEMENT  | —                                                                                           |
+|     3 | 義例一      | CHUA_IMPLEMENT  | —                                                                                           |
+|     4 | 義例二      | ORACLE_MOT_PHAN | 12 Trực shared identities, 月厭/厭對, 陰陽不將                                              |
+|     5 | 義例三      | ORACLE_MOT_PHAN | Đức/Hợp, special days, 王日/民日, 四廢/四忌/四窮/五墓/八專/復日/重日/鳴吠…                  |
+|     6 | 義例四      | ORACLE_MOT_PHAN | 三合/驛馬/劫煞/災煞/月煞/月刑/月害/六合/五富/天倉/天賊                                      |
+|     7 | 義例五      | ORACLE_MOT_PHAN | Hoàng/Hắc đạo ngày và giờ, Nhật Kiến/Phá/Hợp/Hại/Hình, Thiên Quan/Phúc Tinh/Hỷ Thần/Bát Lộc |
+|     8 | 義例六      | CHUA_IMPLEMENT  | —                                                                                           |
+|     9 | 立成        | ORACLE_MOT_PHAN | cross-check một số factor Q5/Q6                                                             |
+|    10 | 宜忌        | ORACLE_MOT_PHAN | semantic vectors cho 7 vertical hiện implement                                              |
+|    11 | 用事        | ORACLE_MOT_PHAN | exact 宜/忌 cho 7 vertical hiện implement                                                   |
+|    12 | 公規一      | CHUA_IMPLEMENT  | —                                                                                           |
+|    13 | 公規二      | CHUA_IMPLEMENT  | —                                                                                           |
+|    14 | 年表一      | CHUA_IMPLEMENT  | Wikisource fallback; chưa implement                                                         |
+| 15–19 | 年表二–六   | CHUA_IMPLEMENT  | —                                                                                           |
+| 20–31 | 月表一–十二 | ORACLE_MOT_PHAN | month boundary/bảng tháng/Trực và các factor đã implement                                   |
+|    32 | 日表        | ORACLE_MOT_PHAN | 60-day hour-table source vectors cho chọn giờ                                               |
+|    33 | 利用一      | ORACLE_MOT_PHAN | tương chủ theo sinh niên, xung/khắc mệnh                                                    |
+|    34 | 利用二      | ORACLE_MOT_PHAN | nguyên tắc dùng giờ: trợ ngày, hợp/lộc/mã, tránh phá/hình/Ngũ Bất Ngộ                       |
+|    35 | 附錄        | CHUA_IMPLEMENT  | —                                                                                           |
+|    36 | 辨訛        | CHUA_IMPLEMENT  | —                                                                                           |
 
 Tổng hiện tại:
 
 - 36 quyển được inventory;
-- 22 quyển có Hán oracle **một phần**;
-- 14 quyển chưa implement;
+- 23 quyển có Hán oracle **một phần**;
+- 13 quyển chưa implement;
 - **0 quyển** được đánh dấu full-volume oracle.
 
 ## Double-entry oracle hiện có

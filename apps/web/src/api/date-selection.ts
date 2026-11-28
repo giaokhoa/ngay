@@ -22,11 +22,19 @@ export interface DongGopDanhGiaApi {
   lyDoLoai?: string;
 }
 
+export interface ThanHoangHacApi {
+  ma: string;
+  ten: string;
+  loai: 'HOANG_DAO' | 'HAC_DAO';
+}
+
 export interface KetQuaXemNgayApi {
   ngayDanSu: string;
   canChiNgay: { can: string; chi: string };
   chiThang: string;
   truc: string;
+  thanHoangHac: ThanHoangHacApi;
+  hacDaoKyCongViec: boolean;
   dangThoVuong: boolean;
   yeuTo: readonly {
     ma: string;
@@ -80,6 +88,7 @@ export interface XungTuoiApi {
 
 export interface NgayTrongThangApi {
   ngayDanSu: string;
+  thanHoangHac: ThanHoangHacApi;
   canChiNgay: { can: string; chi: string };
   canChiThang: { can: string; chi: string };
   canChiNam: { can: string; chi: string };
@@ -95,6 +104,8 @@ export interface NgayTrongThangApi {
 
 export interface GioThucHienApi {
   chiGio: string;
+  thanHoangHac: ThanHoangHacApi;
+  dauThanGio: readonly string[];
   canChiGio: { can: string; chi: string };
   khoangGio: string;
   xepLoai: 'NEN_DUNG' | 'TRUNG_BINH' | 'NEN_TRANH' | 'XUNG_TUOI';
@@ -136,6 +147,7 @@ export interface DanhGiaCongViecTongQuanApi {
 
 export interface NgayTongQuanApi {
   ngayDanSu: string;
+  thanHoangHac: ThanHoangHacApi;
   canChiNgay: { can: string; chi: string };
   canChiThang: { can: string; chi: string };
   canChiNam: { can: string; chi: string };
