@@ -117,7 +117,8 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     revision: KANRIPO_KR3G0051_REVISION,
     sha256: '48327766b9f9b1acaaac986e7f86a653d06a15e532d835dce9316ef40d8acdd5',
     trangThai: 'ORACLE_MOT_PHAN',
-    phamViOracle: 'Conflict semantics cho 7 vertical đã implement; chưa phải toàn bộ 宜忌.',
+    phamViOracle:
+      '51/51 mục Việt = 99/99 heading TOC Hán đã inventory; exact conflict semantics oracle cho 7 vertical, phần còn lại explicit source-only/blocked/out-of-scope.',
   },
   {
     quyen: 11,
@@ -127,7 +128,8 @@ export const HAN_CORPUS_MANIFEST: readonly MucCorpusHan[] = [
     revision: KANRIPO_KR3G0051_REVISION,
     sha256: 'b81db33eba341b0de0e2cc36b704db8e6d89200fb8182b6cb85e69df619df1be',
     trangThai: 'ORACLE_MOT_PHAN',
-    phamViOracle: 'Exact 宜/忌 cho 7 activity vertical đã implement.',
+    phamViOracle:
+      '73/73 canonical Dụng sự sections đã inventory; exact 宜/忌 oracle cho 7 current vertical, 66 section còn lại out-of-scope current product. Prefatory catalogs: 67/37/60 việc.',
   },
   {
     quyen: 12,
