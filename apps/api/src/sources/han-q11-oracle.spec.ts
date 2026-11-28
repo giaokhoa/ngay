@@ -19,6 +19,7 @@ import { QUY_TAC_MAY_DO } from '../activities/may-do-rules';
 import { QUY_TAC_MO_KHO_XUAT_HANG_TIEN } from '../activities/mo-kho-xuat-hang-tien-rules';
 import { QUY_TAC_NAP_TAI } from '../activities/nap-tai-rules';
 import { QUY_TAC_NHAP_HOC } from '../activities/nhap-hoc-rules';
+import { QUY_TAC_PHA_NHA_HUY_TUONG } from '../activities/pha-nha-huy-tuong-rules';
 import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
@@ -75,6 +76,23 @@ const HAN_Q11: Readonly<Record<LoaiCongViec, HanQ11Fixture>> = {
       'YEU_TO:VANG_VONG',
       'YEU_TO:BAT_CHUYEN',
       'CHI_NGAY:HOI',
+    ],
+  },
+  [LoaiCongViec.PHA_NHA_HUY_TUONG]: {
+    tieuDeHan: '破屋壞垣',
+    anchor: 'KR3g0051_WYG_011-23a',
+    nen: ['YEU_TO:NGUYET_PHA'],
+    ky: [
+      'YEU_TO:NGUYET_KIEN',
+      'YEU_TO:THO_PHU',
+      'YEU_TO:KIEP_SAT',
+      'YEU_TO:TAI_SAT',
+      'YEU_TO:NGUYET_SAT',
+      'YEU_TO:NGUYET_HINH',
+      'YEU_TO:NGUYET_YEM',
+      'YEU_TO:THO_PHU_TIN',
+      'YEU_TO:DIA_NANG',
+      'THO_VUONG',
     ],
   },
   [LoaiCongViec.SUA_SANG_DUONG_SA]: {
@@ -868,6 +886,7 @@ const PRODUCTION_Q11: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = 
   [LoaiCongViec.QUET_DON_NHA_CUA]: QUY_TAC_QUET_DON_NHA_CUA,
   [LoaiCongViec.TRANG_TRI_TUONG]: QUY_TAC_TRANG_TRI_TUONG,
   [LoaiCongViec.SUA_SANG_DUONG_SA]: QUY_TAC_SUA_SANG_DUONG_SA,
+  [LoaiCongViec.PHA_NHA_HUY_TUONG]: QUY_TAC_PHA_NHA_HUY_TUONG,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,

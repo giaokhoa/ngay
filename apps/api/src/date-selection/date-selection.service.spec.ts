@@ -925,6 +925,90 @@ describe('XemNgayService SUA_SANG_DUONG_SA end-to-end', () => {
   });
 });
 
+describe('XemNgayService PHA_NHA_HUY_TUONG end-to-end', () => {
+  it('orchestrates calendar/factors -> 月破 Nên Q11 -> inverse/target/global-hard Q10 resolver', () => {
+    const result = taoService().xemPhaNhaHuyTuong(
+      new Date('2026-11-27T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'PHA_NHA_HUY_TUONG'),
+    ).toBe(true);
+  });
+
+  it('is deterministic for PHA_NHA_HUY_TUONG', () => {
+    const service = taoService();
+    const input = new Date('2026-06-15T03:00:00.000Z');
+    expect(service.xemPhaNhaHuyTuong(input, 'Asia/Ho_Chi_Minh')).toEqual(
+      service.xemPhaNhaHuyTuong(input, 'Asia/Ho_Chi_Minh'),
+    );
+  });
+
+  it('real calendar keeps inverse Nguyệt Phá semantics, exemptions and hard blockers exact', () => {
+    const service = taoService();
+    const nguyetPha = service.xemPhaNhaHuyTuong(
+      new Date('2026-01-09T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const taiSatTheoPha = service.xemPhaNhaHuyTuong(
+      new Date('2026-07-01T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const nguyetKy = service.xemPhaNhaHuyTuong(
+      new Date('2028-02-17T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const thoVuong = service.xemPhaNhaHuyTuong(
+      new Date('2026-01-17T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const hard = service.xemPhaNhaHuyTuong(
+      new Date('2026-01-02T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+    const voLoc = service.xemPhaNhaHuyTuong(
+      new Date('2027-05-08T05:00:00.000Z'),
+      'Asia/Ho_Chi_Minh',
+    );
+
+    expect(nguyetPha.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_PHA)).toBe(true);
+    expect(nguyetPha.danhGia.coNen).toBe(true);
+    expect(nguyetPha.danhGia.coKy).toBe(false);
+
+    expect(taiSatTheoPha.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_PHA)).toBe(true);
+    expect(taiSatTheoPha.yeuTo.some((item) => item.ma === MaYeuTo.TAI_SAT)).toBe(true);
+    expect(taiSatTheoPha.danhGia.coNen).toBe(true);
+    expect(taiSatTheoPha.danhGia.coKy).toBe(false);
+    expect(taiSatTheoPha.giaiThich.biLoai.some((text) => text.startsWith('TAI_SAT:'))).toBe(true);
+
+    expect(nguyetKy.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_PHA)).toBe(true);
+    expect(nguyetKy.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_KY)).toBe(true);
+    expect(nguyetKy.danhGia.coNen).toBe(false);
+    expect(nguyetKy.danhGia.coKy).toBe(false);
+    expect(nguyetKy.giaiThich.biLoai.some((text) => text.startsWith('NGUYET_PHA:'))).toBe(true);
+
+    expect(thoVuong.dangThoVuong).toBe(true);
+    expect(thoVuong.danhGia.coKy).toBe(true);
+    expect(
+      thoVuong.danhGia.dongGop.some(
+        (item) => item.quyTac.dieuKien.loai === 'THO_VUONG' && item.trangThai === 'HIEU_LUC',
+      ),
+    ).toBe(true);
+
+    expect(hard.danhGia.camMoiViec).toBe(true);
+    expect(hard.danhGia.coKy).toBe(true);
+
+    expect(voLoc.yeuTo.some((item) => item.ma === MaYeuTo.NGUYET_PHA)).toBe(true);
+    expect(voLoc.yeuTo.some((item) => item.ma === MaYeuTo.VO_LOC)).toBe(true);
+    expect(voLoc.danhGia.coNen).toBe(true);
+    expect(voLoc.danhGia.coKy).toBe(false);
+    expect(voLoc.danhGia.xungDotDaApDung.some((item) => item.ma.endsWith('_VO_LOC_BO_NEN'))).toBe(
+      false,
+    );
+  });
+});
+
 describe('XemNgayService AN_GIUONG end-to-end', () => {
   it('orchestrates calendar -> factors -> exact Q11 -> Q10 An giường resolver', () => {
     const result = taoService().xemAnGiuong(
@@ -1070,7 +1154,7 @@ describe('XemNgayService tổng quan tháng không bắt chọn việc', () => {
         (ngay) => new Set(Object.values(ngay.theoCongViec).map((item) => item.xepLoai)).size > 1,
       ),
     ).toBe(true);
-    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 28)).toBe(true);
+    expect(result.ngay.every((ngay) => Object.keys(ngay.theoCongViec).length === 29)).toBe(true);
   });
 
   it('không lấy nhầm tuổi người đang xem để cá nhân hóa an táng', () => {
@@ -1146,6 +1230,7 @@ describe('Hoàng/Hắc đạo Q7 — cross-activity regression', () => {
       LoaiCongViec.QUET_DON_NHA_CUA,
       LoaiCongViec.TRANG_TRI_TUONG,
       LoaiCongViec.SUA_SANG_DUONG_SA,
+      LoaiCongViec.PHA_NHA_HUY_TUONG,
       LoaiCongViec.AN_TANG,
     ]) {
       expect(hac?.theoCongViec[activity].ky).not.toContain('Hắc đạo: ' + hac?.thanHoangHac.ten);
