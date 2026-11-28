@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { SearchSunLongitude } from 'astronomy-engine';
 
+import { timThoiDiemMatTroiDatKinhDo } from './astronomy/ephemeris';
 import { DiaChi } from './domain/earthly-branch';
 import { DINH_NGHIA_TIET_KHI_THEO_NAM, TietKhi } from './domain/solar-term';
 
@@ -36,7 +36,11 @@ export class TinhTietKhiService {
     let batDauTim = taoDauNamUtc(nam);
 
     for (const dinhNghia of DINH_NGHIA_TIET_KHI_THEO_NAM) {
-      const thoiDiem = SearchSunLongitude(dinhNghia.hoangKinh, batDauTim, SO_NGAY_CUA_SO_TIM_KIEM);
+      const thoiDiem = timThoiDiemMatTroiDatKinhDo(
+        dinhNghia.hoangKinh,
+        batDauTim,
+        SO_NGAY_CUA_SO_TIM_KIEM,
+      );
 
       if (!thoiDiem) {
         throw new Error(
@@ -44,7 +48,7 @@ export class TinhTietKhiService {
         );
       }
 
-      const ngay = new Date(thoiDiem.date.getTime());
+      const ngay = new Date(thoiDiem.getTime());
       ketQua.set(dinhNghia.tietKhi, ngay);
       batDauTim = new Date(ngay.getTime() + SO_NGAY_BAT_DAU_TIM_TIEP * MOT_NGAY_MILLISECOND);
     }
