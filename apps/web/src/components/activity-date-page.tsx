@@ -606,6 +606,12 @@ function nhanDieuKien(item: DongGopDanhGiaApi): string {
   if (condition.loai === 'CHI_NGAY') {
     return 'Ngày ' + nhanDiaChi(condition.chi ?? '');
   }
+  if (condition.loai === 'CAN_NGAY') {
+    return 'Ngày ' + nhanCan(condition.can ?? '');
+  }
+  if (condition.loai === 'NGAY_AM') {
+    return 'Ngày âm ' + String(condition.ngay ?? '');
+  }
   return 'Thổ Vượng dụng sự';
 }
 

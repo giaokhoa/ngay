@@ -522,6 +522,7 @@ export class XemNgayService {
       canNgay: canChiNgay.can,
       chiNgay: canChiNgay.chi,
       truc,
+      ngayAmTrongThang: thongTinNgayAm.ngayTrongThang,
       dangThoVuong,
       yeuTo,
     });
@@ -593,6 +594,10 @@ function moTaDieuKien(dieuKien: KetQuaDanhGia['dongGop'][number]['quyTac']['dieu
       return 'TRUC_' + dieuKien.truc;
     case 'CHI_NGAY':
       return 'CHI_NGAY_' + dieuKien.chi;
+    case 'CAN_NGAY':
+      return 'CAN_NGAY_' + dieuKien.can;
+    case 'NGAY_AM':
+      return 'NGAY_AM_' + dieuKien.ngay;
     case 'THO_VUONG':
       return 'THO_VUONG';
   }

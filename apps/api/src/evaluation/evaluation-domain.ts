@@ -11,6 +11,7 @@ export interface BoiCanhDanhGiaNgay {
   canNgay: ThienCan;
   chiNgay: DiaChi;
   truc: ThapNhiTruc;
+  ngayAmTrongThang?: number;
   dangThoVuong: boolean;
   yeuTo: readonly YeuToNgay[];
 }
@@ -44,4 +45,6 @@ export type TargetDanhGia =
   | { loai: 'YEU_TO'; ma: MaYeuTo }
   | { loai: 'TRUC'; truc: ThapNhiTruc }
   | { loai: 'CHI_NGAY'; chi: DiaChi }
+  | { loai: 'CAN_NGAY'; can: ThienCan }
+  | { loai: 'NGAY_AM'; ngay: number }
   | { loai: 'THO_VUONG' };

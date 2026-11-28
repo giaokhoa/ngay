@@ -60,6 +60,10 @@ function tap(tacDong: TacDongDungSu): Set<string> {
           return 'TRUC:' + target.truc;
         case 'CHI_NGAY':
           return 'CHI_NGAY:' + target.chi;
+        case 'CAN_NGAY':
+          return 'CAN_NGAY:' + target.can;
+        case 'NGAY_AM':
+          return 'NGAY_AM:' + target.ngay;
         case 'THO_VUONG':
           return 'THO_VUONG';
       }
