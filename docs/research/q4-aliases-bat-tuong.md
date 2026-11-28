@@ -80,7 +80,7 @@ Canonical mapping theo mục lục Hán/Việt:
 | ----- | ---------------------------------------------------- |
 | Kiến  | Binh Phúc, Tiểu Thời, Thổ Phủ                        |
 | Trừ   | Cát Kỳ, Binh Bảo                                     |
-| Mãn   | Phúc Đức, Thiên Vu, Thiên Cẩu                        |
+| Mãn   | Phúc Đức, Thiên Vu                                   |
 | Bình  | tháng dương: Thiên Cương; tháng âm: Hà Khôi; Tử Thần |
 | Định  | Thời Âm, Quan Phù, Tử Khí                            |
 | Chấp  | Chi Đức, Tiểu Hao                                    |
@@ -90,6 +90,16 @@ Canonical mapping theo mục lục Hán/Việt:
 | Thu   | tháng dương: Hà Khôi; tháng âm: Thiên Cương          |
 | Khai  | Thời Dương, Sinh Khí                                 |
 | Bế    | Huyết Chi                                            |
+
+### Ngoại lệ Thiên Cẩu: không phải mọi Trực Mãn
+
+Heading Q4 đặt `天狗` cạnh `滿〈福德 天巫 天狗〉`, nhưng phần biện giải sau đó bác cách coi đây là alias đồng vị phổ quát. Exact Việt p.310–311 và Hán `WYG_004-15b..16a` đều chốt:
+
+- không phải mọi ngày Mãn đều là Thiên Cẩu;
+- **Thiên Cẩu chỉ là ngày Tuất trong tháng kiến Thân** (`申建之戌`);
+- vì chỉ có một vị trí nên sách nói không đưa vào đồ hình chung.
+
+Production vì vậy giữ Phúc Đức/Thiên Vu theo Trực Mãn, nhưng tính `THIEN_CAU` riêng theo `chiThang=THAN && chiNgay=TUAT`. Regression có phản ví dụ Trực Mãn tháng Dần/ngày Thìn: vẫn có Phúc Đức + Thiên Vu nhưng **không** có Thiên Cẩu.
 
 ### Tháng dương / tháng âm
 

@@ -25,7 +25,7 @@ Nguồn dùng song song:
 |   2 | Kiến Trừ đồng vị dị danh / 建除同位異名                          | ORACLE_TESTED | IMPLEMENTED          | model “cùng vị trí ≠ cùng semantics”                                                    |
 |   3 | Kiến / 建〈兵福 小時 土府〉                                      | ORACLE_TESTED | IMPLEMENTED          | Binh Phúc, Tiểu Thời, Thổ Phủ                                                           |
 |   4 | Trừ / 除〈吉期 兵寶〉                                            | ORACLE_TESTED | IMPLEMENTED          | Cát Kỳ, Binh Bảo                                                                        |
-|   5 | Mãn / 滿〈福德 天巫 天狗〉                                       | ORACLE_TESTED | IMPLEMENTED          | ba identity riêng                                                                       |
+|   5 | Mãn / 滿〈福德 天巫 天狗〉                                       | ORACLE_TESTED | IMPLEMENTED          | Phúc Đức/Thiên Vu theo Mãn; Thiên Cẩu chỉ singleton Thân–Tuất theo biện giải Q4         |
 |   6 | Bình / 平〈天罡 河魁 死神〉                                      | ORACLE_TESTED | IMPLEMENTED          | Thiên Cương/Hà Khôi đổi theo âm-dương tháng                                             |
 |   7 | Định / 定〈時陰 官符 死氣〉                                      | ORACLE_TESTED | IMPLEMENTED          | ba identity riêng                                                                       |
 |   8 | Chấp / 執〈枝德 小耗〉                                           | ORACLE_TESTED | IMPLEMENTED          | Chi Đức, Tiểu Hao                                                                       |

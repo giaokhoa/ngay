@@ -143,7 +143,8 @@ Các alias cần research thành mapping, ví dụ:
 
 - Kiến: Binh Phúc, Tiểu Thời, Thổ Phủ;
 - Trừ: Cát Kỳ, Binh Bảo;
-- Mãn: Phúc Đức, Thiên Vu, Thiên Cẩu;
+- Mãn: Phúc Đức, Thiên Vu;
+- Thiên Cẩu là ngoại lệ singleton: chỉ tháng kiến Thân, ngày Tuất; không coi là alias của mọi Trực Mãn;
 - Phá: Đại Hao;
 - Thành: Thiên Y, Thiên Hỷ;
 - Khai: Thời Dương, Sinh Khí;
