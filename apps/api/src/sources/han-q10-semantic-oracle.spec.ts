@@ -23,6 +23,7 @@ import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
+import { QUY_TAC_SUA_SANG_DUONG_SA } from '../activities/sua-sang-duong-sa-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_TRANG_TRI_TUONG } from '../activities/trang-tri-tuong-rules';
 import { QUY_TAC_XUAT_HANH } from '../activities/xuat-hanh-rules';
@@ -58,6 +59,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.DAT_COI_XAY_GIA]: QUY_TAC_DAT_COI_XAY_GIA,
   [LoaiCongViec.QUET_DON_NHA_CUA]: QUY_TAC_QUET_DON_NHA_CUA,
   [LoaiCongViec.TRANG_TRI_TUONG]: QUY_TAC_TRANG_TRI_TUONG,
+  [LoaiCongViec.SUA_SANG_DUONG_SA]: QUY_TAC_SUA_SANG_DUONG_SA,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -74,7 +76,8 @@ const ACTIVITIES_WITH_TU_PHE_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.TE_TU &&
     activity !== LoaiCongViec.CHINH_DUNG_CAT_TOC &&
     activity !== LoaiCongViec.SUA_MONG_TAY_CHAN &&
-    activity !== LoaiCongViec.QUET_DON_NHA_CUA,
+    activity !== LoaiCongViec.QUET_DON_NHA_CUA &&
+    activity !== LoaiCongViec.SUA_SANG_DUONG_SA,
 );
 const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
   (activity) =>
@@ -82,7 +85,8 @@ const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
     activity !== LoaiCongViec.TE_TU &&
     activity !== LoaiCongViec.GIAI_TRU &&
     activity !== LoaiCongViec.CAU_Y_TRI_BENH &&
-    activity !== LoaiCongViec.QUET_DON_NHA_CUA,
+    activity !== LoaiCongViec.QUET_DON_NHA_CUA &&
+    activity !== LoaiCongViec.SUA_SANG_DUONG_SA,
 );
 const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
   (activity) =>
@@ -197,6 +201,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.DAT_COI_XAY_GIA]: false,
       [LoaiCongViec.QUET_DON_NHA_CUA]: false,
       [LoaiCongViec.TRANG_TRI_TUONG]: false,
+      [LoaiCongViec.SUA_SANG_DUONG_SA]: false,
       [LoaiCongViec.LAP_KHE_UOC_GIAO_DICH]: false,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
@@ -248,6 +253,31 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       chiThang: DiaChi.THIN,
       yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.NGUYET_YEM, MaYeuTo.THIEN_DUC],
     });
+    expect(result.coKy).toBe(true);
+  });
+
+  it('平治道塗: 平日 is Nên; ordinary 月破/劫煞/月刑/四廢 do not invent Kị', () => {
+    for (const factor of [
+      MaYeuTo.NGUYET_PHA,
+      MaYeuTo.KIEP_SAT,
+      MaYeuTo.NGUYET_HINH,
+      MaYeuTo.TU_PHE,
+    ]) {
+      const result = danhGia(LoaiCongViec.SUA_SANG_DUONG_SA, {
+        truc: ThapNhiTruc.BINH,
+        yeuTo: [factor],
+      });
+      expect(result.coNen).toBe(true);
+      expect(result.coKy).toBe(false);
+    }
+  });
+
+  it('平治道塗: 月破+災煞+月厭 hard overlap still applies globally', () => {
+    const result = danhGia(LoaiCongViec.SUA_SANG_DUONG_SA, {
+      chiThang: DiaChi.MAO,
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.TAI_SAT, MaYeuTo.NGUYET_YEM],
+    });
+    expect(result.camMoiViec).toBe(true);
     expect(result.coKy).toBe(true);
   });
 

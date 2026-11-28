@@ -220,6 +220,17 @@ describe('XemNgayController', () => {
     );
   });
 
+  it('trả kết quả SUA_SANG_DUONG_SA có exact Q11/Q10 provenance', () => {
+    const result = taoController().xemSuaSangDuongSa(
+      '2026-11-27T05:00:00.000Z',
+      'Asia/Ho_Chi_Minh',
+    );
+    expect(result.ngayDanSu).toBe('2026-11-27');
+    expect(
+      result.danhGia.dongGop.every((item) => item.quyTac.congViec === 'SUA_SANG_DUONG_SA'),
+    ).toBe(true);
+  });
+
   it('từ chối thiếu input', () => {
     expect(() => taoController().xemCuoiHoi(undefined, 'Asia/Ho_Chi_Minh')).toThrow(
       BadRequestException,
@@ -273,12 +284,12 @@ describe('XemNgayController XUAT_HANH endpoint', () => {
 });
 
 describe('XemNgayController tổng quan tháng', () => {
-  it('nhận ngày sinh đầy đủ và trả đủ hai mươi bảy nhóm việc', () => {
+  it('nhận ngày sinh đầy đủ và trả đủ hai mươi tám nhóm việc', () => {
     const result = taoController().xemTongQuanThang('1990-02-03', '2026', '11', 'Asia/Ho_Chi_Minh');
 
     expect(result.nguoi.canChiNamSinh).toEqual({ can: 'KY', chi: 'TI' });
     expect(result.ngay).toHaveLength(30);
-    expect(Object.keys(result.ngay[0]?.theoCongViec ?? {})).toHaveLength(27);
+    expect(Object.keys(result.ngay[0]?.theoCongViec ?? {})).toHaveLength(28);
     expect(JSON.stringify(result)).not.toMatch(/\bQ\d+\b|Quyển\s+\d+/i);
   });
 

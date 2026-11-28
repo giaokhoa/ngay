@@ -164,6 +164,12 @@ const CONG_VIEC: readonly {
     to: DUONG_DAN.TRANG_TRI_TUONG,
   },
   {
+    ma: 'SUA_SANG_DUONG_SA',
+    ten: 'Sửa sang đường sá',
+    moTa: 'Nên Bình nhật; chỉ Kị Thổ Phủ, Nguyệt Yếm, Thổ Phù, Địa Nang và sau Thổ Vượng dụng sự.',
+    to: DUONG_DAN.SUA_SANG_DUONG_SA,
+  },
+  {
     ma: 'DONG_THO',
     ten: 'Động thổ',
     moTa: 'Khởi công, đào đắp và việc xây dựng.',

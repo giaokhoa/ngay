@@ -20,6 +20,7 @@ import { QUY_TAC_QUAN_DAI } from '../activities/quan-dai-rules';
 import { QUY_TAC_QUET_DON_NHA_CUA } from '../activities/quet-don-nha-cua-rules';
 import { QUY_TAC_SUA_BUONG_SAN_PHU } from '../activities/sua-buong-san-phu-rules';
 import { QUY_TAC_SUA_MONG_TAY_CHAN } from '../activities/sua-mong-tay-chan-rules';
+import { QUY_TAC_SUA_SANG_DUONG_SA } from '../activities/sua-sang-duong-sa-rules';
 import { QUY_TAC_TE_TU } from '../activities/te-tu-rules';
 import { QUY_TAC_TRANG_TRI_TUONG } from '../activities/trang-tri-tuong-rules';
 import { QUY_TAC_YEN_HOI } from '../activities/yen-hoi-rules';
@@ -54,6 +55,7 @@ import { QUY_TAC_Q10_QUAN_DAI } from '../evaluation/quan-dai-conflict-rules';
 import { QUY_TAC_Q10_QUET_DON_NHA_CUA } from '../evaluation/quet-don-nha-cua-conflict-rules';
 import { QUY_TAC_Q10_SUA_BUONG_SAN_PHU } from '../evaluation/sua-buong-san-phu-conflict-rules';
 import { QUY_TAC_Q10_SUA_MONG_TAY_CHAN } from '../evaluation/sua-mong-tay-chan-conflict-rules';
+import { QUY_TAC_Q10_SUA_SANG_DUONG_SA } from '../evaluation/sua-sang-duong-sa-conflict-rules';
 import { QUY_TAC_Q10_TE_TU } from '../evaluation/te-tu-conflict-rules';
 import { QUY_TAC_Q10_TRANG_TRI_TUONG } from '../evaluation/trang-tri-tuong-conflict-rules';
 import { QuyTacXungDotDataDriven } from '../evaluation/q10-rule-resolver';
@@ -120,6 +122,7 @@ export const HOAT_DONG_TRI_THUC: readonly HoatDongTriThuc[] = [
   { code: LoaiCongViec.DAT_COI_XAY_GIA, tenViet: 'Đặt cối xay, giã', tenHan: '安碓磑' },
   { code: LoaiCongViec.QUET_DON_NHA_CUA, tenViet: 'Quét dọn nhà cửa', tenHan: '掃舍宇' },
   { code: LoaiCongViec.TRANG_TRI_TUONG, tenViet: 'Trang trí tường', tenHan: '修飾垣墻' },
+  { code: LoaiCongViec.SUA_SANG_DUONG_SA, tenViet: 'Sửa sang đường sá', tenHan: '平治道塗' },
   { code: LoaiCongViec.DONG_THO, tenViet: 'Khởi tạo động thổ', tenHan: '興造動土' },
   { code: LoaiCongViec.SUA_CUNG_THAT, tenViet: 'Sửa cung thất', tenHan: '修宮室' },
   { code: LoaiCongViec.KHAI_TRUONG, tenViet: 'Khai trương', tenHan: '開市' },
@@ -153,6 +156,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
       ...activityRules(QUY_TAC_DAT_COI_XAY_GIA),
       ...activityRules(QUY_TAC_QUET_DON_NHA_CUA),
       ...activityRules(QUY_TAC_TRANG_TRI_TUONG),
+      ...activityRules(QUY_TAC_SUA_SANG_DUONG_SA),
       ...activityRules(QUY_TAC_DONG_THO),
       ...activityRules(QUY_TAC_SUA_CUNG_THAT),
       ...activityRules(QUY_TAC_KHAI_TRUONG),
@@ -182,6 +186,7 @@ export function taoDanhMucTriThuc(): DanhMucTriThuc {
       ...conflictRules(LoaiCongViec.DAT_COI_XAY_GIA, QUY_TAC_Q10_DAT_COI_XAY_GIA),
       ...conflictRules(LoaiCongViec.QUET_DON_NHA_CUA, QUY_TAC_Q10_QUET_DON_NHA_CUA),
       ...conflictRules(LoaiCongViec.TRANG_TRI_TUONG, QUY_TAC_Q10_TRANG_TRI_TUONG),
+      ...conflictRules(LoaiCongViec.SUA_SANG_DUONG_SA, QUY_TAC_Q10_SUA_SANG_DUONG_SA),
       ...conflictRules(LoaiCongViec.DONG_THO, QUY_TAC_Q10_CONG_VIEC_DAT),
       ...conflictRules(LoaiCongViec.SUA_CUNG_THAT, QUY_TAC_Q10_CONG_VIEC_DAT),
       ...conflictRules(LoaiCongViec.KHAI_TRUONG, QUY_TAC_Q10_KHAI_TRUONG),

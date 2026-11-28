@@ -19,6 +19,7 @@ const EXEMPT = new Set<LoaiCongViec>([
   LoaiCongViec.SUA_MONG_TAY_CHAN,
   LoaiCongViec.QUET_DON_NHA_CUA,
   LoaiCongViec.TRANG_TRI_TUONG,
+  LoaiCongViec.SUA_SANG_DUONG_SA,
 ]);
 const HAS_OWN_SPECIAL_KY = new Set<LoaiCongViec>([LoaiCongViec.CAU_PHUC, LoaiCongViec.CAU_TU]);
 
