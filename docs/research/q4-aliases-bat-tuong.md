@@ -507,7 +507,7 @@ Tách PR vì bảng lớn, dễ review hơn.
 
 Audit Q10 cho thấy các hội Âm/Dương cuối Q4 đã đi vào production semantics dù không phải `MaYeuTo` độc lập. Hán `WYG_010-48a..51a` liệt kê các ngày “諸事皆忌”; production khóa thành một canonical set tại `q4-hard-days.ts`.
 
-Canonical set hiện có 34 identity/vector:
+Canonical hard-ban set hiện có 34 identity/vector:
 
 - Đại Hội, Tiểu Hội;
 - Tam Âm, Âm Vị;
@@ -516,6 +516,13 @@ Canonical set hiện có 34 identity/vector:
 - bốn Âm Thác trùng Nguyệt Phá/Đại Hội bị nâng thành hard-ban;
 - Tuyệt Âm tháng Tỵ ngày Mậu Thìn;
 - Tuyệt Dương tháng Hợi ngày Mậu Tuất.
+
+Ngoài ra `q4-yem-special-days.ts` khóa ba bảng source-data không-hard:
+
+- Tuế Bạc / Trục Trận: theo chỗ Kị của Nguyệt Yếm;
+- Âm Thác: non-hard theo chỗ Kị của Nguyệt Yếm;
+- Dương Thác: non-hard theo chỗ Kị của Kiến;
+- các ngoại lệ `不從德願所宜` / `不從德合所宜` được giữ thành `boNen`, không suy từ tên ngày.
 
 Một civil day có thể mang nhiều danh xưng, nên test khóa **identity unique** chứ không giả định bộ ba tháng/ngày là unique.
 
@@ -526,12 +533,12 @@ Fix production sau audit:
 - **Cưới hỏi bỏ sót toàn bộ lớp global hard-day**;
 - cả ba bản copy cũ đều thiếu Tuyệt Âm/Tuyệt Dương.
 
-Sau fix, cùng canonical set được test áp cho đủ 7 vertical. Hành Ngoan/Liễu Lệ/Cô Thần và các hội không phải blanket hard-day vẫn không bị tạo thành factor độc lập nếu Q10 không yêu cầu.
+Sau fix, cùng canonical hard-ban set được test áp cho đủ 7 vertical. Audit tiếp Nguyệt Yếm cho Cưới hỏi bổ sung đúng các nhánh Tuế Bạc/Trục Trận, Âm/Dương Thác, hard tháng Tý/Ngọ và cân bằng Đức thần. Hành Ngoan/Liễu Lệ/Cô Thần không bị tạo thành factor độc lập nếu Q10 không yêu cầu một outcome riêng.
 
 ## Trạng thái
 
 - [x] LOCATED
 - [x] COMPARED
 - [x] VERIFIED
-- [ ] IMPLEMENTED
-- [ ] ORACLE_TESTED
+- [x] IMPLEMENTED cho scope production/Q10 hiện có
+- [x] ORACLE_TESTED cho scope production/Q10 hiện có

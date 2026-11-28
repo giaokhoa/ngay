@@ -5,6 +5,12 @@ import { ThapNhiTruc } from '../calendar/domain/twelve-officer';
 import { MaYeuTo } from '../factors/domain/factor-code';
 import { LoaiNguon, ThamChieuNguon } from '../sources/source-reference';
 import { NGAY_CAM_MOI_VIEC_Q4 } from './q4-hard-days';
+import {
+  NGAY_AM_THAC_Q4,
+  NGAY_DUONG_THAC_Q4,
+  NGAY_TUE_BAC_TRUC_TRAN_Q4,
+  NhomNenBiLoaiQ4,
+} from './q4-yem-special-days';
 import { DieuKienQ10, PhepXuLyXungDot, QuyTacXungDotDataDriven } from './q10-rule-resolver';
 
 const Y = (ma: MaYeuTo): DieuKienDungSu => ({ loai: 'YEU_TO', ma });
@@ -858,66 +864,9 @@ interface NgaySai {
 }
 
 function tueBacTrucTranDays(): readonly NgayDacBiet[] {
-  return [
-    special(
-      'TUE_BAC_4_BINH_NGO',
-      DiaChi.TI,
-      ThienCan.BINH,
-      DiaChi.NGO,
-      'Tuế bạc theo chỗ Kị của Nguyệt Yếm; không theo chỗ Nên của Đức, Nguyện.',
-      NEN_DUC_NGUYEN,
-    ),
-    special(
-      'TUE_BAC_4_MAU_NGO',
-      DiaChi.TI,
-      ThienCan.MAU,
-      DiaChi.NGO,
-      'Tuế bạc theo chỗ Kị của Nguyệt Yếm.',
-    ),
-    special(
-      'TUE_BAC_10_NHAM_TY',
-      DiaChi.HOI,
-      ThienCan.NHAM,
-      DiaChi.TY,
-      'Tuế bạc theo chỗ Kị của Nguyệt Yếm.',
-    ),
-    special(
-      'TUE_BAC_10_MAU_TY',
-      DiaChi.HOI,
-      ThienCan.MAU,
-      DiaChi.TY,
-      'Tuế bạc theo chỗ Kị của Nguyệt Yếm.',
-    ),
-    special(
-      'TRUC_TRAN_6_BINH_NGO',
-      DiaChi.MUI,
-      ThienCan.BINH,
-      DiaChi.NGO,
-      'Trục trận theo chỗ Kị của Nguyệt Yếm.',
-    ),
-    special(
-      'TRUC_TRAN_6_MAU_NGO',
-      DiaChi.MUI,
-      ThienCan.MAU,
-      DiaChi.NGO,
-      'Trục trận theo chỗ Kị của Nguyệt Yếm; không theo chỗ Nên của Đức, Nguyện.',
-      NEN_DUC_NGUYEN,
-    ),
-    special(
-      'TRUC_TRAN_12_NHAM_TY',
-      DiaChi.SUU,
-      ThienCan.NHAM,
-      DiaChi.TY,
-      'Trục trận theo chỗ Kị của Nguyệt Yếm.',
-    ),
-    special(
-      'TRUC_TRAN_12_MAU_TY',
-      DiaChi.SUU,
-      ThienCan.MAU,
-      DiaChi.TY,
-      'Trục trận theo chỗ Kị của Nguyệt Yếm.',
-    ),
-  ];
+  return NGAY_TUE_BAC_TRUC_TRAN_Q4.map((item) =>
+    special(item.suffix, item.chiThang, item.canNgay, item.chiNgay, item.moTa, q4BoNen(item.boNen)),
+  );
 }
 
 function hardDays(): readonly NgayDacBiet[] {
@@ -927,37 +876,35 @@ function hardDays(): readonly NgayDacBiet[] {
 }
 
 function duongThacDays(): readonly NgaySai[] {
-  return [
-    sai('DUONG_THAC_1', DiaChi.DAN, ThienCan.GIAP, DiaChi.DAN),
-    sai('DUONG_THAC_2', DiaChi.MAO, ThienCan.AT, DiaChi.MAO),
-    sai('DUONG_THAC_3', DiaChi.THIN, ThienCan.GIAP, DiaChi.THIN),
-    sai('DUONG_THAC_4_DINH', DiaChi.TI, ThienCan.DINH, DiaChi.TI),
-    sai('DUONG_THAC_4_KY', DiaChi.TI, ThienCan.KY, DiaChi.TI, true),
-    sai('DUONG_THAC_6_DINH', DiaChi.MUI, ThienCan.DINH, DiaChi.MUI),
-    sai('DUONG_THAC_6_KY', DiaChi.MUI, ThienCan.KY, DiaChi.MUI, false, NEN_DUC_HOP),
-    sai('DUONG_THAC_7', DiaChi.THAN, ThienCan.CANH, DiaChi.THAN),
-    sai('DUONG_THAC_8', DiaChi.DAU, ThienCan.TAN, DiaChi.DAU),
-    sai('DUONG_THAC_9', DiaChi.TUAT, ThienCan.CANH, DiaChi.TUAT),
-    sai('DUONG_THAC_10', DiaChi.HOI, ThienCan.QUY, DiaChi.HOI),
-    sai('DUONG_THAC_12', DiaChi.SUU, ThienCan.QUY, DiaChi.SUU),
-  ];
+  return NGAY_DUONG_THAC_Q4.map((item) =>
+    sai(
+      item.suffix,
+      item.chiThang,
+      item.canNgay,
+      item.chiNgay,
+      item.hard ?? false,
+      q4BoNen(item.boNen),
+    ),
+  );
 }
 
 function amThacDays(): readonly NgaySai[] {
-  return [
-    sai('AM_THAC_1', DiaChi.DAN, ThienCan.CANH, DiaChi.TUAT),
-    sai('AM_THAC_2', DiaChi.MAO, ThienCan.TAN, DiaChi.DAU, true),
-    sai('AM_THAC_3', DiaChi.THIN, ThienCan.CANH, DiaChi.THAN),
-    sai('AM_THAC_4_DINH', DiaChi.TI, ThienCan.DINH, DiaChi.MUI),
-    sai('AM_THAC_4_KY', DiaChi.TI, ThienCan.KY, DiaChi.MUI),
-    sai('AM_THAC_6_DINH', DiaChi.MUI, ThienCan.DINH, DiaChi.TI, true),
-    sai('AM_THAC_6_KY', DiaChi.MUI, ThienCan.KY, DiaChi.TI, true, NEN_DUC_HOP),
-    sai('AM_THAC_7', DiaChi.THAN, ThienCan.GIAP, DiaChi.THIN),
-    sai('AM_THAC_8', DiaChi.DAU, ThienCan.AT, DiaChi.MAO, true),
-    sai('AM_THAC_9', DiaChi.TUAT, ThienCan.GIAP, DiaChi.DAN),
-    sai('AM_THAC_10', DiaChi.HOI, ThienCan.QUY, DiaChi.SUU),
-    sai('AM_THAC_12', DiaChi.SUU, ThienCan.QUY, DiaChi.HOI, true),
-  ];
+  return NGAY_AM_THAC_Q4.map((item) =>
+    sai(
+      item.suffix,
+      item.chiThang,
+      item.canNgay,
+      item.chiNgay,
+      item.hard ?? false,
+      q4BoNen(item.boNen),
+    ),
+  );
+}
+
+function q4BoNen(nhom: NhomNenBiLoaiQ4 | undefined): readonly DieuKienDungSu[] | undefined {
+  if (nhom === 'DUC_HOP') return NEN_DUC_HOP;
+  if (nhom === 'DUC_NGUYEN') return NEN_DUC_NGUYEN;
+  return undefined;
 }
 
 function special(
