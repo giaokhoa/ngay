@@ -5,6 +5,7 @@ import { QUY_TAC_AN_GIUONG } from '../activities/an-giuong-rules';
 import { QUY_TAC_AN_TANG } from '../activities/an-tang-rules';
 import { QUY_TAC_CAU_PHUC } from '../activities/cau-phuc-rules';
 import { QUY_TAC_CAU_TU } from '../activities/cau-tu-rules';
+import { QUY_TAC_CAU_Y_TRI_BENH } from '../activities/cau-y-tri-benh-rules';
 import { QUY_TAC_CHINH_DUNG_CAT_TOC } from '../activities/chinh-dung-cat-toc-rules';
 import { QUY_TAC_CUOI_HOI } from '../activities/cuoi-hoi-rules';
 import { QUY_TAC_DI_CHUYEN } from '../activities/di-chuyen-rules';
@@ -38,6 +39,7 @@ const RULES: Readonly<Record<LoaiCongViec, readonly QuyTacDungSu[]>> = {
   [LoaiCongViec.TE_TU]: QUY_TAC_TE_TU,
   [LoaiCongViec.CAU_PHUC]: QUY_TAC_CAU_PHUC,
   [LoaiCongViec.CAU_TU]: QUY_TAC_CAU_TU,
+  [LoaiCongViec.CAU_Y_TRI_BENH]: QUY_TAC_CAU_Y_TRI_BENH,
   [LoaiCongViec.GIAI_TRU]: QUY_TAC_GIAI_TRU,
   [LoaiCongViec.CHINH_DUNG_CAT_TOC]: QUY_TAC_CHINH_DUNG_CAT_TOC,
   [LoaiCongViec.DONG_THO]: QUY_TAC_DONG_THO,
@@ -58,7 +60,8 @@ const ACTIVITIES_WITH_NGUYET_PHA_KY = ALL_ACTIVITIES.filter(
   (activity) =>
     activity !== LoaiCongViec.NHAP_HOC &&
     activity !== LoaiCongViec.TE_TU &&
-    activity !== LoaiCongViec.GIAI_TRU,
+    activity !== LoaiCongViec.GIAI_TRU &&
+    activity !== LoaiCongViec.CAU_Y_TRI_BENH,
 );
 const ACTIVITIES_WITH_NGU_MO_KY = ACTIVITIES_WITH_TU_PHE_KY.filter(
   (activity) =>
@@ -159,6 +162,7 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
       [LoaiCongViec.CAU_TU]: false,
       [LoaiCongViec.GIAI_TRU]: false,
       [LoaiCongViec.CHINH_DUNG_CAT_TOC]: false,
+      [LoaiCongViec.CAU_Y_TRI_BENH]: true,
       [LoaiCongViec.DONG_THO]: false,
       [LoaiCongViec.SUA_CUNG_THAT]: false,
       [LoaiCongViec.KHAI_TRUONG]: false,
@@ -224,6 +228,72 @@ describe('independent Hán Q10 semantic oracle — WYG / Kanripo KR3g0051', () =
     expect(dinh.coKy).toBe(true);
     expect(lunar12.coKy).toBe(true);
     expect(lunar15.coKy).toBe(true);
+  });
+
+  it('求醫療病: ordinary 月破 is exempt, but overlap branches restore medical Kị / hard-ban', () => {
+    const ordinary = danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.THIEN_DUC],
+    });
+    const withVirtue = danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+      chiThang: DiaChi.TY,
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.TAI_SAT, MaYeuTo.THIEN_DUC],
+    });
+    const hard = danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+      chiThang: DiaChi.TY,
+      yeuTo: [MaYeuTo.NGUYET_PHA, MaYeuTo.TAI_SAT],
+    });
+    expect(ordinary.coKy).toBe(false);
+    expect(withVirtue.coKy).toBe(true);
+    expect(withVirtue.camMoiViec).toBe(false);
+    expect(hard.camMoiViec).toBe(true);
+  });
+
+  it('求醫療病: residual medical Kị survives cát for 平/死神, 劫煞, 死氣, 往亡', () => {
+    const cases = [
+      danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+        chiThang: DiaChi.HOI,
+        truc: ThapNhiTruc.BINH,
+        yeuTo: [MaYeuTo.TU_THAN, MaYeuTo.THOI_DUC],
+      }),
+      danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+        chiThang: DiaChi.DAN,
+        yeuTo: [MaYeuTo.KIEP_SAT, MaYeuTo.THIEN_DUC],
+      }),
+      danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+        yeuTo: [MaYeuTo.TU_KHI, MaYeuTo.THIEN_DUC],
+      }),
+      danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+        yeuTo: [MaYeuTo.VANG_VONG, MaYeuTo.THIEN_XA],
+      }),
+    ];
+    for (const result of cases) expect(result.coKy).toBe(true);
+  });
+
+  it('求醫療病: 大時 can be released, 五墓 has the May/November 月徳 release', () => {
+    const daiThoi = danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+      chiThang: DiaChi.DAN,
+      yeuTo: [MaYeuTo.DAI_THOI, MaYeuTo.GIAI_THAN],
+    });
+    const nguMo = danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+      chiThang: DiaChi.NGO,
+      yeuTo: [MaYeuTo.NGU_MO, MaYeuTo.NGUYET_DUC],
+    });
+    expect(daiThoi.coKy).toBe(false);
+    expect(nguMo.coKy).toBe(false);
+  });
+
+  it('求醫療病: 未日 / 十五日 / 朔弦望 are direct Kị', () => {
+    const mui = danhGia(LoaiCongViec.CAU_Y_TRI_BENH, { chiNgay: DiaChi.MUI, yeuTo: [] });
+    const lunar15 = danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+      ngayAmTrongThang: 15,
+      yeuTo: [],
+    });
+    const phase = danhGia(LoaiCongViec.CAU_Y_TRI_BENH, {
+      yeuTo: [MaYeuTo.SOC_HUYEN_VONG],
+    });
+    expect(mui.coKy).toBe(true);
+    expect(lunar15.coKy).toBe(true);
+    expect(phase.coKy).toBe(true);
   });
 
   it('解除: ordinary 月破 and special-calendar days stay exempt, while 四廢 / 五墓 remain source-driven Kị', () => {
